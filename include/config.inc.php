@@ -8,7 +8,7 @@ $db_host	= '127.0.0.1';
 $db_user	= 'root';
 
 //数据库密码
-$db_pass	= 'root';
+$db_pass	= '';
 
 //数据库名称
 $db_name	= 'dzmcms';

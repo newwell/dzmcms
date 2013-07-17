@@ -1,6 +1,6 @@
 <?php
 $lang = array();
-//$lang['system_name']      = '';
+//$lang['system_name']      = '大赞会员卡管理系统';
 //$lang['system_version']   = '1.0';
 //$lang['system_copyright'] = '版权所有 © 2007-2008 武汉大赞网络科技，并保留所有权利。';
 
