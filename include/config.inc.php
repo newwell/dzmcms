@@ -8,13 +8,13 @@ $db_host	= '127.0.0.1';
 $db_user	= 'root';
 
 //数据库密码
-$db_pass	= '';
+$db_pass	= 'root';
 
 //数据库名称
-$db_name	= 'durl';
+$db_name	= 'dzmcms';
 
 //数据表前缀
-$tablepre	= 'durl_';
+$tablepre	= 'dzmc_';
 
 //程序调试模式,设定为true为开启，false关闭
 $enable_debugmode	= true;
