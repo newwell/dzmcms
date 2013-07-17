@@ -95,4 +95,4 @@
    
    </tr>
 </table>
-<?php include template('foot'); ?>
+<?php //include template('foot'); ?>

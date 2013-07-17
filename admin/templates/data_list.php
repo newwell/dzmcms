@@ -44,4 +44,3 @@
 </table>
 </form>
 <?php include template('foot'); ?>
-  

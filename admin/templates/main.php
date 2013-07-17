@@ -6,7 +6,7 @@ $(document).ready(function(){
 	$("#switchPoint").click(function(){
 		$("#left").slideToggle("fast");
 	});
-
+	$("body").toggleClass('hidden_body_overflow_y');
 });	
 </script>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="wui_header">
@@ -24,7 +24,7 @@ $(document).ready(function(){
       <table height="100%" cellspacing="0" cellpadding="0" border="0">
         <tbody>
           <tr>
-            <td style="HEIGHT: 100%" ><span  title="关闭/打开"><img id="switchPoint" src="<?php echo $_TEMPLATESDIR?>/image/icon_close.png" border="0"></span></td>
+            <td style="HEIGHT: 100%;background-color: #D4D4D4;"><span  title="关闭/打开"><img id="switchPoint" src="<?php echo $_TEMPLATESDIR?>/image/icon_close.png" border="0"></span></td>
           </tr>
         </tbody>
       </table>
