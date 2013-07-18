@@ -216,13 +216,18 @@ switch($action) {
 		$act     = $db->fetch_one_array($sql);
 		if(!empty($act))
 		{
+			
 			//提交安全检查
 			submitcheck();
+			$filename = 'admin/'.$act['page'];
+			if (!is_file($filename)){
+				stop($act['title'].'--功能稍后写');
+			}
 			//调用模块文件
-			include 'admin/'.$act['page'];
+			include $filename;
 		}
 		else
-		{ print_r($sql);exit;
+		{ //print_r($sql);exit;
 			stop('common_unknow_action');
 		}
 }

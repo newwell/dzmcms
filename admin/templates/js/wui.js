@@ -1,5 +1,6 @@
 	$(document).ready(function(){
 		$(".wui_contentLeftTitle").click(function(){
+			//$(".wui_contentLeftItemList").hide("fast");
 			$(this).next("div").slideToggle("fast");
 			$(this).toggleClass("wui_contentLeftTitleActive");
 			$(this).siblings(".wui_contentLeftTitleActive").removeClass("wui_contentLeftTitleActive");
