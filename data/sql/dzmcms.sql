@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 18 日 14:07
+-- 生成日期: 2013 年 07 月 19 日 12:02
 -- 服务器版本: 5.1.36-community-log
 -- PHP 版本: 5.2.4
 
@@ -19,6 +19,41 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `dzmcms`
 --
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `dzmc_member`
+--
+
+CREATE TABLE IF NOT EXISTS `dzmc_member` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `card` int(11) NOT NULL COMMENT '读卡数字串',
+  `cardid` int(11) NOT NULL COMMENT '会员卡上的编号',
+  `card_type` int(11) NOT NULL COMMENT '卡的类型',
+  `cash_pledge` varchar(125) DEFAULT NULL COMMENT '押金',
+  `name` varchar(125) DEFAULT NULL COMMENT '姓名',
+  `nickname` varchar(125) DEFAULT NULL COMMENT '昵称',
+  `phone` varchar(15) NOT NULL COMMENT '手机号',
+  `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
+  `identity_card` varchar(125) DEFAULT NULL COMMENT '身份证',
+  `sex` int(1) NOT NULL COMMENT '性别1为男',
+  `grade` int(11) NOT NULL COMMENT '等级',
+  `birthday` int(15) DEFAULT NULL COMMENT '生日',
+  `annual_fee` varchar(125) DEFAULT NULL COMMENT '年费',
+  `annual_fee_end_time` int(15) DEFAULT NULL COMMENT '年费到期时间',
+  `balance` varchar(255) NOT NULL DEFAULT '0.0' COMMENT '余额',
+  `customer_manager` varchar(255) DEFAULT NULL COMMENT '客户经理',
+  `address` text COMMENT '地址',
+  `qq` varchar(64) DEFAULT NULL COMMENT 'qq号',
+  `work_unit` text COMMENT '工作单位',
+  `occupation` text COMMENT '职业',
+  `eligibility` int(1) NOT NULL DEFAULT '1' COMMENT '参赛资格',
+  `match_number` int(11) NOT NULL DEFAULT '0' COMMENT '大赛次数',
+  `representative_club` text COMMENT '代表俱乐部',
+  `representative_city` varchar(255) DEFAULT NULL COMMENT '代表城市',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -43,10 +78,10 @@ INSERT INTO `dzmc_settings` (`variable`, `value`) VALUES
 ('siteemail', 'v@dazan.cn'),
 ('sitestatus', '1'),
 ('siteclosereason', '本网站长的过于风流倜傥,特关闭2小时以面壁思过'),
-('siteurl', 'http://durl.dazan.cn/'),
+('siteurl', 'http://dzmcms.dazan.cn/'),
 ('siteurlrewrite', 'none'),
-('sitebrowser', '建议在IE6以上浏览器 1024*768分辨率下浏览本站'),
-('sitedescription', '峰易海贸易有限公司	站务管理系统'),
+('sitebrowser', ''),
+('sitedescription', ''),
 ('sitejump', 'php301'),
 ('siteqq', '1040811569');
 
@@ -66,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemaction` (
   `page` varchar(255) NOT NULL DEFAULT '',
   `listnum` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=56 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
 
 --
 -- 转存表中的数据 `dzmc_systemaction`
@@ -75,22 +110,15 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemaction` (
 INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `page`, `listnum`) VALUES
 (1, 0, '系统设置', '0', '0', '0', '0', 1),
 (2, 1, '系统参数设置', 'system_set', 'show', '', 'system_set.inc.php', 1),
-(4, 1, '用户管理', 'system_user', 'edituser', '1', 'system_user.inc.php', 0),
-(5, 36, '数据库优化', 'database_optimize', 'list', '', 'data.inc.php', 3),
-(6, 36, '数据库备份', 'database_backup', 'backup', '', 'data.inc.php', 4),
-(35, 29, '批量导入', 'batch_in', 'in', NULL, 'batch.inc.php', 0),
-(34, 29, '批量导出', 'batch_out', 'out', NULL, 'batch.inc.php', 0),
-(33, 29, '批量添加', 'batch_add', 'add', NULL, 'batch.inc.php', 0),
-(32, 28, '还原短网址', 'shorturl_restore', 'restore', NULL, 'shorturl.inc.php', 3),
-(31, 28, '添加短网址', 'shorturl_add', 'add', NULL, 'shorturl.inc.php', 2),
-(30, 28, '查看所有', 'shorturl_list', 'list', NULL, 'shorturl.inc.php', 1),
-(29, 0, '批量操作', '0', '0', '0', '0', 0),
-(28, 0, '短网址', '0', '0', '0', '0', 0),
-(36, 0, '数据管理', '0', NULL, NULL, '0', 0),
-(37, 0, '帮助中心', '0', NULL, NULL, '0', 2),
-(38, 88, '如何使用', 'help_manual', NULL, NULL, 'help.inc.php', 0),
-(39, 88, '联系我们', 'help_contact', NULL, NULL, 'help.inc.php', 0),
-(40, 88, '建议反馈', 'help_suggest', NULL, NULL, 'help.inc.php', 0),
+(4, 1, '管理员管理', 'system_user', 'edituser', '1', 'system_user.inc.php', 0),
+(60, 56, '添加商品分类', 'goods_clasadd', 'clasadd', NULL, 'goods.inc.php', 0),
+(59, 56, '商品分类管理', 'goods_class', 'class', NULL, 'goods.inc.php', 0),
+(58, 56, '商品添加', 'goods_add', 'add', NULL, 'goods.inc.php', 0),
+(57, 56, '商品列表', 'goods_list', 'list', NULL, 'goods.inc.php', 0),
+(56, 0, '商品管理', '', NULL, NULL, '', 0),
+(63, 61, '非物品销售', 'buy_cash', 'cash', NULL, 'buy.inc.php', 0),
+(62, 61, '商品销售', 'buy_list', 'list', NULL, 'buy.inc.php', 0),
+(61, 0, '销售管理', '', NULL, NULL, '', 0),
 (41, 88, '数据库优化', 'database', 'list', '', 'data.inc.php', 3),
 (42, 0, '会员管理', '', NULL, NULL, '', 0),
 (43, 42, '会员查询', 'member_find', 'find', NULL, 'member.inc.php', 0),
@@ -103,8 +131,10 @@ INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `
 (51, 42, '添加等级', 'member_gradadd', 'gradadd', NULL, 'member.inc.php', 0),
 (52, 42, '会员导出', 'member_export', 'export', NULL, 'member.inc.php', 0),
 (53, 42, '会员导入', 'member_import', 'import', NULL, 'member.inc.php', 0),
-(54, 42, '密码修改', 'member_changePassword', 'changePassword', NULL, '', 0),
-(55, 42, '会员卡挂失', 'member_guashi', 'guashi', NULL, '', 0);
+(54, 42, '密码修改', 'member_changePassword', 'changePassword', NULL, 'member.inc.php', 0),
+(55, 42, '会员卡挂失', 'member_guashi', 'guashi', NULL, 'member.inc.php', 0),
+(64, 61, '销售记录', 'buy_log', 'log', NULL, 'buy.inc.php', 0),
+(65, 61, '退货记录', 'buy_back', 'back', NULL, 'buy.inc.php', 0);
 
 -- --------------------------------------------------------
 
@@ -131,7 +161,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1374162767, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1374238598, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 
