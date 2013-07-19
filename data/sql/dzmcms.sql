@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 19 日 12:02
+-- 生成日期: 2013 年 07 月 19 日 16:01
 -- 服务器版本: 5.1.36-community-log
 -- PHP 版本: 5.2.4
 
@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_member` (
   `match_number` int(11) NOT NULL DEFAULT '0' COMMENT '大赛次数',
   `representative_club` text COMMENT '代表俱乐部',
   `representative_city` varchar(255) DEFAULT NULL COMMENT '代表城市',
+  `add_date` int(15) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=1 ;
 

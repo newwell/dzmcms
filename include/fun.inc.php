@@ -1085,3 +1085,13 @@ function send_http_status($code) {
 	);
 	if(array_key_exists($code,$_status)) header('HTTP/1.1 '.$code.' '.$_status[$code]);
 }
+/**
+ * 得到配置文件
+ * @param string $config
+ */
+function GetConfig($config){
+	if (array_key_exists($config, $GLOBALS['DZMC_CFG'])) {
+			return $GLOBALS['DZMC_CFG'][$config];
+	}
+	return '';
+}

@@ -35,11 +35,14 @@ for ($i=0;$i<$_path_count-2;$i++)
     $ROOT_PATH = '../'.$ROOT_PATH;
 }
 define('ROOT',$ROOT_PATH);
+
+define('DZMC_ROOT_PATH', dirname(realpath(dirname(__FILE__).'/../m.php')));
 unset($_self_path,$_path_array,$_path_count,$ROOT_PATH);
 
 define('FILE_ROOT',str_replace('include/common.inc.php', '', str_replace('\\', '/', __FILE__)));
 
 require_once('config.inc.php');
+require_once(DZMC_ROOT_PATH.'/config/config.php');
 require_once('db.class.php');
 require_once('template.inc.php');
 require_once('page.class.php');
