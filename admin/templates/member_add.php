@@ -11,7 +11,7 @@ $(function(){
 });
 </script>
 <div class="formnav">添加会员</div>
-<form action="?action=shorturl_list&todo=saveadd" method="post" onsubmit="return CheckForm(this,true);">
+<form action="?action=member_add&todo=saveadd" method="post" onsubmit="return CheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
@@ -134,7 +134,7 @@ $(function(){
 	</tr>
 
 	<tr>
-		<td colspan="4" align="center">	<input type="button" class="formsubmit" value="提交" ></td>
+		<td colspan="4" align="center">	<input type="button" class="formsubmit" value="提交" onclick="javascript:this.form.submit();"></td>
 	</tr>
 </table>
 </form>

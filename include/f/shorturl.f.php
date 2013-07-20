@@ -104,7 +104,7 @@ function shorturl_alias_check($id,$alias) {
 	return false;
 }
 /**
- * 更新指定ID的url信息
+ * 添加url信息
  * @param int		$id			ID
  * @param array()	$infoArr	修改的条件   array('url'=>"http://www.dazan.cn")
  */
