@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 19 日 16:01
+-- 生成日期: 2013 年 07 月 20 日 08:38
 -- 服务器版本: 5.1.36-community-log
 -- PHP 版本: 5.2.4
 
@@ -54,7 +54,15 @@ CREATE TABLE IF NOT EXISTS `dzmc_member` (
   `representative_city` varchar(255) DEFAULT NULL COMMENT '代表城市',
   `add_date` int(15) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=3 ;
+
+--
+-- 转存表中的数据 `dzmc_member`
+--
+
+INSERT INTO `dzmc_member` (`id`, `card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`) VALUES
+(1, 736955981, 800522, 1, '', '刘维', '', '13026105388', '1040811569@qq.com', '', 1, 1, 0, '', 0, '', '', '', '', '', '', 1, 0, '', '武汉', 1374316916),
+(2, 736940301, 800340, 1, '', '王龙', '', '13000000000', '', '', 1, 1, 0, '', 0, '', '', '', '', '', '', 1, 0, '', '广州', 1374317125);
 
 -- --------------------------------------------------------
 
@@ -162,7 +170,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1374238598, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1374330972, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 
