@@ -8,13 +8,13 @@
 	</tr>
 	<tr>
 		<td width="20%" align="right" valign="middle">版权所有：</td>
-		<td width="80%" align="left" valign="middle"><a href="http://www.dazan.cn" target="_blank">武汉大赞网络科技</a></td>
+		<td width="80%" align="left" valign="middle"><a href="#" target="_blank">PK365俱乐部</a></td>
 	</tr>
 
 	<tr>
 		<td  align="right" valign="middle">公司网站：</td>
-		<td  align="left" valign="middle"><a href="http://www.dazan.cn" target="_blank">www.dazan.cn</a></td>
-	</tr>
+		<td  align="left" valign="middle"><a href="#" target="_blank">PK365俱乐部</a></td>
+	</tr><!--
 	<tr>
 		<td  align="right" valign="top">联系方式：</td>
 		<td  align="left" valign="middle">
@@ -23,5 +23,5 @@
 		Q Q:753057793<br>
 		</td>
 	</tr>
-</table>
+--></table>
 <?php include template('foot'); ?>
