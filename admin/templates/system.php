@@ -26,6 +26,12 @@
             </td>
         </tr>
         
+        <tr>  
+            <td align="right" class="listtable" valign="top">积分兑换比率:</td>
+            <td align="left"><input type="text" name="setting_rate" value="<?php echo $setting_rate?>" size="35" style="border:#336699 1px solid;" onmouseover="fEvent('mouseover',this)" onfocus="fEvent('focus',this)" onblur="fEvent('blur',this)" onmouseout="fEvent('mouseout',this)"/> 
+            </td>
+        </tr>
+        
     	<tr> 
         	<td colspan="2" align="center">
             <input type="submit" class="formsubmit" value="提交">            </td>

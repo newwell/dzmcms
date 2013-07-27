@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 20 日 08:38
+-- 生成日期: 2013 年 07 月 27 日 09:35
 -- 服务器版本: 5.1.36-community-log
 -- PHP 版本: 5.2.4
 
@@ -53,16 +53,18 @@ CREATE TABLE IF NOT EXISTS `dzmc_member` (
   `representative_club` text COMMENT '代表俱乐部',
   `representative_city` varchar(255) DEFAULT NULL COMMENT '代表城市',
   `add_date` int(15) NOT NULL COMMENT '添加时间',
+  `jiangli_jifen` varchar(255) NOT NULL DEFAULT '0' COMMENT '奖励积分',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=7 ;
 
 --
 -- 转存表中的数据 `dzmc_member`
 --
 
-INSERT INTO `dzmc_member` (`id`, `card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`) VALUES
-(1, 736955981, 800522, 1, '', '刘维', '', '13026105388', '1040811569@qq.com', '', 1, 1, 0, '', 0, '', '', '', '', '', '', 1, 0, '', '武汉', 1374316916),
-(2, 736940301, 800340, 1, '', '王龙', '', '13000000000', '', '', 1, 1, 0, '', 0, '', '', '', '', '', '', 1, 0, '', '广州', 1374317125);
+INSERT INTO `dzmc_member` (`id`, `card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`) VALUES
+(1, 736955981, 800522, 1, '', '刘维', '', '13026105388', '1040811569@qq.com', '', 1, 1, 0, '', 0, '832', '', '', '', '', '', 1, 0, '', '武汉', 1374316916, '0'),
+(4, 737239805, 800329, 1, '', '刘德华', '华仔', '13026105388', '2579192831@qq.com', '429004199110162258', 1, 1, 1374451200, '100', 1405987200, '1000', '', '硚口区青年路嘉新大厦2502', '', '', '', 1, 0, '', '武汉', 1374488970, '0'),
+(6, 736940301, 800340, 1, '100', '郭富城', '富城', '13886143620', '1040811569@qq.com', '429004199110162254', 1, 1, 1215475200, '200', 1343260800, '211', '晓菲', '湖北省武汉市洪山区雄楚大街489号领秀城8栋', '996159513', '华秦', '歌手', 1, 0, 'pk365', '中文/拼音', 1374922571, '0');
 
 -- --------------------------------------------------------
 
@@ -91,7 +93,7 @@ INSERT INTO `dzmc_settings` (`variable`, `value`) VALUES
 ('siteurlrewrite', 'none'),
 ('sitebrowser', ''),
 ('sitedescription', ''),
-('sitejump', 'php301'),
+('rate', '1'),
 ('siteqq', '1040811569');
 
 -- --------------------------------------------------------
@@ -170,7 +172,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1374330972, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1374918687, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 

@@ -5,10 +5,28 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'dopay':
+		$dopay	= isset($_POST['dopay']) ? $_POST['dopay'] : "" ;
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		if (empty($dopay))e("充值金额为0");
+		if (empty($card))e('无法获取读卡');
+		$value = $dopay*$setting_rate;
+		$r = member_dopay($card, $value);
+		s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);	
+		break;
+	case 'pay':
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+		}else {
+			$member_info = '';
+		}
+		include template('member_pay');
+		break;
 	case 'dofind':
 		$card		= (int)( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
 		$cardid		= (int)( isset($_REQUEST['cardid']) ? $_REQUEST['cardid'] : '' );
-		
+		$member_info = '';
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 		}elseif (!empty($cardid)){
@@ -16,7 +34,7 @@ switch ($todo) {
 		}else {
 			e('至少填写一个信息');
 		}
-		//print_r($member_info);
+		if (empty($member_info))e('暂无该会员信息');
 		include template('member_dofind');
 		break;
 	case 'find':
@@ -37,7 +55,7 @@ switch ($todo) {
 		$birthday	= htmlspecialchars( isset($_POST['birthday']) ? $_POST['birthday'] : 0 );
 		$annual_fee	= htmlspecialchars( isset($_POST['annual_fee']) ? $_POST['annual_fee'] : '' );
 		$annual_fee_end_time= htmlspecialchars( isset($_POST['annual_fee_end_time']) ? $_POST['annual_fee_end_time'] : '' );
-		$balance	= htmlspecialchars( isset($_POST['balance']) ? $_POST['balance'] : 0 );
+		$balance	= htmlspecialchars( isset($_POST['balance']) ? $_POST['balance'] : "0.0" );
 		$customer_manager	= htmlspecialchars( isset($_POST['customer_manager']) ? $_POST['customer_manager'] : '' );
 
 		$address	= htmlspecialchars( isset($_POST['address']) ? $_POST['address'] : '' );
