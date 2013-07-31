@@ -36,7 +36,7 @@
 		<td align="right">当前兑换比率:</td>
 		<td><span id="rmb">1</span>元人民币&nbsp;&nbsp;=&nbsp;&nbsp;<span id="jifenzhi"><?php echo $setting_rate * 1;?></span>积分</td>
 	</tr>
-	<tr align="center"><td colspan="4" >
+	<tr align="center"><td colspan="3" >
 		<input type="submit" class="formsubmit" value="充值"/>
 	<td></tr>
 </table>

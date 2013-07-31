@@ -1,7 +1,7 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
-<div class="formnav">积分兑换</div>
-<form action="?action=member_credits&todo=credits" method="post" onsubmit="return CheckForm(this,true);">
+<div class="formnav"><?php echo $act['title'];?></div>
+<form action="?action=member_changePassword&todo=changePassword&do=" method="post" onsubmit="return CheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
@@ -15,8 +15,9 @@
 </form>
 
 <?php if (!empty($member_info)) {?>
-<form action="?action=member_credits&todo=docredits" method="post" onsubmit="return CheckForm(this,true);">
+<form action="?action=member_changePassword&todo=dochangePassword" method="post" onsubmit="return CheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
+<input type="hidden" name="card" value="<?php echo $card;?>"/>
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
 	    <td width="80px" align="right">姓名:</td>
@@ -30,15 +31,24 @@
 	    <td width="80px" align="right">奖励积分:</td>
 	    <td><?php echo $member_info['jiangli_jifen'];?></td>
 	</tr>
+</table>
+<br/>
+<table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
-		<td align="right">提现金额:</td>
-		<td><input name="docredits" /><input type="hidden" name="card" value="<?php echo $card;?>"/></td>
-		<td align="right">当前兑换比率:</td>
-		<td><span id="rmb">1</span>元人民币&nbsp;&nbsp;=&nbsp;&nbsp;<span id="jifenzhi"><?php echo $setting_rate * 1;?></span>积分</td>
+		<td align="right">原密码:</td>
+		<td><input type="password" name="odl_pwd"/></td>
 	</tr>
-	<tr align="center"><td colspan="3" >
-		<input type="submit" class="formsubmit" value="充值"/>
-	<td></tr>
+	<tr>
+		<td align="right">新密码:</td>
+		<td><input type="password" name="new_pwd"/></td>
+	</tr>
+	<tr>
+		<td align="right">再次输入:</td>
+		<td><input type="password" name="new2_pwd"/></td>
+	</tr>
+	<tr>
+		<td align="center" colspan="2"><input type="submit" class="formsubmit" value="提交"/></td>
+	</tr>
 </table>
 </form>
 <?php }?>

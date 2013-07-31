@@ -115,3 +115,20 @@ function member_docredits($card,$value) {
 	$result	= $db->fetch_one_array($sql);
 	return $result;
 }
+/**
+ * 更新指定$card的会员信息信息
+ * @param int		$card		读卡
+ * @param array()	$infoArr	修改的条件   array('url'=>"http://www.dazan.cn")
+ */
+function member_update($card,$infoArr) {
+	global $db,$tablepre;
+	if (empty($infoArr)) return false;
+	$sql = "UPDATE  `{$tablepre}member` SET ";
+	foreach ($infoArr as $key => $value) {
+		$sql.= "`$key` =  '$value',";
+	}
+	//去掉最后一个多余的,
+	$sql = substr($sql,0,strlen($sql)- 1);
+	$sql.=" WHERE `card` =$card;";
+	return $db->query($sql);
+}

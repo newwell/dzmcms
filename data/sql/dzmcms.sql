@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 31 日 09:27
+-- 生成日期: 2013 年 07 月 31 日 19:07
 -- 服务器版本: 5.1.70-community
 -- PHP 版本: 5.2.17
 
@@ -29,7 +29,6 @@ USE `dzmcms`;
 --
 
 CREATE TABLE IF NOT EXISTS `dzmc_member` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `card` int(11) NOT NULL COMMENT '读卡数字串',
   `cardid` int(11) NOT NULL COMMENT '会员卡上的编号',
   `card_type` int(11) NOT NULL COMMENT '卡的类型',
@@ -56,17 +55,19 @@ CREATE TABLE IF NOT EXISTS `dzmc_member` (
   `representative_city` varchar(255) DEFAULT NULL COMMENT '代表城市',
   `add_date` int(15) NOT NULL COMMENT '添加时间',
   `jiangli_jifen` varchar(255) NOT NULL DEFAULT '0' COMMENT '奖励积分',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='会员表' AUTO_INCREMENT=7 ;
+  `pwd` varchar(255) NOT NULL COMMENT '密码',
+  PRIMARY KEY (`card`),
+  UNIQUE KEY `card` (`card`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 --
 -- 转存表中的数据 `dzmc_member`
 --
 
-INSERT INTO `dzmc_member` (`id`, `card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`) VALUES
-(1, 736955981, 800522, 1, '', '刘维', '', '13026105388', '1040811569@qq.com', '', 1, 1, 0, '', 0, '832', '', '', '', '', '', 1, 0, '', '武汉', 1374316916, '0'),
-(4, 737239805, 800329, 1, '', '刘德华', '华仔', '13026105388', '2579192831@qq.com', '429004199110162258', 1, 1, 1374451200, '100', 1405987200, '1000', '', '硚口区青年路嘉新大厦2502', '', '', '', 1, 0, '', '武汉', 1374488970, '0'),
-(6, 736940301, 800340, 1, '100', '郭富城', '富城', '13886143620', '1040811569@qq.com', '429004199110162254', 1, 1, 1215475200, '200', 1343260800, '622', '晓菲', '湖北省武汉市洪山区雄楚大街489号领秀城8栋', '996159513', '华秦', '歌手', 1, 0, 'pk365', '中文/拼音', 1374922571, '0');
+INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
+(736955981, 800522, 1, '', '刘维', '', '13026105388', '1040811569@qq.com', '', 1, 1, 0, '', 0, '1632', '', '', '', '', '', 1, 0, '', '武汉', 1374316916, '0', '670b14728ad9902aecba32e22fa4f6bd'),
+(737239805, 800329, 1, '', '刘德华', '华仔', '13026105388', '2579192831@qq.com', '429004199110162258', 1, 1, 1374451200, '100', 1405987200, '1000', '', '硚口区青年路嘉新大厦2502', '', '', '', 1, 0, '', '武汉', 1374488970, '0', ''),
+(736940301, 800340, 1, '100', '郭富城', '富城', '13886143620', '1040811569@qq.com', '429004199110162254', 1, 1, 1215475200, '200', 1343260800, '622', '晓菲', '湖北省武汉市洪山区雄楚大街489号领秀城8栋', '996159513', '华秦', '歌手', 1, 0, 'pk365', '中文/拼音', 1374922571, '0', '');
 
 -- --------------------------------------------------------
 

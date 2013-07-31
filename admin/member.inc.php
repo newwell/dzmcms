@@ -5,15 +5,51 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'dochangePassword':
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$odl_pwd	= isset($_POST['odl_pwd']) ? $_POST['odl_pwd'] : "" ;
+		$new_pwd	= isset($_POST['new_pwd']) ? $_POST['new_pwd'] : "" ;
+		$new2_pwd	= isset($_POST['new2_pwd']) ? $_POST['new2_pwd'] : "" ;
+		
+		if (empty($card))s('无法获取读卡',"?action=member_changePassword&todo=changePassword&card=".$card);
+		$member_info = member_get(array($card),'card');
+		if ($new_pwd!=$new2_pwd){
+			s('两次输入的密码不同',"?action=member_changePassword&todo=changePassword&card=".$card);
+		}
+		$odl_pwd = md5($odl_pwd);
+		if ($odl_pwd!=$member_info['pwd']){
+			s('原密码不正确',"?action=member_changePassword&todo=changePassword&card=".$card);
+		}
+		$result = member_update($card, array(
+			'pwd' =>md5($new_pwd)
+		));
+		if ($result) {
+			s('密码修改成功',"?action=member_changePassword&todo=changePassword&card=".$card);
+		}else {
+			s('修改失败',"?action=member_changePassword&todo=changePassword&card=".$card);
+		}
+		break;
+	case 'changePassword':
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+		}else {
+			$member_info = '';
+		}
+		include template('member_changePassword');
+		break;
 	case 'docredits':
 		$docredits= isset($_POST['docredits']) ? $_POST['docredits'] : "" ;
 		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
-		if (empty($docredits))e("提现积分为0");
+		if (empty($docredits))e("提现金额为0");
 		if (empty($card))e('无法获取读卡');
 		$member_info = member_get(array($card),'card');
-		$value = $docredits/$setting_rate;
+		$value = $docredits*$setting_rate;
+		if ($member_info['balance']<$value){
+			s('您的积分不够,无法兑换',"?action=member_credits&todo=credits&card=".$card);
+		}
 		$r = member_docredits($card, $value);
-		s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);
+		s('成功,提现[ '.$docredits.' ]扣除[ '.$value.' ]积分',"?action=member_credits&todo=credits&card=".$card);
 		break;
 	case 'credits'://提现/积分兑换
 		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );

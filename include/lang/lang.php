@@ -38,9 +38,6 @@ $lang['user_del']                    = '删除管理员';
 $lang['user_userpassword_notmatch']  = '对不起，您填写的密码未达到系统要求！';
 
 
-
-
-
 #后台数据库管理
 $lang['database_list']                 = '数据库优化';
 $lang['database_tablename']            = '数据表';
@@ -95,27 +92,6 @@ $lang['database_replace']              = '网站数据内容替换';
 $lang['database_replace_search']       = '寻找的关键字';
 $lang['database_replace_replace']      = '替换的关键字';
 $lang['database_replace_success']      = '网站数据内容替换成功';
-
-
-#后台模板管理
-$lang['theme_main_class']                = '课程网站模板设置';
-$lang['theme_main_declare']              = '网站模板设置';
-$lang['theme_class_list']                = '网站模板列表';
-$lang['theme_declare_list']              = '网站模板列表';
-$lang['theme_choose']                    = '模板选择';
-$lang['theme_class_img']                 = '网站模板缩略图';
-$lang['theme_declare_img']               = '网站模板缩略图';
-$lang['theme_title']                     = '模板名称';
-$lang['theme_desc']                      = '模板详细介绍';
-$lang['theme_dir_empty']                 = '该分类暂无模板';
-$lang['theme_dir_open']                  = '展开所有分类';
-$lang['theme_dir_close']                 = '关闭所有分类';
-$lang['theme_click_close_window']        = '点击模板图片选中模板';
-$lang['theme_index_position']            = '首页模块位置参考图';
-$lang['theme_indexnum']                  = '调用条数';
-$lang['theme_titlenum']                  = '标题字数';
-$lang['theme_timeformat']                = '时间格式';
-$lang['theme_img_empty']                 = '暂无预览图';
 
 
 #系统设置
