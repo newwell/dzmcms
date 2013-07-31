@@ -1,4 +1,5 @@
 <?php
+echo '<meta http-equiv="Content-Type" content="text/html; charset=utf-8">';
 //加密狗调用类,必须开启COM组件
 
 function Hex($indata)
@@ -171,7 +172,7 @@ else
 <head>
 <title>会员登陆</title>
 <link rel="stylesheet" type="text/css" href="style.css">
-<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 
 <script language="javascript" type="text/javascript" > 

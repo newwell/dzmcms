@@ -104,3 +104,14 @@ function member_dopay($card,$value) {
 	$result	= $db->fetch_one_array($sql);
 	return $result;
 }
+/**
+ * 积分提现
+ * @param array		$idArr	id数组
+ * @param string	$fields	要查询的字段
+ */
+function member_docredits($card,$value) {
+	global $db,$tablepre;
+	$sql = "UPDATE  `{$tablepre}member` SET  `balance` =  `balance`-$value WHERE  card =$card;";
+	$result	= $db->fetch_one_array($sql);
+	return $result;
+}

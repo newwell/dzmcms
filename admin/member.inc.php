@@ -5,6 +5,25 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'docredits':
+		$docredits= isset($_POST['docredits']) ? $_POST['docredits'] : "" ;
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		if (empty($docredits))e("提现积分为0");
+		if (empty($card))e('无法获取读卡');
+		$member_info = member_get(array($card),'card');
+		$value = $docredits/$setting_rate;
+		$r = member_docredits($card, $value);
+		s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);
+		break;
+	case 'credits'://提现/积分兑换
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+		}else {
+			$member_info = '';
+		}
+		include template('member_credits');
+		break;
 	case 'dopay':
 		$dopay	= isset($_POST['dopay']) ? $_POST['dopay'] : "" ;
 		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
