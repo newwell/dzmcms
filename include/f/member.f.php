@@ -11,7 +11,7 @@
  * ------------------------------------------------------------------
  */
 /**
- * 获取短url列表
+ * 获取列表
  * @param int		$startlimit	开始行
  * @param int		$perpage	结束行
  * @param array()	$where		查找的条件
@@ -36,7 +36,7 @@ function member_list($startlimit,$endlimit,$where='') {
  */
 function member_total($where='') {
 	global $db,$tablepre;
-	$sql	= "SELECT COUNT(id) AS countnum FROM {$tablepre}member ";
+	$sql	= "SELECT COUNT(card) AS countnum FROM {$tablepre}member ";
 	if (!empty($where)) {
 		$sql .="WHERE ".$where;
 	}

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 07 月 31 日 19:07
+-- 生成日期: 2013 年 08 月 01 日 18:19
 -- 服务器版本: 5.1.70-community
 -- PHP 版本: 5.2.17
 
@@ -21,6 +21,28 @@ SET time_zone = "+00:00";
 --
 CREATE DATABASE IF NOT EXISTS `dzmcms` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `dzmcms`;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `dzmc_goods`
+--
+
+CREATE TABLE IF NOT EXISTS `dzmc_goods` (
+  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
+  `name` varchar(255) NOT NULL COMMENT '商品名称',
+  `suk` varchar(255) DEFAULT NULL COMMENT '简码',
+  `unit` varchar(255) NOT NULL COMMENT '单位',
+  `categories_id` int(11) NOT NULL COMMENT '分类id',
+  `jinjia` varchar(255) NOT NULL COMMENT '进货价',
+  `price` varchar(255) NOT NULL COMMENT '零售价',
+  `jiangli_jifen` varchar(255) DEFAULT NULL COMMENT '奖励积分',
+  `diyong_jifen` varchar(255) DEFAULT NULL COMMENT '可抵用奖励积分',
+  `inventory` int(255) DEFAULT NULL COMMENT '库存',
+  `remark` text NOT NULL COMMENT '备注',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -175,7 +197,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1375180663, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1375350030, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 
