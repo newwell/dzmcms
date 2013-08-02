@@ -43,3 +43,14 @@ function goods_total($where='') {
 	$result	= $db->fetch_one_array($sql);
 	return $result['countnum'];
 }
+/**
+ * 删除指定id的短url
+ * @param array $idArr	id数组
+ */
+function goods_del($idArr=array()) {
+	global $db,$tablepre;
+	$ids = implode(',', $idArr);
+	$sql = "DELETE FROM `{$tablepre}goods` WHERE `id`in($ids)";
+	$result	= $db->query($sql);
+	return $result;
+}
