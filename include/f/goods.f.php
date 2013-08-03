@@ -54,3 +54,35 @@ function goods_del($idArr=array()) {
 	$result	= $db->query($sql);
 	return $result;
 }
+/**
+ * 该条件下的商品分类的总数
+ */
+function goods_class_total($where='') {
+	global $db,$tablepre;
+	$sql	= "SELECT COUNT(id) AS countnum FROM {$tablepre}goods_class ";
+	if (!empty($where)) {
+		$sql .="WHERE ".$where;
+	}
+	$result	= $db->fetch_one_array($sql);
+	return $result['countnum'];
+}
+/**
+ * 获取商品分类列表
+ * @param int		$startlimit	开始行
+ * @param int		$perpage	结束行
+ * @param array()	$where		查找的条件
+ */
+function goods_class_list($startlimit,$endlimit,$where='') {
+	global $db,$tablepre;
+	$sql = "SELECT * FROM  `{$tablepre}goods_class` ";
+	if (!empty($where)) {
+		$sql .="WHERE ".$where;
+	}
+	$sql .= "ORDER BY id DESC LIMIT $startlimit , $endlimit";
+	$result		= $db->query($sql);
+	$resultArr	= array();
+	while($arr	= $db->fetch_array($result)){
+        $resultArr[]	= $arr;
+	}
+	return $resultArr;
+}

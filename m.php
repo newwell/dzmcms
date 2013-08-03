@@ -20,7 +20,7 @@ banip('admin');
 
 //模板路径设置
 $_TEMPLATESDIR = 'admin/templates/';
-$_CACHEDIR     = 'admin/cache/';
+$_CACHEDIR     = 'data'.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR;
 
 //模块导航
 
@@ -237,6 +237,6 @@ unset($db);
 // 程序运行信息
 $end_time = array_sum(explode(' ',microtime()));
 $runtime  = number_format( $end_time - $start_time, 10);
-echo "\n<!--  $quernum times query, processed in $runtime second(s)  -->";
+echo "\n<!--  $quernum times query, processed in $runtime second(s)  daZan Network Tech/www.dazan.cn -->";
 ob_flush();
 ?>

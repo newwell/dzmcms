@@ -5,6 +5,21 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/goods.f.php';
 switch ($todo) {
+	case 'class':
+		echo 'class';
+		$page   = intval( isset($_GET['page']) ? $_GET['page'] : 1 );
+		$perpage = intval( isset($_GET['perpage']) ? $_GET['perpage'] : 20 );
+		if($page > 0){
+			$startlimit = ($page - 1) * $perpage;
+		}else{
+			$startlimit = 0;
+		}
+		$page_array = array();
+		$total		= goods_class_total();
+		$page_control = multipage($total,$perpage,$page);
+		$infoArr	= goods_class_list($startlimit, $perpage);	
+		include template('goods_class_list');
+		break;
 	case 'add':
 		include template('goods_add');
 		break;
