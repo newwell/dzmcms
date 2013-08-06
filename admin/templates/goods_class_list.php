@@ -30,8 +30,7 @@
          </td>
         </tr>
         <tr>
-            <th><input type="checkbox" name="chkall" onclick="checkall(this.form)" title="全选">全选</th>
-            <th>名称</th>
+            <th align="left">&nbsp;&nbsp;<img src="<?php echo $_TEMPLATESDIR?>/image/icon_component.gif" /></th>
 			<th>简码</th>
 			<th>单位</th>
 			<th>售价(积分)</th>
@@ -39,8 +38,7 @@
 			<th>操作</th>
         </tr>
 		<?php if(is_array($goodslArr)) { foreach($goodslArr as $key => $value) { ?>
-        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
-            <td class="list"><input type="checkbox" name="ids[]" value="<?php echo $value['id']?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>      
+        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>      
             <td class="list"><?php echo $value['name']?></td>
             <td class="list"><?php echo $value['suk']?></td>
             <td class="list"><?php echo $value['unit']?></td>

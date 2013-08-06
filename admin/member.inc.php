@@ -5,6 +5,112 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'doexport':
+		$start = strtotime ( isset ( $_POST ['start'] ) ? $_POST ['start'] : '' );
+		$end = strtotime ( isset ( $_POST ['end'] ) ? $_POST ['end'] : '' );
+		
+		if (empty ( $start ) || empty ( $end ))e ( '选择一个时间' );
+		
+		$title = Array("读卡","会员号","持卡类型","押金","姓名","昵称","手机号","电子邮箱",
+					"身份证号","性别","会员等级","生日","年费","年费到期时间","余额","客户经理","居住地址",
+					"qq或者MSN","工作单位","职业","大赛资格","大赛次数","代表俱乐部","代表城市","奖励积分","注册时间");
+		$Data = array ();
+		$Data [] = array_values ( $title );
+		require_once 'include/excel_class.php';
+		
+		$sql = "SELECT * FROM  `{$tablepre}member` WHERE add_date<$end AND add_date>$start";
+		$query = $db->query ( $sql );
+		while ( $rArr = $db->fetch_array ( $query ) ) {
+			//$rArr ['add_date'] = gmdate ( 'Y-n-j', $rArr ['add_date'] );
+			if ($rArr ['sex']==1){
+				$rArr ['sex'] = "男";
+			}else {
+				$rArr ['sex'] = "女";
+			}
+			//$Data[] = $rArr;
+			$Data [] = array ($rArr ['card'], $rArr ['cardid'], $rArr ['card_type'], $rArr ['cash_pledge'], $rArr ['name'], $rArr ['nickname'], $rArr ['phone'], $rArr ['email'],
+			 $rArr ['identity_card'], $rArr ['sex'], $rArr ['grade'], gmdate ( 'Y-n-j', $rArr ['birthday'] ), $rArr ['annual_fee'],gmdate ( 'Y-n-j', $rArr ['annual_fee_end_time'] ), $rArr ['balance'], $rArr ['customer_manager'], $rArr ['address'],
+			 $rArr ['qq'], $rArr ['work_unit'], $rArr ['occupation'], $rArr ['eligibility'], $rArr ['match_number'], $rArr ['representative_club'], $rArr ['representative_city'], $rArr ['jiangli_jifen'],gmdate ( 'Y-n-j', $rArr ['add_date'] ));
+		}
+		//echo '<pre>';print_r($Data);exit;
+		$start = gmdate ( 'Y_n_j', $start );
+		$end = gmdate ( 'Y_n_j', $end );
+		Create_Excel_File ( iconv ( "UTF-8", "gb2312", $start . "-" . $end . "所有会员.xls" ), $Data );
+		break;
+	case 'export':
+		include template ( 'member_export' );
+		break;
+	case 'doimport':
+		if (isset ( $_FILES ['xls'])) {
+			require_once ('include/excel_class.php');
+			$attach = $_FILES ['xls'];
+			for($i = 0; $i < count ( $attach ['name'] ); $i ++) {
+				if ($attach ['error'] [$i] != 4) {
+					$attachment = $attach ['name'] [$i];
+					$tmp_attachment = $attach ['tmp_name'] [$i];
+					$attachment_size = $attach ['size'] [$i];
+					$url = uploadfile ( $attachment, $tmp_attachment, $attachment_size, array ('xls' ) );
+					
+					$xls = Read_Excel_File ( $url, $return );
+					if ($xls) {
+						e ( $xls );
+					} else {
+						//echo "<pre>";print_r($return);exit();
+						$row = count ( $return ['Sheet1'] );
+						
+						for($i = 1; $i < $row; $i ++) {
+							if ((recode ( $return ['Sheet1'] [$i] [9] ))=="男"){
+								$sex = 1;
+							}else {
+								$sex = 0;
+							}
+								$result = member_add(array(
+									'card'=>recode ( $return ['Sheet1'] [$i] [0] ),
+									'cardid'=>recode ( $return ['Sheet1'] [$i] [1] ),
+									'card_type'=>recode ( $return ['Sheet1'] [$i] [2] ),
+									'cash_pledge'=>recode ( $return ['Sheet1'] [$i] [3] ),
+									'name'=>recode ( $return ['Sheet1'] [$i] [4] ),
+									'nickname'=>recode ( $return ['Sheet1'] [$i] [5] ),
+									'phone'=>recode ( $return ['Sheet1'] [$i] [6] ),
+									'email'=>recode ( $return ['Sheet1'] [$i] [7] ),
+									'identity_card'=>recode ( $return ['Sheet1'] [$i] [8] ),
+									'sex'=>$sex,
+									'grade'=>recode ( $return ['Sheet1'] [$i] [10] ),
+									'birthday'=>strtotime(recode ( $return ['Sheet1'] [$i] [11] )),
+									'annual_fee'=>recode ( $return ['Sheet1'] [$i] [12] ),
+									'annual_fee_end_time'=>strtotime(recode ( $return ['Sheet1'] [$i] [13] )),
+									'balance'=>recode ( $return ['Sheet1'] [$i] [14] ),
+									'customer_manager'=>recode ( $return ['Sheet1'] [$i] [15] ),
+								
+									'address'=>recode ( $return ['Sheet1'] [$i] [16] ),
+									'qq'=>recode ( $return ['Sheet1'] [$i] [17] ),
+									'work_unit'=>recode ( $return ['Sheet1'] [$i] [18] ),
+									'occupation'=>recode ( $return ['Sheet1'] [$i] [19] ),
+									'eligibility'=>recode ( $return ['Sheet1'] [$i] [20] ),
+									'match_number'=>recode ( $return ['Sheet1'] [$i] [21] ),
+									'representative_club'=>recode ( $return ['Sheet1'] [$i] [22] ),
+									'representative_city'=>recode ( $return ['Sheet1'] [$i] [23] ),
+									'jiangli_jifen'=>recode ( $return ['Sheet1'] [$i] [24] ),
+								
+									'add_date'=>strtotime(recode ( $return ['Sheet1'] [$i] [25] ))
+								));
+								/*if (!$result){
+									$resultArr[] =recode ( $return ['Sheet1'] [$i] [0] );
+								}*/
+						}						
+					}
+					
+					@unlink ( $url );
+					s ( '导入数据成功', '?action=member_import&todo=import' );
+				}
+			}
+		} else {
+			e ( '请选择一个XLS文件' );
+		}
+		break;
+	case 'import':
+		include template ( 'member_import' );
+		break;
 	case 'dochangePassword':
 		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
 		$odl_pwd	= isset($_POST['odl_pwd']) ? $_POST['odl_pwd'] : "" ;
