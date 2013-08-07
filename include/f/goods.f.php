@@ -67,22 +67,106 @@ function goods_class_total($where='') {
 	return $result['countnum'];
 }
 /**
- * 获取商品分类列表
- * @param int		$startlimit	开始行
- * @param int		$perpage	结束行
- * @param array()	$where		查找的条件
+ * 递归获取商品分类列表
+ * @param int		$fid	父ID
  */
-function goods_class_list($startlimit,$endlimit,$where='') {
+function goods_class_list($fid) {
 	global $db,$tablepre;
 	$sql = "SELECT * FROM  `{$tablepre}goods_class` ";
-	if (!empty($where)) {
-		$sql .="WHERE ".$where;
+	$module_result = $db->query("SELECT * FROM {$tablepre}goods_class WHERE fid = $fid");
+	$module_arr    = array();
+	while($modules = $db->fetch_array($module_result))
+	{
+		//检查下级是否含有分类
+		if(check_goods_class_list_ChildMoudule($modules['id']))
+        	$modules['childmodules'] =  goods_class_list($modules['id']);
+        else
+        	$modules['childmodules'] = '';
+        $module_arr[] = $modules;
 	}
-	$sql .= "ORDER BY id DESC LIMIT $startlimit , $endlimit";
-	$result		= $db->query($sql);
-	$resultArr	= array();
-	while($arr	= $db->fetch_array($result)){
-        $resultArr[]	= $arr;
+	return $module_arr;
+}
+/**
+ * 通过id得到分类的信息
+ * @param int $id
+ */
+function goods_class_info($id) {
+	global $db,$tablepre;
+	$sql = "SELECT * FROM  `{$tablepre}goods_class` WHERE id = ".$id;
+	$result	= $db->fetch_one_array($sql);
+	return $result;
+}
+/**
+ * 检查模块是否含有子模块函数
+ *
+ * @access  public
+ *
+ * @param   int $fid 要检查下属模块情况的模块的id
+ *
+ * @return  bool
+ */
+function check_goods_class_list_ChildMoudule($fid)
+{
+	global $db,$tablepre;
+	$child = $db->fetch_one_array("SELECT COUNT(id) as allnum FROM {$tablepre}goods_class WHERE fid = $fid");
+	if($child['allnum']==0)
+		return false;
+	else
+		return true;
+}
+/**
+ * 添加商品分类
+ * @param int		$id			ID
+ * @param array()	$infoArr	条件   array('url'=>"http://www.dazan.cn")
+ */
+function goods_class_add($infoArr) {
+	global $db,$tablepre;
+	if (empty($infoArr)) return false;
+	if (!is_array($infoArr))return false;
+	$sql = "INSERT INTO  `{$tablepre}goods_class` (";
+	foreach ($infoArr as $key => $value) {
+		$sql.="`$key` ,";
 	}
-	return $resultArr;
+	$sql = substr($sql,0,strlen($sql)- 1);
+	$sql.=")VALUES (";
+	foreach ($infoArr as $key => $value) {
+		$sql.= " '$value',";
+	}
+	//去掉最后一个多余的,
+	$sql = substr($sql,0,strlen($sql)- 1);
+	$sql.=");";
+	return $db->query($sql);
+}
+/**
+ * 删除指定id的产品分类
+ * @param array $idArr	id数组
+ */
+function goods_class_del($idArr=array()) {
+	global $db,$tablepre;
+	$ids = implode(',', $idArr);
+	$sql = "DELETE FROM `{$tablepre}goods_class` WHERE `id`in($ids)";
+	$result	= $db->query($sql);
+	return $result;
+}
+/**
+ * 添加商品
+ * @param array()	$infoArr	条件   array('url'=>"http://www.dazan.cn")
+ */
+function goods_add($infoArr) {
+	global $db,$tablepre;
+	if (empty($infoArr)) return false;
+	if (!is_array($infoArr))return false;
+	$sql = "INSERT INTO  `{$tablepre}goods` (";
+	foreach ($infoArr as $key => $value) {
+		$sql.="`$key` ,";
+	}
+	$sql = substr($sql,0,strlen($sql)- 1);
+	$sql.=")VALUES (";
+	foreach ($infoArr as $key => $value) {
+		$sql.= " '$value',";
+	}
+	//去掉最后一个多余的,
+	$sql = substr($sql,0,strlen($sql)- 1);
+	$sql.=");";
+	return $db->query($sql);
 }

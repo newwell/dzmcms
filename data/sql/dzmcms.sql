@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 06 日 21:43
+-- 生成日期: 2013 年 08 月 08 日 00:09
 -- 服务器版本: 5.1.70-community
 -- PHP 版本: 5.2.17
 
@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_goods` (
   `add_date` int(22) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `dzmc_goods`
@@ -52,6 +52,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_goods` (
 INSERT INTO `dzmc_goods` (`id`, `name`, `suk`, `unit`, `categories_id`, `jinjia`, `price`, `jiangli_jifen`, `diyong_jifen`, `inventory`, `remark`, `add_date`) VALUES
 (1, '手机', 'shouj', '个', 1, '10', '20', '1', '5', 1000, '备注', 0),
 (2, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 0),
+(5, '刘维', '', '华秦', 9, '', '20', '0', '0', 99, '', 1375919891),
 (4, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 11111);
 
 -- --------------------------------------------------------
@@ -66,15 +67,19 @@ CREATE TABLE IF NOT EXISTS `dzmc_goods_class` (
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
   `remark` text COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品分类表' AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品分类表' AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `dzmc_goods_class`
 --
 
 INSERT INTO `dzmc_goods_class` (`id`, `fid`, `name`, `remark`) VALUES
-(1, 0, '茶', NULL),
-(2, 1, '贡茶', NULL);
+(8, 0, '茶', ''),
+(5, 0, '酒', ''),
+(9, 8, '红茶', ''),
+(6, 5, '红酒', ''),
+(7, 5, '白酒', ''),
+(10, 8, '绿茶', '');
 
 -- --------------------------------------------------------
 
@@ -178,7 +183,6 @@ INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `
 (1, 0, '系统设置', '0', '0', '0', '0', 1),
 (2, 1, '系统参数设置', 'system_set', 'show', '', 'system_set.inc.php', 1),
 (4, 1, '管理员管理', 'system_user', 'edituser', '1', 'system_user.inc.php', 0),
-(60, 56, '添加商品分类', 'goods_clasadd', 'clasadd', NULL, 'goods.inc.php', 0),
 (59, 56, '商品分类管理', 'goods_class', 'class', NULL, 'goods.inc.php', 0),
 (58, 56, '商品添加', 'goods_add', 'add', NULL, 'goods.inc.php', 0),
 (57, 56, '商品列表', 'goods_list', 'list', NULL, 'goods.inc.php', 0),
@@ -228,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1375824211, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1375880165, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 
