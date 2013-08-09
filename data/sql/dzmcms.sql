@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 08 日 00:09
+-- 生成日期: 2013 年 08 月 09 日 20:56
 -- 服务器版本: 5.1.70-community
 -- PHP 版本: 5.2.17
 
@@ -232,7 +232,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1375880165, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1376053531, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 

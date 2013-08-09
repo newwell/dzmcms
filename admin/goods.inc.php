@@ -5,6 +5,9 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/goods.f.php';
 switch ($todo) {
+	case 'update':
+		e('修改商品信息暂时未做!');
+		break;
 	case 'saveadd'://保存商品信息
 		$name	= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
 		$suk	= htmlspecialchars( isset($_POST['suk']) ? $_POST['suk'] : '' );
