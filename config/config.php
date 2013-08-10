@@ -7,3 +7,7 @@
 	$GLOBALS['DZMC_CFG']["grade"]["2"] = "二级";
 	
 	$GLOBALS['DZMC_CFG']["template_cache"]= 0;
+	
+	$GLOBALS['DZMC_CFG']["method_payment"]["jifen"] = "积分";
+	$GLOBALS['DZMC_CFG']["method_payment"]["xianjin"] = "现金";
+	$GLOBALS['DZMC_CFG']["method_payment"]["yinhangka"] = "银行卡";
