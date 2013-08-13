@@ -40,8 +40,5 @@ $(document).ready(function(){
     </td>
   </tr>
 </table>
-<script>
-change($('nav0'));
-</script>
 </body>
 </html>

@@ -9,6 +9,9 @@
 $(function(){
 	$("#representative_city").suggest(citys,{hot_list:commoncitys,attachObject:"#suggest2"});
 });
+document.body.onload = function(){
+    document.getElementById("card").focus();
+};
 </script>
 <div class="formnav">添加会员</div>
 <form action="?action=member_add&todo=saveadd" method="post" onsubmit="return CheckForm(this,true);">
@@ -17,7 +20,7 @@ $(function(){
 	<tr>
 	    <td width="80px" align="right">读卡:</td>
 	    <td>
-	        <input name="card" required="true" type="text" style="border:#336699 1px solid;"/>*不能为空</td>
+	        <input name="card" id="card" required="true" type="text" style="border:#336699 1px solid;"/>*不能为空</td>
 	    <td width="80px" align="right">会员卡编号:</td>
 	    <td>
 	        <input name="cardid" required="true" type="text" style="border:#336699 1px solid;"/>*不能为空</td>

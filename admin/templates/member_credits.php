@@ -2,6 +2,11 @@
 <?php include template('header'); ?>
 <div class="formnav">积分兑换</div>
 <form action="?action=member_credits&todo=credits" method="post" onsubmit="return CheckForm(this,true);">
+<script type="text/javascript"> 
+document.body.onload = function(){
+    document.getElementById("card").focus();
+};
+</script>
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
@@ -41,5 +46,6 @@
 	<td></tr>
 </table>
 </form>
+ 
 <?php }?>
 <?php include template('foot'); ?>

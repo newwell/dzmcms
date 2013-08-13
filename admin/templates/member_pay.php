@@ -1,6 +1,11 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
 <div class="formnav">账户充值</div>
+<script type="text/javascript"> 
+document.body.onload = function(){
+    document.getElementById("card").focus();
+};
+</script>
 <form action="?action=member_pay&todo=pay" method="post" onsubmit="return CheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
