@@ -4,7 +4,42 @@ CheckAccess();
 global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/member.f.php';
+require_once 'include/f/balance.f.php';
 switch ($todo) {
+	case 'dojifenlog'://执行积分变动
+		$change_type	= isset($_POST['change_type']) ? $_POST['change_type'] : "" ;
+		$change_object	= isset($_POST['change_object']) ? $_POST['change_object'] : "" ;
+		$change_value	= isset($_POST['change_value']) ? $_POST['change_value'] : "" ;
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '' );
+		
+		if (empty($change_value))s("变动积分值0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
+		if (empty($card))e('无法获取读卡');
+		
+		switch ($change_type) {
+			case 'add':
+				balance_add($card, $change_value,$change_object);
+			break;
+			case 'del':
+				balance_reduce($card, $change_value,$change_object);
+			break;
+			
+			default:
+				s("变动类型未知",'?action=member_jifenlog&todo=jifenlog&card='.$card);
+			break;
+		}
+		$member_info = member_get(array($card),'card');
+		include template('member_balance_change_print');
+		break;
+	case 'jifenlog'://积分变动
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+		}else {
+			$member_info = '';
+		}
+		include template('member_jifenlog');
+		break;
 	case 'doexport':
 		$start = strtotime ( isset ( $_POST ['start'] ) ? $_POST ['start'] : '' );
 		$end = strtotime ( isset ( $_POST ['end'] ) ? $_POST ['end'] : '' );
