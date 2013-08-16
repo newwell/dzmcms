@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta http-equiv="Page-Enter" Content="blendTrans(Duration=0.3)"> 
 <meta http-equiv="Page-Exit" Content="blendTrans(Duration=0.3)"> 
+
 <title>管理员控制面板</title>
 <link rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css.css" />
 <link rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css/wui.css" />

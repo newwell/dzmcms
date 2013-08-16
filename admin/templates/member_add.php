@@ -1,5 +1,6 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
+<div class="formnav"><?php echo $act['title'];?></div>
 <link rel="stylesheet" type="text/css" href="script/aircity/css/jquery.suggest.css">
 
 <script type="text/javascript" src="script/aircity/js/j.dimensions.js"></script>
@@ -13,7 +14,7 @@ document.body.onload = function(){
     document.getElementById("card").focus();
 };
 </script>
-<div class="formnav">添加会员</div>
+
 <form action="?action=member_add&todo=saveadd" method="post" onsubmit="return CheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">

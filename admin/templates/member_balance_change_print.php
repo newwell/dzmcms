@@ -3,24 +3,23 @@
 <div class="formnav"><?php echo $act['title'];?></div>
 <script src="script/jquery.js" type="text/javascript"></script>
 <script src="script/jquery.PrintArea.js" type="text/javascript"></script>
-
 <input type="button" id="btnPrint" value="打印"/>
 <div id="printContent" style="font-family: 宋体;font-size: 8px;">
 <h2><?php echo $setting_sitename;?></h2>
+<?php echo $act['title'];?>小票<br/>
 -----------------------------<br/>
-消费时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br>
 打印时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br/>
 -----------------------------<br/>
-支付方式:<?php echo $method_payment_v;?><br>
-支付金额:<?php echo $payment_amount;?><br>
-抵用积分:<?php echo $diyong_jifen;?><br>
-奖励积分:<?php echo $jiangli_jifen;?><br>
+变动类型:<?php if ($change_type=="add"){echo '增加';}else {echo "减少";};?><br>
+变动对象:<?php if ($change_object=="balance"){echo '积分';}else {echo "奖励积分";};?><br>
+变动分值:<?php echo $change_value;?><br>
 -----------------------------<br/>
-目前积分:<?php echo $member_info['balance'];?><br/>
+变动后积分:<?php echo $member_info['balance'];?><br/>
+变动后奖励积分:<?php echo $member_info['jiangli_jifen'];?><br/>
 会员读卡:<?php echo $member_info['card'];?><br/>
 会员卡号:<?php echo $member_info['cardid'];?><br/>
 
-<div>
+</div>
 
 <script type="text/javascript">
 $(function(){

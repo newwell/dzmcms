@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 15 日 22:22
+-- 生成日期: 2013 年 08 月 16 日 21:41
 -- 服务器版本: 5.1.70-community
 -- PHP 版本: 5.2.17
 
@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_member` (
 
 INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
 (736940301, 800340, 1, '100', '郭富城', '富城', '13886143620', '1040811569@qq.com', '429004199110162254', 1, 1, 1215475200, '200', 1343260800, '2222277', '晓菲', '湖北省武汉市洪山区雄楚大街489号领秀城8栋', '996159513', '华秦', '歌手', 1, 0, 'pk365', '中文/拼音', 1374922571, '0', ''),
-(736955981, 800522, 1, '100', '刘德华', '华仔', '1388888888', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, '655', '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1375804224, '100', '');
+(736955981, 800522, 1, '100', '刘德华', '华仔', '1388888888', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, '1335', '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1375804224, '300', '');
 
 -- --------------------------------------------------------
 
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemaction` (
   `page` varchar(255) NOT NULL DEFAULT '',
   `listnum` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=66 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=72 ;
 
 --
 -- 转存表中的数据 `dzmc_systemaction`
@@ -246,7 +246,13 @@ INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `
 (54, 42, '密码修改', 'member_changePassword', 'changePassword', NULL, 'member.inc.php', 0),
 (55, 42, '会员卡挂失', 'member_guashi', 'guashi', NULL, 'member.inc.php', 0),
 (64, 61, '销售记录', 'buy_log', 'log', NULL, 'buy.inc.php', 0),
-(65, 61, '退货记录', 'buy_back', 'back', NULL, 'buy.inc.php', 0);
+(65, 61, '退货记录', 'buy_back', 'back', NULL, 'buy.inc.php', 0),
+(66, 0, '赛事管理', '', NULL, NULL, '', 0),
+(67, 66, '赛事管理', 'sport_list', 'list', NULL, 'sport.inc.php', 0),
+(68, 66, '添加赛事', 'sport_add', 'add', NULL, 'sport.inc.php', 0),
+(69, 66, '会员参赛管理', 'sport_entry', 'entry', NULL, 'sport.inc.php', 0),
+(70, 66, '会员退赛管理', 'sport_withdraw', 'withdraw', NULL, 'sport.inc.php', 0),
+(71, 66, '会员参赛记录', 'sport_entrlog', 'entrlog', NULL, 'sport.inc.php', 0);
 
 -- --------------------------------------------------------
 
@@ -273,7 +279,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1376599055, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1376666463, '192.168.1.101', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 
