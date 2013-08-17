@@ -37,9 +37,9 @@ function balance_reduce($card,$value,$type='balance') {
  * @param int		$card	用户card
  * @param string	$explain	增加的值
  */
-function balance_log($card,$explain) {
-	global $db,$tablepre,$localtime;
-	$sql = "INSERT INTO `{$tablepre}balance_log` (`card`, `explain`, `add_date`) VALUES ('$card', '$explain', $localtime);";
+function balance_log($card,$explain,$time) {
+	global $db,$tablepre;
+	$sql = "INSERT INTO `{$tablepre}balance_log` (`card`, `explain`, `add_date`) VALUES ('$card', '$explain','$time' );";
 	$result	= $db->fetch_one_array($sql);
 	return $result;
 }

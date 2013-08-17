@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 16 日 21:41
+-- 生成日期: 2013 年 08 月 17 日 17:31
 -- 服务器版本: 5.1.70-community
 -- PHP 版本: 5.2.17
 
@@ -34,16 +34,15 @@ CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
   `explain` text NOT NULL COMMENT '说明',
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=4 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `dzmc_balance_log`
 --
 
 INSERT INTO `dzmc_balance_log` (`id`, `card`, `explain`, `add_date`) VALUES
-(1, 2147483647, '是vdsasdfasdf', 0),
-(2, 2147483647, '是vdsasdfasdf', 0),
-(3, 2147483647, '是vdsasdfasdf', 0);
+(4, 736955981, '积分变动-增加-100分', 0),
+(5, 736955981, '积分变动-增加-100分', 1376738774);
 
 -- --------------------------------------------------------
 
@@ -148,7 +147,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_member` (
 
 INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
 (736940301, 800340, 1, '100', '郭富城', '富城', '13886143620', '1040811569@qq.com', '429004199110162254', 1, 1, 1215475200, '200', 1343260800, '2222277', '晓菲', '湖北省武汉市洪山区雄楚大街489号领秀城8栋', '996159513', '华秦', '歌手', 1, 0, 'pk365', '中文/拼音', 1374922571, '0', ''),
-(736955981, 800522, 1, '100', '刘德华', '华仔', '1388888888', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, '1335', '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1375804224, '300', '');
+(736955981, 800522, 1, '100', '刘德华', '华仔', '1388888888', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, '1635', '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1375804224, '300', '');
 
 -- --------------------------------------------------------
 
@@ -197,6 +196,32 @@ INSERT INTO `dzmc_settings` (`variable`, `value`) VALUES
 ('sitedescription', ''),
 ('rate', '1'),
 ('siteqq', '1040811569');
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `dzmc_sport`
+--
+
+CREATE TABLE IF NOT EXISTS `dzmc_sport` (
+  `id` int(11) NOT NULL COMMENT '编号',
+  `type` varchar(255) NOT NULL COMMENT '赛事类型',
+  `start_time` int(25) NOT NULL COMMENT '比赛开始时间',
+  `deduction` int(20) NOT NULL COMMENT '消耗积分',
+  `people_number` int(11) DEFAULT NULL COMMENT '人数',
+  `rebuy` int(1) NOT NULL COMMENT '是否可以再次买入',
+  `entry_number` int(11) NOT NULL COMMENT '参赛次数',
+  `stop_entry_time` int(15) NOT NULL COMMENT '买入截至时间',
+  `zhangmang_time` int(15) DEFAULT NULL COMMENT '涨盲时间',
+  `rest_time` int(11) DEFAULT NULL COMMENT '休息时间',
+  `scoreboard` varchar(525) DEFAULT NULL COMMENT '记分牌',
+  `MaxBLNum` int(11) DEFAULT NULL COMMENT '桌数',
+  `seating` int(11) DEFAULT NULL COMMENT '座位数',
+  `venue` varchar(525) DEFAULT NULL COMMENT '比赛地点',
+  `remark` text COMMENT '备注',
+  `jackpot` int(25) DEFAULT NULL COMMENT '奖池',
+  `add_date` int(15) DEFAULT NULL COMMENT '添加时间'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='赛事表';
 
 -- --------------------------------------------------------
 
@@ -279,7 +304,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1376666463, '192.168.1.101', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1376758739, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 

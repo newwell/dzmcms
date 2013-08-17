@@ -27,7 +27,7 @@ switch ($todo) {
 		}
 		//var_dump($jiangli_jifen);
 		if (balance_reduce($card, $payment_amount)){
-			balance_log($card, "非商品交易,扣除$payment_amount积分");
+			balance_log($card, "非商品交易,扣除$payment_amount积分",$localtime);
 		}
 		//echo "";
 		$method_payment_v = GetConfig('method_payment');

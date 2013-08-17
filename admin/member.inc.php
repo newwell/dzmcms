@@ -11,7 +11,7 @@ switch ($todo) {
 		$change_object	= isset($_POST['change_object']) ? $_POST['change_object'] : "" ;
 		$change_value	= isset($_POST['change_value']) ? $_POST['change_value'] : "" ;
 		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
-		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '' );
+		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '空' );
 		
 		if (empty($change_value))s("变动积分值0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
 		if (empty($card))e('无法获取读卡');
@@ -19,9 +19,11 @@ switch ($todo) {
 		switch ($change_type) {
 			case 'add':
 				balance_add($card, $change_value,$change_object);
+				$type = "增加";
 			break;
 			case 'del':
 				balance_reduce($card, $change_value,$change_object);
+				$type = "减少";
 			break;
 			
 			default:
@@ -29,6 +31,7 @@ switch ($todo) {
 			break;
 		}
 		$member_info = member_get(array($card),'card');
+		balance_log($card, "积分变动-".$type."-".$change_value."分/////////备注:".$remark, $localtime);
 		include template('member_balance_change_print');
 		break;
 	case 'jifenlog'://积分变动

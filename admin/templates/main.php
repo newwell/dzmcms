@@ -18,7 +18,7 @@ $(document).ready(function(){
 <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="table-layout: fixed;">
   <tr>
     <td width="205" id="left">
-      <iframe frameborder="0" id="menu" name="menu" src="?action=show&todo=left&do=system"  style="height: 100%;  z-index: 1;overflow: auto;"></iframe>
+      <iframe frameborder="0" id="menu" name="menu" src="?action=show&todo=left&do=system"  style="height: 100%;width:100%; z-index: 1;overflow: auto;"></iframe>
     </td>
     <td style="WIDTH:7px" bgcolor="#F3F3F3">
       <table height="100%" cellspacing="0" cellpadding="0" border="0">
