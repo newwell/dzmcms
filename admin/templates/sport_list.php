@@ -1,6 +1,6 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
-<div class="formnav"><?php echo $act['title'];?></div>
+<div class="formnav"><?php echo $act['title'];?></div> 
 <form  method="post" id="data" action="?action=shorturl_list">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <style>.xiankuan{max-width: 220px;overflow: hidden;text-overflow: ellipsis;width: 220px;white-space:nowrap;}</style>

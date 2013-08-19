@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 17 日 17:31
+-- 生成日期: 2013 年 08 月 20 日 00:26
 -- 服务器版本: 5.1.70-community
 -- PHP 版本: 5.2.17
 
@@ -205,9 +205,12 @@ INSERT INTO `dzmc_settings` (`variable`, `value`) VALUES
 
 CREATE TABLE IF NOT EXISTS `dzmc_sport` (
   `id` int(11) NOT NULL COMMENT '编号',
+  `name` text NOT NULL COMMENT '赛事名称',
   `type` varchar(255) NOT NULL COMMENT '赛事类型',
   `start_time` int(25) NOT NULL COMMENT '比赛开始时间',
   `deduction` int(20) NOT NULL COMMENT '消耗积分',
+  `service_charge` int(255) NOT NULL COMMENT '服务费',
+  `service_charge_time` int(11) DEFAULT NULL COMMENT '每次服务费时间(分钟)',
   `people_number` int(11) DEFAULT NULL COMMENT '人数',
   `rebuy` int(1) NOT NULL COMMENT '是否可以再次买入',
   `entry_number` int(11) NOT NULL COMMENT '参赛次数',
@@ -217,7 +220,6 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
   `scoreboard` varchar(525) DEFAULT NULL COMMENT '记分牌',
   `MaxBLNum` int(11) DEFAULT NULL COMMENT '桌数',
   `seating` int(11) DEFAULT NULL COMMENT '座位数',
-  `venue` varchar(525) DEFAULT NULL COMMENT '比赛地点',
   `remark` text COMMENT '备注',
   `jackpot` int(25) DEFAULT NULL COMMENT '奖池',
   `add_date` int(15) DEFAULT NULL COMMENT '添加时间'
@@ -304,7 +306,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1376758739, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1376947816, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 -- --------------------------------------------------------
 

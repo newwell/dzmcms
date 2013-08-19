@@ -1,6 +1,6 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
-<div class="formnav">会员查询</div>
+<div class="formnav"><?php echo $act['title'];?></div> 
 <script type="text/javascript"> 
 document.body.onload = function(){
     document.getElementById("card").focus();
