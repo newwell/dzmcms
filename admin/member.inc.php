@@ -6,6 +6,14 @@ admin_priv($act['action']);
 require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 switch ($todo) {
+	case 'js_user_info':
+		$card		= ( isset($_GET['card']) ? $_GET['card'] : '' );
+		$member_info = member_get(array($card),'card');
+		echo json_encode($member_info);
+		//输出到浏览器
+		ob_flush();
+		exit();
+		break;
 	case 'dojifenlog'://执行积分变动
 		$change_type	= isset($_POST['change_type']) ? $_POST['change_type'] : "" ;
 		$change_object	= isset($_POST['change_object']) ? $_POST['change_object'] : "" ;

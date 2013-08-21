@@ -17,7 +17,7 @@
 	    </select></td>
 	    <td align="right">积分消耗:</td>
 	    <td>
-	    	<input name="deduction"/>*不能为空
+	    	<input name="deduction" required="true"/>*不能为空
 	    </td>
 	</tr>
 	<tr>
@@ -27,7 +27,7 @@
 	    <td><input name="people_number" required="true"/>*不能为空</td>
 	</tr>
 	<tr>
-	    <td align="right">rebuy:</td>
+	    <td align="right">支持可以再次买入:</td>
 	    <td><select name="rebuy">
 	    		<option value="1">是</option>
 	    		<option value="0">否</option>

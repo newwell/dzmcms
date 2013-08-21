@@ -44,7 +44,7 @@ function goods_total($where='') {
 	return $result['countnum'];
 }
 /**
- * 删除指定id的短url
+ * 删除指定id的信息
  * @param array $idArr	id数组
  */
 function goods_del($idArr=array()) {
