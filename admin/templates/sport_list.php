@@ -12,7 +12,7 @@
     <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
     <?php //if ($todo!='entry'){?>
 		<tr >
-         <td colspan="9" align="right">
+         <td colspan="9">
          <input type="hidden" name="action" value="shorturl_list"/>
          <input type="hidden" name="todo" value="search"/>
          	名称<input name="keywork" value="<?php if (!empty($keywork))echo $keywork;?>"/>
@@ -53,10 +53,8 @@
 			<a href="?action=sport_list&todo=jiesai&id=<?php echo $value['id']?>" title="结束比赛">结束比赛</a>
 			<?php }elseif ($value['status']=="已结束"){?>
 			<a href="?action=sport_list&todo=prize&id=<?php echo $value['id']?>" title="颁奖">颁奖</a>
-			<?php }elseif ($value['status']=="已颁奖"){?>
-			<a href="?action=sport_list&todo=prizelog&id=<?php echo $value['id']?>" title="颁奖记录">颁奖记录</a>
-			<a href="JavaScript:;" onclick="if(confirm('删除操作不可恢复,确认吗?')){location.href='?action=sport_list&todo=del&id=<?php echo $value['id']?>'}" title="删除">删除</a>
 			<?php }?>
+			<a href="JavaScript:;" onclick="if(confirm('删除不可恢复,同时删除该赛事下的参赛,颁奖记录,确认删除?')){location.href='?action=sport_list&todo=del&id=<?php echo $value['id']?>'}" title="删除">删除</a>
 			<?php }else {?>
 				<a href="?action=sport_list&todo=doentry&id=<?php echo $value['id']?>" title="报名">报名</a>
 			<?php }?>

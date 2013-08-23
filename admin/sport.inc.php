@@ -48,7 +48,7 @@ switch ($todo) {
 		//print_r($sport_info);exit;
 		include template('sport_prize');
 		break;
-	case 'dowithdraw':
+	case 'dowithdraw'://执行退赛
 		
 		$card		= intval( isset($_GET['card']) ? $_GET['card'] : '' );
 		$entry_id	= intval( isset($_GET['entry_id']) ? $_GET['entry_id'] : '' );
@@ -83,10 +83,12 @@ switch ($todo) {
 			$type="积分";
 		}
 		$result = entry_update($entry_id, array(
-			"status"=>"已退赛"
+			"status"=>"已退赛",
+			"exit_time"=>$localtime
 		));
 		if ($result){
-			s("退赛成功,扣除[ $serviceCharge ]$type",$tiaohui);
+			//s("退赛成功,扣除[ $serviceCharge ]$type",$tiaohui);
+			include template('sport_withdraw_print');
 		}else {
 			s("退赛失败",$tiaohui);
 		}
@@ -94,11 +96,11 @@ switch ($todo) {
 		break;
 	case 'withdraw':
 		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$infoList	= array();
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
-			$sql = "SELECT * FROM  `{$tablepre}entry` WHERE  `card` =$card AND STATUS =  '已入赛' ORDER BY  `add_date` DESC ";
+			$sql = "SELECT * FROM  `{$tablepre}entry` WHERE  `card` =$card ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
-			$infoList	= array();
 			while($arr	= $db->fetch_array($result)){
 				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
 				$arr['sport'] = sport_get(array($arr['sport_id']),"id");
@@ -109,6 +111,24 @@ switch ($todo) {
 			print_r($infoList);exit();*/
 		}else {
 			$member_info = '';
+			$page   = intval( isset($_GET['page']) ? $_GET['page'] : 1 );
+			$perpage = intval( isset($_GET['perpage']) ? $_GET['perpage'] : 20 );
+			if($page > 0){
+				$startlimit = ($page - 1) * $perpage;
+			}else{
+				$startlimit = 0;
+			}
+			$page_array = array();
+			$total		= entry_total();
+			$page_control = multipage($total,$perpage,$page);
+			$sql = "SELECT * FROM  `{$tablepre}entry` ORDER BY add_date DESC LIMIT $startlimit , $perpage";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				$arr['sport'] = sport_get(array($arr['sport_id']),"id");
+		        $infoList[]	= $arr;
+			}
+			//$infoList	= entry_list($startlimit, $perpage);	
 		}
 		include template('sport_withdraw');
 		break;
@@ -244,7 +264,12 @@ switch ($todo) {
 		if (empty($id)) {
 			e('ID不存在!');
 		}
+		//删除赛事信息
 		if (sport_del(array($id))) {
+			//删除参赛退赛记录
+			entry_del(array($id),'sport_id');
+			//删除颁奖记录
+			prize_del(array($id),'sport_id');
 			s('删除成功','?action=sport_list&todo=list');
 		}
 		break;
@@ -258,8 +283,8 @@ switch ($todo) {
 		$people_number	= intval( isset($_POST['people_number']) ? $_POST['people_number'] : 0 );
 		$rebuy	= intval( isset($_POST['rebuy']) ? $_POST['rebuy'] : 0 );
 		$entry_number	= intval( isset($_POST['entry_number']) ? $_POST['entry_number'] : '' );
-		$zhangmang_time	= intval( isset($_POST['zhangmang_time']) ? $_POST['zhangmang_time'] : '' );
-		$stop_entry_time= intval( isset($_POST['stop_entry_time']) ? $_POST['stop_entry_time'] : 0 );
+		$zhangmang_time	= ( isset($_POST['zhangmang_time']) ? $_POST['zhangmang_time'] : '' );
+		$stop_entry_time= ( isset($_POST['stop_entry_time']) ? $_POST['stop_entry_time'] : 0 );
 		$rest_time	= intval( isset($_POST['rest_time']) ? $_POST['rest_time'] : 0 );
 		$scoreboard	= htmlspecialchars( isset($_POST['scoreboard']) ? $_POST['scoreboard'] : 0 );
 		$MaxBLNum	= intval( isset($_POST['MaxBLNum']) ? $_POST['MaxBLNum'] : 0 );
@@ -270,7 +295,7 @@ switch ($todo) {
 		if (empty($name))e("赛事名称不能为空!");
 		if (empty($start_time))e("比赛开始时间必填");
 		if (empty($stop_entry_time))e("截至报名时间必填");
-		if (($stop_entry_time)<=($start_time))e("截至报名不应比比赛开始开始时间小");
+		if (strtotime($stop_entry_time)<=strtotime($start_time))e("截至报名不应比比赛开始开始时间小");
 		
 		$result = sport_add(array(
 			'name'=>$name,

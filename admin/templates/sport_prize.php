@@ -27,11 +27,11 @@
         </tr>
 		<?php } }?>
 		<tr bgcolor="#A6D0F6" align="center">
-			<td class="list"><input name="ranking" value="第 <?php echo $key+2;?> 名"/></td>
+			<td class="list"><input name="ranking" value="第 <?php if (isset($key)){echo $key+2;}else {echo 1;};?> 名"/></td>
 			<td class="list"><input name="card" value="" onblur="get_user_name();" id="card"/></td>
 			<td class="list"><input name="name" id="name"/></td>
 			<td class="list"><input name="jiangli_jifen"/></td>
-			<td class="list"><input type="submit" value="提交奖励"  class="formsubmit" /></td>
+			<td class="list"><input type="button" value="提交奖励"  class="formsubmit" onclick="javascript:this.form.submit();"/></td>
 		</tr>
 		<script type="text/javascript">
 function get_user_name() {

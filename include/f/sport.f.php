@@ -151,6 +151,18 @@ function entry_list($startlimit,$endlimit,$where='') {
 	return $resultArr;
 }
 /**
+ * 该条件下的参赛的总数
+ */
+function entry_total($where='') {
+	global $db,$tablepre;
+	$sql	= "SELECT COUNT(id) AS countnum FROM {$tablepre}entry ";
+	if (!empty($where)) {
+		$sql .="WHERE ".$where;
+	}
+	$result	= $db->fetch_one_array($sql);
+	return $result['countnum'];
+}
+/**
  * 奖池减少
  * @param int		$id		赛事编号
  * @param string	$value	值
@@ -168,7 +180,9 @@ function jackpot_reduce($id,$value) {
  */
 function jackpot_add($id,$value) {
 	global $db,$tablepre;
-	$sql = "UPDATE  `{$tablepre}sport` SET  `jackpot` =  `jackpot`+$value WHERE  id =$id;";
+	//$sql = "UPDATE  `{$tablepre}sport` SET  `jackpot` =  `jackpot`+$value WHERE  id =$id;";
+	$sql = "UPDATE  `{$tablepre}sport` SET  `jackpot` =`jackpot`+$value WHERE id =$id";
+	//exit($sql);
 	$result	= $db->fetch_one_array($sql);
 	return $result;
 }
@@ -223,4 +237,28 @@ function prize_add($infoArr) {
 	$sql = substr($sql,0,strlen($sql)- 1);
 	$sql.=");";
 	return $db->query($sql);
+}
+/**
+ * 删除参赛信息
+ * @param array $idArr	id数组
+ */
+function entry_del($idArr=array(),$fields='id') {
+	global $db,$tablepre;
+	if (empty($idArr))return false;
+	$ids = implode(',', $idArr);
+	$sql = "DELETE FROM `{$tablepre}entry` WHERE `$fields`in($ids)";
+	$result	= $db->query($sql);
+	return $result;
+}
+/**
+ * 删除指定字段的颁奖信息
+ * @param array $idArr	id数组
+ */
+function prize_del($idArr=array(),$fields='id') {
+	global $db,$tablepre;
+	if (empty($idArr))return false;
+	$ids = implode(',', $idArr);
+	$sql = "DELETE FROM `{$tablepre}prize` WHERE `$fields`in($ids)";
+	$result	= $db->query($sql);
+	return $result;
 }

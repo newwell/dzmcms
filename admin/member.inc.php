@@ -39,7 +39,7 @@ switch ($todo) {
 			break;
 		}
 		$member_info = member_get(array($card),'card');
-		balance_log($card, "积分变动-".$type."-".$change_value."分/////////备注:".$remark, $localtime);
+		balance_log($card, "积分变动-".$type."-".$change_value."分-------备注:".$remark, $localtime);
 		include template('member_balance_change_print');
 		break;
 	case 'jifenlog'://积分变动
