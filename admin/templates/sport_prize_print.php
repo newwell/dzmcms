@@ -12,7 +12,7 @@
 打印时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br/>
 -----------------------------<br/>
 参赛名称:<?php echo $sportinfo['name'];?><br>
-名词:<?php echo $ranking;?><br>
+名次:<?php echo $ranking;?><br>
 奖励积分:<?php echo $jiangli_jifen;?><br>
 -----------------------------<br/>
 会员读卡:<?php echo $member_info['card'];?><br/>

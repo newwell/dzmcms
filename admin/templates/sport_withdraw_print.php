@@ -13,7 +13,6 @@
 打印时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br/>
 -----------------------------<br/>
 参赛名称:<?php echo $sport_info['name'];?><br>
-消耗积分:<?php echo $sport_info['deduction'];?><br>
 服务积分:<?php echo $serviceCharge;?><br>
 扣分方式:<?php if ($entry_info['payment_type']=='jiangli_jifen'){echo '奖励积分';}else{echo '积分';}?><br>
 -----------------------------<br/>
