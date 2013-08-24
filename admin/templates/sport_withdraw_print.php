@@ -1,6 +1,6 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
-<?php include template('header'); ?>
-<div class="formnav">退赛-小票打印</div>
+<?php /// include template('header'); ?>
+<!-- <div class="formnav">退赛-小票打印</div> -->
 <script src="script/jquery.js" type="text/javascript"></script>
 <script src="script/jquery.PrintArea.js" type="text/javascript"></script>
 
@@ -32,4 +32,4 @@ $(function(){
 });
 $("#printContent").printArea();//直接打印
 </script>
-<?php include template('foot'); ?>
+<?php //include template('foot'); ?>

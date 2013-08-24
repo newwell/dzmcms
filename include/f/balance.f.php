@@ -43,3 +43,36 @@ function balance_log($card,$explain,$time) {
 	$result	= $db->fetch_one_array($sql);
 	return $result;
 }
+
+/**
+ * 获取列表
+ * @param int		$startlimit	开始行
+ * @param int		$perpage	结束行
+ * @param array()	$where		查找的条件
+ */
+function balance_log_list($startlimit,$endlimit,$where='') {
+	global $db,$tablepre;
+	$sql = "SELECT * FROM  `{$tablepre}balance_log` ";
+	if (!empty($where)) {
+		$sql .="WHERE ".$where;
+	}
+	$sql .= "ORDER BY add_date DESC LIMIT $startlimit , $endlimit";
+	$result		= $db->query($sql);
+	$resultArr	= array();
+	while($arr	= $db->fetch_array($result)){
+		$resultArr[]	= $arr;
+	}
+	return $resultArr;
+}
+/**
+ * 该条件下的积分记录的总数
+ */
+function balance_log_total($where='') {
+	global $db,$tablepre;
+	$sql	= "SELECT COUNT(card) AS countnum FROM {$tablepre}balance_log ";
+	if (!empty($where)) {
+		$sql .="WHERE ".$where;
+	}
+	$result	= $db->fetch_one_array($sql);
+	return $result['countnum'];
+}

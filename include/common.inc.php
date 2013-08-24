@@ -1,6 +1,6 @@
 <?php
 define("IN_SITE", "TRUE");
-define("DZMC_VERSIONS", "1.1.18");
+define("DZMC_VERSIONS", "1.2.42");
 header("Cache-control: private");
 header(base64_decode('WC1Qb3dlcmVkLUJ5OiBkYVphbiBOZXR3b3JrIFRlY2gvd3d3LmRhemFuLmNu'));
 header("Content-Type: text/html; charset=UTF-8");  

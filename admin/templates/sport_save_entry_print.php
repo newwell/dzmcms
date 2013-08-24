@@ -1,6 +1,6 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
-<?php include template('header'); ?>
-<div class="formnav">赛事报名-小票打印</div>
+<?php // include template('header'); ?>
+<!-- <div class="formnav">赛事报名-小票打印</div> -->
 <script src="script/jquery.js" type="text/javascript"></script>
 <script src="script/jquery.PrintArea.js" type="text/javascript"></script>
 
@@ -17,12 +17,13 @@
 扣分方式:<?php if ($payment_type=='jiangli_jifen'){echo '奖励积分';}else{echo '积分';}?><br>
 是否可以再次买入:<?php if ($sportinfo['rebuy']){echo "是";}else {echo '否';}?><br>
 -----------------------------<br/>
+会员卡号:<?php echo $member_info['cardid'];?><br/>
 会员名:<?php echo $member_info['name'];?><br/>
 会员昵称:<?php echo $member_info['nickname'];?><br/>
 剩余积分:<?php echo $member_info['balance'];?><br/>
 剩余奖励积分:<?php echo $member_info['jiangli_jifen'];?><br/>
-会员读卡:<?php echo $member_info['card'];?><br/>
-会员卡号:<?php echo $member_info['cardid'];?><br/>
+积分合计:<?php echo $member_info['balance']+$member_info['jiangli_jifen'];?><br/>
+
 
 </div>
 
@@ -32,4 +33,4 @@ $(function(){
 });
 $("#printContent").printArea();//直接打印
 </script>
-<?php include template('foot'); ?>
+<?php //include template('foot'); ?>

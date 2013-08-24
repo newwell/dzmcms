@@ -1,6 +1,6 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
-<?php include template('header'); ?>
-<div class="formnav"><?php echo $act['title'];?></div>
+<?php //include template('header'); ?>
+<!-- <div class="formnav"><?php echo $act['title'];?></div> -->
 <script src="script/jquery.js" type="text/javascript"></script>
 <script src="script/jquery.PrintArea.js" type="text/javascript"></script>
 <input type="button" id="btnPrint" value="打印"/>
@@ -14,11 +14,12 @@
 变动对象:<?php if ($change_object=="balance"){echo '积分';}else {echo "奖励积分";};?><br>
 变动分值:<?php echo $change_value;?><br>
 -----------------------------<br/>
+会员名称:<?php echo $member_info['name'];?><br/>
+会员昵称:<?php echo $member_info['nickname'];?><br/>
+会员卡号:<?php echo $member_info['cardid'];?><br/>
 变动后积分:<?php echo $member_info['balance'];?><br/>
 变动后奖励积分:<?php echo $member_info['jiangli_jifen'];?><br/>
-会员读卡:<?php echo $member_info['card'];?><br/>
-会员卡号:<?php echo $member_info['cardid'];?><br/>
-
+剩余积分合计:<b><?php echo $member_info['balance']+$member_info['jiangli_jifen'];?></b>
 </div>
 
 <script type="text/javascript">
@@ -27,4 +28,4 @@ $(function(){
 });
 $("#printContent").printArea();//直接打印
 </script>
-<?php include template('foot'); ?>
+<?php //include template('foot'); ?>
