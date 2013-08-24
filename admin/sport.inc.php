@@ -24,6 +24,7 @@ switch ($todo) {
 		));
 		if ($result) {
 			balance_add($card, $jiangli_jifen,'jiangli_jifen');//奖励积分
+			balance_log($card, "赛事奖励-增加奖励积分:".$jiangli_jifen."", $localtime);
 			jackpot_reduce($sport_id, $jiangli_jifen);//增加奖池
 			$member_info = member_get(array($card),'card');
 			$sportinfo		= sport_get(array($sport_id),'id');
@@ -88,6 +89,7 @@ switch ($todo) {
 		));
 		if ($result){
 			//s("退赛成功,扣除[ $serviceCharge ]$type",$tiaohui);
+			balance_log($card, "退出赛事-扣除服务费:$type,".$serviceCharge."分", $localtime);
 			include template('sport_withdraw_print');
 		}else {
 			s("退赛失败",$tiaohui);
@@ -159,6 +161,7 @@ switch ($todo) {
 		));
 		if ($result) {
 			balance_reduce($card, $sportinfo['deduction'],$payment_type);//扣除积分
+			balance_log($card, "报名赛事-扣除参赛费:,".$sportinfo['deduction']."分", $localtime);
 			jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
 			$member_info = member_get(array($card),'card');
 			include template('sport_save_entry_print');

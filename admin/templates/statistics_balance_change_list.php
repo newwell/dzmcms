@@ -1,52 +1,59 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
 <div class="formnav"><?php echo $act['title'];?></div>
-<form  method="post" id="data" action="?action=shorturl_list">
+<style>.xiankuan{max-width: 330px;overflow: hidden;text-overflow: ellipsis;width: 330px;white-space:nowrap;}</style>
+<script type="text/javascript"> 
+document.body.onload = function(){
+    document.getElementById("card").focus();
+};
+</script>
+<form action="?action=statistics_balance_change&todo=balance_change" method="post" onsubmit="return CheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
-<style>.xiankuan{max-width: 220px;overflow: hidden;text-overflow: ellipsis;width: 220px;white-space:nowrap;}</style>
+<table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
+	<tr>
+	    <td width="80px" align="right">读卡:</td>
+	    <td>
+	        <input name="card" id="card" required="true" type="text" style="border:#336699 1px solid;"/>
+	   		<input type="submit" class="formsubmit" value="提交">
+	   	</td>
+	</tr>
+</table>
+</form>
+
+<?php if (!empty($member_info)) {?>
+<input type="hidden" value="<?php echo $formhash;?>" name="formhash">
+<table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
+	<tr>
+	    <td width="80px" align="right">姓名:</td>
+	    <td><?php echo $member_info['name'];?></td>
+	    <td width="80px" align="right">昵称:</td>
+	    <td><?php echo $member_info['nickname'];?></td>
+	</tr>
+	<tr>
+	    <td width="80px" align="right">积分:</td>
+	    <td style="color: red;"><?php if (empty($member_info['balance'])){ echo "0.00";}else {echo $member_info['balance'];};?></td>
+	    <td width="80px" align="right">奖励积分:</td>
+	    <td><?php echo $member_info['jiangli_jifen'];?></td>
+	</tr>
+</table><br>
+<?php }?>
 <table width="98%"  border="0" cellpadding="0" cellspacing="0" align="center">
   <tr>
     <td valign="top" align="center" width="100%">
     <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
-		<tr >
-         <td colspan="1" >
-            <input type="button" value="删除" class="button_input" onclick="JavaScript:if(confirm('删除操作不可恢复,确认吗?')){commendsubmitform('?action=shorturl_list&todo=del',this.form,'');}">
-         </td>
-         <td colspan="6" align="right">
-         <input type="hidden" name="action" value="shorturl_list"/>
-         <input type="hidden" name="todo" value="search"/>
-         	按<select name="d_option">
-         		<option value="annotation" <?php if(!empty($d_option)&&$d_option=='annotation'){echo 'selected';}?>>备注</option>
-         		<option value="url" <?php if(!empty($d_option)&&$d_option=='url'){echo 'selected';}?>>链接</option>
-         		<option value="alias" <?php if(!empty($d_option)&&$d_option=='alias'){echo 'selected';}?>>别名</option>
-         	</select>搜索<input name="keywork" value="<?php if (!empty($keywork))echo $keywork;?>"/>
-         	<input type="button" value="搜索" class="button_input" onclick="JavaScript:searchsubmitform(this.form);">
-         	<script type="text/javascript">
-         	function searchsubmitform(form) {
-         		form.method='get';
-         		form.action='?action=shorturl_list&todo=search';
-         		form.submit();
-			}
-         	</script>
-         </td>
-        </tr>
         <tr>
-            <th width="8%"><input type="checkbox" name="chkall" onclick="checkall(this.form)" title="全选">全选</th>
-            <th width="30%">链接地址</th>
-			<th width="12%">别名</th>
-			<th width="12%">添加日期</th>
-			<th width="22%">备注</th>
-			<th width="8%">浏览次数</th>	
-			<th width="8%">操作</th>		
+            <!-- <th ><input type="checkbox" name="chkall" onclick="checkall(this.form)" title="全选">全选</th> -->
+            <th>读卡</th>
+			<th >说明</th>
+			<th>产生日期</th>
+			<th>操作</th>		
         </tr>
 		<?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
         <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
-            <td class="list"><input type="checkbox" name="ids[]" value="<?php echo $value['id']?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>      
-            <td class="list xiankuan"><a href="<?php echo $value['url']?>" target="_blank" title="<?php echo $value['url']?>"><?php echo $value['url']?></a></td>  
-            <td class="list"><?php echo $value['alias']?></td>
+            <!-- <td class="list"><input type="checkbox" name="ids[]" value="<?php echo $value['id']?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> -->      
+            <td class="list"><?php echo $value['card']?></td>  
+            <td class="list xiankuan"><?php echo $value['explain']?></td>
             <td class="list"><?php echo $value['add_date']?></td>
-            <td class="list xiankuan"><?php echo $value['annotation']?></td>
-            <td class="list"><?php echo $value['times']?></td>
 			<td class="list">
 			<a href="?action=shorturl_list&todo=update&id=<?php echo $value['id']?>" title="修改"><img src="<?php echo $_TEMPLATESDIR?>/image/edit_g.gif" border="0" alt="修改"/></a>
 			</td>
@@ -59,5 +66,4 @@
 </td>
   </tr>
 </table>
-</form>
 <?php include template('foot'); ?>

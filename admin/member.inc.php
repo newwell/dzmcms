@@ -201,6 +201,7 @@ switch ($todo) {
 			s('您的积分不够,无法兑换',"?action=member_credits&todo=credits&card=".$card);
 		}
 		$r = member_docredits($card, $value);
+		balance_log($card, "积分提现-".$docredits."-使用".$value."分", $localtime);
 		s('成功,提现[ '.$docredits.' ]扣除[ '.$value.' ]积分',"?action=member_credits&todo=credits&card=".$card);
 		break;
 	case 'credits'://提现/积分兑换
@@ -219,6 +220,7 @@ switch ($todo) {
 		if (empty($card))e('无法获取读卡');
 		$value = $dopay*$setting_rate;
 		$r = member_dopay($card, $value);
+		balance_log($card, "积分充值-增加".$value."分", $localtime);
 		s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);	
 		break;
 	case 'pay':
