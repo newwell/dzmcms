@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 24 日 16:24
+-- 生成日期: 2013 年 08 月 27 日 20:36
 -- 服务器版本: 5.1.70-community
 -- PHP 版本: 5.2.17
 
@@ -155,7 +155,7 @@ INSERT INTO `dzmc_goods_class` (`id`, `fid`, `name`, `remark`) VALUES
 --
 
 CREATE TABLE IF NOT EXISTS `dzmc_member` (
-  `card` int(11) NOT NULL COMMENT '读卡数字串',
+  `card` varchar(11) NOT NULL COMMENT '读卡数字串',
   `cardid` int(11) NOT NULL COMMENT '会员卡上的编号',
   `card_type` int(11) NOT NULL COMMENT '卡的类型',
   `cash_pledge` varchar(125) DEFAULT NULL COMMENT '押金',
@@ -191,8 +191,8 @@ CREATE TABLE IF NOT EXISTS `dzmc_member` (
 --
 
 INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
-(736940301, 800340, 1, '100', '郭富城', '富城', '13886143620', '1040811569@qq.com', '429004199110162254', 1, 1, 1215475200, '200', 1343260800, '2216863', '晓菲', '湖北省武汉市洪山区雄楚大街489号领秀城8栋', '996159513', '华秦', '歌手', 1, 0, 'pk365', '中文/拼音', 1374922571, '214', ''),
-(736955981, 800522, 1, '100', '刘德华', '华仔', '1388888888', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, '1000000600', '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1375804224, '88888866440', '');
+('736940301', 800340, 1, '100', '郭富城', '富城', '13886143620', '1040811569@qq.com', '429004199110162254', 1, 1, 1215475200, '200', 1343260800, '2216863', '晓菲', '湖北省武汉市洪山区雄楚大街489号领秀城8栋', '996159513', '华秦', '歌手', 1, 0, 'pk365', '中文/拼音', 1374922571, '214', ''),
+('736955981', 800522, 1, '100', '刘德华', '华仔', '1388888888', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, '1000000600', '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1375804224, '88888866440', '');
 
 -- --------------------------------------------------------
 
@@ -392,65 +392,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1377360783, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
-
--- --------------------------------------------------------
-
---
--- 表的结构 `dzmc_urls`
---
-
-CREATE TABLE IF NOT EXISTS `dzmc_urls` (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `url` text NOT NULL COMMENT '连接地址',
-  `alias` varchar(40) DEFAULT NULL COMMENT '别名',
-  `add_date` int(10) NOT NULL COMMENT '添加日期',
-  `annotation` text COMMENT '注释',
-  `times` int(20) DEFAULT '0' COMMENT '次数',
-  PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='链接表' AUTO_INCREMENT=10005 ;
-
---
--- 转存表中的数据 `dzmc_urls`
---
-
-INSERT INTO `dzmc_urls` (`id`, `url`, `alias`, `add_date`, `annotation`, `times`) VALUES
-(10000, 'http://www.baidu.com', 'dazan', 1370010810, NULL, 2),
-(154, 'http://www.dazan.cn', 'qq', 1370010810, NULL, 6),
-(156, 'http://www.dazan.cn', 'www', 1370010810, NULL, 0),
-(158, 'http://www.dazan.cn', NULL, 1370010810, NULL, 0),
-(162, 'http://www.dazan.cn', NULL, 1370010810, NULL, 0),
-(163, 'http://www.taobao.comhttp://www.baidu.com', NULL, 1370010810, NULL, 0),
-(164, 'http://www.dazan.cn', NULL, 1370010810, NULL, 0),
-(165, 'http://www.taobao.comhttp://www.baidu.com', NULL, 1370010810, NULL, 0),
-(166, 'http://www.dazan.cn', NULL, 1370010810, NULL, 0),
-(168, 'http://www.dazan.cn', NULL, 1370010810, NULL, 0),
-(170, 'http://www.dazan.cn', NULL, 1370010810, NULL, 0),
-(180, 'http://www.baidu.com', NULL, 1370010815, NULL, 0),
-(181, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(183, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(185, 'http://www.dazan.cn', NULL, 1370010815, NULL, 1),
-(187, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(191, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(193, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(195, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(197, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(199, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(200, 'http://www.taobao.comhttp://www.baidu.com', NULL, 1370010815, NULL, 0),
-(201, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(202, 'http://www.taobao.comhttp://www.baidu.com', NULL, 1370010815, NULL, 0),
-(203, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(204, 'http://www.taobao.comhttp://www.baidu.com', NULL, 1370010815, NULL, 0),
-(205, 'http://www.dazan.cn', NULL, 1370010815, NULL, 0),
-(206, 'http://www.taobao.com', NULL, 1370010815, NULL, 0),
-(228, 'http://www.dazan.cn', NULL, 1370010819, NULL, 0),
-(230, 'http://www.dazan.cn', NULL, 1370010819, NULL, 0),
-(232, 'http://www.dazan.cn', NULL, 1370010819, NULL, 0),
-(233, 'http://www.taobao.com', NULL, 1370010819, NULL, 0),
-(10001, 'http://www.dazan.cn/module-12.html', '', 1370878992, '', 0),
-(10002, 'http://www.baidu.com', NULL, 1370881258, NULL, 0),
-(10003, 'http://www.dazan.cn', NULL, 1370881258, NULL, 0),
-(10004, 'http://www.taobao.com', NULL, 1370881258, NULL, 0);
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1377611914, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
