@@ -9,7 +9,7 @@ require_once 'include/f/balance.f.php';
 switch ($todo) {
 	case 'doprize':
 		$ranking	= htmlspecialchars( isset($_POST['ranking']) ? $_POST['ranking'] : '' );
-		$card		= intval( isset($_POST['card']) ? $_POST['card'] : '' );
+		$card		= ( isset($_POST['card']) ? $_POST['card'] : '' );
 		$sport_id		= intval( isset($_POST['sport_id']) ? $_POST['sport_id'] : '' );
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
 		$jiangli_jifen	= intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : '' );
@@ -51,7 +51,7 @@ switch ($todo) {
 		break;
 	case 'dowithdraw'://执行退赛
 		
-		$card		= intval( isset($_GET['card']) ? $_GET['card'] : '' );
+		$card		= ( isset($_GET['card']) ? $_GET['card'] : '' );
 		$entry_id	= intval( isset($_GET['entry_id']) ? $_GET['entry_id'] : '' );
 		$sport_id	= intval( isset($_GET['sport_id']) ? $_GET['sport_id'] : '' );
 		if (empty($card)){s('没有得到读卡',"?action=sport_withdraw&todo=withdraw&card=$card");}

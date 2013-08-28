@@ -29,6 +29,7 @@ h1 {font-wieght: bold;font-size: 20px;padding: 0 28px;margin: 0;text-shadow: 0 1
 </style>
 <![endif]-->
 <script type="text/javascript">
+if (top.location != self.location)top.location=self.location;
 var userAgent = navigator.userAgent.toLowerCase();
 var is_opera = navigator.appName.indexOf('Opera')>=0?true:false;
 var is_ie =navigator.appName=="Microsoft Internet Explorer"?true:false;

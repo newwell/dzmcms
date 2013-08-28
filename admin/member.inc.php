@@ -233,8 +233,8 @@ switch ($todo) {
 		include template('member_pay');
 		break;
 	case 'dofind':
-		$card		= (int)( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
-		$cardid		= (int)( isset($_REQUEST['cardid']) ? $_REQUEST['cardid'] : '' );
+		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$cardid		= ( isset($_REQUEST['cardid']) ? $_REQUEST['cardid'] : '' );
 		$member_info = '';
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
@@ -250,8 +250,8 @@ switch ($todo) {
 		include template('member_find');
 		break;
 	case 'saveadd':
-		$card		= (int)( isset($_POST['card']) ? $_POST['card'] : 0 );
-		$cardid		= (int)( isset($_POST['cardid']) ? $_POST['cardid'] : 0 );
+		$card		= ( isset($_POST['card']) ? $_POST['card'] : 0 );
+		$cardid		= ( isset($_POST['cardid']) ? $_POST['cardid'] : 0 );
 		$card_type	= (int)( isset($_POST['card_type']) ? $_POST['card_type'] : 0 );		
 		$cash_pledge= htmlspecialchars( isset($_POST['cash_pledge']) ? $_POST['cash_pledge'] : '' );
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
