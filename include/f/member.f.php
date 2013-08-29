@@ -51,7 +51,7 @@ function member_total($where='') {
  */
 function member_check_field($field,$value) {
 	global $db,$tablepre;
-	$sql = "SELECT COUNT(id) AS countnum FROM {$tablepre}member WHERE `$field` = '$value'";
+	$sql = "SELECT COUNT(card) AS countnum FROM {$tablepre}member WHERE `$field` = '$value'";
 	$result	= $db->fetch_one_array($sql);
 	if ($result['countnum']>0) {
 		return true;

@@ -1,10 +1,10 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.5
+-- version 4.0.3
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 08 月 28 日 17:19
--- 服务器版本: 5.1.70-community
+-- 生成日期: 2013 年 08 月 29 日 23:00
+-- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- 数据库: `dzmcms`
 --
+CREATE DATABASE IF NOT EXISTS `dzmcms` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `dzmcms`;
 
 -- --------------------------------------------------------
 
@@ -1505,7 +1507,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1377705222, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1377809857, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
