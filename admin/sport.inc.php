@@ -9,7 +9,7 @@ require_once 'include/f/balance.f.php';
 switch ($todo) {
 	case 'doprize':
 		$ranking	= htmlspecialchars( isset($_POST['ranking']) ? $_POST['ranking'] : '' );
-		$card		= bindec(decbin( isset($_POST['card']) ? $_POST['card'] : '' ));
+		$card		= dzmc_revise_card(( isset($_POST['card']) ? $_POST['card'] : '' ));
 		$sport_id		= intval( isset($_POST['sport_id']) ? $_POST['sport_id'] : '' );
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
 		$jiangli_jifen	= intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : '' );
@@ -51,7 +51,7 @@ switch ($todo) {
 		break;
 	case 'dowithdraw'://执行退赛
 		
-		$card		= bindec(decbin( isset($_GET['card']) ? $_GET['card'] : '' ));
+		$card		= dzmc_revise_card(( isset($_GET['card']) ? $_GET['card'] : '' ));
 		$entry_id	= intval( isset($_GET['entry_id']) ? $_GET['entry_id'] : '' );
 		$sport_id	= intval( isset($_GET['sport_id']) ? $_GET['sport_id'] : '' );
 		if (empty($card)){s('没有得到读卡',"?action=sport_withdraw&todo=withdraw&card=$card");}
@@ -97,7 +97,7 @@ switch ($todo) {
 		
 		break;
 	case 'withdraw':
-		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : ''));
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : ''));
 		$infoList	= array();
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
@@ -136,7 +136,7 @@ switch ($todo) {
 		include template('sport_withdraw');
 		break;
 	case 'save_entry':
-		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$sport_id   = isset($_REQUEST['sport_id']) ? $_REQUEST['sport_id'] : '';
 		$payment_type   = isset($_POST['payment_type']) ? $_POST['payment_type'] : '';
 		
@@ -171,7 +171,7 @@ switch ($todo) {
 		}
 		break;
 	case 'doentry':
-		$card		=bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		$card		=dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$id   = isset($_GET['id']) ? $_GET['id'] : '';
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');

@@ -7,7 +7,7 @@ require_once 'include/f/balance.f.php';
 require_once 'include/f/member.f.php';
 switch ($todo) {
 	case 'balance_change':
-		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` =$card ORDER BY  `add_date` DESC ";

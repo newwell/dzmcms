@@ -1095,3 +1095,13 @@ function GetConfig($config){
 	}
 	return '';
 }
+/**
+ * 获取读卡.用户读卡字符修正
+ * @param unknown_type $card
+ */
+function dzmc_revise_card($card) {
+	if (substr($card, 0,1)==0){
+		$card = dzmc_revise_card(substr($card, 1,strlen($card)));
+	}
+	return $card;
+}
