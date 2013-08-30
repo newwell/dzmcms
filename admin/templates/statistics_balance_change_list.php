@@ -30,6 +30,12 @@ document.body.onload = function(){
 	    <td><?php echo $member_info['nickname'];?></td>
 	</tr>
 	<tr>
+	    <td width="80px" align="right">读卡:</td>
+	    <td><?php echo $member_info['card'];?></td>
+	    <td width="80px" align="right">会员号:</td>
+	    <td><?php echo $member_info['cardid'];?></td>
+	</tr>
+	<tr>
 	    <td width="80px" align="right">积分:</td>
 	    <td style="color: red;"><?php if (empty($member_info['balance'])){ echo "0.00";}else {echo $member_info['balance'];};?></td>
 	    <td width="80px" align="right">奖励积分:</td>

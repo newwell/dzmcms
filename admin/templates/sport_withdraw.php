@@ -21,11 +21,17 @@ document.body.onload = function(){
 <?php if (!empty($member_info)) {?>
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
-	<tr>
+<tr>
 	    <td width="80px" align="right">姓名:</td>
 	    <td><?php echo $member_info['name'];?></td>
 	    <td width="80px" align="right">昵称:</td>
 	    <td><?php echo $member_info['nickname'];?></td>
+	</tr>
+	<tr>
+	    <td width="80px" align="right">读卡:</td>
+	    <td><?php echo $member_info['card'];?></td>
+	    <td width="80px" align="right">会员号:</td>
+	    <td><?php echo $member_info['cardid'];?></td>
 	</tr>
 	<tr>
 	    <td width="80px" align="right">积分:</td>

@@ -6,8 +6,16 @@ admin_priv($act['action']);
 require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 switch ($todo) {
+	case 'del':
+		$card  = bindec(decbin(isset($_GET['id']) ? $_GET['id'] : ''));
+		if (empty($card)) {
+			e('ID不存在!');
+		}
+		member_del(array($card));
+		s('删除成功','?action=member_find&todo=find');
+		break;
 	case 'js_user_info':
-		$card		= ( isset($_GET['card']) ? $_GET['card'] : '' );
+		$card		= bindec(decbin( isset($_GET['card']) ? $_GET['card'] : '' ));
 		$member_info = member_get(array($card),'card');
 		echo json_encode($member_info);
 		//输出到浏览器
@@ -18,7 +26,7 @@ switch ($todo) {
 		$change_type	= isset($_POST['change_type']) ? $_POST['change_type'] : "" ;
 		$change_object	= isset($_POST['change_object']) ? $_POST['change_object'] : "" ;
 		$change_value	= isset($_POST['change_value']) ? $_POST['change_value'] : "" ;
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '空' );
 		
 		if (empty($change_value))s("变动积分值0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
@@ -43,7 +51,7 @@ switch ($todo) {
 		include template('member_balance_change_print');
 		break;
 	case 'jifenlog'://积分变动
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 		}else {
@@ -158,7 +166,7 @@ switch ($todo) {
 		include template ( 'member_import' );
 		break;
 	case 'dochangePassword':
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$odl_pwd	= isset($_POST['odl_pwd']) ? $_POST['odl_pwd'] : "" ;
 		$new_pwd	= isset($_POST['new_pwd']) ? $_POST['new_pwd'] : "" ;
 		$new2_pwd	= isset($_POST['new2_pwd']) ? $_POST['new2_pwd'] : "" ;
@@ -182,7 +190,7 @@ switch ($todo) {
 		}
 		break;
 	case 'changePassword':
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 		}else {
@@ -192,7 +200,7 @@ switch ($todo) {
 		break;
 	case 'docredits':
 		$docredits= isset($_POST['docredits']) ? $_POST['docredits'] : "" ;
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '') );
 		if (empty($docredits))e("提现金额为0");
 		if (empty($card))e('无法获取读卡');
 		$member_info = member_get(array($card),'card');
@@ -205,7 +213,7 @@ switch ($todo) {
 		s('成功,提现[ '.$docredits.' ]扣除[ '.$value.' ]积分',"?action=member_credits&todo=credits&card=".$card);
 		break;
 	case 'credits'://提现/积分兑换
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 		}else {
@@ -215,7 +223,7 @@ switch ($todo) {
 		break;
 	case 'dopay':
 		$dopay	= isset($_POST['dopay']) ? $_POST['dopay'] : "" ;
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (empty($dopay))e("充值金额为0");
 		if (empty($card))e('无法获取读卡');
 		$value = $dopay*$setting_rate;
@@ -224,7 +232,7 @@ switch ($todo) {
 		s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);	
 		break;
 	case 'pay':
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 		}else {
@@ -233,7 +241,7 @@ switch ($todo) {
 		include template('member_pay');
 		break;
 	case 'dofind':
-		$card		= ( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' );
+		$card		= bindec(decbin( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$cardid		= ( isset($_REQUEST['cardid']) ? $_REQUEST['cardid'] : '' );
 		$member_info = '';
 		if (!empty($card)){
@@ -247,10 +255,22 @@ switch ($todo) {
 		include template('member_dofind');
 		break;
 	case 'find':
+		$page   = intval( isset($_GET['page']) ? $_GET['page'] : 1 );
+		$perpage = intval( isset($_GET['perpage']) ? $_GET['perpage'] : 20 );
+		if($page > 0){
+			$startlimit = ($page - 1) * $perpage;
+		}else{
+			$startlimit = 0;
+		}
+		$page_array = array();
+		$total		= member_total();
+		$page_control = multipage($total,$perpage,$page);
+		$infoList	= member_list($startlimit, $perpage);	
+		//include template('member_list');
 		include template('member_find');
 		break;
 	case 'saveadd':
-		$card		= ( isset($_POST['card']) ? $_POST['card'] : 0 );
+		$card		= bindec(decbin( isset($_POST['card']) ? $_POST['card'] : 0 ));
 		$cardid		= ( isset($_POST['cardid']) ? $_POST['cardid'] : 0 );
 		$card_type	= (int)( isset($_POST['card_type']) ? $_POST['card_type'] : 0 );		
 		$cash_pledge= htmlspecialchars( isset($_POST['cash_pledge']) ? $_POST['cash_pledge'] : '' );

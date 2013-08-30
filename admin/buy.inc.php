@@ -8,7 +8,7 @@ require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 switch ($todo) {
 	case 'docash':
-		$card			= ( isset($_POST['card']) ? $_POST['card'] : '' );
+		$card			= bindec(decbin( isset($_POST['card']) ? $_POST['card'] : '' ));
 		$method_payment	= htmlspecialchars( isset($_POST['method_payment']) ? $_POST['method_payment'] : '' );
 		$payment_amount	= intval( isset($_POST['payment_amount']) ? $_POST['payment_amount'] : 0);
 		$diyong_jifen	= intval( isset($_POST['diyong_jifen']) ? $_POST['diyong_jifen'] : 0 );

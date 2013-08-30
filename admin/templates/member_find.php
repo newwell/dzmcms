@@ -22,4 +22,37 @@ document.body.onload = function(){
 	</tr>
 </table>
 </form>
+<table width="98%"  border="0" cellpadding="0" cellspacing="0" align="center">
+  <tr>
+    <td valign="top" align="center" width="100%">
+    <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
+        <tr>
+            <th>姓名</th>
+			<th>昵称</th>
+			<th>读卡</th>
+			<th>会员号</th>
+			<th>积分</th>	
+			<th>奖励积分</th>	
+			<th>操作</th>		
+        </tr>
+		<?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
+        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>      
+            <td class="list"><a href="?action=member_find&todo=dofind&card=<?php echo $value['card'];?>"><?php echo $value['name']?></a></td>  
+            <td class="list"><?php echo $value['nickname']?></td>
+            <td class="list"><?php echo $value['card']?></td>
+            <td class="list"><?php echo $value['cardid']?></td>
+            <td class="list" style="color: red;"><?php echo $value['balance']?></td>
+            <td class="list"><?php echo $value['jiangli_jifen']?></td>
+			<td class="list">
+			<a href="JavaScript:;" onclick="if(confirm('删除不可恢复,确认删除?')){location.href='?action=member_find&todo=del&id=<?php echo $value['card']?>'}" title="删除"><img src="<?php echo $_TEMPLATESDIR?>/image/delete_g.gif" border="0" alt="删除"/></a>
+			</td>
+        </tr>
+		<?php } }?>
+		<tr bgcolor="#A6D0F6" align="center">
+			<td colspan="7"><?php if (!empty($page_control)){echo $page_control;}?></td>
+		</tr>
+    </table>
+</td>
+  </tr>
+</table>
 <?php include template('foot'); ?>

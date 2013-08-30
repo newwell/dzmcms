@@ -89,7 +89,11 @@ function member_add($infoArr) {
 function member_get($idArr=array(),$fields) {
 	global $db,$tablepre;
 	$ids = implode(',', $idArr);
-	$sql = "SELECT * FROM `{$tablepre}member` WHERE `$fields` in($ids)";
+	if (count($idArr==1)and $fields=='card'){
+		$sql = "SELECT * FROM `{$tablepre}member` WHERE `card` ='$ids' or cardid = '$ids'";
+	}else {
+		$sql = "SELECT * FROM `{$tablepre}member` WHERE `$fields` in($ids)";
+	}
 	$result	= $db->fetch_one_array($sql);
 	return $result;
 }
@@ -131,4 +135,15 @@ function member_update($card,$infoArr) {
 	$sql = substr($sql,0,strlen($sql)- 1);
 	$sql.=" WHERE `card` =$card;";
 	return $db->query($sql);
+}
+/**
+ * 删除指定id的信息
+ * @param array $idArr	id数组
+ */
+function member_del($idArr=array()) {
+	global $db,$tablepre;
+	$ids = implode(',', $idArr);
+	$sql = "DELETE FROM `{$tablepre}member` WHERE `card`in($ids)";
+	$result	= $db->query($sql);
+	return $result;
 }
