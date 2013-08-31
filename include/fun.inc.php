@@ -1100,6 +1100,7 @@ function GetConfig($config){
  * @param unknown_type $card
  */
 function dzmc_revise_card($card) {
+	if (empty($card))return $card;
 	if (substr($card, 0,1)==0){
 		$card = dzmc_revise_card(substr($card, 1,strlen($card)));
 	}
