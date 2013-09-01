@@ -10,6 +10,7 @@
  * @link	http://www.dazan.cn
  * ------------------------------------------------------------------
  */
+require_once 'include/f/member.f.php';
 /**
  * 积分增加
  * @param int		$card	用户card
@@ -39,6 +40,8 @@ function balance_reduce($card,$value,$type='balance') {
  */
 function balance_log($card,$explain,$time) {
 	global $db,$tablepre;
+	$member_info = member_get(array($card),'card');
+	$explain .="<br>剩余积分:".$member_info['balance']."剩余奖励积分:".$member_info['jiangli_jifen']; 
 	$sql = "INSERT INTO `{$tablepre}balance_log` (`card`, `explain`, `add_date`) VALUES ('$card', '$explain','$time' );";
 	$result	= $db->fetch_one_array($sql);
 	return $result;

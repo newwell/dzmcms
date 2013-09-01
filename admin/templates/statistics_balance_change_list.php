@@ -1,7 +1,10 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
 <div class="formnav"><?php echo $act['title'];?></div>
-<style>.xiankuan{max-width: 330px;overflow: hidden;text-overflow: ellipsis;width: 330px;white-space:nowrap;}</style>
+<style>.xiankuan{max-width: 430px;overflow: hidden;text-overflow: ellipsis;width: 330px;white-space:nowrap;}</style>
+<link type="text/css" rel="stylesheet" href="script/hiAlert/css/alert.css">
+<script src="script/hiAlert/jquery.alert.js" type="text/javascript"></script>
+<script src="script/textSearch.jquery.js" type="text/javascript"></script>
 <script type="text/javascript"> 
 document.body.onload = function(){
     document.getElementById("card").focus();
@@ -43,7 +46,7 @@ document.body.onload = function(){
 	</tr>
 </table><br>
 <?php }?>
-<table width="98%"  border="0" cellpadding="0" cellspacing="0" align="center">
+<table width="98%"  border="0" cellpadding="0" cellspacing="0" align="center" id="searchResult">
   <tr>
     <td valign="top" align="center" width="100%">
     <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
@@ -55,15 +58,17 @@ document.body.onload = function(){
 			<th>操作</th>		
         </tr>
 		<?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
-        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
-            <!-- <td class="list"><input type="checkbox" name="ids[]" value="<?php echo $value['id']?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td> -->      
+        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>     
             <td class="list"><?php echo $value['card']?></td>  
-            <td class="list xiankuan"><?php echo $value['explain']?></td>
+            <td class="list xiankuan" ><a href="JavaScript:;" onclick="JavaScript:hiBox('#showbox_<?php echo $value['id']?>', '详细说明',400,'','','.a_close');"><?php echo $value['explain']?><a/></td>
             <td class="list"><?php echo $value['add_date']?></td>
 			<td class="list">
-			<a href="?action=shorturl_list&todo=update&id=<?php echo $value['id']?>" title="修改"><img src="<?php echo $_TEMPLATESDIR?>/image/edit_g.gif" border="0" alt="修改"/></a>
+			--
 			</td>
         </tr>
+        <div id="showbox_<?php echo $value['id']?>" style="display:none">
+		   <p><?php echo $value['explain']?></p>
+		</div>
 		<?php } }?>
 		<tr bgcolor="#A6D0F6" align="center">
 			<td colspan="7"><?php if (!empty($page_control)){echo $page_control;}?></td>
@@ -72,4 +77,14 @@ document.body.onload = function(){
 </td>
   </tr>
 </table>
+<script type="text/javascript">$("#searchResult").textSearch("扣除");</script>
+<script type="text/javascript">$("#searchResult").textSearch("减少");</script>
+<script type="text/javascript">$("#searchResult").textSearch("增加",options={divFlag: true,
+		divStr: " ",
+		markClass: "",
+		markColor: "#94AA3E",
+		nullReport: false,
+		callback: function(){
+			return false;	
+		}});</script>
 <?php include template('foot'); ?>

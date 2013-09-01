@@ -51,6 +51,9 @@
 				<a href="?action=sport_list&todo=kaisai&id=<?php echo $value['id']?>" title="开赛">开赛</a>
 			<?php }elseif ($value['status']=="竞赛中"){?>
 			<a href="?action=sport_list&todo=jiesai&id=<?php echo $value['id']?>" title="结束比赛">结束比赛</a>
+				<?php if ($value['type']=="time_trial"){?>
+					<a href="?action=sport_list&todo=prize&id=<?php echo $value['id']?>" title="颁奖">颁奖</a>
+				<?php }?>
 			<?php }elseif ($value['status']=="已结束"){?>
 			<a href="?action=sport_list&todo=prize&id=<?php echo $value['id']?>" title="颁奖">颁奖</a>
 			<?php }?>

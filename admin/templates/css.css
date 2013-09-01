@@ -85,8 +85,6 @@ html {
 	
 	
 }
-body input {font-size:12px; }
-body textarea{font-size:12px;}
 body{
 	/*SCROLLBAR-FACE-COLOR: #72A3D0; SCROLLBAR-HIGHLIGHT-COLOR: #337ABB; 
 SCROLLBAR-SHADOW-COLOR: #337ABB; SCROLLBAR-DARKSHADOW-COLOR: #337ABB; 
@@ -244,10 +242,9 @@ body td{
 .f_one {background-color:#FFFFFF; color:#000000;}
 
 .formtable {border: 1px solid #ABD8F8;} 
-.formtable th { background:url(image/pic_bg_index.png);}
+.formtable th { background-color: #D5EFFC;);}
 .formtable td{background-color:#EBF7FD; color:#08417C; padding:2px;}
 .formtable td input text{ border:1px #E6E6E6 solid;color:#336699;}
-.formtable td textarea{ border:1px #cccccc solid;color:#336699;}
 .formsubmit{ border:1px  #FF6600 solid;color:#FFFFFF; height:20px; background-color:#FF6600;}
 
 

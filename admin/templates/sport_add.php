@@ -12,8 +12,9 @@
 	</tr>
 	<tr>
 	    <td align="right">类型:</td>
-	    <td><select name="type">
+	    <td><select name="type" onchange="show_sport_type(this.value);">
 	    		<option value="time_trial">计时赛</option>
+	    		<option value="no_time_trial">非计时赛</option>
 	    </select></td>
 	    <td align="right">积分消耗:</td>
 	    <td>
@@ -22,7 +23,7 @@
 	</tr>
 	<tr>
 	    <td align="right">服务费:</td>
-	    <td>每<input name="service_charge_time" style="width: 35px;"/>分钟,扣除<input name="service_charge" required="true"/>积分</td>
+	    <td><span id="service_charge_time">每<input name="service_charge_time" style="width: 35px;"/>分钟,</span>扣除<input name="service_charge" required="true"/>积分</td>
 	    <td align="right">人数上限:</td>
 	    <td><input name="people_number" required="true"/>*不能为空</td>
 	</tr>
@@ -64,4 +65,18 @@
 	</tr>
 </table>
 </form>
+<script type="text/javascript">
+<!--
+function show_sport_type(type) {
+	switch (type) {
+		case 'time_trial':
+			$('#service_charge_time').show();
+		break;
+		case 'no_time_trial':
+			$('#service_charge_time').hide();
+			break;
+	}
+}
+//-->
+</script>
 <?php include template('foot'); ?>

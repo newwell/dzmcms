@@ -10,7 +10,7 @@ switch ($todo) {
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
-			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` =$card ORDER BY  `add_date` DESC ";
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);

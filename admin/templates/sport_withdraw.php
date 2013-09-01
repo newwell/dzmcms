@@ -47,6 +47,7 @@ document.body.onload = function(){
             <th>赛事名称</th>
 			<th>状态</th>
 			<th>类型</th>
+			<th>参赛次数</th>
 			<th>开赛时间</th>
 			<th>报名时间</th>
 			<th>退赛时间</th>
@@ -58,13 +59,15 @@ document.body.onload = function(){
             <td class="list"><?php echo $value['sport']['name'];?></td>  
             <td class="list"><?php echo $value['status'];?></td>
             <td class="list"><?php if ($value['sport']['type']=="time_trial"){echo '计时赛';}else echo "非计时赛";?></td>
+            <td class="list"><?php echo $value['number'];?></td>
             <td class="list"><?php echo gmdate("Y-n-j H:m:s",$value['sport']['add_date']) ?></td>
             <td class="list"><?php echo $value['add_date'];?></td>
             <td class="list"><?php if (empty($value['exit_time'])){echo '未退赛';}else {echo gmdate("Y-n-j H:m:s",$value['exit_time']);};?></td>
             
 			<td class="list">
 			<?php if ($value['status']=="已入赛"){?>
-				<a href="?action=sport_withdraw&todo=dowithdraw&entry_id=<?php echo $value['id']?>&card=<?php echo $value['card'];?>&sport_id=<?php echo $value['sport']['id'];?>" title="退赛">退赛</a>
+				<a onclick="if(confirm('确定rebuy?')){location.href='?action=sport_withdraw&todo=rebuy&entry_id=<?php echo $value['id']?>&card=<?php echo $value['card'];?>&sport_id=<?php echo $value['sport']['id'];?>'}" href="JavaScript:;" title="rebuy">rebuy</a>
+				<a onclick="if(confirm('确定退赛?')){location.href='?action=sport_withdraw&todo=dowithdraw&entry_id=<?php echo $value['id']?>&card=<?php echo $value['card'];?>&sport_id=<?php echo $value['sport']['id'];?>'}" href="JavaScript:;" title="退赛">退赛</a>
 			<?php }else {?>
 			----
 			<?php }?>
@@ -72,10 +75,7 @@ document.body.onload = function(){
         </tr>
 		<?php }}?>
 		<tr bgcolor="#A6D0F6" align="center">
-			<td colspan="8"><?php if (!empty($page_control)){echo $page_control;}?></td>
+			<td colspan="9"><?php if (!empty($page_control)){echo $page_control;}?></td>
 		</tr>
 </table>
-
-
-
 <?php include template('foot'); ?>
