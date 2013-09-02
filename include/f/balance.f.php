@@ -38,11 +38,11 @@ function balance_reduce($card,$value,$type='balance') {
  * @param int		$card	用户card
  * @param string	$explain	增加的值
  */
-function balance_log($card,$explain,$time) {
+function balance_log($card,$explain,$time,$type='',$type_explain='') {
 	global $db,$tablepre;
 	$member_info = member_get(array($card),'card');
 	$explain .="<br>剩余积分:".$member_info['balance']."剩余奖励积分:".$member_info['jiangli_jifen']; 
-	$sql = "INSERT INTO `{$tablepre}balance_log` (`card`, `explain`, `add_date`) VALUES ('$card', '$explain','$time' );";
+	$sql = "INSERT INTO `{$tablepre}balance_log` (`card`, `explains`, `add_date`,`type`,`type_explain`) VALUES ('$card', '$explain','$time','$type','$type_explain');";
 	$result	= $db->fetch_one_array($sql);
 	return $result;
 }

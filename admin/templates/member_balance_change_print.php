@@ -6,7 +6,7 @@
 <input type="button" id="btnPrint" value="打印"/>
 <div id="printContent" style="font-family: 宋体;font-size: 8px;">
 <h2><?php echo $setting_sitename;?></h2>
-<?php echo $act['title'];?>小票<br/>
+<?php echo $act['title'];?>小票-编号:<?php echo $num;?><br/>
 -----------------------------<br/>
 打印时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br/>
 -----------------------------<br/>

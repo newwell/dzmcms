@@ -32,6 +32,15 @@ switch ($todo) {
 		if (empty($change_value))s("变动积分值0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
 		if (empty($card))e('无法获取读卡');
 		
+		//计算积分变动 编号
+		$dojifenlog_time = date('Y-n-j',$localtime);
+		$dojifenlog_time_1 = strtotime($dojifenlog_time)+(12*3600);
+		$dojifenlog_time_2 = $dojifenlog_time_1+(24*3600);
+		//$dojifenlog_time = date('Y.n.j H:i:s',$dojifenlog_time_2);
+		//echo $dojifenlog_time;exit;
+		$num = balance_log_total(" `add_date`<$dojifenlog_time_2 AND `add_date` >$dojifenlog_time_1  AND `type`='积分变动'");
+		$num = $num+1;
+		//echo $num;exit;
 		switch ($change_type) {
 			case 'add':
 				balance_add($card, $change_value,$change_object);
@@ -47,7 +56,7 @@ switch ($todo) {
 			break;
 		}
 		$member_info = member_get(array($card),'card');
-		balance_log($card, "积分变动-".$type."-".$change_value."分-------备注:".$remark, $localtime);
+		balance_log($card, "积分变动:".$type.",".$change_value."分,备注:".$remark, $localtime,"积分变动",$num);
 		include template('member_balance_change_print');
 		break;
 	case 'jifenlog'://积分变动
@@ -209,7 +218,7 @@ switch ($todo) {
 			s('您的积分不够,无法兑换',"?action=member_credits&todo=credits&card=".$card);
 		}
 		$r = member_docredits($card, $value);
-		balance_log($card, "积分提现-".$docredits."-使用".$value."分", $localtime);
+		balance_log($card, "积分提现:".$docredits.",使用".$value."分", $localtime);
 		s('成功,提现[ '.$docredits.' ]扣除[ '.$value.' ]积分',"?action=member_credits&todo=credits&card=".$card);
 		break;
 	case 'credits'://提现/积分兑换
@@ -226,10 +235,12 @@ switch ($todo) {
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (empty($dopay))e("充值金额为0");
 		if (empty($card))e('无法获取读卡');
+		$member_info = member_get(array($card),'card');
 		$value = $dopay*$setting_rate;
 		$r = member_dopay($card, $value);
-		balance_log($card, "积分充值-增加".$value."分", $localtime);
-		s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);	
+		balance_log($card, "积分充值:增加".$value."分", $localtime,'充值');
+		//s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);
+		include template('member_dopay_print');
 		break;
 	case 'pay':
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));

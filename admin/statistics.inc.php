@@ -6,6 +6,32 @@ admin_priv($act['action']);
 require_once 'include/f/balance.f.php';
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'jifenlog':
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='积分变动' ORDER BY  `add_date` DESC ";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
+		        $infoList[]	= $arr;
+			}
+			//$infoList = entry_list(0, 100," `card` = $card AND status = '已入赛' ");
+			/*echo '<<pre>';
+			print_r($infoList);exit();*/
+		}else {
+			$member_info= '';
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='积分变动' ORDER BY  `add_date` DESC ";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
+		        $infoList[]	= $arr;
+			}
+		}
+		include template('statistics_jifenlog_list');
+		break;
 	case 'balance_change':
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){

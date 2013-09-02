@@ -10,7 +10,7 @@ document.body.onload = function(){
     document.getElementById("card").focus();
 };
 </script>
-<form action="?action=statistics_balance_change&todo=balance_change" method="post" onsubmit="return CheckForm(this,true);">
+<form action="?action=statistics_jifenlog&todo=jifenlog" method="post" onsubmit="return CheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
@@ -54,6 +54,7 @@ document.body.onload = function(){
             <!-- <th ><input type="checkbox" name="chkall" onclick="checkall(this.form)" title="全选">全选</th> -->
             <th>读卡</th>
 			<th >说明</th>
+			<th >小票编号</th>
 			<th>产生日期</th>
 			<th>操作</th>		
         </tr>
@@ -61,6 +62,7 @@ document.body.onload = function(){
         <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>     
             <td class="list"><?php echo $value['card']?></td>  
             <td class="list xiankuan" ><a href="JavaScript:;" onclick="JavaScript:hiBox('#showbox_<?php echo $value['id']?>', '详细说明',400,'','','.a_close');"><?php echo $value['explains']?><a/></td>
+            <td class="list"><?php echo $value['type_explain']?></td>
             <td class="list"><?php echo $value['add_date']?></td>
 			<td class="list">
 			--

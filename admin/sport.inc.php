@@ -39,14 +39,14 @@ switch ($todo) {
 			}
 			balance_reduce($card, $serviceCharge,$entry_info['payment_type']);
 			$type="奖励积分";
-		}elseif ($entry_info['payment_type']=='deduction') {
+		}elseif ($entry_info['payment_type']=='balance') {
 			if ($member_info['balance']<$serviceCharge){
 				s("需要[ $serviceCharge ]积分,积分不够,无法完成rebuy",$tiaohui);
 			}
 			balance_reduce($card, $serviceCharge,$entry_info['payment_type']);
 			$type="积分";
 		}
-		balance_log($card, "rebuy赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime);
+		balance_log($card, "rebuy赛事[".$sport_info['name']."]:rebuy扣费:$type,".$serviceCharge."分", $localtime);
 		$result = entry_update($entry_id, array(
 			"number"=>$entry_info['number']+1
 		));
@@ -126,7 +126,7 @@ switch ($todo) {
 			}
 			balance_reduce($card, $serviceCharge,$entry_info['payment_type']);
 			$type="奖励积分";
-		}elseif ($entry_info['payment_type']=='deduction') {
+		}elseif ($entry_info['payment_type']=='balance') {
 			if ($member_info['balance']<$serviceCharge){
 				s("需要[ $serviceCharge ]积分,积分不够,无法完成退赛",$tiaohui);
 			}
