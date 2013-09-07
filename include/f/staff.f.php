@@ -45,7 +45,7 @@ function staff_list($startlimit,$endlimit,$where='') {
 	if (!empty($where)) {
 		$sql .="WHERE ".$where;
 	}
-	$sql .= "ORDER BY id DESC LIMIT $startlimit , $endlimit";
+	$sql .= " ORDER BY id DESC LIMIT $startlimit , $endlimit";
 	$result		= $db->query($sql);
 	$resultArr	= array();
 	while($arr	= $db->fetch_array($result)){
@@ -92,4 +92,17 @@ function staff_update($id,$infoArr) {
 	$sql = substr($sql,0,strlen($sql)- 1);
 	$sql.=" WHERE `id` =$id;";
 	return $db->query($sql);
+}
+/**
+ * 得到指定ID的信息
+ * @param array		$idArr	id数组
+ * @param string	$fields	要查询的字段
+ */
+function staff_get($idArr=array(),$fields) {
+	global $db,$tablepre;
+	$ids = implode(',', $idArr);
+	$sql = "SELECT * FROM `{$tablepre}staff` WHERE `$fields` in($ids)";
+	//print_r($idArr);exit;
+	$result	= $db->fetch_one_array($sql);
+	return $result;
 }

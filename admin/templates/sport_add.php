@@ -8,13 +8,13 @@
 	    <td align="right">赛事名称:</td>
 	    <td><input name="name" required="true"/>*不能为空</td>
 	    <td align="right">比赛开始时间:</td>
-	    <td><input name="start_time" class="Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+	    <td><input name="start_time" autocomplete="off" class="Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
 	</tr>
 	<tr>
 	    <td align="right">类型:</td>
 	    <td><select name="type" onchange="show_sport_type(this.value);">
 	    		<option value="time_trial">计时赛</option>
-	    		<option value="no_time_trial">非计时赛</option>
+	    		<option value="no_time_trial" selected="selected">非计时赛</option>
 	    </select></td>
 	    <td align="right">积分消耗:</td>
 	    <td>
@@ -23,7 +23,7 @@
 	</tr>
 	<tr>
 	    <td align="right">服务费:</td>
-	    <td><span id="service_charge_time">每<input name="service_charge_time" style="width: 35px;"/>分钟,</span>扣除<input name="service_charge" required="true"/>积分</td>
+	    <td><span id="service_charge_time" style="display: none;">每<input name="service_charge_time" style="width: 35px;"/>分钟,</span>扣除<input name="service_charge" required="true"/>积分</td>
 	    <td align="right">人数上限:</td>
 	    <td><input name="people_number" required="true"/>*不能为空</td>
 	</tr>
@@ -40,7 +40,7 @@
 		<td align="right">涨盲时间:</td>
 		<td><input name="zhangmang_time"/>分钟</td>
 	    <td align="right">截至买入时间:</td>
-	    <td><input name="stop_entry_time" required="true" class="Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" />*不能为空</td>
+	    <td><input name="stop_entry_time" autocomplete="off"  required="true" class="Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" />*不能为空</td>
 	</tr>
 	<tr>
 	    <td align="right">休息时间:</td>
@@ -53,6 +53,15 @@
 	    <td><input name="MaxBLNum" /></td>
 	    <td align="right">座位数:</td>
 	    <td><input name="seating"/></td>
+	</tr>
+	<tr>
+	    <td align="right" >发牌员:</td>
+	    <td colspan="3"><select name="deingcoholr_id">
+	    	<option value="0">-不指定-</option>
+	    	<?php if (is_array($deingcoholrList)){foreach ($deingcoholrList as $value) {?>
+	    	<option value="<?php echo $value['id'];?>"><?php echo $value['name'];?></option>	
+	    	<?php }}?>
+	    </select></td>
 	</tr>
 	<tr >
 	    <td width="80px" align="right">备注:</td>

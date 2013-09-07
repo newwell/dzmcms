@@ -14,6 +14,7 @@ switch ($todo) {
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				$arr['member_info'] = member_get(array($arr['card']),'card');
 				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
 		        $infoList[]	= $arr;
 			}
@@ -26,7 +27,7 @@ switch ($todo) {
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
-				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
+				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}
 		}
@@ -40,7 +41,7 @@ switch ($todo) {
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
-				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
+				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}
 			//$infoList = entry_list(0, 100," `card` = $card AND status = '已入赛' ");

@@ -83,19 +83,19 @@ function RemoveSpan(ele) {
 function getvalue(ele) {
 	var type = ele.getAttribute('type');
 	switch(type) {
-　　　　case 'text':
-　　　　case 'hidden':
-　　　　case 'password':
-　　　　case 'file':
+		case 'text':
+		case 'hidden':
+		case 'password':
+		case 'file':
 		case "select-one":
-　　　　case 'textarea': 
+		case 'textarea': 
 			return ele.value;
-　　　　case 'checkbox':
-　　　　case 'radio': 
+		case 'checkbox':
+		case 'radio': 
 			return choosevalue(ele);
-　　　　case "select-multiple": 
+		case "select-multiple": 
 			return selectvalue(ele);
-　　}
+	}
 }
 
 
@@ -104,12 +104,12 @@ function getvalue(ele) {
 function choosevalue(ele) {
 	var value = 0;
 	//取得第一个元素的name,搜索这个元素组
-　　var tmpele = document.getElementsByName(ele.getAttribute('name'));
-　　for(var i=0;i<tmpele.length;i++) {
+	var tmpele = document.getElementsByName(ele.getAttribute('name'));
+	for(var i=0;i<tmpele.length;i++) {
 		if(tmpele[i].checked) {
 			value++;
-　　　　}
-　　}
+		}
+	}
 	return value;
 }
 

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 09 月 06 日 23:47
+-- 生成日期: 2013 年 09 月 07 日 17:58
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
   `explains` text NOT NULL COMMENT '说明',
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=57 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=76 ;
 
 -- --------------------------------------------------------
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_entry` (
   `exit_time` int(22) NOT NULL DEFAULT '0' COMMENT '退赛时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=23 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=25 ;
 
 -- --------------------------------------------------------
 
@@ -857,7 +857,7 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 ('737051693', 800433, 1, '', '左乐', '', '18907188817', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1363439756, '140', ''),
 ('737052973', 800473, 1, '', '俞琴', '', '13476089543', '', '', 0, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1363435078, '40', ''),
 ('737286365', 800523, 1, '', '杜景杰', '', '13307131488', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1363426621, '0', ''),
-('736955981', 800522, 1, '', '夜风', '', '18610730011', '', '', 1, 1, 0, '', 0, '1736956154', '', '', '', '', '', 0, 0, '', '', 1363421142, '8888325', ''),
+('736955981', 800522, 1, '', '夜风', '', '18610730011', '', '', 1, 1, 0, '', 0, '1736956142', '', '', '', '', '', 0, 0, '', '', 1363421142, '8886983', ''),
 ('736761645', 800016, 1, '', '张志高', '', '13971254125', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1363421007, '0', ''),
 ('737100061', 800521, 1, '', '黄欢', '', '13908659897', '', '', 1, 1, 0, '', 0, '100', '', '', '', '', '', 0, 0, '', '', 1363420643, '0', ''),
 ('737052205', 800487, 1, '', '沈然', '', '13971601915', '', '', 1, 1, 0, '', 0, '300', '', '', '', '', '', 0, 0, '', '', 1363418112, '0', ''),
@@ -1301,16 +1301,6 @@ CREATE TABLE IF NOT EXISTS `dzmc_prize` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='颁奖表' AUTO_INCREMENT=12 ;
 
---
--- 转存表中的数据 `dzmc_prize`
---
-
-INSERT INTO `dzmc_prize` (`id`, `card`, `name`, `sport_id`, `ranking`, `jiangli_jifen`, `add_date`) VALUES
-(8, '736955981', '刘德华', 30, '第 1 名', 100, 1377297912),
-(9, '736955981', '刘德华', 30, '第 2 名', 1, 1377344793),
-(10, '736955981', '刘德华', 30, '第 2 名', 1, 1377344955),
-(11, '736940301', '郭富城', 32, '第 1 名', 100, 1377361309);
-
 -- --------------------------------------------------------
 
 --
@@ -1367,20 +1357,11 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
   `remark` text COMMENT '备注',
   `jackpot` int(25) DEFAULT '0' COMMENT '奖池',
   `status` varchar(22) NOT NULL DEFAULT '未开赛' COMMENT '赛事状态',
+  `deingcoholr_id` int(11) NOT NULL COMMENT '发牌员编号',
   `add_date` int(15) DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=34 ;
-
---
--- 转存表中的数据 `dzmc_sport`
---
-
-INSERT INTO `dzmc_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `add_date`) VALUES
-(30, 'MTT 50积分赛', 'time_trial', 1377297120, 500, 50, 15, 100, 1, 0, 1377383526, 10, 0, '', 0, 0, '', NULL, '已结束', 1377297145),
-(31, 'MTT 80 积分赛', 'time_trial', 1377298080, 1000, 80, 15, 100, 1, 0, 1377384488, 0, 0, '', 0, 0, '', 5000, '已结束', 1377298093),
-(32, 'newwell', 'time_trial', 1377361066, 500, 100, 15, 100, 1, 0, 1377447470, 0, 0, '', 0, 0, '', 400, '已结束', 1377361078),
-(33, '非计时赛 588', 'no_time_trial', 1378039000, 500, 88, 0, 100, 1, 0, 1378125405, 0, 0, '', 0, 0, '', 500, '竞赛中', 1378039020);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=36 ;
 
 -- --------------------------------------------------------
 
@@ -1402,7 +1383,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_staff` (
 --
 
 INSERT INTO `dzmc_staff` (`id`, `name`, `type`, `activate`) VALUES
-(6, '张曼玉', '发牌员', 1),
+(6, '张曼玉', '发牌员', 0),
 (2, '刘德华', '发牌员', 1),
 (4, '张学友', '发牌员', 1),
 (5, '陈奕迅', '发牌员', 1);
@@ -1491,7 +1472,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1378494234, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1378570942, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

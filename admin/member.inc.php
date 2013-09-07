@@ -32,6 +32,8 @@ switch ($todo) {
 		if (empty($change_value))s("变动积分值0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
 		if (empty($card))e('无法获取读卡');
 		
+		$member_info = member_get(array($card),'card');
+		$card = $member_info['card'];
 		//计算积分变动 编号
 		$dojifenlog_time = date('Y-n-j',$localtime);
 		$dojifenlog_time_1 = strtotime($dojifenlog_time)+(12*3600);
@@ -236,10 +238,12 @@ switch ($todo) {
 		if (empty($dopay))e("充值金额为0");
 		if (empty($card))e('无法获取读卡');
 		$member_info = member_get(array($card),'card');
+		$card = $member_info['card'];
 		$value = $dopay*$setting_rate;
 		$r = member_dopay($card, $value);
 		balance_log($card, "积分充值:增加".$value."分", $localtime,'充值');
 		//s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);
+		$member_info = member_get(array($card),'card');
 		include template('member_dopay_print');
 		break;
 	case 'pay':

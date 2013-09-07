@@ -51,8 +51,8 @@ document.body.onload = function(){
     <td valign="top" align="center" width="100%">
     <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
         <tr>
-            <!-- <th ><input type="checkbox" name="chkall" onclick="checkall(this.form)" title="全选">全选</th> -->
             <th>读卡</th>
+            <th>会员卡</th>
 			<th >说明</th>
 			<th >小票编号</th>
 			<th>产生日期</th>
@@ -60,7 +60,8 @@ document.body.onload = function(){
         </tr>
 		<?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
         <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>     
-            <td class="list"><?php echo $value['card']?></td>  
+            <td class="list"><?php echo $value['card']?></td>
+            <td class="list"><?php echo $value['member_info']['cardid'];?></td>
             <td class="list xiankuan" ><a href="JavaScript:;" onclick="JavaScript:hiBox('#showbox_<?php echo $value['id']?>', '详细说明',400,'','','.a_close');"><?php echo $value['explains']?><a/></td>
             <td class="list"><?php echo $value['type_explain']?></td>
             <td class="list"><?php echo $value['add_date']?></td>

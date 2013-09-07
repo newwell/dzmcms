@@ -6,6 +6,7 @@ admin_priv($act['action']);
 require_once 'include/f/sport.f.php';
 require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
+require_once 'include/f/staff.f.php';
 switch ($todo) {
 	case 'rebuy':
 		$card		= dzmc_revise_card(( isset($_GET['card']) ? $_GET['card'] : '' ));
@@ -22,6 +23,7 @@ switch ($todo) {
 		$entry_info		= entry_get(array($entry_id),'id');
 		$sport_info		= sport_get(array($sport_id),'id');
 		
+		$card = $member_info['card'];
 		if (!$sport_info['rebuy']){s('本赛事不允许再次买入',$tiaohui);}
 		
 		if ($sport_info['type']=='time_trial'){
@@ -190,10 +192,10 @@ switch ($todo) {
 		$sport_id   = isset($_REQUEST['sport_id']) ? $_REQUEST['sport_id'] : '';
 		$payment_type   = isset($_POST['payment_type']) ? $_POST['payment_type'] : '';
 		
-		if (empty($card)||empty($sport_id))s('会员id为得到','?action=sport_entry&todo=entry&do=entry');
+		if (empty($card)||empty($sport_id))s('会员id未得到','?action=sport_entry&todo=entry&do=entry');
 		$member_info = member_get(array($card),'card');
 		$sportinfo = sport_get(array($sport_id),'id');
-		
+		$card = $member_info['card'];
 		if ($payment_type=='jiangli_jifen'){
 			if($sportinfo['type']=='time_trial'){//计时赛
 				if ($member_info['jiangli_jifen']<$sportinfo['deduction'])s('奖励积分不够,无法完成报名','?action=sport_entry&todo=doentry&do=entry&card='.$card."&id=".$sport_id);
@@ -231,7 +233,7 @@ switch ($todo) {
 			$member_info = member_get(array($card),'card');
 			include template('sport_save_entry_print');
 		}else {
-			s('添加失败','?action=sport_entry&todo=entry&do=entry');
+			s('失败','?action=sport_entry&todo=entry&do=entry');
 		}
 		break;
 	case 'doentry':
@@ -357,6 +359,7 @@ switch ($todo) {
 		$scoreboard	= htmlspecialchars( isset($_POST['scoreboard']) ? $_POST['scoreboard'] : 0 );
 		$MaxBLNum	= intval( isset($_POST['MaxBLNum']) ? $_POST['MaxBLNum'] : 0 );
 		$seating	= intval( isset($_POST['seating']) ? $_POST['seating'] : 0 );
+		$deingcoholr_id	= intval( isset($_POST['deingcoholr_id']) ? $_POST['deingcoholr_id'] : 0 );
 		$remark	= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '' );
 		
 		if ($type=="time_trial"){
@@ -383,6 +386,7 @@ switch ($todo) {
 			'scoreboard'=>$scoreboard,
 			'MaxBLNum'=>$MaxBLNum,
 			'seating'=>$seating,
+			'deingcoholr_id'=>$deingcoholr_id,
 			'remark'=>$remark,
 		
 			'add_date'=>$localtime
@@ -394,6 +398,8 @@ switch ($todo) {
 		}
 		break;
 	case 'add':
+		$where = "`type`='发牌员' AND `activate`=1";
+		$deingcoholrList = staff_list(0, 1000,$where);
 		include template('sport_add');
 		break;
 	case 'list':

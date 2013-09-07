@@ -45,7 +45,6 @@
             <td class="list"><?php echo gmdate("Y-n-j H:m:s",$value['add_date']) ?></td>
 			<td class="list">
 			<?php if ($do!='entry'){?>
-			<!-- <a href="?action=sport_list&todo=update&id=<?php echo $value['id']?>" title="修改"><img src="<?php echo $_TEMPLATESDIR?>/image/edit_g.gif" border="0" alt="修改"/></a>  -->
 			<a href="JavaScript:;" onclick="JavaScript:hiBox('#showbox_<?php echo $value['id']?>', '<?php echo $value['name'];?>',400,'','','.a_close');" title="查看">查看</a>
 			<?php if ($value['status']=="未开赛"){?>
 				<a href="?action=sport_list&todo=kaisai&id=<?php echo $value['id']?>" title="开赛">开赛</a>
@@ -78,6 +77,7 @@
 记分牌: <?php echo $value['scoreboard'];?><br>
 桌数: <?php echo $value['MaxBLNum'];?><br>
 座位数: <?php echo $value['seating'];?><br>
+发牌员: <?php $r = staff_get(array($value['deingcoholr_id']),'id');if(!$r){echo '未指定';}else {echo $r['name'];};?><br>
 备注: <?php echo $value['remark'];?><br>
    </p>
    <p style="text-align:right"><a href="#" class="a_close">关闭</a></p>
