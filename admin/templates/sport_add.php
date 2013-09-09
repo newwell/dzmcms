@@ -25,7 +25,7 @@
 	    <td align="right">服务费:</td>
 	    <td><span id="service_charge_time" style="display: none;">每<input name="service_charge_time" style="width: 35px;"/>分钟,</span>扣除<input name="service_charge" required="true"/>积分</td>
 	    <td align="right">人数上限:</td>
-	    <td><input name="people_number" required="true"/>*不能为空</td>
+	    <td><input name="people_number" required="true" value="10" />*不能为空</td>
 	</tr>
 	<tr>
 	    <td align="right">支持可以再次买入:</td>

@@ -6,6 +6,14 @@ admin_priv($act['action']);
 require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 switch ($todo) {
+	case 'so':
+		$option	= isset($_POST['option']) ? $_POST['option'] : "" ;
+		$keywork	= isset($_POST['keywork']) ? $_POST['keywork'] : "" ;
+		
+		$where = " $option LIKE '%$keywork%' ";
+		$infoList	= member_list(0, 100,$where);
+		include template('member_find');
+		break;
 	case 'del':
 		$card  = dzmc_revise_card((isset($_GET['id']) ? $_GET['id'] : ''));
 		if (empty($card)) {

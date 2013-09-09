@@ -22,6 +22,20 @@ document.body.onload = function(){
 	</tr>
 </table>
 </form>
+<form action="?action=member_find&todo=so" method="post" onsubmit="return CheckForm(this,true);">
+<input type="hidden" value="<?php echo $formhash;?>" name="formhash">
+<table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
+	<tr>
+	    <td width="80px" align="center">按:<select name="option">
+	    	<option value="name"  <?php if ($option=='name')echo 'selected';?>>姓名</option>
+	    	<option value="phone" <?php if ($option=='phone')echo 'selected';?>>手机号</option>
+	    </select>模糊搜索<input name="keywork" value="<?php if (isset($keywork))echo $keywork;?>"/></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="center">	<input type="submit" class="formsubmit" value="搜索"></td>
+	</tr>
+</table>
+</form>
 <table width="98%"  border="0" cellpadding="0" cellspacing="0" align="center">
   <tr>
     <td valign="top" align="center" width="100%">
@@ -31,6 +45,7 @@ document.body.onload = function(){
 			<th>昵称</th>
 			<th>读卡</th>
 			<th>会员号</th>
+			<th>手机号</th>
 			<th>积分</th>	
 			<th>奖励积分</th>	
 			<th>操作</th>		
@@ -41,6 +56,7 @@ document.body.onload = function(){
             <td class="list"><?php echo $value['nickname']?></td>
             <td class="list"><?php echo $value['card']?></td>
             <td class="list"><?php echo $value['cardid']?></td>
+            <td class="list"><?php echo $value['phone']?></td>
             <td class="list" style="color: red;"><?php echo $value['balance']?></td>
             <td class="list"><?php echo $value['jiangli_jifen']?></td>
 			<td class="list">
@@ -49,7 +65,7 @@ document.body.onload = function(){
         </tr>
 		<?php } }?>
 		<tr bgcolor="#A6D0F6" align="center">
-			<td colspan="7"><?php if (!empty($page_control)){echo $page_control;}?></td>
+			<td colspan="8"><?php if (!empty($page_control)){echo $page_control;}?></td>
 		</tr>
     </table>
 </td>

@@ -37,7 +37,7 @@
             <td class="list"><?php echo $value['name'];?></td>      
             <td class="list"><?php echo $value['deduction'];?></td>  
             <td class="list"><?php if ($value['type']=="time_trial"){echo "每".$value['service_charge_time']."分钟,".$value['service_charge']."积分";}else {echo $value['service_charge'].'积分';}?></td>
-            <td class="list">0/<?php echo $value['people_number'];?></td>
+            <td class="list"><?php echo entry_total(" `sport_id`=".$value['id'])?>/<?php echo $value['people_number'];?></td>
             <td class="list"><?php if ($value['rebuy']){echo "是";}else {echo '否';}?></td>
             <td class="list"><?php echo $value['entry_number']?></td>
             <td class="list"><?php echo $value['status']?></td>

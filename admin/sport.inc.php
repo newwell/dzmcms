@@ -61,6 +61,12 @@ switch ($todo) {
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
 		$jiangli_jifen	= intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : '' );
 		
+		$sportinfo		= sport_get(array($sport_id),'id');
+		if ($jiangli_jifen>$sportinfo['jackpot'])e('奖池不够颁奖');
+		
+		$member_info = member_get(array($card),'card');
+		if (empty($member_info))e('无会员信息');
+		$card = $member_info['card'];
 		$result = prize_add(array(
 			'card'=>$card,
 			'sport_id'=>$sport_id,
@@ -72,9 +78,8 @@ switch ($todo) {
 		if ($result) {
 			balance_add($card, $jiangli_jifen,'jiangli_jifen');//奖励积分
 			balance_log($card, "赛事奖励-增加奖励积分:".$jiangli_jifen."", $localtime);
-			jackpot_reduce($sport_id, $jiangli_jifen);//增加奖池
-			$member_info = member_get(array($card),'card');
-			$sportinfo		= sport_get(array($sport_id),'id');
+			jackpot_reduce($sport_id, $jiangli_jifen);//减少奖池
+			
 			include template('sport_prize_print');
 		}else {
 			s('添加失败','?action=sport_list&todo=prize&id='.$sport_id);

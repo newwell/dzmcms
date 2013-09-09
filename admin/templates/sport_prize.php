@@ -39,9 +39,9 @@ function get_user_name() {
 		$("#name").val(data.name);
 	  }, "json");
 }</script>
-	<!-- <tr bgcolor="#E4EDF9" align="center">
-			<td class="list">奖池剩余:<?php echo $sport_info['jackpot']?></td>
-		</tr>  -->
+		<tr bgcolor="#E4EDF9" align="center">
+			<td class="list" colspan="5" style="color: red;">奖池剩余:<?php echo $sport_info['jackpot']?></td>
+		</tr>
     </table>
 </td>
   </tr>
