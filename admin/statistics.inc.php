@@ -6,14 +6,55 @@ admin_priv($act['action']);
 require_once 'include/f/balance.f.php';
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'PresentExp':
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='积分赠送' ORDER BY  `id` DESC ";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				if (empty($arr['type'])){
+					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				}else{
+					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+				}
+		
+				$arr['member_info'] = member_get(array($arr['card']),'card');
+				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
+				$infoList[]	= $arr;
+			}
+			//$infoList = entry_list(0, 100," `card` = $card AND status = '已入赛' ");
+			/*echo '<<pre>';
+			 print_r($infoList);exit();*/
+		}else {
+			$member_info= '';
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='积分赠送' ORDER BY  `id` DESC ";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				if (empty($arr['type'])){
+					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				}else{
+					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+				}
+				$arr['member_info'] = member_get(array($arr['card']),'card');
+				$infoList[]	= $arr;
+			}
+		}
+		include template('statistics_jifenlog_list');
+		break;
 	case 'jifenlog':
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
-			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='积分变动' ORDER BY  `add_date` DESC ";
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='积分变动' ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				if (empty($arr['type'])){
+					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				}else{
+					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+				}
+				
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
 		        $infoList[]	= $arr;
@@ -23,10 +64,14 @@ switch ($todo) {
 			print_r($infoList);exit();*/
 		}else {
 			$member_info= '';
-			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='积分变动' ORDER BY  `add_date` DESC ";
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='积分变动' ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				if (empty($arr['type'])){
+					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				}else{
+					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+				}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}
@@ -38,9 +83,13 @@ switch ($todo) {
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' ORDER BY  `add_date` DESC ";
+			//exit($sql);
 			$result		= $db->query($sql);
-			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+			while($arr	= $db->fetch_array($result)){if (empty($arr['type'])){
+					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				}else{
+					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+				}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}

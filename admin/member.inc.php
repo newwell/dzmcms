@@ -6,6 +6,51 @@ admin_priv($act['action']);
 require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 switch ($todo) {
+	case 'doPresentExp':
+		$change_value	= isset($_POST['change_value']) ? $_POST['change_value'] : "" ;
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '空' );
+		
+		if (empty($change_value))s("赠送积分值不能为0",'member_PresentExp&todo=PresentExp&card='.$card);
+		if (empty($card))e('无法获取读卡');
+		
+		$member_info = member_get(array($card),'card');
+		$card = $member_info['card'];
+		//计算积分变动 编号
+		$xianzaishijian = time();
+		$dojifenlog_time = date('Y-n-j',$xianzaishijian);//今天日期
+		$dojifenlog_time = strtotime($dojifenlog_time);
+		$shicha = $xianzaishijian - $dojifenlog_time;
+		//echo $shicha;exit;
+		if ($shicha<(12*3600)){//时差,今天12点前算昨天
+			$dojifenlog_time_1 = $dojifenlog_time+(12*3600)-(24*3600);
+			$dojifenlog_time_2 = $dojifenlog_time_1+(24*3600);
+			
+		}else{
+			//exit('2');
+			$dojifenlog_time_1 = $dojifenlog_time+(12*3600);
+			$dojifenlog_time_2 = $dojifenlog_time_1+(24*3600);
+		}
+		
+		//$dojifenlog_time = date('Y.n.j H:i:s',1378526400);
+		//echo $dojifenlog_time;exit;
+		$num = balance_log_total(" `add_date`<$dojifenlog_time_2 AND `add_date` >$dojifenlog_time_1  AND `type`='积分赠送'");
+		$num = $num+1;
+		
+		balance_add($card, $change_value,'jiangli_jifen');
+		balance_log($card, "积分赠送:增加奖励积分,".$change_value."分,备注:".$remark, $xianzaishijian,"积分赠送",$num);
+		include template('member_doPresentExp_print');
+		
+		break;
+	case 'PresentExp':
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+		}else {
+			$member_info = '';
+		}
+		include template('member_PresentExp');
+		break;
 	case 'so':
 		$option	= isset($_POST['option']) ? $_POST['option'] : "" ;
 		$keywork	= isset($_POST['keywork']) ? $_POST['keywork'] : "" ;
@@ -43,10 +88,22 @@ switch ($todo) {
 		$member_info = member_get(array($card),'card');
 		$card = $member_info['card'];
 		//计算积分变动 编号
-		$dojifenlog_time = date('Y-n-j',$localtime);
-		$dojifenlog_time_1 = strtotime($dojifenlog_time)+(12*3600);
-		$dojifenlog_time_2 = $dojifenlog_time_1+(24*3600);
-		//$dojifenlog_time = date('Y.n.j H:i:s',$dojifenlog_time_2);
+		$xianzaishijian = time();
+		$dojifenlog_time = date('Y-n-j',$xianzaishijian);//今天日期
+		$dojifenlog_time = strtotime($dojifenlog_time);
+		$shicha = $xianzaishijian - $dojifenlog_time;
+		//echo $shicha;exit;
+		if ($shicha<(12*3600)){//时差,今天12点前算昨天
+			$dojifenlog_time_1 = $dojifenlog_time+(12*3600)-(24*3600);
+			$dojifenlog_time_2 = $dojifenlog_time_1+(24*3600);
+			
+		}else{
+			//exit('2');
+			$dojifenlog_time_1 = $dojifenlog_time+(12*3600);
+			$dojifenlog_time_2 = $dojifenlog_time_1+(24*3600);
+		}
+		
+		//$dojifenlog_time = date('Y.n.j H:i:s',1378526400);
 		//echo $dojifenlog_time;exit;
 		$num = balance_log_total(" `add_date`<$dojifenlog_time_2 AND `add_date` >$dojifenlog_time_1  AND `type`='积分变动'");
 		$num = $num+1;
@@ -66,7 +123,7 @@ switch ($todo) {
 			break;
 		}
 		$member_info = member_get(array($card),'card');
-		balance_log($card, "积分变动:".$type.",".$change_value."分,备注:".$remark, $localtime,"积分变动",$num);
+		balance_log($card, "积分变动:".$type.",".$change_value."分,备注:".$remark, $xianzaishijian,"积分变动",$num);
 		include template('member_balance_change_print');
 		break;
 	case 'jifenlog'://积分变动

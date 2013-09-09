@@ -72,10 +72,11 @@ function balance_log_list($startlimit,$endlimit,$where='') {
  */
 function balance_log_total($where='') {
 	global $db,$tablepre;
-	$sql	= "SELECT COUNT(card) AS countnum FROM {$tablepre}balance_log ";
+	$sql	= "SELECT COUNT(id) AS countnum FROM {$tablepre}balance_log ";
 	if (!empty($where)) {
 		$sql .="WHERE ".$where;
 	}
+	//echo $sql;exit;
 	$result	= $db->fetch_one_array($sql);
 	return $result['countnum'];
 }
