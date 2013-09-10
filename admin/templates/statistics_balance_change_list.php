@@ -63,9 +63,7 @@ document.body.onload = function(){
             <td class="list"><?php echo $value['member_info']['cardid'];?></td>
             <td class="list xiankuan" ><a href="JavaScript:;" onclick="JavaScript:hiBox('#showbox_<?php echo $value['id']?>', '详细说明',400,'','','.a_close');"><?php echo $value['explains']?><a/></td>
             <td class="list"><?php echo $value['add_date']?></td>
-			<td class="list">
-			--
-			</td>
+			<td class="list"><a href="JavaScript:;" onclick="location.href='?action=statistics_balance_change&todo=balance_change_print&id=<?php echo $value['id']?>'">打印</a></td>
         </tr>
         <div id="showbox_<?php echo $value['id']?>" style="display:none">
 		   <p><?php echo $value['explains']?></p>

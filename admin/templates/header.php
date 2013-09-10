@@ -8,8 +8,8 @@
 <meta http-equiv="Page-Exit" Content="blendTrans(Duration=0.3)"> 
 
 <title>管理员控制面板</title>
-<link rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css.css" />
-<link rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css/wui.css" />
+<link rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css.min.css" />
+<link rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css/wui.min.css" />
 <link type="text/css" rel="stylesheet" href="script/Date_Time/skin/WdatePicker.css">
 
 <script src="script/class.js" type="text/javascript"></script>

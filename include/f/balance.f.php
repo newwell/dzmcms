@@ -80,3 +80,15 @@ function balance_log_total($where='') {
 	$result	= $db->fetch_one_array($sql);
 	return $result['countnum'];
 }
+/**
+ * 得到指定ID的信息
+ * @param array		$idArr	id数组
+ * @param string	$fields	要查询的字段
+ */
+function balance_log_get($idArr=array(),$fields) {
+	global $db,$tablepre;
+	$ids = implode(',', $idArr);
+	$sql = "SELECT * FROM `{$tablepre}balance_log` WHERE `$fields` in($ids)";
+	$result	= $db->fetch_one_array($sql);
+	return $result;
+}

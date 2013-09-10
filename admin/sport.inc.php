@@ -84,8 +84,6 @@ switch ($todo) {
 		}else {
 			s('添加失败','?action=sport_list&todo=prize&id='.$sport_id);
 		}
-		
-		
 		break;
 	case 'prize':
 		$sport_id	= intval( isset($_GET['id']) ? $_GET['id'] : '' );

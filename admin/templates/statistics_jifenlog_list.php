@@ -55,8 +55,7 @@ document.body.onload = function(){
             <th>会员卡</th>
 			<th >说明</th>
 			<th >小票编号</th>
-			<th>产生日期</th>
-			<th>操作</th>		
+			<th>产生日期</th>		
         </tr>
 		<?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
         <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>     
@@ -65,9 +64,6 @@ document.body.onload = function(){
             <td class="list xiankuan" ><a href="JavaScript:;" onclick="JavaScript:hiBox('#showbox_<?php echo $value['id']?>', '详细说明',400,'','','.a_close');"><?php echo $value['explains']?><a/></td>
             <td class="list"><?php echo $value['type_explain']?></td>
             <td class="list"><?php echo $value['add_date']?></td>
-			<td class="list">
-			--
-			</td>
         </tr>
         <div id="showbox_<?php echo $value['id']?>" style="display:none">
 		   <p><?php echo $value['explains']?></p>

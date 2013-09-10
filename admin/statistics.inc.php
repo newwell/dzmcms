@@ -6,6 +6,14 @@ admin_priv($act['action']);
 require_once 'include/f/balance.f.php';
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'balance_change_print':
+		$id		= intval( isset($_GET['id']) ? $_GET['id'] : 0 );
+		$balance_log_info = balance_log_get(array($id),'id');
+		if (empty($balance_log_info))s('无记录','?action=statistics_balance_change&todo=balance_change');
+		$member_info = member_get(array($balance_log_info['card']),'card');
+		//print_r($balance_log_info);exit;
+		include template('statistics_balance_change_print');
+		break;
 	case 'PresentExp':
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		if (!empty($card)){
