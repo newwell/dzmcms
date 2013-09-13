@@ -1,15 +1,13 @@
 #定义404错误页面
 #ErrorDocument 404 /404.html
 
-
 #URL重写规则
 <IfModule mod_rewrite.c>
 RewriteEngine on
-RewriteRule ^m.do$	m.php
-RewriteRule ^m.java$	m.php
-RewriteRule ^m.jsp$	m.php
-RewriteRule ^m.asp$	m.php
-RewriteRule ^([a-zA-Z0-9_]+)$	j.php?c=$1
+RewriteRule ^index.do$		index.php
+RewriteRule ^index.java$	index.php
+RewriteRule ^index.jsp$		index.php
+RewriteRule ^index.asp$		index.php
 </IfModule>
 
 #配置压缩

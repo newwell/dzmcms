@@ -37,7 +37,7 @@ for ($i=0;$i<$_path_count-2;$i++)
 }
 define('ROOT',$ROOT_PATH);
 
-define('DZMC_ROOT_PATH', dirname(realpath(dirname(__FILE__).'/../m.php')));
+define('DZMC_ROOT_PATH', dirname(realpath(dirname(__FILE__).'/../index.php')));
 unset($_self_path,$_path_array,$_path_count,$ROOT_PATH);
 
 define('FILE_ROOT',str_replace('include/common.inc.php', '', str_replace('\\', '/', __FILE__)));
