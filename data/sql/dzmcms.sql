@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 09 月 10 日 12:15
+-- 生成日期: 2013 年 09 月 14 日 11:32
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -35,7 +35,14 @@ CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `dzmc_balance_log`
+--
+
+INSERT INTO `dzmc_balance_log` (`id`, `card`, `type`, `type_explain`, `explains`, `add_date`) VALUES
+(1, '736955981', '', '', '报名赛事[ 非计时赛 588 ]:扣除参赛费:,500分,扣除服务费:88分<br>剩余积分:1736956042剩余奖励积分:8884912', 1379152175);
 
 -- --------------------------------------------------------
 
@@ -54,7 +61,14 @@ CREATE TABLE IF NOT EXISTS `dzmc_entry` (
   `exit_time` int(22) NOT NULL DEFAULT '0' COMMENT '退赛时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `dzmc_entry`
+--
+
+INSERT INTO `dzmc_entry` (`id`, `card`, `sport_id`, `status`, `payment_type`, `number`, `add_date`, `exit_time`) VALUES
+(1, '736955981', 1, '已入赛', 'jiangli_jifen', 1, 1379152175, 0);
 
 -- --------------------------------------------------------
 
@@ -858,7 +872,7 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 ('737051693', 800433, 1, '', '左乐', '', '18907188817', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1363439756, '140', ''),
 ('737052973', 800473, 1, '', '俞琴', '', '13476089543', '', '', 0, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1363435078, '40', ''),
 ('737286365', 800523, 1, '', '杜景杰', '', '13307131488', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1363426621, '0', ''),
-('736955981', 800522, 1, '', '夜风', '', '18610730011', '', '', 1, 1, 0, '', 0, '1736956042', '', '', '', '', '', 0, 0, '', '', 1363421142, '8885500', ''),
+('736955981', 800522, 1, '', '夜风', '', '18610730011', '', '', 1, 1, 0, '', 0, '1736956042', '', '', '', '', '', 0, 0, '', '', 1363421142, '8884912', ''),
 ('736761645', 800016, 1, '', '张志高', '', '13971254125', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1363421007, '0', ''),
 ('737100061', 800521, 1, '', '黄欢', '', '13908659897', '', '', 1, 1, 0, '', 0, '100', '', '', '', '', '', 0, 0, '', '', 1363420643, '0', ''),
 ('737052205', 800487, 1, '', '沈然', '', '13971601915', '', '', 1, 1, 0, '', 0, '300', '', '', '', '', '', 0, 0, '', '', 1363418112, '0', ''),
@@ -1362,7 +1376,14 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
   `add_date` int(15) DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=2 ;
+
+--
+-- 转存表中的数据 `dzmc_sport`
+--
+
+INSERT INTO `dzmc_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
+(1, '非计时赛 588', 'no_time_trial', 1379152016, 500, 88, 0, 10, 1, 0, 1379238422, 0, 0, '', 0, 0, '', 500, '竞赛中', 5, 1379152036);
 
 -- --------------------------------------------------------
 
@@ -1475,7 +1496,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1378806674, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1379151164, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
