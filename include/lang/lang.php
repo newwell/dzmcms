@@ -1,9 +1,4 @@
 <?php
-$lang = array();
-//$lang['system_name']      = '大赞会员卡管理系统';
-//$lang['system_version']   = '1.0';
-//$lang['system_copyright'] = '版权所有 © 2007-2008 武汉大赞网络科技，并保留所有权利。';
-
 
 #后台用户语言栏目
 $lang['user_username_empty']         = "对不起,请填写用户名!";

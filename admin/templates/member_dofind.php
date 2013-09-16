@@ -64,8 +64,14 @@
 	    }?></td>
 	</tr>
 	<tr>
-	    <td width="80px" align="right">积分余额:</td>
+	    <td width="80px" align="right">积分:</td>
 	    <td><font color="red"><?php if (empty($member_info['balance'])){echo '0.00';}else{ echo $member_info['balance'];}?></font></td>
+	    <td width="80px" align="right">奖励积分:</td>
+	    <td><?php if (empty($member_info['jiangli_jifen'])){echo '0.00';}else{ echo $member_info['jiangli_jifen'];}?></td>
+	</tr>
+	<tr>
+	    <td width="80px" align="right">积分合计:</td>
+	    <td><font color="red"><?php echo $member_info['balance']+$member_info['jiangli_jifen'];?></font></td>
 	    <td width="80px" align="right">客户经理:</td>
 	    <td><?php echo $member_info['customer_manager'];?></td>
 	</tr>

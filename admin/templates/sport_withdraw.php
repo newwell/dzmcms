@@ -43,7 +43,8 @@ document.body.onload = function(){
 <?php }?>
 <table width="97%" cellpadding="1" cellspacing="1" align="center" class="listtable">
         <tr>
-            <th>会员读卡</th>
+            <th>名称/昵称</th>
+            <th>会员号</th>
             <th>赛事名称</th>
 			<th>状态</th>
 			<th>类型</th>
@@ -55,7 +56,8 @@ document.body.onload = function(){
         </tr>
         <?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
         <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
-            <td class="list"><?php echo $value['card'];?></td>  
+            <td class="list"><?php echo $value['member_info']['name'];?>/<?php echo $value['member_info']['nickname'];?></td>
+            <td class="list"><?php echo $value['member_info']['cardid'];?></td>
             <td class="list"><?php echo $value['sport']['name'];?></td>  
             <td class="list"><?php echo $value['status'];?></td>
             <td class="list"><?php if ($value['sport']['type']=="time_trial"){echo '计时赛';}else echo "非计时赛";?></td>
@@ -75,7 +77,7 @@ document.body.onload = function(){
         </tr>
 		<?php }}?>
 		<tr bgcolor="#A6D0F6" align="center">
-			<td colspan="9"><?php if (!empty($page_control)){echo $page_control;}?></td>
+			<td colspan="10"><?php if (!empty($page_control)){echo $page_control;}?></td>
 		</tr>
 </table>
 <?php include template('foot'); ?>

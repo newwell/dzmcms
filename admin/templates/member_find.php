@@ -47,7 +47,8 @@ document.body.onload = function(){
 			<th>会员号</th>
 			<th>手机号</th>
 			<th>积分</th>	
-			<th>奖励积分</th>	
+			<th>奖励积分</th>
+			<th>积分合计</th>
 			<th>操作</th>		
         </tr>
 		<?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
@@ -57,15 +58,16 @@ document.body.onload = function(){
             <td class="list"><?php echo $value['card']?></td>
             <td class="list"><?php echo $value['cardid']?></td>
             <td class="list"><?php echo $value['phone']?></td>
-            <td class="list" style="color: red;"><?php echo $value['balance']?></td>
+            <td class="list" ><?php echo $value['balance']?></td>
             <td class="list"><?php echo $value['jiangli_jifen']?></td>
+            <td class="list" style="color: red;"><?php echo $value['balance']+$value['jiangli_jifen']?></td>
 			<td class="list">
 			<a href="JavaScript:;" onclick="if(confirm('删除不可恢复,确认删除?')){location.href='?action=member_find&todo=del&id=<?php echo $value['card']?>'}" title="删除"><img src="<?php echo $_TEMPLATESDIR?>/image/delete_g.gif" border="0" alt="删除"/></a>
 			</td>
         </tr>
 		<?php } }?>
 		<tr bgcolor="#A6D0F6" align="center">
-			<td colspan="8"><?php if (!empty($page_control)){echo $page_control;}?></td>
+			<td colspan="9"><?php if (!empty($page_control)){echo $page_control;}?></td>
 		</tr>
     </table>
 </td>
