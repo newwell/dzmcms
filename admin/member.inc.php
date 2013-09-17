@@ -16,7 +16,9 @@ switch ($todo) {
 		
 		$member_info = member_get(array($card),'card');
 		$card = $member_info['card'];
+		
 		//计算积分变动 编号
+		$xianzaishijian = '';
 		$xianzaishijian = time();
 		$dojifenlog_time = date('Y-n-j',$xianzaishijian);//今天日期
 		$dojifenlog_time = strtotime($dojifenlog_time);
@@ -39,6 +41,7 @@ switch ($todo) {
 		
 		balance_add($card, $change_value,'jiangli_jifen');
 		balance_log($card, "积分赠送:增加奖励积分,".$change_value."分,备注:".$remark, $xianzaishijian,"积分赠送",$num);
+		$member_info = member_get(array($card),'card');
 		include template('member_doPresentExp_print');
 		
 		break;
@@ -121,6 +124,9 @@ switch ($todo) {
 			default:
 				s("变动类型未知",'?action=member_jifenlog&todo=jifenlog&card='.$card);
 			break;
+		}
+		if ($change_object=='jiangli_jifen'){
+		
 		}
 		$member_info = member_get(array($card),'card');
 		balance_log($card, "积分变动:".$type.",".$change_value."分,备注:".$remark, $xianzaishijian,"积分变动",$num);

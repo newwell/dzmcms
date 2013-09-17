@@ -50,12 +50,8 @@
 				<a href="?action=sport_list&todo=kaisai&id=<?php echo $value['id']?>" title="开赛">开赛</a>
 			<?php }elseif ($value['status']=="竞赛中"){?>
 			<a href="?action=sport_list&todo=jiesai&id=<?php echo $value['id']?>" title="结束比赛">结束比赛</a>
-				<?php if ($value['type']=="time_trial"){?>
-					<a href="?action=sport_list&todo=prize&id=<?php echo $value['id']?>" title="颁奖">颁奖</a>
-				<?php }?>
-			<?php }elseif ($value['status']=="已结束"){?>
-			<a href="?action=sport_list&todo=prize&id=<?php echo $value['id']?>" title="颁奖">颁奖</a>
 			<?php }?>
+			<a href="?action=sport_list&todo=prize&id=<?php echo $value['id']?>" title="颁奖">颁奖</a>
 			<a href="JavaScript:;" onclick="if(confirm('删除不可恢复,同时删除该赛事下的参赛,颁奖记录,确认删除?')){location.href='?action=sport_list&todo=del&id=<?php echo $value['id']?>'}" title="删除">删除</a>
 			<?php }else {?>
 				<a href="?action=sport_list&todo=doentry&id=<?php echo $value['id']?>" title="报名">报名</a>

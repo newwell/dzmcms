@@ -12,9 +12,7 @@
 打印时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br/>
 -----------------------------<br/>
 参赛名称:<?php echo $sportinfo['name'];?><br>
-消耗积分:<?php echo $sportinfo['deduction'];?><br>
-服务积分:<?php if ($sportinfo['type']=="time_trial"){echo "每".$sportinfo['service_charge_time']."分钟,".$sportinfo['service_charge']."积分";}else {echo $sportinfo['service_charge'].'积分';}?><br>
-扣分方式:<?php if ($payment_type=='jiangli_jifen'){echo '奖励积分';}else{echo '积分';}?><br>
+费用:<?php echo $text_;?><br>
 是否可以再次买入:<?php if ($sportinfo['rebuy']){echo "是";}else {echo '否';}?><br>
 -----------------------------<br/>
 会员卡号:<?php echo $member_info['cardid'];?><br/>
