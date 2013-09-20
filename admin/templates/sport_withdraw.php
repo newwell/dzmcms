@@ -62,9 +62,9 @@ document.body.onload = function(){
             <td class="list"><?php echo $value['status'];?></td>
             <td class="list"><?php if ($value['sport']['type']=="time_trial"){echo '计时赛';}else echo "非计时赛";?></td>
             <td class="list"><?php echo $value['number'];?></td>
-            <td class="list"><?php echo gmdate("Y-n-j H:m:s",$value['sport']['add_date']) ?></td>
+            <td class="list"><?php echo gmdate("Y-n-j H:i:s",$value['sport']['add_date']) ?></td>
             <td class="list"><?php echo $value['add_date'];?></td>
-            <td class="list"><?php if (empty($value['exit_time'])){echo '未退赛';}else {echo gmdate("Y-n-j H:m:s",$value['exit_time']);};?></td>
+            <td class="list"><?php if (empty($value['exit_time'])){echo '未退赛';}else {echo gmdate("Y-n-j H:i:s",$value['exit_time']);};?></td>
             
 			<td class="list">
 			<?php if ($value['status']=="已入赛"){?>

@@ -22,9 +22,9 @@ switch ($todo) {
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				if (empty($arr['type'])){
-					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				}else{
-					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
 				}
 		
 				$arr['member_info'] = member_get(array($arr['card']),'card');
@@ -40,9 +40,9 @@ switch ($todo) {
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				if (empty($arr['type'])){
-					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				}else{
-					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
 				}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 				$infoList[]	= $arr;
@@ -58,9 +58,9 @@ switch ($todo) {
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				if (empty($arr['type'])){
-					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				}else{
-					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
 				}
 				
 				$arr['member_info'] = member_get(array($arr['card']),'card');
@@ -76,9 +76,9 @@ switch ($todo) {
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				if (empty($arr['type'])){
-					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				}else{
-					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
 				}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
@@ -94,9 +94,9 @@ switch ($todo) {
 			//exit($sql);
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){if (empty($arr['type'])){
-					$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				}else{
-					$arr['add_date']= date('Y-n-j H:m:s',$arr['add_date']);
+					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
 				}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
@@ -119,7 +119,7 @@ switch ($todo) {
 			$sql = "SELECT * FROM  `{$tablepre}entry` ORDER BY add_date DESC LIMIT $startlimit , $perpage";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
 		        $infoList[]	= $arr;
 			}*/

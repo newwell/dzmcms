@@ -13,14 +13,14 @@ rebuy时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br>
 -----------------------------<br/>
 参赛名称:<?php echo $sport_info['name'];?><br>
 rebuy扣费:<?php echo $serviceCharge;?>分<br>
-支付方式:<?php echo $type;?><br>
+支付:<?php echo $text_;?><br>
 -----------------------------<br/>
-会员名:<?php echo $member_info['name'];?><br/>
-会员昵称:<?php echo $member_info['nickname'];?><br/>
-会员卡号:<?php echo $member_info['cardid'];?><br/>
-剩余积分:<?php echo $member_info['balance'];?><br/>
-剩余奖励积分:<?php echo $member_info['jiangli_jifen'];?><br/>
-积分合计:<?php echo $member_info['balance']+$member_info['jiangli_jifen'];?>
+会员名:<?php echo $buy_member_info['name'];?><br/>
+会员昵称:<?php echo $buy_member_info['nickname'];?><br/>
+会员卡号:<?php echo $buy_member_info['cardid'];?><br/>
+剩余积分:<?php echo $buy_member_info['balance'];?><br/>
+剩余奖励积分:<?php echo $buy_member_info['jiangli_jifen'];?><br/>
+积分合计:<?php echo $buy_member_info['balance']+$buy_member_info['jiangli_jifen'];?>
 
 </div>
 

@@ -1,19 +1,86 @@
 <?php
 if(!defined('IN_SITE')) exit('Access Denied');
 CheckAccess();
-global $act,$todo,$tablepre,$db,$do,$localtime;
+global $act,$todo,$tablepre,$db,$do;
 admin_priv($act['action']);
 require_once 'include/f/sport.f.php';
 require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 require_once 'include/f/staff.f.php';
 switch ($todo) {
+	case 'dorebuy':
+		$r_card		= dzmc_revise_card(( isset($_POST['card']) ? $_POST['card'] : '' ));
+		$buy_card	= dzmc_revise_card(( isset($_POST['buy_card']) ? $_POST['buy_card'] : '' ));
+		$entry_id	= intval( isset($_POST['entry_id']) ? $_POST['entry_id'] : '' );
+		$sport_id	= intval( isset($_POST['sport_id']) ? $_POST['sport_id'] : '' );
+		$payment_type   = isset($_POST['payment_type']) ? $_POST['payment_type'] : '';
+		
+		$tiaohui = "?action=sport_withdraw&todo=withdraw&card=$r_card";
+		if (empty($buy_card)){s('没有得到读卡',$tiaohui);}
+		if (empty($entry_id)){s('没有得到参赛编号',$tiaohui);}
+		if (empty($sport_id)){s('没有得到赛事编号',$tiaohui);}
+		
+		//用户信息为 支付用户的
+		$member_info	= member_get(array($buy_card),'card');
+		$entry_info		= entry_get(array($entry_id),'id');
+		$sport_info		= sport_get(array($sport_id),'id');
+		
+		$card = $member_info['card'];
+		//计算赛事费用
+		if($sport_info['type']=='time_trial'){//计时赛
+			$serviceCharge = $sport_info['deduction'];
+		}else {//非计时赛
+			$serviceCharge = $sport_info['deduction']+$sport_info['service_charge'];
+		}
+		
+		if((($member_info['balance'])+($member_info['jiangli_jifen']))<($serviceCharge)){
+			s('支付人所有积分不够,无法完成rebuy',"?action=sport_withdraw&todo=rebuy&entry_id=$entry_id&card=$r_card&sport_id=$sport_id");
+		}
+		if ($payment_type=='jiangli_jifen'){
+			if ($member_info['jiangli_jifen']>$serviceCharge) {
+				balance_reduce($card, $serviceCharge,$payment_type);//扣除积分;
+				$text_ ="扣除rebuy费,奖励积分:".$serviceCharge."分";
+				$explain = "rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
+			}else {
+				$cha = $serviceCharge-$member_info['jiangli_jifen'];
+				balance_reduce($card, $member_info['jiangli_jifen'],'jiangli_jifen');
+				balance_reduce($card, $cha,'balance');
+				$text_ = "扣除rebuy费,奖励积分:".$member_info['jiangli_jifen']."分,积分:".$cha."分";
+				$explain = "rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
+			}
+		}elseif ($payment_type=="balance") {
+			if ($member_info['balance']>$serviceCharge) {
+				balance_reduce($card, $serviceCharge,$payment_type);//扣除积分;
+				$text_ = "扣除rebuy费:,积分:".$serviceCharge."分";
+				$explain = "rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
+			}else {
+				$cha = $serviceCharge-$member_info['balance'];
+				balance_reduce($card, $member_info['balance'],'balance');
+				balance_reduce($card, $cha,'jiangli_jifen');
+				$text_ = "扣除rebuy费,积分:".$member_info['jiangli_jifen']."分,奖励积分:".$cha."分";
+				$explain = "rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
+			}
+		}
+			
+		$result = entry_update($entry_id, array(
+				"number"=>$entry_info['number']+1
+		));
+		if ($result) {
+			balance_log($card, $explain, $localtime);
+			jackpot_add($sport_id,  $sport_info['deduction']);//增加奖池
+			$buy_member_info = member_get(array($card),'card');
+			$r_member_info = member_get(array($r_card),'card');
+			include template('sport_rebuy_print');
+		}else {
+			s('失败','?action=sport_entry&todo=entry&do=entry');
+		}
+		break;
 	case 'rebuy':
 		$card		= dzmc_revise_card(( isset($_GET['card']) ? $_GET['card'] : '' ));
 		$entry_id	= intval( isset($_GET['entry_id']) ? $_GET['entry_id'] : '' );
 		$sport_id	= intval( isset($_GET['sport_id']) ? $_GET['sport_id'] : '' );
 		
-		$tiaohui = "?action=sport_withdraw&todo=withdraw&card=$card";
+		
 		
 		if (empty($card)){s('没有得到读卡',$tiaohui);}
 		if (empty($entry_id)){s('没有得到参赛编号',$tiaohui);}
@@ -24,7 +91,15 @@ switch ($todo) {
 		$sport_info		= sport_get(array($sport_id),'id');
 		
 		$card = $member_info['card'];
-		if (!$sport_info['rebuy']){s('本赛事不允许再次买入',$tiaohui);}
+		
+		//计算赛事费用
+		if($sport_info['type']=='time_trial'){//计时赛
+			$sportcharge = $sport_info['deduction'];
+		}else {//非计时赛
+			$sportcharge = $sport_info['deduction']+$sport_info['service_charge'];
+		}
+		include template('sport_rebuy');
+		/* if (!$sport_info['rebuy']){s('本赛事不允许再次买入',$tiaohui);}
 		
 		if ($sport_info['type']=='time_trial'){
 			//计算//rebuy 服务费
@@ -53,8 +128,8 @@ switch ($todo) {
 			"number"=>$entry_info['number']+1
 		));
 		jackpot_add($sport_id,  $sport_info['deduction']);//增加奖池
-		$member_info	= member_get(array($card),'card');
-		include template('sport_rebuy_print');
+		$member_info	= member_get(array($card),'card'); */
+		//include template('sport_rebuy_print');
 		break;
 	case 'doprize':
 		$ranking	= htmlspecialchars( isset($_POST['ranking']) ? $_POST['ranking'] : '' );
@@ -94,7 +169,7 @@ switch ($todo) {
 			$result		= $db->query($sql);
 			$infoList	= array();
 			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
 		        $infoList[]	= $arr;
 			}
@@ -162,7 +237,7 @@ switch ($todo) {
 			$sql = "SELECT * FROM  `{$tablepre}entry` WHERE  `card` =$card ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				$arr['sport'] = sport_get(array($arr['sport_id']),"id");
 				$arr['member_info'] = member_get(array($arr['card']),"card");
 		        $infoList[]	= $arr;
@@ -185,7 +260,7 @@ switch ($todo) {
 			$sql = "SELECT * FROM  `{$tablepre}entry` ORDER BY add_date DESC LIMIT $startlimit , $perpage";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:m:s',$arr['add_date']);
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				$arr['sport'] = sport_get(array($arr['sport_id']),"id");
 				$arr['member_info'] = member_get(array($arr['card']),"card");
 		        $infoList[]	= $arr;

@@ -42,7 +42,7 @@
             <td class="list"><?php echo $value['entry_number']?></td>
             <td class="list"><?php echo $value['status']?></td>
             <td class="list"><?php if ($value['type']=="time_trial"){echo '计时赛';}else echo "非计时赛";?></td>
-            <td class="list"><?php echo gmdate("Y-n-j H:m:s",$value['add_date']) ?></td>
+            <td class="list"><?php echo gmdate("Y-n-j H:i:s",$value['add_date']) ?></td>
 			<td class="list">
 			<?php if ($do!='entry'){?>
 			<a href="JavaScript:;" onclick="JavaScript:hiBox('#showbox_<?php echo $value['id']?>', '<?php echo $value['name'];?>',400,'','','.a_close');" title="查看">查看</a>
@@ -60,8 +60,8 @@
         </tr>
 <div id="showbox_<?php echo $value['id']?>" style="display:none">
 <h3><?php echo $value['name'];?></h3>
-   <p>比赛开始时间:<?php echo gmdate("Y-n-j H:m:s",$value['start_time'])?><br>
-   报名截至时间:<?php echo gmdate("Y-n-j H:m:s",$value['stop_entry_time'])?><br>
+   <p>比赛开始时间:<?php echo gmdate("Y-n-j H:i:s",$value['start_time'])?><br>
+   报名截至时间:<?php echo gmdate("Y-n-j H:i:s",$value['stop_entry_time'])?><br>
    消耗积分:<?php echo $value['deduction'];?><br>
    服务费:<?php if ($value['type']=="time_trial"){echo "每".$value['service_charge_time']."分钟,".$value['service_charge']."积分";}else {echo $value['service_charge'].'积分';}?><br>
  类型:<?php if ($value['type']=="time_trial"){echo '计时赛';}else echo "非计时赛";?><br>
