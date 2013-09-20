@@ -156,7 +156,7 @@ switch ($todo) {
 			balance_add($card, $jiangli_jifen,'jiangli_jifen');//奖励积分
 			balance_log($card, "赛事奖励-增加奖励积分:".$jiangli_jifen."", $localtime);
 			jackpot_reduce($sport_id, $jiangli_jifen);//减少奖池
-			
+			$member_info = member_get(array($card),'card');
 			include template('sport_prize_print');
 		}else {
 			s('添加失败','?action=sport_list&todo=prize&id='.$sport_id);
