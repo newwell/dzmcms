@@ -8,6 +8,20 @@ require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 require_once 'include/f/staff.f.php';
 switch ($todo) {
+	case 'desktop':
+		$page   = intval( isset($_GET['page']) ? $_GET['page'] : 1 );
+		$perpage = intval( isset($_GET['perpage']) ? $_GET['perpage'] : 20 );
+		if($page > 0){
+			$startlimit = ($page - 1) * $perpage;
+		}else{
+			$startlimit = 0;
+		}
+		$page_array = array();
+		$total		= sport_total();
+		$page_control = multipage($total,$perpage,$page);
+		$listArr	= sport_list($startlimit, $perpage);
+		include template('sport_desktop');
+		break;
 	case 'dorebuy':
 		$r_card		= dzmc_revise_card(( isset($_POST['card']) ? $_POST['card'] : '' ));
 		$buy_card	= dzmc_revise_card(( isset($_POST['buy_card']) ? $_POST['buy_card'] : '' ));
@@ -278,8 +292,10 @@ switch ($todo) {
 		$member_info = member_get(array($card),'card');
 		$sportinfo = sport_get(array($sport_id),'id');
 		$card = $member_info['card'];
+		$shangxian = entry_total(" `sport_id`=".$sportinfo['id']);
+		//echo $sportinfo['people_number'];exit;
+		if (($shangxian+1)>$sportinfo['people_number'])s('参赛人数达到上限','?action=sport_entry&todo=entry&do=entry');
 		
-	
 		if($sportinfo['type']=='time_trial'){//计时赛
 				$sportcharge = $sportinfo['deduction'];
 			}else {//非计时赛

@@ -13,7 +13,7 @@
 -----------------------------<br/>
 参赛名称:<?php echo $sportinfo['name'];?><br>
 费用:<?php echo $text_;?><br>
-是否可以再次买入:<?php if ($sportinfo['rebuy']){echo "是";}else {echo '否';}?><br>
+<!-- 是否可以再次买入:<?php if ($sportinfo['rebuy']){echo "是";}else {echo '否';}?><br> -->
 -----------------------------<br/>
 会员卡号:<?php echo $member_info['cardid'];?><br/>
 会员名:<?php echo $member_info['name'];?><br/>
