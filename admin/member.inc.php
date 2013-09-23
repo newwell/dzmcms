@@ -85,10 +85,23 @@ switch ($todo) {
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '空' );
 		
-		if (empty($change_value))s("变动积分值0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
 		if (empty($card))e('无法获取读卡');
+		if (empty($change_value))s("变动积分值0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
+		
 		
 		$member_info = member_get(array($card),'card');
+		
+		if ($change_type=='del') {
+			if ($change_object=='jiangli_jifen'){
+				if ($member_info['jiangli_jifen']<$change_value) {
+					s("奖励积分不够",'?action=member_jifenlog&todo=jifenlog&card='.$card);
+				}
+			}else{
+				if ($member_info['balance']<$change_value) {
+					s("积分不够",'?action=member_jifenlog&todo=jifenlog&card='.$card);
+				}
+			}
+		}
 		$card = $member_info['card'];
 		//计算积分变动 编号
 		$xianzaishijian = time();

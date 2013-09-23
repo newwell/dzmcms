@@ -292,7 +292,9 @@ switch ($todo) {
 		$member_info = member_get(array($card),'card');
 		$sportinfo = sport_get(array($sport_id),'id');
 		$card = $member_info['card'];
-		$shangxian = entry_total(" `sport_id`=".$sportinfo['id']);
+		
+		//计算当前正在比赛的人数
+		$shangxian = entry_total(" `sport_id`=".$value['id']." AND `status`='已入赛'");
 		//echo $sportinfo['people_number'];exit;
 		if (($shangxian+1)>$sportinfo['people_number'])s('参赛人数达到上限','?action=sport_entry&todo=entry&do=entry');
 		

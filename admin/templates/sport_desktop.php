@@ -50,7 +50,7 @@ background-color: #FFBD00;
   	<?php if(is_array($listArr)) { foreach($listArr as $key => $value) { ?>
   	<div class="desktop_itme">
   		<div class="desktop_name"><?php echo $value['name'];?></div>
-  		<div class="desktop_num">人数/上限:<?php echo entry_total(" `sport_id`=".$value['id'])?>/<?php echo $value['people_number'];?></div>
+  		<div class="desktop_num">人数/上限:<?php echo entry_total(" `sport_id`=".$value['id']." AND `status`='已入赛'");?>/<?php echo $value['people_number'];?></div>
   		<div class="desktop_time">开赛时间:<?php echo gmdate("Y-n-j H:i:s",$value['add_date']) ?></div>
   	</div>
   	
