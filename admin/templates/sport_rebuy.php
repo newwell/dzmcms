@@ -51,7 +51,7 @@ document.body.onload = function(){
 	</tr>
 	<tr>
 	    <td align="right">读卡:</td>
-	    <td><input name="buy_card" id="buy_card" required="true" type="text" onkeydown="if(event.keyCode==13){get_user_info();}"/></td>
+	    <td><input name="buy_card" id="buy_card" required="true" type="text" onkeydown="if(event.keyCode==13){get_user_info();}"/><input onclick="get_user_info();" class="formsubmit" type="button" value="读卡"/></td>
 	    <td align="right">会员号:</td>
 	    <td><input value="未获取" disabled="cardid" name="cardid" id="cardid"></td>
 	</tr>
@@ -82,7 +82,6 @@ document.body.onload = function(){
 </form>
 <script type="text/javascript">
 function get_user_info() {
-	alert('11111111111111');
 	$.get("?action=member_find&todo=js_user_info&card="+$("#buy_card").val(),function(data,status){
 		$("#user_name").val(data.name);
 		$("#cardid").val(data.cardid);

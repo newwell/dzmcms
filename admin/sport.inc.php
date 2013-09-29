@@ -36,6 +36,7 @@ switch ($todo) {
 		
 		//用户信息为 支付用户的
 		$member_info	= member_get(array($buy_card),'card');
+		$r_member_info	= member_get(array($r_card),'card');
 		$entry_info		= entry_get(array($entry_id),'id');
 		$sport_info		= sport_get(array($sport_id),'id');
 		
@@ -54,25 +55,25 @@ switch ($todo) {
 			if ($member_info['jiangli_jifen']>$serviceCharge) {
 				balance_reduce($card, $serviceCharge,$payment_type);//扣除积分;
 				$text_ ="扣除rebuy费,奖励积分:".$serviceCharge."分";
-				$explain = "rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
+				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}else {
 				$cha = $serviceCharge-$member_info['jiangli_jifen'];
 				balance_reduce($card, $member_info['jiangli_jifen'],'jiangli_jifen');
 				balance_reduce($card, $cha,'balance');
 				$text_ = "扣除rebuy费,奖励积分:".$member_info['jiangli_jifen']."分,积分:".$cha."分";
-				$explain = "rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
+				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}
 		}elseif ($payment_type=="balance") {
 			if ($member_info['balance']>$serviceCharge) {
 				balance_reduce($card, $serviceCharge,$payment_type);//扣除积分;
 				$text_ = "扣除rebuy费:,积分:".$serviceCharge."分";
-				$explain = "rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
+				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}else {
 				$cha = $serviceCharge-$member_info['balance'];
 				balance_reduce($card, $member_info['balance'],'balance');
 				balance_reduce($card, $cha,'jiangli_jifen');
 				$text_ = "扣除rebuy费,积分:".$member_info['jiangli_jifen']."分,奖励积分:".$cha."分";
-				$explain = "rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
+				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}
 		}
 			
@@ -294,7 +295,7 @@ switch ($todo) {
 		$card = $member_info['card'];
 		
 		//计算当前正在比赛的人数
-		$shangxian = entry_total(" `sport_id`=".$value['id']." AND `status`='已入赛'");
+		$shangxian = entry_total(" `sport_id`=".$sport_id." AND `status`='已入赛'");
 		//echo $sportinfo['people_number'];exit;
 		if (($shangxian+1)>$sportinfo['people_number'])s('参赛人数达到上限','?action=sport_entry&todo=entry&do=entry');
 		

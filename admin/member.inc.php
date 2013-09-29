@@ -319,13 +319,14 @@ switch ($todo) {
 	case 'dopay':
 		$dopay	= isset($_POST['dopay']) ? $_POST['dopay'] : "" ;
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		$xianzaishijian = time();
 		if (empty($dopay))e("充值金额为0");
 		if (empty($card))e('无法获取读卡');
 		$member_info = member_get(array($card),'card');
 		$card = $member_info['card'];
 		$value = $dopay*$setting_rate;
 		$r = member_dopay($card, $value);
-		balance_log($card, "积分充值:增加".$value."分", $localtime,'充值');
+		balance_log($card, "积分充值:增加积分 ".$value."分", $xianzaishijian,'充值');
 		//s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);
 		$member_info = member_get(array($card),'card');
 		include template('member_dopay_print');
