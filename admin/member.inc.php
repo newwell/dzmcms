@@ -139,10 +139,12 @@ switch ($todo) {
 			break;
 		}
 		if ($change_object=='jiangli_jifen'){
-		
+			$change_object_text = "奖励积分";
+		}else {
+			$change_object_text = "积分";
 		}
 		$member_info = member_get(array($card),'card');
-		balance_log($card, "积分变动:".$type.",".$change_value."分,备注:".$remark, $xianzaishijian,"积分变动",$num);
+		balance_log($card, "积分变动:".$type.$change_object_text.",".$change_value."分,备注:".$remark, $xianzaishijian,"积分变动",$num);
 		include template('member_balance_change_print');
 		break;
 	case 'jifenlog'://积分变动

@@ -6,6 +6,37 @@ admin_priv($act['action']);
 require_once 'include/f/balance.f.php';
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'paylog':
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='充值' ORDER BY  `id` DESC ";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				if (empty($arr['type'])){
+					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
+				}else{
+					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
+				}
+				$arr['member_info'] = member_get(array($arr['card']),'card');
+		        $infoList[]	= $arr;
+			}
+		}else {
+			$member_info= '';
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='充值' ORDER BY  `id` DESC ";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				if (empty($arr['type'])){
+					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
+				}else{
+					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
+				}
+				$arr['member_info'] = member_get(array($arr['card']),'card');
+		        $infoList[]	= $arr;
+			}
+		}
+		include template('statistics_paylog_list');
+		break;
 	case 'balance_change_print':
 		$id		= intval( isset($_GET['id']) ? $_GET['id'] : 0 );
 		$balance_log_info = balance_log_get(array($id),'id');

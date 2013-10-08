@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 09 月 29 日 22:28
+-- 生成日期: 2013 年 10 月 08 日 17:18
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=31 ;
 
 --
 -- 转存表中的数据 `dzmc_balance_log`
@@ -66,7 +66,12 @@ INSERT INTO `dzmc_balance_log` (`id`, `card`, `type`, `type_explain`, `explains`
 (22, '737323005', '积分变动', '3', '积分变动:减少,10分,备注:<br>剩余积分:0剩余奖励积分:2', 1379901485),
 (23, '736955981', '', '', '报名赛事[ 非计时赛 588 ]:扣除参赛费,奖励积分:588分,  <br>剩余积分:1736956042剩余奖励积分:8881206', 1380487090),
 (24, '736940301', '充值', '', '积分充值:增加22分<br>剩余积分:77774575810剩余奖励积分:999998832', 1380487125),
-(25, '736940301', '充值', '', '积分充值:增加积分 1分<br>剩余积分:77774575811剩余奖励积分:999998832', 1380464623);
+(25, '736940301', '充值', '', '积分充值:增加积分 1分<br>剩余积分:77774575811剩余奖励积分:999998832', 1380464623),
+(26, '736940301', '积分变动', '1', '积分变动:增加,10分,备注:<br>剩余积分:77774575821剩余奖励积分:999998832', 1381203432),
+(27, '736940301', '积分变动', '2', '积分变动:减少积分,10分,备注:<br>剩余积分:77774575811剩余奖励积分:999998832', 1381203680),
+(28, '736940301', '积分变动', '3', '积分变动:减少奖励积分,100分,备注:<br>剩余积分:77774575811剩余奖励积分:999998732', 1381203703),
+(29, '736940301', '', '', '为[夜风]rebuy赛事[ 非计时赛 588 ]:扣除rebuy费,奖励积分:588分,  <br>剩余积分:77774575811剩余奖励积分:999998144', 1381232545),
+(30, '736940301', '充值', '', '积分充值:增加积分 100分<br>剩余积分:77774575911剩余奖励积分:999998144', 1381204140);
 
 -- --------------------------------------------------------
 
@@ -100,7 +105,7 @@ INSERT INTO `dzmc_entry` (`id`, `card`, `sport_id`, `status`, `payment_type`, `n
 (6, '736955981', 1, '已入赛', 'jiangli_jifen', 2, 1379685520, 0),
 (7, '736940301', 1, '已入赛', 'jiangli_jifen', 1, 1379867066, 0),
 (8, '736940301', 1, '已入赛', 'jiangli_jifen', 1, 1379867134, 0),
-(9, '736955981', 1, '已入赛', 'jiangli_jifen', 1, 1380487090, 0);
+(9, '736955981', 1, '已入赛', 'jiangli_jifen', 2, 1380487090, 0);
 
 -- --------------------------------------------------------
 
@@ -975,7 +980,7 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 ('737053789', 800406, 1, '', '景桓', '', '13971049719', '', '', 1, 1, 0, '', 0, '100', '', '', '', '', '', 0, 0, '', '', 1362487537, '0', ''),
 ('736940797', 800372, 1, '', '王波', '', '13407183430', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1362484226, '0', ''),
 ('736641501', 800381, 1, '', '崔晨伟', '', '18607139122', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1362471830, '67', ''),
-('736940301', 800340, 1, '', '潘志增', '', '13797000089', '', '', 1, 1, 0, '', 0, '77774575811', '', '', '', '', '', 0, 0, '', '', 1362471733, '999998832', ''),
+('736940301', 800340, 1, '', '潘志增', '', '13797000089', '', '', 1, 1, 0, '', 0, '77774575911', '', '', '', '', '', 0, 0, '', '', 1362471733, '999998144', ''),
 ('736951805', 800380, 1, '', '王德勇', '', '13871237620', '', '', 1, 1, 0, '', 0, '32', '', '', '', '', '', 0, 0, '', '', 1362408429, '3239', ''),
 ('736762061', 800382, 1, '', '李广岐', '', '13971218881', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1362406737, '0', ''),
 ('737890317', 800393, 1, '', '鹏鹏', '', '13995597744', '', '', 1, 1, 0, '', 0, '0', '', '', '', '', '', 0, 0, '', '', 1362403966, '0', ''),
@@ -1422,7 +1427,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
 --
 
 INSERT INTO `dzmc_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
-(1, '非计时赛 588', 'no_time_trial', 1379152016, 500, 88, 0, 10, 1, 0, 1379238422, 0, 0, '', 0, 0, '', 5500, '竞赛中', 5, 1379152036),
+(1, '非计时赛 588', 'no_time_trial', 1379152016, 500, 88, 0, 10, 1, 0, 1379238422, 0, 0, '', 0, 0, '', 6000, '竞赛中', 5, 1379152036),
 (2, '非计时赛188', 'no_time_trial', 1379678821, 100, 88, 0, 10, 1, 0, 1379765228, 0, 0, '', 0, 0, '', 90, '已结束', 5, 1379678834);
 
 -- --------------------------------------------------------
@@ -1466,7 +1471,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemaction` (
   `page` varchar(255) NOT NULL DEFAULT '',
   `listnum` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=79 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=80 ;
 
 --
 -- 转存表中的数据 `dzmc_systemaction`
@@ -1510,7 +1515,8 @@ INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `
 (75, 1, '发牌员管理', 'staff_deingcoholr_list', 'deingcoholr_list', NULL, 'staff.inc.php', 0),
 (76, 42, '积分赠送', 'member_PresentExp', 'PresentExp', NULL, 'member.inc.php', 0),
 (77, 72, '赠送积分记录', 'statistics_PresentExp', 'PresentExp', NULL, 'statistics.inc.php', 0),
-(78, 66, '桌面', 'sport_desktop', 'desktop', NULL, 'sport.inc.php', 0);
+(78, 66, '桌面', 'sport_desktop', 'desktop', NULL, 'sport.inc.php', 0),
+(79, 72, '会员充值记录', 'statistics_paylog', 'paylog', NULL, 'statistics.inc.php', 0);
 
 -- --------------------------------------------------------
 
@@ -1537,7 +1543,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1380493601, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1381232188, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
