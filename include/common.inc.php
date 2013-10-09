@@ -1,6 +1,7 @@
 <?php
 define("IN_SITE", "TRUE");
 define("DZMC_VERSIONS", "1.4.2");
+define("DZMC_SOFTDOG_KEY", "136d26b5b22b0dfe0ed781dac2d521f8");
 header("Cache-control: private");
 header(base64_decode('WC1Qb3dlcmVkLUJ5OiBkYVphbiBOZXR3b3JrIFRlY2gvd3d3LmRhemFuLmNu'));
 header("Content-Type: text/html; charset=UTF-8");  
@@ -48,6 +49,14 @@ require_once('db.class.php');
 require_once('template.inc.php');
 require_once('page.class.php');
 require_once('fun.inc.php');
+
+require_once(DZMC_ROOT_PATH.'/include/softdog.php');
+//----加密狗验证
+//开发版 不做验证
+/*if (!softdog_check()){stop('未找到加密狗设备');}
+$softdog_key = md5(softdog_getID().'dazan'.md5(softdog_readString(10)));
+if ($softdog_key!=DZMC_SOFTDOG_KEY){stop('加密狗密钥不正确');}*/
+//----end加密狗验证
 
 if(!$enable_debugmode)
 {

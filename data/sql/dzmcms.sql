@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 10 月 08 日 17:18
+-- 生成日期: 2013 年 10 月 09 日 16:37
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -98,7 +98,6 @@ CREATE TABLE IF NOT EXISTS `dzmc_entry` (
 
 INSERT INTO `dzmc_entry` (`id`, `card`, `sport_id`, `status`, `payment_type`, `number`, `add_date`, `exit_time`) VALUES
 (1, '736955981', 1, '已入赛', 'jiangli_jifen', 3, 1379152175, 0),
-(2, '736955981', 2, '已退赛', 'jiangli_jifen', 1, 1379678923, 1379691187),
 (3, '736955981', 1, '已退赛', '', 1, 1379682372, 1379691117),
 (4, '736955981', 1, '已退赛', 'jiangli_jifen', 1, 1379683509, 1379691322),
 (5, '736955981', 1, '已入赛', 'jiangli_jifen', 1, 1379683876, 0),
@@ -1353,13 +1352,6 @@ CREATE TABLE IF NOT EXISTS `dzmc_prize` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='颁奖表' AUTO_INCREMENT=2 ;
 
---
--- 转存表中的数据 `dzmc_prize`
---
-
-INSERT INTO `dzmc_prize` (`id`, `card`, `name`, `sport_id`, `ranking`, `jiangli_jifen`, `add_date`) VALUES
-(1, '736955981', '夜风', 2, '第 1 名', 10, 1379695569);
-
 -- --------------------------------------------------------
 
 --
@@ -1420,7 +1412,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
   `add_date` int(15) DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=3 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=4 ;
 
 --
 -- 转存表中的数据 `dzmc_sport`
@@ -1428,7 +1420,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
 
 INSERT INTO `dzmc_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
 (1, '非计时赛 588', 'no_time_trial', 1379152016, 500, 88, 0, 10, 1, 0, 1379238422, 0, 0, '', 0, 0, '', 6000, '竞赛中', 5, 1379152036),
-(2, '非计时赛188', 'no_time_trial', 1379678821, 100, 88, 0, 10, 1, 0, 1379765228, 0, 0, '', 0, 0, '', 90, '已结束', 5, 1379678834);
+(3, 'MTT 50积分赛', 'time_trial', 1381328223, 0, 50, 15, 10, 1, 0, 1381501025, 0, 0, '', 0, 0, '', 0, '竞赛中', 0, 1381328239);
 
 -- --------------------------------------------------------
 
@@ -1543,7 +1535,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1381232188, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1381325840, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
