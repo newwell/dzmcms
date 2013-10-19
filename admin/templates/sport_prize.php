@@ -10,7 +10,7 @@
     <td valign="top" align="center" width="100%">
     <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
         <tr>
-            <th>名次</th>
+            <th>奖项</th>
 			<th>会员读卡</th>
 			<th >会员名称</th>
 			<th >奖励积分</th>

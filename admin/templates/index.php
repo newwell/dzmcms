@@ -1,7 +1,25 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
 <div class="formnav">管理平台首页</div>
-
+<?php if (is_array($iconArr)){?>
+<table align="center" class="formtable" cellpadding="3" cellspacing="1" width="97%" style="line-height:18px;">
+	<tr>
+		<th scope="row" colspan="2" >快捷图标</th>
+	</tr>
+	<tr>
+		<td>
+		<?php foreach ($iconArr as $value) {?>
+		<div class="index_icon_div" onmouseover="javascript:$(this).addClass('index_icon_div_onmousemove');" onmouseout="javascript:$(this).removeClass('index_icon_div_onmousemove');">
+			<a title="<?php echo $value['action']['title'];?>" href="?action=<?php echo $value['action']['action'];?>&todo=<?php echo $value['action']['todo'];?>&do=<?php echo $value['action']['do'];?>">
+				<img height="88px" border="0" src="script/icons/<?php echo $value['iconid'];?>.png"/>
+			</a>
+		</div>
+		<?php }?>
+		</td>
+	</tr>
+</table>
+<?php }?>
+<br/>
 <table align="center" class="formtable" cellpadding="3" cellspacing="1" width="97%" style="line-height:18px;">
 	<tr>
 		<th scope="row" colspan="2" >系统版权信息</th>

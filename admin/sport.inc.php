@@ -169,7 +169,7 @@ switch ($todo) {
 		));
 		if ($result) {
 			balance_add($card, $jiangli_jifen,'jiangli_jifen');//奖励积分
-			balance_log($card, "赛事奖励-增加奖励积分:".$jiangli_jifen."", $localtime);
+			balance_log($card, "赛事奖励-增加奖励积分:".$jiangli_jifen."奖项:$ranking", $localtime);
 			jackpot_reduce($sport_id, $jiangli_jifen);//减少奖池
 			$member_info = member_get(array($card),'card');
 			include template('sport_prize_print');

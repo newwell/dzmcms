@@ -53,9 +53,9 @@ require_once('fun.inc.php');
 require_once(DZMC_ROOT_PATH.'/include/softdog.php');
 //----加密狗验证
 //开发版 不做验证
-/*if (!softdog_check()){stop('未找到加密狗设备');}
-$softdog_key = md5(softdog_getID().'dazan'.md5(softdog_readString(10)));
-if ($softdog_key!=DZMC_SOFTDOG_KEY){stop('加密狗密钥不正确');}*/
+//if (!softdog_check()){stop('未找到加密狗设备');}
+//$softdog_key = md5(softdog_getID().'dazan'.md5(softdog_readString(10)));
+//if ($softdog_key!=DZMC_SOFTDOG_KEY){stop('加密狗密钥不正确');}
 //----end加密狗验证
 
 if(!$enable_debugmode)

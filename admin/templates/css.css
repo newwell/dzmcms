@@ -583,4 +583,12 @@ text-align:center;}
 	text-decoration:underline;
 }
 
-
+.index_icon_div{
+	margin-top: 6px;
+float: left;
+margin-bottom: 6px;
+margin-left: 12px;
+}
+.index_icon_div_onmousemove{
+	background-color:#fff;
+}

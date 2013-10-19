@@ -193,19 +193,8 @@ switch($action) {
 			}
 
 		}elseif ($todo == 'index'){
-			switch ($_SESSION['userlevel']) {
-				case '1':
-					break;
-				case '2':
-					//$weipiyue = checkWeiPiYueZhouZhi();
-				break;
-				case '3':
-					//$weitijiao = checkWeiTiJiaoZhouZhi($_SESSION['uid']);					
-				break;
-				default:
-					s('登陆失效','./');
-				break;
-			}
+			require_once 'include/f/icon.f.php';
+			$iconArr	= icon_list(0, 100,"userid = ".$_SESSION["uid"]);
 		}
 		include template($todo);
 		break;
