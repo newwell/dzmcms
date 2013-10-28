@@ -12,7 +12,7 @@ $(document).ready(function(){
 <table width="100%" border="0" cellpadding="0" cellspacing="0" class="wui_header">
   <tr>
     <td class="wui_logo" ><a style="color: white;font-size: 100%;" href="?action=show&todo=main">&nbsp;&nbsp;<?php echo $setting_sitename;?></a></td>
-    <td class="wui_dynacomm" align="right"">德州扑克运营管理系统&nbsp;&nbsp;</td>
+    <td class="wui_dynacomm" align="right"">德州扑克运营管理系统&nbsp;&nbsp;<img title="退出登陆" onclick="javascript:adminlogout();" style="cursor: pointer;height:22px" src="<?php echo $_TEMPLATESDIR?>/img/exit.png"/>&nbsp;&nbsp;</td>
   </tr>
 </table>
 <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="table-layout: fixed;">

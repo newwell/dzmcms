@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 10 月 28 日 17:42
+-- 生成日期: 2013 年 10 月 28 日 22:49
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -182,7 +182,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_icon` (
   `action_id` int(11) NOT NULL COMMENT '对应才操作id',
   `listnum` int(11) NOT NULL DEFAULT '0' COMMENT '排序',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
 -- 转存表中的数据 `dzmc_icon`
@@ -190,13 +190,22 @@ CREATE TABLE IF NOT EXISTS `dzmc_icon` (
 
 INSERT INTO `dzmc_icon` (`id`, `iconid`, `userid`, `link`, `action_id`, `listnum`) VALUES
 (6, 6, 1, '', 43, 0),
+(13, 4, 251, '', 4, 0),
+(12, 6, 251, '', 43, 0),
 (4, 3, 1, '', 78, 0),
 (5, 1, 1, '', 4, 0),
 (7, 8, 1, '', 45, 0),
 (8, 9, 1, '', 2, 0),
 (9, 13, 1, '', 62, 0),
 (10, 16, 1, '', 73, 0),
-(11, 12, 1, '', 80, 0);
+(11, 12, 1, '', 80, 0),
+(14, 9, 251, '', 2, 0),
+(15, 12, 251, '', 80, 0),
+(16, 16, 251, '', 73, 0),
+(17, 3, 251, '', 78, 0),
+(18, 18, 251, '', 54, 0),
+(19, 13, 251, '', 62, 0),
+(20, 19, 251, '', 77, 0);
 
 -- --------------------------------------------------------
 
@@ -1516,7 +1525,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemaction` (
 INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `page`, `listnum`) VALUES
 (1, 0, '系统设置', '0', '0', '0', '0', 1),
 (2, 1, '系统参数设置', 'system_set', 'show', '', 'system_set.inc.php', 1),
-(4, 1, '管理员管理', 'system_user', 'edituser', '1', 'system_user.inc.php', 0),
+(4, 1, '管理员管理', 'system_user', 'list', '1', 'system_user.inc.php', 0),
 (59, 56, '商品分类管理', 'goods_class', 'class', NULL, 'goods.inc.php', 0),
 (58, 56, '商品添加', 'goods_add', 'add', NULL, 'goods.inc.php', 0),
 (57, 56, '商品列表', 'goods_list', 'list', NULL, 'goods.inc.php', 0),
@@ -1573,14 +1582,15 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
   `QQ` varchar(15) NOT NULL COMMENT 'QQ',
   `email` varchar(255) NOT NULL COMMENT '手机',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=250 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=252 ;
 
 --
 -- 转存表中的数据 `dzmc_systemuser`
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '刘维', 'e10adc3949ba59abbe56e057f20f883e', 1382960640, '127.0.0.1', 'all', 1, '0', 'hubei_java@qq.com');
+(251, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1383000259, '127.0.0.1', 'all', 1, '', ''),
+(250, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1382998091, '127.0.0.1', 'system_set,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

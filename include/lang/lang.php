@@ -117,7 +117,7 @@ $lang['system_rewrite_none']       = '不重写';
 $lang['system_deletelog']          = '管理日志记录保持时间';
 $lang['system_log_days']           = '后台管理日志默认保持时间';
 $lang['system_log_days_notnum']    = '日志默认保持时间请填写数字';
-$lang['system_setconfig_success']  = '网站设定保存成功';
+$lang['system_setconfig_success']  = '系统参数保存成功';
 
 
 

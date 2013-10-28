@@ -1,7 +1,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>管理员登录</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+<title>管理员登录 - 德州扑克运营管理系统</title>
 <style type="text/css">
 html {}
 body {color: #fff;font-size: 14px;padding: 0;overflow: hidden;margin: 0;width: 100%;height: 100%;min-height: 400px;background: #2784bd url(<?php echo $_TEMPLATESDIR. 'image/bg_line.gif';?>)	repeat-x left top;}
