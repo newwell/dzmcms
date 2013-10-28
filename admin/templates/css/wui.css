@@ -126,3 +126,10 @@ body {
 	font-size: 12px;
 	color: #fff;
 }
+.desktop_add{
+	margin-left: 32px;
+	margin-top: 38px;
+	color: #fff;
+	font-size: 38px;
+	cursor: pointer;
+}

@@ -12,7 +12,8 @@
 		<div class="index_icon_div" onmouseover="javascript:$(this).addClass('index_icon_div_onmousemove');" onmouseout="javascript:$(this).removeClass('index_icon_div_onmousemove');">
 			<a title="<?php echo $value['action']['title'];?>" href="?action=<?php echo $value['action']['action'];?>&todo=<?php echo $value['action']['todo'];?>&do=<?php echo $value['action']['do'];?>">
 				<img height="88px" border="0" src="script/icons/<?php echo $value['iconid'];?>.png"/>
-			</a>
+			</a><br/>
+			<div style="text-align: center;"><?php echo $value['action']['title'];?></div>
 		</div>
 		<?php }?>
 		</td>
@@ -26,12 +27,12 @@
 	</tr>
 	<tr>
 		<td width="20%" align="right" valign="middle">版权所有：</td>
-		<td width="80%" align="left" valign="middle"><a href="#" target="_blank">PK365俱乐部</a></td>
+		<td width="80%" align="left" valign="middle"><a href="http://www.pk365club.com/" target="_blank">PK365俱乐部</a></td>
 	</tr>
 
 	<tr>
 		<td  align="right" valign="middle">公司网站：</td>
-		<td  align="left" valign="middle"><a href="#" target="_blank">PK365俱乐部</a></td>
+		<td  align="left" valign="middle"><a href="http://www.pk365club.com/" target="_blank">PK365俱乐部</a></td>
 	</tr><!--
 	<tr>
 		<td  align="right" valign="top">联系方式：</td>

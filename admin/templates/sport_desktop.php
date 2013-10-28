@@ -33,6 +33,9 @@ background-color: #FFBD00;
 <table width="98%"  border="0" cellpadding="0" cellspacing="0" align="center">
   <tr><td valign="top" align="center" width="100%">
   <div class="desktop">
+  <div class="desktop_itme wrap" id="wrap_new_add">
+  		<div class="desktop_add" onclick="JavaScript:location.href='?action=sport_add&todo=add&do='">新建赛事</div>
+  	</div>
   	<?php if(is_array($listArr)) { foreach($listArr as $key => $value) { ?>
   	<div class="desktop_itme wrap" id="wrap<?php echo $value['id'];?>">
   	<ul id="menu<?php echo $value['id'];?>">
