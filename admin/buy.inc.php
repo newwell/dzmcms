@@ -25,9 +25,9 @@ switch ($todo) {
 		if ($method_payment=="jifen"&&$member_info['balance']<$payment_amount){
 			e("积分不够,请时使用其他付款方式");
 		}
-		//var_dump($jiangli_jifen);
+		$money = intval("-".$payment_amount);
 		if (balance_reduce($card, $payment_amount)){
-			balance_log($card, "非商品交易,扣除$payment_amount积分",$localtime);
+			balance_log($card, "非商品交易,扣除$payment_amount积分",$localtime,$money);
 		}
 		//echo "";
 		$method_payment_v = GetConfig('method_payment');

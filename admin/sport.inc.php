@@ -54,25 +54,29 @@ switch ($todo) {
 		if ($payment_type=='jiangli_jifen'){
 			if ($member_info['jiangli_jifen']>$serviceCharge) {
 				balance_reduce($card, $serviceCharge,$payment_type);//扣除积分;
+				$money = intval("-".$serviceCharge);
 				$text_ ="扣除rebuy费,奖励积分:".$serviceCharge."分";
 				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}else {
 				$cha = $serviceCharge-$member_info['jiangli_jifen'];
 				balance_reduce($card, $member_info['jiangli_jifen'],'jiangli_jifen');
 				balance_reduce($card, $cha,'balance');
+				$money = intval("-".($member_info['jiangli_jifen']+$cha));
 				$text_ = "扣除rebuy费,奖励积分:".$member_info['jiangli_jifen']."分,积分:".$cha."分";
 				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}
 		}elseif ($payment_type=="balance") {
 			if ($member_info['balance']>$serviceCharge) {
 				balance_reduce($card, $serviceCharge,$payment_type);//扣除积分;
+				$money = intval("-".$serviceCharge);
 				$text_ = "扣除rebuy费:,积分:".$serviceCharge."分";
 				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}else {
 				$cha = $serviceCharge-$member_info['balance'];
 				balance_reduce($card, $member_info['balance'],'balance');
 				balance_reduce($card, $cha,'jiangli_jifen');
-				$text_ = "扣除rebuy费,积分:".$member_info['jiangli_jifen']."分,奖励积分:".$cha."分";
+				$money = intval("-".($member_info['balance']+$cha));
+				$text_ = "扣除rebuy费,积分:".$member_info['balance']."分,奖励积分:".$cha."分";
 				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}
 		}
@@ -81,7 +85,8 @@ switch ($todo) {
 				"number"=>$entry_info['number']+1
 		));
 		if ($result) {
-			balance_log($card, $explain, $localtime);
+			//$money = intval($value);
+			balance_log($card, $explain, $localtime,$money);
 			jackpot_add($sport_id,  $sport_info['deduction']);//增加奖池
 			$buy_member_info = member_get(array($card),'card');
 			$r_member_info = member_get(array($r_card),'card');
@@ -169,7 +174,8 @@ switch ($todo) {
 		));
 		if ($result) {
 			balance_add($card, $jiangli_jifen,'jiangli_jifen');//奖励积分
-			balance_log($card, "赛事奖励-增加奖励积分:".$jiangli_jifen."奖项:$ranking", $localtime);
+			$money = intval($jiangli_jifen);
+			balance_log($card, "赛事奖励-增加奖励积分:".$jiangli_jifen."奖项:$ranking", $localtime,$money);
 			jackpot_reduce($sport_id, $jiangli_jifen);//减少奖池
 			$member_info = member_get(array($card),'card');
 			include template('sport_prize_print');
@@ -236,7 +242,8 @@ switch ($todo) {
 		));
 		if ($result){
 			//s("退赛成功,扣除[ $serviceCharge ]$type",$tiaohui);
-			balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime);
+			$money = intval("-".$serviceCharge);
+			balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money);
 			include template('sport_withdraw_print');
 		}else {
 			s("退赛失败",$tiaohui);
@@ -331,6 +338,7 @@ switch ($todo) {
 		if ($payment_type=='jiangli_jifen'){
 			if ($member_info['jiangli_jifen']>$sportcharge) {
 				balance_reduce($card, $sportcharge,$payment_type);//扣除积分;
+				$money = intval("-".$sportcharge);
 				$text_ ="扣除参赛费,奖励积分:".$sportcharge."分";
 				$explain = "报名赛事[ ".$sportinfo['name']." ]:".$text_.",  ";
 			}else {
@@ -338,18 +346,21 @@ switch ($todo) {
 				balance_reduce($card, $member_info['jiangli_jifen'],'jiangli_jifen');
 				balance_reduce($card, $cha,'balance');
 				$text_ = "扣除参赛费,奖励积分:".$member_info['jiangli_jifen']."分,积分:".$cha."分";
+				$money = intval("-".($member_info['jiangli_jifen']+$cha));
 				$explain = "报名赛事[ ".$sportinfo['name']." ]:".$text_.",  ";
 			}
 		}elseif ($payment_type=="balance") {
 			if ($member_info['balance']>$sportcharge) {
 				balance_reduce($card, $sportcharge,$payment_type);//扣除积分;
+				$money = intval("-".$sportcharge);
 				$text_ = "扣除参赛费:,积分:".$sportcharge."分";
 				$explain = "报名赛事[ ".$sportinfo['name']." ]:".$text_.",  ";
 			}else {
 				$cha = $sportcharge-$member_info['balance'];
 				balance_reduce($card, $member_info['balance'],'balance');
 				balance_reduce($card, $cha,'jiangli_jifen');
-				$text_ = "扣除参赛费,积分:".$member_info['jiangli_jifen']."分,奖励积分:".$cha."分";
+				$money = intval("-".($member_info['balance']+$cha));
+				$text_ = "扣除参赛费,积分:".$member_info['balance']."分,奖励积分:".$cha."分";
 				$explain = "报名赛事[ ".$sportinfo['name']." ]:".$text_.",  ";
 			}
 		}
@@ -362,7 +373,7 @@ switch ($todo) {
 			'add_date'=>$localtime
 		));
 		if ($result) {
-			balance_log($card, $explain, $localtime);
+			balance_log($card, $explain, $localtime,$money);
 			jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
 			$member_info = member_get(array($card),'card');
 			include template('sport_save_entry_print');

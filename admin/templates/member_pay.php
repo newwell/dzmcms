@@ -36,14 +36,25 @@ document.body.onload = function(){
 	    <td><?php echo $member_info['jiangli_jifen'];?></td>
 	</tr>
 	<tr>
+	    <td width="80px" align="right">支付方式:</td>
+	    <td><select name="method_payment">
+	    		<option value="现金">现金</option>
+	    		<option value="刷卡">刷卡</option>
+	    </select></td>
+	    <td width="80px" align="right">操作员:</td>
+	    <td><?php echo $_SESSION['username'];?><input type="hidden" value="<?php echo $_SESSION['uid'];?>" name="system_user_id"></td>
+	</tr>
+	<tr>
 		<td align="right">充值金额:</td>
 		<td><input name="dopay" /><input type="hidden" name="card" value="<?php echo $card;?>"/></td>
 		<td align="right">当前兑换比率:</td>
 		<td><span id="rmb">1</span>元人民币&nbsp;&nbsp;=&nbsp;&nbsp;<span id="jifenzhi"><?php echo $setting_rate * 1;?></span>积分</td>
 	</tr>
-	<tr align="center"><td colspan="3" >
-		<input type="submit" class="formsubmit" value="充值"/>
-	<td></tr>
+	<tr align="center">
+		<td colspan="4">
+			<input type="submit" class="formsubmit" value="充值"/>
+		</td>
+	</tr>
 </table>
 </form>
 <?php }?>

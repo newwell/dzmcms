@@ -40,7 +40,8 @@ switch ($todo) {
 		$num = $num+1;
 		
 		balance_add($card, $change_value,'jiangli_jifen');
-		balance_log($card, "积分赠送:增加奖励积分,".$change_value."分,备注:".$remark, $xianzaishijian,"积分赠送",$num);
+		$money = intval($change_value);
+		balance_log($card, "积分赠送:增加奖励积分,".$change_value."分,备注:".$remark, $xianzaishijian,$money,"积分赠送",$num);
 		$member_info = member_get(array($card),'card');
 		include template('member_doPresentExp_print');
 		
@@ -144,7 +145,13 @@ switch ($todo) {
 			$change_object_text = "积分";
 		}
 		$member_info = member_get(array($card),'card');
-		balance_log($card, "积分变动:".$type.$change_object_text.",".$change_value."分,备注:".$remark, $xianzaishijian,"积分变动",$num);
+		if($type == "减少"){
+			$money = intval("-".$change_value);
+		}else{
+			$money = intval($change_value);
+		}
+		
+		balance_log($card, "积分变动:".$type.$change_object_text.",".$change_value."分,备注:".$remark, $xianzaishijian,$money,"积分变动",$num);
 		include template('member_balance_change_print');
 		break;
 	case 'jifenlog'://积分变动
@@ -306,7 +313,8 @@ switch ($todo) {
 			s('您的积分不够,无法兑换',"?action=member_credits&todo=credits&card=".$card);
 		}
 		$r = member_docredits($card, $value);
-		balance_log($card, "积分提现:".$docredits.",使用".$value."分", $localtime);
+		$money = intval("-".$value);
+		balance_log($card, "积分提现:".$docredits.",减少积分".$value."分", $localtime,$money);
 		s('成功,提现[ '.$docredits.' ]扣除[ '.$value.' ]积分',"?action=member_credits&todo=credits&card=".$card);
 		break;
 	case 'credits'://提现/积分兑换
@@ -321,6 +329,11 @@ switch ($todo) {
 	case 'dopay':
 		$dopay	= isset($_POST['dopay']) ? $_POST['dopay'] : "" ;
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		
+		//支付方式  现金 or 刷卡
+		$method_payment = ( isset($_POST['method_payment']) ? $_POST['method_payment'] : "" );
+		//$system_user_id = intval( isset($_GET['system_user_id']) ? $_GET['system_user_id'] : "" );
+		//print_r($method_payment);exit();
 		$xianzaishijian = time();
 		if (empty($dopay))e("充值金额为0");
 		if (empty($card))e('无法获取读卡');
@@ -328,7 +341,8 @@ switch ($todo) {
 		$card = $member_info['card'];
 		$value = $dopay*$setting_rate;
 		$r = member_dopay($card, $value);
-		balance_log($card, "积分充值:增加积分 ".$value."分", $xianzaishijian,'充值');
+		$money = intval($value);
+		balance_log($card, "积分充值:增加积分 ".$value."分", $xianzaishijian,$money,'充值',"$method_payment");
 		//s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);
 		$member_info = member_get(array($card),'card');
 		include template('member_dopay_print');
