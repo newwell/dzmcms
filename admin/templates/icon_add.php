@@ -59,12 +59,14 @@ padding-top: 2px;
 		<th width="100%" colspan="2" align="center">选择对应操作</th>
 	</tr>
 	<?php if (is_array($cates)){foreach ($cates as $cates_value) {?>
-	<tr>
-		<td align="right"><?php echo $cates_value['title'];?></td>
-		<td><?php if (is_array($cates_value['childs'])) {foreach ($cates_value['childs'] as $value) {?>
-			<input name="action_id" type="radio" value="<?php echo $value['id'];?>"><?php echo $value['title'];?>
-		<?php }}?></td>
-	</tr>
+		<?php if (!empty($cates_value['childs'])) {?>
+		<tr>
+			<td align="right"><?php echo $cates_value['title'];?></td>
+			<td><?php foreach ($cates_value['childs'] as $value) {?>
+				<input name="action_id" type="radio" value="<?php echo $value['id'];?>"><?php echo $value['title'];?>
+			<?php }?></td>
+		</tr>
+		<?php }?>
 	<?php }}?>
 
 

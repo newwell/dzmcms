@@ -45,15 +45,37 @@ switch ($todo) {
 		break;
 	case 'add':
 		//操作模块列表
-		$cate_result = $db->query("SELECT * FROM {$tablepre}systemaction WHERE fid = 0");
-		$cates = array();
-		while($cate = $db->fetch_array($cate_result)){
-			$cate['childs'] = array();
-			$child_result = $db->query("SELECT * FROM {$tablepre}systemaction WHERE fid = " .$cate['id'] );
-			while($child = $db->fetch_array($child_result)){
-				$cate['childs'][] = $child;
+		if($_SESSION['userlevel']==1){
+			$cate_result = $db->query("SELECT * FROM {$tablepre}systemaction WHERE fid = 0 ORDER BY listnum,id ASC");
+			$cates = array();
+			while($cate = $db->fetch_array($cate_result))
+			{
+				//读取下级菜单
+				$cate['childs'] = array();
+				$child_result = $db->query("SELECT * FROM {$tablepre}systemaction WHERE fid = " .$cate['id']." ORDER BY listnum,id ASC" );
+				while($child = $db->fetch_array($child_result))
+				{
+					$cate['childs'][] = $child;
+				}
+				$cates[] = $cate;
 			}
-			$cates[] = $cate;
+		}elseif($_SESSION['userlevel']==2 || $_SESSION['userlevel']==3)
+		{
+			$useractions = explode(",",$_SESSION['useraction']);					
+			$cate_result = $db->query("SELECT * FROM {$tablepre}systemaction WHERE fid = 0 ORDER BY listnum,id ASC");
+			$cates = array();
+			while($cate = $db->fetch_array($cate_result))
+			{
+				//读取下级菜单
+				$cate['childs'] = array();
+				$child_result = $db->query("SELECT * FROM {$tablepre}systemaction WHERE fid = " .$cate['id']." AND action in ('".implode("','",explode(",",$_SESSION['useraction']))."') ORDER BY listnum,id ASC" );
+		
+				while($child = $db->fetch_array($child_result))
+				{
+					$cate['childs'][] = $child;
+				}
+				$cates[] = $cate;
+			}
 		}
 		include template('icon_add');
 		break;
@@ -72,17 +94,6 @@ switch ($todo) {
 		$total		= icon_total($where);
 		$page_control = multipage($total,$perpage,$page);
 		$listArr	= icon_list($startlimit, $perpage,$where);
-/*		$sql = "SELECT * FROM  `{$tablepre}icon` ";
-		if (!empty($where)) {
-			$sql .="WHERE ".$where;
-		}
-		$sql .= " ORDER BY listnum ASC LIMIT $startlimit , $perpage";
-		$result		= $db->query($sql);
-		$listArr	= array();
-		while($arr	= $db->fetch_array($result)){
-			
-	        $listArr[]	= $arr;
-		}*/
 		include template('icon_list');
 		break;
 	

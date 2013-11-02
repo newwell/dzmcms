@@ -16,13 +16,14 @@
  * @param int		$perpage	结束行
  * @param array()	$where		查找的条件
  */
-function member_list($startlimit,$endlimit,$where='') {
+function member_list($startlimit,$endlimit,$where='',$order='add_date') {
 	global $db,$tablepre;
 	$sql = "SELECT * FROM  `{$tablepre}member` ";
 	if (!empty($where)) {
 		$sql .="WHERE ".$where;
 	}
-	$sql .= "ORDER BY add_date DESC LIMIT $startlimit , $endlimit";
+	$sql .= "ORDER BY ".$order." DESC LIMIT $startlimit , $endlimit";
+	//exit($sql);
 	$result		= $db->query($sql);
 	$resultArr	= array();
 	while($arr	= $db->fetch_array($result)){

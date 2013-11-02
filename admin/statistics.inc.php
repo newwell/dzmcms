@@ -6,11 +6,28 @@ admin_priv($act['action']);
 require_once 'include/f/balance.f.php';
 require_once 'include/f/member.f.php';
 switch ($todo) {
+	case 'leaderboard':
+		//获取排行版数据    积分 奖励积分
+		$leaderboard_balance	= member_list(0, 10,'',"balance");
+		$leaderboard_jiangli_jifen	= member_list(0, 10,'',"jiangli_jifen");
+		include template('statistics_leaderboard');
+		break;
 	case 'paylog':
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		$starttime	= isset($_REQUEST['starttime']) ? $_REQUEST['starttime'] : '';
+		$endtime	= isset($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
+		
+		$time_where = "";
+		if (!empty($starttime)&&!empty($endtime)){
+			$time_where = " AND add_date>='".strtotime($starttime)."' AND add_date<='".strtotime($endtime)."' "; 
+		}
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
-			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='充值' ORDER BY  `id` DESC ";
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='充值'";
+			if (!empty($time_where)) {
+				$sql.=$time_where;
+			}
+			$sql.=" ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				if (empty($arr['type'])){
@@ -23,7 +40,11 @@ switch ($todo) {
 			}
 		}else {
 			$member_info= '';
-			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='充值' ORDER BY  `id` DESC ";
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='充值'";
+			if (!empty($time_where)) {
+				$sql.=$time_where;
+			}
+			$sql.=" ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				if (empty($arr['type'])){
@@ -119,10 +140,23 @@ switch ($todo) {
 		break;
 	case 'balance_change':
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
-		if (!empty($card)){
+		$starttime	= isset($_REQUEST['starttime']) ? $_REQUEST['starttime'] : '';
+		$endtime	= isset($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
+		
+		$time_where = "";
+		if (!empty($starttime)&&!empty($endtime)){
+			$time_where = " AND add_date>='".strtotime($starttime)."' AND add_date<='".strtotime($endtime)."' "; 
+		}
+		if ((!empty($card))||(!empty($time_where))){
 			$member_info = member_get(array($card),'card');
-			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' ORDER BY  `add_date` DESC ";
-			//exit($sql);
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE id>0 ";
+			if (!empty($card)){
+				$sql.=" AND `card` ='".$member_info['card']."'";
+			}
+			if (!empty($time_where)) {
+				$sql.=$time_where;
+			}
+			$sql.=" ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){if (empty($arr['type'])){
 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);

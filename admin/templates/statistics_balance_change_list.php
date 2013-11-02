@@ -9,16 +9,31 @@
 document.body.onload = function(){
     document.getElementById("card").focus();
 };
+function thisCheckForm() {
+	if($("#starttime").val()!=''&&$("#endtime").val()!=''){
+		return true;
+	}
+	if($("#starttime").val()==''&&$("#endtime").val()==''){
+		return true;
+	}
+	alert('不能只填一边的时间!');
+	return false;
+}
 </script>
-<form action="?action=statistics_balance_change&todo=balance_change" method="post" onsubmit="return CheckForm(this,true);">
+<form action="?action=statistics_balance_change&todo=balance_change" method="post" onsubmit="return thisCheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
-	    <td width="80px" align="right">读卡:</td>
-	    <td>
-	        <input name="card" id="card" required="true" type="text" style="border:#336699 1px solid;"/>
-	   		<input type="submit" class="formsubmit" value="提交">
-	   	</td>
+	    <td align="right">读卡:</td>
+	    <td><input name="card" id="card" type="text" style="border:#336699 1px solid;"/></td>
+	</tr>
+	<tr>
+	   	<td align="right">时间范围</td>
+	   	<td><input name="starttime" id="starttime" value="<?php if (isset($starttime))echo $starttime;?>" class="Wdate" autocomplete="off" onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" />
+	   	至<input name="endtime" id="endtime" value="<?php if (isset($endtime))echo $endtime;?>" class="Wdate" autocomplete="off" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 23:59:59',alwaysUseStartDate:true});" /></td>
+	</tr>
+	<tr align="center">
+		<td colspan="2"><input type="submit" class="formsubmit" value="提交"></td>
 	</tr>
 </table>
 </form>

@@ -13,12 +13,11 @@
 <link rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css/wui.min.css?v201312281737.css" />
 <link type="text/css" rel="stylesheet" href="script/Date_Time/skin/WdatePicker.css">
 
+<script src="script/Date_Time/WdatePicker.js" type="text/javascript"></script>
 <script src="script/class.js" type="text/javascript"></script>
 <script src="script/common.js" type="text/javascript"></script>
 <script src="script/admin.js" type="text/javascript"></script>
 <script src="script/check.js" type="text/javascript"></script>
-<script src="script/Date_Time/WdatePicker.js" type="text/javascript"></script>
-
 <script src="script/jquery-1.8.0.min.js" type="text/javascript"></script>
 
 </head>
