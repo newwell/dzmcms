@@ -835,3 +835,9 @@ function showpaneluploadadmin(tpars)
 	var myajax = new Ajax.Request(url,{method:'get',parameters: pars,onSuccess:showGoogleResponse});
 
 }
+/*快捷选择赋值*/
+function set_kuaixuan(starttime,endtime) {
+	$("#starttime").val(starttime);
+	$("#endtime").val(endtime);
+	return true;
+}

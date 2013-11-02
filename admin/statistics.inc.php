@@ -5,6 +5,32 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/balance.f.php';
 require_once 'include/f/member.f.php';
+//今天
+		$kaishi = gmdate("Y-n-j 00:00:00",$localtime);
+		$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
+		$jintian = "'".$kaishi."','".$jieshu."'";
+		//本周
+		$date = gmdate("Y-m-d",$localtime); 
+		$w = gmdate("w", strtotime($date));  //获取当前周的第几天 周日是 0 周一 到周六是 1 -6 
+		$d = $w ? $w - 1 : 6;  //如果是周日 -6天 
+		$kaishi = gmdate("Y-m-d 00:00:00", strtotime("$date -".$d." days")); //本周开始时间
+		$jieshu = gmdate("Y-m-d 23:59:59", strtotime("$kaishi +7 days"));  //本周结束时间	
+		$benzhou = "'".$kaishi."','".$jieshu."'";
+		//本月
+		$kaishi = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';
+		$jieshu = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-'.gmdate("t",$localtime).'  23:59:59';
+		$benyue = "'".$kaishi."','".$jieshu."'";
+		//近30天
+		$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
+		$kaishi = gmdate("Y-m-d 00:00:00", strtotime("$kaishi -30 days"));
+		$jin30tian =  "'".$kaishi."','".$jieshu."'";
+		//近3月
+		$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
+		$benyu1hao = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';
+		$kaishi = gmdate("Y-m-1 00:00:00", strtotime("$benyu1hao -2 month"));
+		$jin3yue =  "'".$kaishi."','".$jieshu."'";
+		
+		
 switch ($todo) {
 	case 'leaderboard':
 		//获取排行版数据    积分 奖励积分
@@ -56,6 +82,8 @@ switch ($todo) {
 		        $infoList[]	= $arr;
 			}
 		}
+		
+
 		include template('statistics_paylog_list');
 		break;
 	case 'balance_change_print':

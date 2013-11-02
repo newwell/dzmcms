@@ -19,6 +19,7 @@ function thisCheckForm() {
 	alert('不能只填一边的时间!');
 	return false;
 }
+
 </script>
 <form action="?action=statistics_paylog&todo=paylog" method="get" onsubmit="return thisCheckForm();">
 <input type="hidden" value="statistics_paylog" name="action">
@@ -30,9 +31,22 @@ function thisCheckForm() {
 	    <td><input name="card" id="card" type="text" style="border:#336699 1px solid;"/></td>
 	</tr>
 	<tr>
+	    <td align="right">快捷选择:</td>
+	    <td>
+		    <input onclick="set_kuaixuan(<?php echo $jintian;?>)" type="button" class="button_input" value="今天"/>
+		    <input onclick="set_kuaixuan(<?php echo $benzhou;?>)" type="button" class="button_input" value="本周"/>
+		    <input onclick="set_kuaixuan(<?php echo $benyue;?>)" type="button" class="button_input" value="本月"/>
+		    <input onclick="set_kuaixuan(<?php echo $jin30tian;?>)" type="button" class="button_input" value="最近30天"/>
+		    <input onclick="set_kuaixuan(<?php echo $jin3yue;?>)" type="button" class="button_input" value="最近3个月"/>
+		    <input onclick="set_kuaixuan('','')" type="button" class="button_input" value="自定义"/>
+		</td>
+	</tr>
+	<tr>
 	   	<td align="right">时间范围</td>
-	   	<td><input name="starttime" id="starttime" value="<?php echo $starttime;?>" class="Wdate" autocomplete="off" onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" />
-	   	至<input name="endtime" id="endtime" value="<?php echo $endtime;?>" class="Wdate" autocomplete="off" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 23:59:59',alwaysUseStartDate:true});" /></td>
+	   	<td><input name="starttime" id="starttime" value="<?php echo $starttime;?>" class="Wdate" autocomplete="off" onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss'})" />
+	   	至<input name="endtime" id="endtime" value="<?php echo $endtime;?>" class="Wdate" autocomplete="off" onfocus="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',startDate:'%y-%M-%d 23:59:59'});" />
+	   	
+	   	</td>
 	</tr>
 	<tr align="center">
 		<td colspan="2"><input type="submit" class="formsubmit" value="提交"></td>

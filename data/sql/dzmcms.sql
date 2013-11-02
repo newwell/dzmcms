@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 11 月 02 日 09:45
+-- 生成日期: 2013 年 11 月 02 日 17:34
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=7 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `dzmc_balance_log`
@@ -49,7 +49,8 @@ INSERT INTO `dzmc_balance_log` (`id`, `card`, `type`, `money`, `type_explain`, `
 (3, '736940301', '充值', 1, '现金', '积分充值:增加积分 1分<br>剩余积分:77774576214剩余奖励积分:999998145', 'admin', 1383150799),
 (4, '736940301', '积分变动', -800, '1', '积分变动:减少积分,800分,备注:减的试试<br>剩余积分:77774575414剩余奖励积分:999998145', 'admin', 1383150839),
 (5, '736940301', '积分赠送', 2, '1', '积分赠送:增加奖励积分,2分,备注:送两分咯<br>剩余积分:77774575414剩余奖励积分:999998147', 'admin', 1383151119),
-(6, '736940301', '积分赠送', 2, '1', '积分赠送:增加奖励积分,2分,备注:刘维给你送两分<br>剩余积分:77774575414剩余奖励积分:999998149', 'liuwei', 1383202276);
+(6, '736940301', '积分赠送', 2, '1', '积分赠送:增加奖励积分,2分,备注:刘维给你送两分<br>剩余积分:77774575414剩余奖励积分:999998149', 'liuwei', 1383202276),
+(7, '736955981', '充值', 1, '现金', '积分充值:增加积分 1分<br>剩余积分:1736956043剩余奖励积分:8880130', 'admin', 1383383159);
 
 -- --------------------------------------------------------
 
@@ -927,7 +928,7 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
 ('737052973', 800473, 1, '', '俞琴', '', '13476089543', '', '', 0, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363435078, '40', ''),
 ('737286365', 800523, 1, '', '杜景杰', '', '13307131488', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363426621, '0', ''),
-('736955981', 800522, 1, '', '夜风', '', '18610730011', '', '', 1, 1, 0, '', 0, 1736956042, '', '', '', '', '', 0, 0, '', '', 1363421142, '8880130', ''),
+('736955981', 800522, 1, '', '夜风', '', '18610730011', '', '', 1, 1, 0, '', 0, 1736956043, '', '', '', '', '', 0, 0, '', '', 1363421142, '8880130', ''),
 ('736761645', 800016, 1, '', '张志高', '', '13971254125', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363421007, '0', ''),
 ('737100061', 800521, 1, '', '黄欢', '', '13908659897', '', '', 1, 1, 0, '', 0, 100, '', '', '', '', '', 0, 0, '', '', 1363420643, '0', ''),
 ('737052205', 800487, 1, '', '沈然', '', '13971601915', '', '', 1, 1, 0, '', 0, 300, '', '', '', '', '', 0, 0, '', '', 1363418112, '0', ''),
@@ -1564,7 +1565,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1383382821, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1383408410, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

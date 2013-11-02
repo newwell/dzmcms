@@ -27,6 +27,17 @@ function thisCheckForm() {
 	    <td align="right">读卡:</td>
 	    <td><input name="card" id="card" type="text" style="border:#336699 1px solid;"/></td>
 	</tr>
+		<tr>
+	    <td align="right">快捷选择:</td>
+	    <td>
+		    <input onclick="set_kuaixuan(<?php echo $jintian;?>)" type="button" class="button_input" value="今天"/>
+		    <input onclick="set_kuaixuan(<?php echo $benzhou;?>)" type="button" class="button_input" value="本周"/>
+		    <input onclick="set_kuaixuan(<?php echo $benyue;?>)" type="button" class="button_input" value="本月"/>
+		    <input onclick="set_kuaixuan(<?php echo $jin30tian;?>)" type="button" class="button_input" value="最近30天"/>
+		    <input onclick="set_kuaixuan(<?php echo $jin3yue;?>)" type="button" class="button_input" value="最近3个月"/>
+		    <input onclick="set_kuaixuan('','')" type="button" class="button_input" value="自定义"/>
+		</td>
+	</tr>
 	<tr>
 	   	<td align="right">时间范围</td>
 	   	<td><input name="starttime" id="starttime" value="<?php if (isset($starttime))echo $starttime;?>" class="Wdate" autocomplete="off" onfocus="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" />

@@ -66,6 +66,7 @@ body {
 }
 .wui_contentLeftItem{
 	font-size: 88%;
+	display: none;
 }
 .wui_contentLeftItem ul{
 	list-style: none;
