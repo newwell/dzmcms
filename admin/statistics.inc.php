@@ -22,16 +22,52 @@ require_once 'include/f/member.f.php';
 		$benyue = "'".$kaishi."','".$jieshu."'";
 		//近30天
 		$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
-		$kaishi = gmdate("Y-m-d 00:00:00", strtotime("$kaishi -30 days"));
+		$kaishi = gmdate("Y-m-d 00:00:00", strtotime("$jieshu -30 days"));
 		$jin30tian =  "'".$kaishi."','".$jieshu."'";
 		//近3月
-		$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
-		$benyu1hao = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';
+		//$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
+		$jieshu = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';
 		$kaishi = gmdate("Y-m-1 00:00:00", strtotime("$benyu1hao -2 month"));
 		$jin3yue =  "'".$kaishi."','".$jieshu."'";
 		
 		
 switch ($todo) {
+	case 'serviceCharge'://服务费统计
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
+		$starttime	= isset($_REQUEST['starttime']) ? $_REQUEST['starttime'] : '';
+		$endtime	= isset($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
+		
+		$time_where = "";
+		$moneywhere=" `money`!=0 AND `type`='服务费'";
+		if (!empty($starttime)&&!empty($endtime)){
+			$time_where = " AND add_date>='".strtotime($starttime)."' AND add_date<='".strtotime($endtime)."'";
+		}
+		if ((!empty($card))||(!empty($time_where))){
+			$member_info = member_get(array($card),'card');
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `money`!=0 AND `type`='服务费'";
+			if (!empty($card)){
+				$sql.=" AND `card` ='".$member_info['card']."'";
+				$moneywhere.=" AND `card` ='".$member_info['card']."'";
+			}
+			if (!empty($time_where)) {
+				$sql.=$time_where;
+				$moneywhere.=$time_where;
+			}
+			$sql.=" ORDER BY  `add_date` DESC ";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
+				$arr['member_info'] = member_get(array($arr['card']),'card');
+				$infoList[]	= $arr;
+			}
+		}else {
+			$member_info = '';
+		}
+		//统计合计费用
+		$money_sun = abs(balance_log_money($moneywhere));
+		//echo $money_sun;exit;
+		include template('statistics_serviceCharge_list');
+		break;
 	case 'leaderboard':
 		//获取排行版数据    积分 奖励积分
 		$leaderboard_balance	= member_list(0, 10,'',"balance");
@@ -44,23 +80,26 @@ switch ($todo) {
 		$endtime	= isset($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
 		
 		$time_where = "";
+		$moneywhere=" `type`='充值'";
 		if (!empty($starttime)&&!empty($endtime)){
 			$time_where = " AND add_date>='".strtotime($starttime)."' AND add_date<='".strtotime($endtime)."' "; 
 		}
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='充值'";
+			
 			if (!empty($time_where)) {
 				$sql.=$time_where;
+				$moneywhere.=$time_where;
 			}
 			$sql.=" ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				if (empty($arr['type'])){
+				//if (empty($arr['type'])){
 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				}else{
+/* 				}else{
 					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
-				}
+				} */
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}
@@ -73,17 +112,17 @@ switch ($todo) {
 			$sql.=" ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				if (empty($arr['type'])){
+				//if (empty($arr['type'])){
 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				}else{
-					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
-				}
+				//}else{
+					//$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
+				//}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}
 		}
-		
-
+		//统计合计费用
+		$money_sun = abs(balance_log_money($moneywhere));
 		include template('statistics_paylog_list');
 		break;
 	case 'balance_change_print':
@@ -101,11 +140,11 @@ switch ($todo) {
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='积分赠送' ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				if (empty($arr['type'])){
+				//if (empty($arr['type'])){
 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				}else{
-					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
-				}
+				//}else{
+					//$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
+				//}
 		
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
@@ -119,11 +158,11 @@ switch ($todo) {
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='积分赠送' ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				if (empty($arr['type'])){
+				//if (empty($arr['type'])){
 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				}else{
-					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
-				}
+				//}else{
+					//$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
+				//}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 				$infoList[]	= $arr;
 			}
@@ -137,11 +176,11 @@ switch ($todo) {
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE  `card` ='".$member_info['card']."' AND `type`='积分变动' ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				if (empty($arr['type'])){
+				//if (empty($arr['type'])){
 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				}else{
-					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
-				}
+				//}else{
+					//$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
+				//}
 				
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 				//$arr['sport'] = sport_get(array($arr['sport_id']),"id");
@@ -155,11 +194,11 @@ switch ($todo) {
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='积分变动' ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				if (empty($arr['type'])){
+				//if (empty($arr['type'])){
 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				}else{
-					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
-				}
+				//}else{
+				//	$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
+				//}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}
@@ -177,7 +216,7 @@ switch ($todo) {
 		}
 		if ((!empty($card))||(!empty($time_where))){
 			$member_info = member_get(array($card),'card');
-			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE id>0 ";
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `money`!=0 ";
 			if (!empty($card)){
 				$sql.=" AND `card` ='".$member_info['card']."'";
 			}
@@ -186,11 +225,12 @@ switch ($todo) {
 			}
 			$sql.=" ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
-			while($arr	= $db->fetch_array($result)){if (empty($arr['type'])){
+			while($arr	= $db->fetch_array($result)){
+// 				if (empty($arr['type'])){
+// 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
+// 				}else{
 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				}else{
-					$arr['add_date']= date('Y-n-j H:i:s',$arr['add_date']);
-				}
+				//}
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}

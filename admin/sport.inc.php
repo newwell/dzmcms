@@ -243,7 +243,7 @@ switch ($todo) {
 		if ($result){
 			//s("退赛成功,扣除[ $serviceCharge ]$type",$tiaohui);
 			$money = intval("-".$serviceCharge);
-			balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money);
+			balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money,"服务费","计时赛");
 			include template('sport_withdraw_print');
 		}else {
 			s("退赛失败",$tiaohui);
@@ -256,7 +256,7 @@ switch ($todo) {
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 			$card = isset($member_info['card'])?$member_info['card']:0;
-			$sql = "SELECT * FROM  `{$tablepre}entry` WHERE  `card` =$card ORDER BY  `add_date` DESC ";
+			$sql = "SELECT * FROM  `{$tablepre}entry` WHERE `card` =$card ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
@@ -372,7 +372,12 @@ switch ($todo) {
 			'payment_type'=>$payment_type,
 			'add_date'=>$localtime
 		));
+		//exit('sssss');
 		if ($result) {
+			if ($sportinfo['type']!='time_trial') {
+				//非计时赛 记录服务费
+				balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛");
+			}
 			balance_log($card, $explain, $localtime,$money);
 			jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
 			$member_info = member_get(array($card),'card');

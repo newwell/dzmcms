@@ -18,9 +18,8 @@ switch ($todo) {
 		$card = $member_info['card'];
 		
 		//计算积分变动 编号
-		$xianzaishijian = '';
-		$xianzaishijian = time();
-		$dojifenlog_time = date('Y-n-j',$xianzaishijian);//今天日期
+		$xianzaishijian =  time() + 8 * 3600;
+		$dojifenlog_time = gmdate('Y-n-j',$xianzaishijian);//今天日期
 		$dojifenlog_time = strtotime($dojifenlog_time);
 		$shicha = $xianzaishijian - $dojifenlog_time;
 		//echo $shicha;exit;
@@ -105,8 +104,8 @@ switch ($todo) {
 		}
 		$card = $member_info['card'];
 		//计算积分变动 编号
-		$xianzaishijian = time();
-		$dojifenlog_time = date('Y-n-j',$xianzaishijian);//今天日期
+		$xianzaishijian =  time() + 8 * 3600;
+		$dojifenlog_time = gmdate('Y-n-j',$xianzaishijian);//今天日期
 		$dojifenlog_time = strtotime($dojifenlog_time);
 		$shicha = $xianzaishijian - $dojifenlog_time;
 		//echo $shicha;exit;
@@ -151,7 +150,7 @@ switch ($todo) {
 			$money = intval($change_value);
 		}
 		
-		balance_log($card, "积分变动:".$type.$change_object_text.",".$change_value."分,备注:".$remark, $xianzaishijian,$money,"积分变动",$num);
+		balance_log($card, "积分变动:".$type.$change_object_text.",".$change_value."分,备注:".$remark, $localtime,$money,"积分变动",$num);
 		include template('member_balance_change_print');
 		break;
 	case 'jifenlog'://积分变动
@@ -334,7 +333,7 @@ switch ($todo) {
 		$method_payment = ( isset($_POST['method_payment']) ? $_POST['method_payment'] : "" );
 		//$system_user_id = intval( isset($_GET['system_user_id']) ? $_GET['system_user_id'] : "" );
 		//print_r($method_payment);exit();
-		$xianzaishijian = time();
+		//$xianzaishijian = time();
 		if (empty($dopay))e("充值金额为0");
 		if (empty($card))e('无法获取读卡');
 		$member_info = member_get(array($card),'card');
@@ -342,7 +341,7 @@ switch ($todo) {
 		$value = $dopay*$setting_rate;
 		$r = member_dopay($card, $value);
 		$money = intval($value);
-		balance_log($card, "积分充值:增加积分 ".$value."分", $xianzaishijian,$money,'充值',"$method_payment");
+		balance_log($card, "积分充值:增加积分 ".$value."分", $localtime,$money,'充值',"$method_payment");
 		//s('成功充值[ '.$value.' ]积分',"?action=member_pay&todo=pay&card=".$card);
 		$member_info = member_get(array($card),'card');
 		include template('member_dopay_print');

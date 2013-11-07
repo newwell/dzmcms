@@ -98,3 +98,16 @@ function balance_log_get($idArr=array(),$fields) {
 	$result	= $db->fetch_one_array($sql);
 	return $result;
 }
+/**
+ * 该条件下的money记录的和值
+ */
+function balance_log_money($where='') {
+	global $db,$tablepre;
+	$sql	= "SELECT SUM(money) AS moneysum FROM {$tablepre}balance_log ";
+	if (!empty($where)) {
+		$sql .="WHERE ".$where;
+	}
+	//echo $sql;exit;
+	$result	= $db->fetch_one_array($sql);
+	return $result['moneysum'];
+}
