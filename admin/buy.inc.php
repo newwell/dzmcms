@@ -41,7 +41,7 @@ switch ($todo) {
 		include template('buy_cash');
 		break;
 	case 'list':
-		stop('这功能稍后写');
+		include template('buy_list');
 	break;
 	
 	default:
