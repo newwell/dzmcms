@@ -170,3 +170,19 @@ function goods_add($infoArr) {
 	$sql.=");";
 	return $db->query($sql);
 }
+/**
+ * 得到商品信息
+ * @param array()	$infoArr	条件   array('url'=>"http://www.dazan.cn")
+ */
+function goods_get($idArr=array()) {
+	global $db,$tablepre;
+	$ids = implode(',', $idArr);
+	$sql = "SELECT * FROM `{$tablepre}goods` WHERE `id`in($ids)";
+	$result		= $db->query($sql);
+	$resultArr	= array();
+	while($arr	= $db->fetch_array($result)){
+		$arr['add_date']= gmdate('Y.n.j',$arr['add_date']);
+        $resultArr[]	= $arr;
+	}
+	return $resultArr;
+}

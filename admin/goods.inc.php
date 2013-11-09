@@ -5,6 +5,27 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/goods.f.php';
 switch ($todo) {
+	case 'js_good_info':
+		$ids = $_GET['ids'];
+		$ids = substr($ids,0,strlen($ids)- 1);
+		$ids = explode(",", $ids);
+		$goodsInfo = goods_get($ids);
+		$html = "";
+		foreach ($goodsInfo as $value) {
+			$html.="<tr bgcolor='#E4EDF9'>";
+			$html.='<td class="list">'.$value['name'].'</td>';
+			$html.='<td class="list">'.$value['suk'].'</td>';
+			$html.='<td class="list">'.$value['unit'].'</td>';
+			$html.='<td class="list">'.$value['price'].'</td>';
+			$html.='<td class="list">'.$value['diyong_jifen'].'</td>';
+			$html.="</tr>";
+		}
+		//echo "<pre>";
+		//print_r($goodsInfo);
+		echo $html;
+		ob_flush();
+		exit();
+		break;
 	case 'update':
 		e('修改商品信息暂时未做!');
 		break;

@@ -82,12 +82,15 @@ document.body.onload = function(){
 </form>
 <script type="text/javascript">
 function get_user_info() {
+	$("#user_name").val("获取失败");
+	$("#cardid").val("获取失败");
+	$("#balance").val("获取失败");
+	$("#jiangli_jifen").val("获取失败");
 	$.get("?action=member_find&todo=js_user_info&card="+$("#buy_card").val(),function(data,status){
 		$("#user_name").val(data.name);
 		$("#cardid").val(data.cardid);
 		$("#balance").val(data.balance);
 		$("#jiangli_jifen").val(data.jiangli_jifen);
-		//$("#jifen_heji").val(parseInt(data.jiangli_jifen)+parseInt(data.balance));
 	  }, "json");
 }
 function check_jifen_submit(form) {

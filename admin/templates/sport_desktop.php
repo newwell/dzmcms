@@ -31,11 +31,9 @@ background-color: #FFBD00;
 </style>
 <div class="formnav"><?php echo $act['title'];?></div>
 <table width="98%"  border="0" cellpadding="0" cellspacing="0" align="center">
+<tr><td align="left"><input type="button" class="button_input" value="添加赛事" onclick="JavaScript:location.href='?action=sport_add&todo=add&do='"/></td></tr>
   <tr><td valign="top" align="center" width="100%">
   <div class="desktop">
-  <div class="desktop_itme wrap" id="wrap_new_add">
-  		<div class="desktop_add" onclick="JavaScript:location.href='?action=sport_add&todo=add&do='">添加赛事</div>
-  	</div>
   	<?php if(is_array($listArr)) { foreach($listArr as $key => $value) { ?>
   	<div class="desktop_itme wrap" id="wrap<?php echo $value['id'];?>">
   	<ul id="menu<?php echo $value['id'];?>">

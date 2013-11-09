@@ -24,7 +24,6 @@
 				<td><?php echo $value['cardid'];?></td>
 			</tr>
 			<?php }}?>
-			
 		</table>
 	</td>
     <td>
@@ -38,8 +37,6 @@
 				<td>姓名/昵称</td>
 				<td>卡号</td>
 			</tr>
-		
-			
 			<?php if(is_array($leaderboard_jiangli_jifen)) { foreach($leaderboard_jiangli_jifen as $key => $value) { ?>
 			<tr align="center">
 				<td><?php echo $key+1;?></td>
@@ -53,6 +50,4 @@
 	</td>
   </tr>
 </table>
-
-
 <?php include template('foot'); ?>

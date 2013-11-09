@@ -22,7 +22,7 @@ a:active{text-decoration: none; font-size:9pt; color:#FF9933;}
 
 .left3 {}
 
-.left4 {font-weight: bold;font-size:13px; color:#fff; padding: bottom-4px}
+.left4 {font-weight: bold;font-size:13px; color:#fff; padding-bottom: 4px;}
 
 .left33 a{background:url(image/pic_left5.gif) left no-repeat;display:block;
    padding-left:12px; }
@@ -242,7 +242,7 @@ body td{
 .f_one {background-color:#FFFFFF; color:#000000;}
 
 .formtable {border: 1px solid #ABD8F8;} 
-.formtable th { background-color: #D5EFFC;);}
+.formtable th { background-color: #D5EFFC;}
 .formtable td{background-color:#EBF7FD; color:#08417C; padding:2px;}
 .formtable td input text{ border:1px #E6E6E6 solid;color:#336699;}
 .formsubmit{ border:1px  #FF6600 solid;color:#FFFFFF; height:20px; background-color:#FF6600;}
@@ -256,7 +256,7 @@ body td{
 	font-size:12px; 
 	margin-left:auto;
 	margin-right:auto;
-	width:97%;
+	width:94%;
 	margin-top:10px;
 	margin-bottom:10px;
 	padding-left:30px;
@@ -566,7 +566,7 @@ text-align:center;}
 	font-size:12px;
 	padding: 3px 15px 3px 3px;
 	border-top:1px dotted #CCCCCC;
-	top:28px;;
+	top:28px;
 	text-align:right;
 	color:#999999;
 }

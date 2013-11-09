@@ -1,8 +1,8 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
 <div class="formnav"><?php echo $act['title'];?></div> 
-<form  method="post" id="data" action="?action=goods_list">
-<input type="hidden" value="<?php echo $formhash;?>" name="formhash">
+<form  method="post" id="data" action="?action=goods_list" id="chk_id">
+<input type="hidden" value="<?php echo $formhash;?>" name="formhash" id="formhash">
 <style>.xiankuan{max-width: 220px;overflow: hidden;text-overflow: ellipsis;width: 220px;white-space:nowrap;}</style>
 <table width="98%"  border="0" cellpadding="0" cellspacing="0" align="center">
   <tr>
@@ -10,7 +10,11 @@
     <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
 		<tr >
          <td colspan="1" >
-            <input type="button" value="删除" class="button_input" onclick="JavaScript:if(confirm('删除操作不可恢复,确认吗?')){commendsubmitform('?action=goods_list&todo=del',this.form,'');}">
+         <?php if ($_GET['do']!='buy_list'){?>
+         	<input type="button" value="删除" class="button_input" onclick="JavaScript:if(confirm('删除操作不可恢复,确认吗?')){commendsubmitform('?action=goods_list&todo=del',this.form,'');}">
+         <?php }else{?>
+         <input type="button" value="添加到购物车" class="button_input" onclick="huoqu();">
+         <?php }?>
          </td>
          <td colspan="6" align="right">
          <input type="hidden" name="action" value="goods_list"/>
@@ -35,8 +39,10 @@
 			<th>简码</th>
 			<th>单位</th>
 			<th>售价(积分)</th>
-			<th>奖励积分</th>	
+			<th>奖励积分</th>
+			<?php if ($_GET['do']!='buy_list'){?>
 			<th>操作</th>
+			<?php }?>
         </tr>
 		<?php if(is_array($goodslArr)) { foreach($goodslArr as $key => $value) { ?>
         <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
@@ -46,10 +52,11 @@
             <td class="list"><?php echo $value['unit']?></td>
             <td class="list"><font color="red"><?php echo $value['price']?></font></td>
             <td class="list"><?php echo $value['jiangli_jifen']?></td>
-            
+            <?php if ($_GET['do']!='buy_list'){?>
 			<td class="list">
-			<a href="?action=goods_list&todo=update&id=<?php echo $value['id']?>" title="修改"><img src="<?php echo $_TEMPLATESDIR?>/image/edit_g.gif" border="0" alt="修改"/></a>
+				<a href="?action=goods_list&todo=update&id=<?php echo $value['id']?>" title="修改"><img src="<?php echo $_TEMPLATESDIR?>/image/edit_g.gif" border="0" alt="修改"/></a>
 			</td>
+			<?php }?>
         </tr>
 		<?php } }?>
 		<tr bgcolor="#A6D0F6" align="center">
@@ -60,4 +67,21 @@
   </tr>
 </table>
 </form>
+<script type="text/javascript">
+function huoqu() {
+	var str=document.getElementsByName("ids[]");
+	var objarray=str.length;
+	var chestr="";
+	for (i=0;i<objarray;i++){
+	  if(str[i].checked == true){
+	   chestr+=str[i].value+",";
+	  }
+	}
+	if(chestr == ""){
+	  alert("至少选择一个");
+	}else{
+	  window.parent.frames.add_buy_cart(chestr);
+	}
+}
+</script>
 <?php include template('foot'); ?>
