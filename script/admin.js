@@ -793,51 +793,17 @@ function setupTemplate(folder)
 	document.getElementsByTagName('form')[0].submit();
 }
 
-
-function finishreply(replyid)
-{
-	//关闭浮动窗口
-	closeMsgPanel();
-	ClosePanel();
-	$('reply'+replyid).innerHTML = '已回复';
-}
-
-function showGoogleResponse(originalRequest)
-{
-	$('panel').innerHTML = originalRequest.responseText;
-	loadGoogle();
-}
-
-function loadGoogle(){
-
-	//是否安装google gears
-	if (!window.google || !google.gears ){
-		//安装Gears
-		document.getElementById('gears-d').style.display = 'block';
-		document.getElementById('gears-available-div').style.display = 'none';
-		return;
-	}
-	else{
-
-		document.getElementById('gears-d').style.display = 'none';
-		document.getElementById('gears-available-div').style.display = 'block';
-	}
-	desktop      = google.gears.factory.create('beta.desktop');
-	request      = google.gears.factory.create('beta.httprequest');
-
-}
-
-function showpaneluploadadmin(tpars)
-{
-
-	var url  = 'admincp.php';
-	var pars = tpars;  //"action=theme&todo=ajax&tmp=class"
-	var myajax = new Ajax.Request(url,{method:'get',parameters: pars,onSuccess:showGoogleResponse});
-
-}
 /*快捷选择赋值*/
 function set_kuaixuan(starttime,endtime) {
 	$("#starttime").val(starttime);
 	$("#endtime").val(endtime);
 	return true;
+}
+/*增加背景色*/
+function tr_add_color(tr_obj) {
+	tr_obj.css({ "background-color": "#87CEEB" });
+}
+/*去掉背景色*/
+function tr_del_color(tr_obj) {
+	tr_obj.css({ "background-color": "#F1F3F5" });
 }

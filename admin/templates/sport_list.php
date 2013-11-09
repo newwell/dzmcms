@@ -33,7 +33,7 @@
 			<th>操作</th>		
         </tr>
 		<?php if(is_array($listArr)) { foreach($listArr as $key => $value) { ?>
-        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
+        <tr bgcolor="#F1F3F5" onmouseover="tr_add_color($(this))"onmouseout="tr_del_color($(this))">
             <td class="list"><?php echo $value['name'];?></td>      
             <td class="list"><?php echo $value['deduction'];?></td>  
             <td class="list"><?php if ($value['type']=="time_trial"){echo "每".$value['service_charge_time']."分钟,".$value['service_charge']."积分";}else {echo $value['service_charge'].'积分';}?></td>
