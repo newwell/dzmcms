@@ -77,7 +77,11 @@ function thisCheckForm() {
     <td valign="top" align="center" width="100%">
     <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
     	<tr bgcolor="#fff" align="left">
-			<td colspan="7" align="left">该条件下的服务费合计:<font color="red"><?php echo $money_sun;?></font>积分=<font color="red"><?php echo $money_sun/$setting_rate;?></font>人民币</td>
+			<td colspan="7" align="left">
+				该条件下的服务费合计:<font color="red"><?php echo $money_sun;?></font>积分=<font color="red"><?php echo $money_sun/$setting_rate;?></font>人民币
+				&nbsp;&nbsp;其中&nbsp;[计时赛:<font color="red"><?php echo $money_sun_jishi;?></font>积分=<font color="red"><?php echo $money_sun_jishi/$setting_rate;?></font>人民币
+				&nbsp;&nbsp;非计时赛:<font color="red"><?php echo $money_sun_feijishi;?></font>积分=<font color="red"><?php echo $money_sun_feijishi/$setting_rate;?></font>人民币]
+			</td>
 		</tr>
         <tr>
             <th>姓名/昵称</th>

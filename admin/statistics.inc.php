@@ -64,7 +64,10 @@ switch ($todo) {
 			$member_info = '';
 		}
 		//统计合计费用
-		$money_sun = abs(balance_log_money($moneywhere));
+		$money_sun			= abs(balance_log_money($moneywhere));
+		$money_sun_jishi	= abs(balance_log_money($moneywhere." AND `type_explain`= '计时赛'"));
+		$money_sun_feijishi	= abs(balance_log_money($moneywhere." AND `type_explain`= '非计时赛'"));
+		
 		//echo $money_sun;exit;
 		include template('statistics_serviceCharge_list');
 		break;
@@ -123,6 +126,8 @@ switch ($todo) {
 		}
 		//统计合计费用
 		$money_sun = abs(balance_log_money($moneywhere));
+		$money_sun_xianjin	= abs(balance_log_money($moneywhere." AND `type_explain`= '现金'"));
+		$money_sun_shuaka	= abs(balance_log_money($moneywhere." AND `type_explain`= '刷卡'"));
 		include template('statistics_paylog_list');
 		break;
 	case 'balance_change_print':

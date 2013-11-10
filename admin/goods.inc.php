@@ -15,7 +15,7 @@ switch ($todo) {
 			$html.="<tr bgcolor='#E4EDF9'>";
 			$html.='<td class="list">'.$value['name'].'</td>';
 			$html.='<td class="list">'.$value['suk'].'</td>';
-			$html.='<td class="list">'.$value['unit'].'</td>';
+			$html.='<td class="list"><input name="shuliang[]" value="1"/><input type="hidden" name="ids[]" value="'.$value['id'].'"/>'.$value['unit'].'</td>';
 			$html.='<td class="list">'.$value['price'].'</td>';
 			$html.='<td class="list">'.$value['diyong_jifen'].'</td>';
 			$html.="</tr>";

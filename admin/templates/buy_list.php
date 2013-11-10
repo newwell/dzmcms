@@ -38,7 +38,7 @@ document.body.onload = function(){
 	<tr>
 		<th>名称</th>
 		<th>简码</th>
-		<th>单位</th>
+		<th>购买数量</th>
 		<th>所需积分</th>
 		<th>所需奖励积分</th>
 	</tr>
