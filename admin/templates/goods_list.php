@@ -19,6 +19,7 @@
          <td colspan="6" align="right">
          <input type="hidden" name="action" value="goods_list"/>
          <input type="hidden" name="todo" value="search"/>
+         <input type="hidden" name="do" value="<?php if ($_GET['do']=='buy_list')echo 'buy_list';?>"/>
          	按<select name="d_option">
          		<option value="name" <?php if(!empty($d_option)&&$d_option=='name'){echo 'selected';}?>>名称</option>
          		<option value="suk" <?php if(!empty($d_option)&&$d_option=='suk'){echo 'selected';}?>>简码</option>
@@ -27,7 +28,7 @@
          	<script type="text/javascript">
          	function searchsubmitform(form) {
          		form.method='get';
-         		form.action='?action=goods_list&todo=search';
+         		form.action='?action=goods_list&todo=search&do=';
          		form.submit();
 			}
          	</script>

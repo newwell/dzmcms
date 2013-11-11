@@ -12,12 +12,16 @@ switch ($todo) {
 		$goodsInfo = goods_get($ids);
 		$html = "";
 		foreach ($goodsInfo as $value) {
-			$html.="<tr bgcolor='#E4EDF9'>";
+			$html.="<tr bgcolor='#F1F3F5'>";
 			$html.='<td class="list">'.$value['name'].'</td>';
 			$html.='<td class="list">'.$value['suk'].'</td>';
-			$html.='<td class="list"><input name="shuliang[]" value="1"/><input type="hidden" name="ids[]" value="'.$value['id'].'"/>'.$value['unit'].'</td>';
-			$html.='<td class="list">'.$value['price'].'</td>';
-			$html.='<td class="list">'.$value['diyong_jifen'].'</td>';
+			$html.='<td class="list"><input name="shuliang[]" id="shuliang_'.$value['id'].'" value="1" onblur="buy_cart_up_price('.$value['id'].');"/><input type="hidden" name="ids[]" value="'.$value['id'].'"/>'.$value['unit'].'</td>';
+			$html.='<td class="list">';
+			$html.='<input disabled name="price[]" id="price_'.$value['id'].'" value="'.$value['price'].'"/>';
+			$html.='<input type="hidden" id="old_price_'.$value['id'].'" value="'.$value['price'].'"/>';
+			$html.='<input type="hidden" id="old_diyong_jifen_'.$value['id'].'" value="'.$value['diyong_jifen'].'"/>';
+			$html.='</td>';
+			$html.='<td class="list"><input disabled name="diyong_jifen[]" id="diyong_jifen_'.$value['id'].'" value="'.$value['diyong_jifen'].'"/></td>';
 			$html.="</tr>";
 		}
 		//echo "<pre>";

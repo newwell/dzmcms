@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 11 月 10 日 12:20
+-- 生成日期: 2013 年 11 月 11 日 15:37
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -115,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_goods` (
   `add_date` int(22) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=6 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=8 ;
 
 --
 -- 转存表中的数据 `dzmc_goods`
@@ -123,7 +123,9 @@ CREATE TABLE IF NOT EXISTS `dzmc_goods` (
 
 INSERT INTO `dzmc_goods` (`id`, `name`, `suk`, `unit`, `categories_id`, `jinjia`, `price`, `jiangli_jifen`, `diyong_jifen`, `inventory`, `remark`, `add_date`) VALUES
 (2, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 0),
-(4, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 11111);
+(4, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 11111),
+(6, '红茶', 'hc', '杯', 9, '', '20', '0', '0', 99, '', 1384172704),
+(7, '法国干红', 'fhgh', '瓶', 11, '', '199', '0', '10', 999, '', 1384172772);
 
 -- --------------------------------------------------------
 
@@ -1574,7 +1576,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1384074763, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1384168485, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

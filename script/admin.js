@@ -143,73 +143,6 @@ function showpanelnextadmin(tpars)
 
 }
 
-//弹出选择模板窗口
-function showpanel(tpars,url)
-{
-	//防止重复调用
-	if($('panelbox'))
-		return;
-
-	hideselects();
-	hideiframes();
-
-	//生成高亮层
-	var panelbox = document.createElement('div');
-	//设定高亮层的css样式
-    panelbox.className = 'panelbox';
-	//生成菜单层
-	panelbox.setAttribute('id','panelbox');
-	//设定层定位
-	panelbox.style.left = (document.body.clientWidth * 0.5) + 'px';
-	panelbox.style.top  = (document.body.scrollTop + (document.body.scrollHeight - document.body.scrollTop) * 0.2) + 'px';
-
-	var panelbanner = document.createElement('div');
-	panelbanner.setAttribute('id','panelbanner');
-	//设定高亮层的css样式
-    panelbanner.className = 'panelbanner';
-	var panelcontent = document.createElement('div');
-	//设定高亮层的css样式
-    panelcontent.className = 'panelcontent';
-	//设定banner的HTML代码
-	panelbanner.innerHTML = '<a href="javascript:ClosePanel()">[ 关闭 ]</a>   ';
-	//给内容层赋ID
-	panelcontent.setAttribute('id','panel');
-	//把标题和内容层放到高亮层中去
-	panelbox.appendChild(panelbanner);
-	panelbox.appendChild(panelcontent);
-
-	//最后把生成好的层放入body中
-	document.body.appendChild(panelbox);
-
-	Dom.Drag.makeDraggable(panelbanner,true);
-	Dom.Drag.eleTransparent = true;
-	Dom.Drag.startdrag();
-
-	if(url=='' || url == undefined)
-	{
-		//url = 'admincp.php'
-		url  = getpagename();
-	}
-
-	//var pars ='admincp.php?action=system_user&todo=edituser&uid=26';
-	//var pars ='admincp.php?action=system_user&todo=edituser&uid=26'
-	var pars = tpars;  //"action=theme&todo=ajax&tmp=class"
-	var option = new Object();
-	option.method = 'get';
-	option.parameters = pars;
-	option.onSuccess = showResponse;
-	var myajax = new Ajax.Request(url,option);
-	ShowLoading();
-}
-
-//返回数据处理
-function showResponse(originalRequest)
-{
-
-	Element.update("panel",originalRequest.responseText);
-	HideLoading();
-}
-
 //关闭ajax表单
 function ClosePanel()
 {
@@ -722,77 +655,6 @@ function choosefile(file)
 }
 
 
-//左侧导航菜单点击变色函数
-function ChangeMenuStyle(id)
-{
-	var modulecount = $('modulecount').value;
-	$('leftmenu'+id).className = 'click';
-	for(i=0;i<modulecount;i++)
-	{
-		if(i!=id)
-		{
-			$('leftmenu'+i).className = 'left';
-		}
-	}
-	try
-	{
-		var catecount = $('catecount').value;
-		for(i=0;i<catecount;i++)
-		{
-			$('leftcate'+i).className = 'left';
-		}
-	}
-	catch (e)
-	{
-	}
-}
-
-function ChangeCateStyle(id)
-{
-	var catecount = $('catecount').value;
-	$('leftcate'+id).className = 'click';
-	for(i=0;i<catecount;i++)
-	{
-		if(i!=id)
-		{
-			$('leftcate'+i).className = 'left';
-		}
-	}
-	try
-	{
-		var modulecount = $('modulecount').value;
-		for(i=0;i<modulecount;i++)
-		{
-			$('leftmenu'+i).className = 'left';
-		}
-	}
-	catch (e)
-	{
-	}
-}
-
-function Topen(key1,key2,key3)  //展开下属列表
-{
-	$(key1).style.display="none";
-	$(key2).style.display="";
-	$(key3).style.display="";
-}
-
-function Tclose(key1,key2,key3)  //关闭下属列表
-{
-	$(key1).style.display="";
-	$(key2).style.display="none";
-	$(key3).style.display="none";
-}
-
-//设定模板并提交表单
-function setupTemplate(folder)
-{
-	$('setting_sitetemplate').value = folder;
-	ClosePanel();
-	document.getElementsByTagName('form')[0].submit();
-}
-
 /*快捷选择赋值*/
 function set_kuaixuan(starttime,endtime) {
 	$("#starttime").val(starttime);
@@ -806,4 +668,35 @@ function tr_add_color(tr_obj) {
 /*去掉背景色*/
 function tr_del_color(tr_obj) {
 	tr_obj.css({ "background-color": "#F1F3F5" });
+}
+/*购物车----加减个数后变价格*/
+function buy_cart_up_price(id) {
+	//单价
+	var old_price = parseInt($("#old_price_"+id).val());
+	//单个使用积分
+	var old_diyong_jifen = parseInt($("#old_diyong_jifen_"+id).val());
+	//获取个数
+	var shuliang = parseInt($("#shuliang_"+id).val());
+	
+	$("#price_"+id).val(old_price*shuliang);
+	$("#diyong_jifen_"+id).val(old_diyong_jifen*shuliang);
+	buy_sum();
+}
+/*购物车----计算总数和总价*/
+function buy_sum() {
+	var zongshu = 0;
+	for ( var int = 0; int < document.getElementsByName("shuliang[]").length; int++) {
+		zongshu = zongshu+parseInt(document.getElementsByName("shuliang[]")[int].value);
+	}
+	$("#zongshu").html(zongshu);
+	var zongjifen = 0;
+	for ( var int = 0; int < document.getElementsByName("price[]").length; int++) {
+		zongjifen = zongjifen+parseInt(document.getElementsByName("price[]")[int].value);
+	}
+	$("#zongjifen").html(zongjifen);
+	var zoongjianglijifen = 0;
+	for ( var int = 0; int < document.getElementsByName("diyong_jifen[]").length; int++) {
+		zoongjianglijifen = zoongjianglijifen+parseInt(document.getElementsByName("diyong_jifen[]")[int].value);
+	}
+	$("#zoongjianglijifen").html(zoongjianglijifen);
 }

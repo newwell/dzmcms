@@ -33,7 +33,7 @@ document.body.onload = function(){
 <input type="hidden" id="card" value="" name="card">
 <table width="97%" cellpadding="1" cellspacing="1" align="center" class="listtable" id="rspan">
 	<tr>
-		<td><input type="button" value="选择商品" class="button_input" onclick="JavaScript:hiBox('#showbox_chanpin', '选择商品',700,'','','.a_close');"></td>
+		<td><input type="button" value="选择商品" class="button_input" onclick="JavaScript:hiBox('#showbox_chanpin', '选择商品',700,'400','','.a_close');"></td>
 	</tr>
 	<tr>
 		<th>名称</th>
@@ -41,6 +41,37 @@ document.body.onload = function(){
 		<th>购买数量</th>
 		<th>所需积分</th>
 		<th>所需奖励积分</th>
+	</tr>
+</table>
+<br/>
+<table width="97%" cellpadding="1" cellspacing="1" align="center" class="formtable">
+	<tr>
+		<th colspan="4">消费合计</th>
+	</tr>
+	<tr>
+		<td align="right" width="25%">支付方式:</td>
+		<td width="25%"><select name="method_payment">
+				<option value="积分">积分</option>
+	    		<option value="现金">现金</option>
+	    		<option value="刷卡">刷卡</option>
+	    </select></td>
+		<td align="right" width="25%">商品总数:</td>
+		<td><span style="color: red;" id="zongshu">&nbsp;</span></td>
+	</tr>
+	<tr id="show_jifen">
+		<td align="right" width="25%">所需总积分:</td>
+		<td width="25%"><span style="color: red;" id="zongjifen">&nbsp;</span></td>
+		<td align="right" width="25%">所需总奖励积分:</td>
+		<td><span style="color: red;" id="zoongjianglijifen">&nbsp;</span></td>
+	</tr>
+	<tr id="show_jifen">
+		<td align="right" width="25%">所需总积分:</td>
+		<td width="25%"><span style="color: red;" id="zongjifen">&nbsp;</span></td>
+		<td align="right" width="25%">所需总奖励积分:</td>
+		<td><span style="color: red;" id="zoongjianglijifen">&nbsp;</span></td>
+	</tr>
+	<tr>
+		<td colspan="4" align="center"><input onclick="check_jifen_submit(this.form);" class="formsubmit" type="button" value="确定购买"/></td>
 	</tr>
 </table>
 </form>
@@ -56,6 +87,7 @@ function add_buy_cart(ids) {
 	$.get("?action=goods_list&todo=js_good_info&ids="+ids,function(data,status){
 		$("#rspan").html($("#rspan").html()+data);
 	  });
+	setTimeout(function(){buy_sum();}, 200);
 }
 //得到用户信息
 function get_user_info() {
