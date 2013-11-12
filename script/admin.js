@@ -699,4 +699,6 @@ function buy_sum() {
 		zoongjianglijifen = zoongjianglijifen+parseInt(document.getElementsByName("diyong_jifen[]")[int].value);
 	}
 	$("#zoongjianglijifen").html(zoongjianglijifen);
+	$("#jin_e").html(zoongjianglijifen+zongjifen);
+	
 }

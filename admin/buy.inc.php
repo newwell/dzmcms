@@ -6,7 +6,34 @@ admin_priv($act['action']);
 require_once 'include/f/buy.f.php';
 require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
+require_once 'include/f/goods.f.php';
 switch ($todo) {
+	case 'buy'://执行购买
+		$card			= dzmc_revise_card( isset($_POST['card']) ? $_POST['card'] : '');
+		$shuliang		= isset($_POST['shuliang']) ? $_POST['shuliang'] : '';
+		$ids			= isset($_POST['ids']) ? $_POST['ids'] : '';
+		$method_payment	= htmlspecialchars( isset($_POST['method_payment']) ? $_POST['method_payment'] : '' );
+		
+		if (empty($card))e("未获取到读卡");
+		if (empty($shuliang))e("未购买商品");
+		$member_info = member_get(array($card),'card');
+		if (empty($member_info))e("用户不存在");
+		if (empty($shuliang))e("未得到购买商品数量");
+		$goodArr = array();
+		foreach ($shuliang as $key => $value) {
+			$temp = goods_get(array($ids[$key]));
+			$goodArr[$ids[$key]] = $temp[0];
+			$goodArr[$ids[$key]]["shuliang"] = $value;
+		}
+		
+		foreach ($goodArr as $value) {
+			echo $value['shuliang'].$value['unit']."\t[".$value['name']."]\t使用".$value['shuliang']*$value['price']."积分,".$value['shuliang']*$value['diyong_jifen']."奖励积分<br/>";
+		}
+		//echo("<pre>");
+		
+		//print_r($goodArr);
+		exit;
+		//include template('buy_print');
 	case 'docash':
 		$card			= dzmc_revise_card(( isset($_POST['card']) ? $_POST['card'] : '' ));
 		$method_payment	= htmlspecialchars( isset($_POST['method_payment']) ? $_POST['method_payment'] : '' );

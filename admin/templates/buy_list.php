@@ -14,13 +14,21 @@ document.body.onload = function(){
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
 	    <td align="right">读卡:</td>
-	    <td>
+	    <td colspan="3">
 	    	<input name="buy_card" id="buy_card" required="true" type="text" onkeydown="if(event.keyCode==13){get_user_info();}"/><input onclick="get_user_info();" class="formsubmit" type="button" value="读卡"/>
 	    </td>
 	</tr>
 	<tr>
-	    <td align="right" >会员名:</td>
-	    <td colspan="3"><span id="username">未获取</span></td>
+	    <td align="right" width="25%">会员名/昵称:</td>
+	    <td width="25%"><span id="username">未获取</span></td>
+	    <td align="right" width="25%">会员卡编号</td>
+	    <td width="25%"><span id="cardid">未获取</span></td>
+	</tr>
+	<tr>
+	    <td align="right" >积分:</td>
+	    <td><span id="balance" style="color: red;">未获取</span></td>
+	    <td align="right">奖励积分</td>
+	    <td><span id="jiangli_jifen" style="color: red;">未获取</span></td>
 	</tr>
 	<tr>
 		
@@ -28,7 +36,7 @@ document.body.onload = function(){
 </table>
 <br/>
 
-<form action="?action=sport_add&todo=saveadd" method="post">
+<form action="?action=buy_list&todo=buy" method="post">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash" id="formhash">
 <input type="hidden" id="card" value="" name="card">
 <table width="97%" cellpadding="1" cellspacing="1" align="center" class="listtable" id="rspan">
@@ -50,7 +58,7 @@ document.body.onload = function(){
 	</tr>
 	<tr>
 		<td align="right" width="25%">支付方式:</td>
-		<td width="25%"><select name="method_payment">
+		<td width="25%"><select name="method_payment" onchange="show_buy_method_payment(this.value);">
 				<option value="积分">积分</option>
 	    		<option value="现金">现金</option>
 	    		<option value="刷卡">刷卡</option>
@@ -64,11 +72,9 @@ document.body.onload = function(){
 		<td align="right" width="25%">所需总奖励积分:</td>
 		<td><span style="color: red;" id="zoongjianglijifen">&nbsp;</span></td>
 	</tr>
-	<tr id="show_jifen">
-		<td align="right" width="25%">所需总积分:</td>
-		<td width="25%"><span style="color: red;" id="zongjifen">&nbsp;</span></td>
-		<td align="right" width="25%">所需总奖励积分:</td>
-		<td><span style="color: red;" id="zoongjianglijifen">&nbsp;</span></td>
+	<tr id="show_shuaka_xianjin" style="display: none;">
+		<td align="right" width="25%" id="show_shuaka_xianjin_txt">所需现金:</td>
+		<td colspan="3"><span style="color: red;" id="jin_e">&nbsp;</span></td>
 	</tr>
 	<tr>
 		<td colspan="4" align="center"><input onclick="check_jifen_submit(this.form);" class="formsubmit" type="button" value="确定购买"/></td>
@@ -81,6 +87,25 @@ document.body.onload = function(){
 </div>
 
 <script type="text/javascript">
+function show_buy_method_payment(type) {
+	switch (type) {
+		case '积分':
+			$('#show_jifen').show();
+			$('#show_shuaka_xianjin').hide();
+		break;
+		case '现金':
+			$('#show_jifen').hide();
+			$('#show_shuaka_xianjin_txt').html("所需现金:");
+			$('#show_shuaka_xianjin').show();
+		break;
+		case '刷卡':
+			$('#show_jifen').hide();
+			$('#show_shuaka_xianjin_txt').html("通过POS机刷金额:");
+			$('#show_shuaka_xianjin').show();
+		break;
+	}
+}
+//添加到购物车的操作
 function add_buy_cart(ids) {
 	$("#popup_overlay").hide();
 	$("#popup_container").hide();
@@ -92,10 +117,33 @@ function add_buy_cart(ids) {
 //得到用户信息
 function get_user_info() {
 	$("#username").html("获取失败");
+	$("#cardid").html("获取失败");
+	$("#balance").html("获取失败");
+	$("#jiangli_jifen").html("获取失败");
 	$("#card").val($("#buy_card").val());
 	$.get("?action=member_find&todo=js_user_info&card="+$("#buy_card").val(),function(data,status){
-		$("#username").html(data.name);
+		$("#username").html(data.name+"/"+data.nickname);
+		$("#cardid").html(data.cardid);
+		$("#balance").html(data.balance);
+		$("#jiangli_jifen").html(data.jiangli_jifen);
 	  }, "json");
+}
+//检查积分时候够用!够用则提交购买
+function check_jifen_submit(form){
+	if($("#balance").text()=="未获取"){
+		alert("积分未获取");return false;
+	}
+	if($("#zongshu").text()==''||$("#zongshu").text()==0){
+		alert("未购买商品");return false;
+	}
+	if(parseInt($("#zongjifen").text())>parseInt($("#balance").text())){
+		alert("积分不够");return false;
+	}
+	if(parseInt($("#zoongjianglijifen").text())>parseInt($("#jiangli_jifen").text())){
+		alert("奖励积分不够");return false;
+	}
+	form.submit();
+	return true;
 }
 </script>
 <?php include template('foot'); ?>

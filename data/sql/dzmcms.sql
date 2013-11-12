@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 11 月 11 日 15:37
+-- 生成日期: 2013 年 11 月 12 日 13:37
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -1576,7 +1576,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1384168485, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1384248343, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
