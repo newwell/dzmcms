@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 11 月 12 日 13:37
+-- 生成日期: 2013 年 11 月 17 日 11:25
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -1518,7 +1518,7 @@ INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `
 (63, 61, '非物品销售', 'buy_cash', 'cash', NULL, 'buy.inc.php', 0),
 (62, 61, '商品销售', 'buy_list', 'list', NULL, 'buy.inc.php', 0),
 (61, 0, '销售管理', '', NULL, NULL, '', 0),
-(41, 88, '数据库优化', 'database', 'list', '', 'data.inc.php', 3),
+(41, 1, '数据备份', 'database_backup', 'backup', '', 'data.inc.php', 3),
 (42, 0, '会员管理', '', NULL, NULL, '', 0),
 (43, 42, '会员查询', 'member_find', 'find', NULL, 'member.inc.php', 0),
 (45, 42, '添加会员', 'member_add', 'add', NULL, 'member.inc.php', 0),
@@ -1576,7 +1576,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1384248343, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1384685724, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

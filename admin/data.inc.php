@@ -51,7 +51,9 @@ elseif($todo=="backup")
 {
 	//初始化随机文件名
 	$filename  = gmdate('ymdHi',$localtime).'_'.random(8);
-    $filearr   = getFile('data/backup/',array('sql','zip'));
+    //$filearr   = getFile('data/backup/',array('sql','zip'));
+    //大赞科技备份文件
+    $filearr   = getFile('data/backup/',array('sql','dzbak'));
     include template('data_backup');
     
 }
@@ -78,10 +80,19 @@ elseif($todo=="dobackup") //数据表备份操作
 	//数据是否扩展插入
 	$extendins  = 0;
 	//系统表数组
-	$tables   = array('settings',
+	$tables   = array('balance_log',
+						'entry',
+						'goods',
+						'goods_class',
+						'icon',
+						'member',
+						'order',
+						'prize',
+						'settings',
+						'sport',
+						'staff',
 						'systemaction',
-						'systemuser',
-						'urls');
+						'systemuser');
 	//初始化SQL语句
 	$sqldump = '';
 	//表数组索引号
@@ -145,7 +156,8 @@ elseif($todo=="dobackup") //数据表备份操作
 			//往压缩包中添加同名SQL文件
 			$zip->addFile($sqldump,str_replace('#num#',$volume,$filename.'_#num#.sql'));
 			//更换文件后缀
-			$dumpfile = str_replace('.sql','.zip',$dumpfile);
+			//$dumpfile = str_replace('.sql','.zip',$dumpfile);
+			$dumpfile = str_replace('.sql','.dzbak',$dumpfile);
 			
 			//获得打包后的数据内容
 			$sqldump = $zip->file();
@@ -178,7 +190,9 @@ elseif($todo=="dobackup") //数据表备份操作
 			
 			$sqldump = $zip->file();
 			unset($zip);
-			$dumpfile = $backup_file_dir.$filename.".zip";
+			//$dumpfile = $backup_file_dir.$filename.".zip";
+			//文件后缀给dzbak
+			$dumpfile = $backup_file_dir.$filename.".dzbak";
 			@$fp = fopen($dumpfile, 'wb');
 			@flock($fp, 2);
 			if(@!fwrite($fp, $sqldump)) 
@@ -195,7 +209,7 @@ elseif($todo=="dobackup") //数据表备份操作
 			
 		}
 		//备份完毕
-		s('database_backup_success','?action=database&todo=backup');
+		s('database_backup_success','?action=database_backup&todo=backup');
 	}
 }
 elseif($todo=="importzip") //导入压缩数据文件操作

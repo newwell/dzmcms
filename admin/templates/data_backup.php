@@ -9,17 +9,17 @@
         备份文件压缩设定:
         </td>
        <td>
-        <input name="ziped" value="0" type="radio">不压缩
-        <input name="ziped" value="1" type="radio">分卷文件分别压缩
-        <input name="ziped" value="2" type="radio" checked="checked">压缩为一个zip文件
+		<!-- <input name="ziped" value="0" type="radio">不压缩 -->
+        <input name="ziped" value="1" type="radio">分卷备份
+        <input name="ziped" value="2" type="radio" checked="checked">备份为一个文件
         </td>
    </tr>
    <tr>
 <td align="right">
-        备份数据库文件兼容格式:
+        备份数据兼容格式:
         </td>
    		<td>
-   	        <!-- <input class="radio" type="radio" name="sqlcompat" value="MYSQL40"> MySQL 3.23/4.0.x &nbsp; --> <input class="radio" type="radio" name="sqlcompat" value="MYSQL41" checked> MySQL 4.1.x/5.x &nbsp;
+   	        <!-- <input class="radio" type="radio" name="sqlcompat" value="MYSQL40"> MySQL 3.23/4.0.x &nbsp; --> <input class="radio" type="radio" name="sqlcompat" value="MYSQL41" checked> DZBAK 1.x 和 DZBAK 2.x &nbsp;
    		</td>
    	</tr>
    	
@@ -34,7 +34,7 @@
    </tr>
    	<tr>
 <td align="right">
-分卷打包大小:
+分卷备份大小:
         </td>
    	<td>
 <input type="text" name="sizelimit" value="2024" fun="isInt('0+')" required="true" style="border:#336699 1px solid;" onmouseover="fEvent('mouseover',this)" onfocus="fEvent('focus',this)" onblur="fEvent('blur',this)" onmouseout="fEvent('mouseout',this)"/>kb *分卷备份 - 每个分卷文件大小限制(kb) 
@@ -78,7 +78,7 @@
        <td align="center"><?=$file['edittime']?></td>
        <td class="list" align="center">
        
-<?php if(preg_match('/\.zip$/',$file['name'])) { ?>
+<?php if(preg_match('/\.dzbak$/',$file['name'])) { ?>
        		<!-- <a title="还原数据库" href="?action=database&todo=importzip&datafile=<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/restore_g.gif" border="0" ></a> | --> 
        		<a title="下载备份数据" href="<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/restore_g.gif" border="0" ></a> |
        		<a title="删除数据库备份文件" href="?action=database&todo=del&file=<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/delete_g.gif" border="0"></a>
@@ -95,4 +95,4 @@
    
    </tr>
 </table>
-<?php //include template('foot'); ?>
+<?php include template('foot'); ?>
