@@ -80,14 +80,9 @@
        
 <?php if(preg_match('/\.dzbak$/',$file['name'])) { ?>
        		<!-- <a title="还原数据库" href="?action=database&todo=importzip&datafile=<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/restore_g.gif" border="0" ></a> | --> 
-       		<a title="下载备份数据" href="<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/restore_g.gif" border="0" ></a> |
-       		<a title="删除数据库备份文件" href="?action=database&todo=del&file=<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/delete_g.gif" border="0"></a>
-       
-<?php } elseif(preg_match('/\.sql$/',$file['name'])) { ?>
-       		<a title="下载备份数据" href="<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/restore_g.gif" border="0"></a> | 
-       		<a title="删除数据库备份文件" href="?action=database&todo=del&file=<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/delete_g.gif" border="0"></a>
-       
-<? } ?>
+       		<a title="下载备份数据" href="<?=$file['name']?>"><img src="<?=$_TEMPLATESDIR?>/image/restore_g.gif" border="0" ></a>&nbsp;&nbsp;
+       		<a title="删除数据库备份文件" onclick="if(confirm('删除不可恢复,确认删除?')){location.href='?action=database_backup&todo=del&file=<?php echo $file['name'];?>';}" href="JavaScript:;"><img src="<?=$_TEMPLATESDIR?>/image/delete_g.gif" border="0"></a>
+<?php }?>
        </td>
     
 <?php } } ?>

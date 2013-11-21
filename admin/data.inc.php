@@ -368,11 +368,11 @@ elseif($todo=="execute") //运行查询语句
 elseif($todo=="del")
 {
     $backupfile = $_GET['file'];
-    if(is_file($backupfile) && preg_match("/\.(sql|zip)$/i", $backupfile)) 
+    if(is_file($backupfile) && preg_match("/\.(sql|dzbak)$/i", $backupfile)) 
     {
         if(unlink($backupfile))
         {
-            s('database_backupfile_delsuccess','?action=database&todo=backup');
+            s('database_backupfile_delsuccess','?action=database_backup&todo=backup');
         }
         else
         {
