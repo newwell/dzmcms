@@ -372,13 +372,13 @@ switch ($todo) {
 			'payment_type'=>$payment_type,
 			'add_date'=>$localtime
 		));
-		//exit('sssss');
 		if ($result) {
 			if ($sportinfo['type']!='time_trial') {
 				//非计时赛 记录服务费
 				balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛");
+			}else {
+				balance_log($card, $explain, $localtime,$money,"服务费","计时赛");
 			}
-			balance_log($card, $explain, $localtime,$money);
 			jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
 			$member_info = member_get(array($card),'card');
 			include template('sport_save_entry_print');

@@ -20,8 +20,11 @@ rebuy扣费:<?php echo $serviceCharge;?>分<br>
 会员卡号:<?php echo $buy_member_info['cardid'];?><br/>
 剩余积分:<?php echo $buy_member_info['balance'];?><br/>
 剩余奖励积分:<?php echo $buy_member_info['jiangli_jifen'];?><br/>
-积分合计:<?php echo $buy_member_info['balance']+$buy_member_info['jiangli_jifen'];?>
-
+积分合计:<?php echo $buy_member_info['balance']+$buy_member_info['jiangli_jifen'];?><br/>
+说明:<?php 
+$explain = explode(":", $explain);
+echo $explain[0];
+?>
 </div>
 
 <script type="text/javascript">

@@ -1,6 +1,6 @@
 <?php
 define("IN_SITE", "TRUE");
-define("DZMC_VERSIONS", "1.8.6");
+define("DZMC_VERSIONS", "1.8.8");
 define("DZMC_SOFTDOG_KEY", "136d26b5b22b0dfe0ed781dac2d521f8");
 header("Cache-control: private");
 header(base64_decode('WC1Qb3dlcmVkLUJ5OiBkYVphbiBOZXR3b3JrIFRlY2gvd3d3LmRhemFuLmNu'));
@@ -8,7 +8,8 @@ header("Content-Type: text/html; charset=UTF-8");
 //关闭PHP.ini的错误提示
 //ini_set("display_errors",0);
 $start_time = array_sum(explode(' ',microtime()));
-
+//全体使用格林威治时间
+date_default_timezone_set("UTC");
 if (!get_magic_quotes_gpc())
 {
     function addslashes_deep($value)

@@ -55,7 +55,6 @@ document.body.onload = function(){
             <th>会员卡</th>
 			<th >说明</th>
 			<th >小票编号</th>
-			
 			<th >操作员</th>	
 			<th>产生日期</th>	
         </tr>

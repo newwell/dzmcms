@@ -37,6 +37,9 @@ switch ($todo) {
 		$starttime	= isset($_REQUEST['starttime']) ? $_REQUEST['starttime'] : '';
 		$endtime	= isset($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
 		
+		/*echo strtotime($starttime)."<br/>";
+		echo $endtime."<br/>";*/
+		
 		$time_where = "";
 		$moneywhere=" `money`!=0 AND `type`='服务费'";
 		if (!empty($starttime)&&!empty($endtime)){
@@ -63,6 +66,7 @@ switch ($todo) {
 		}else {
 			$member_info = '';
 		}
+		//echo $sql;
 		//统计合计费用
 		$money_sun			= abs(balance_log_money($moneywhere));
 		$money_sun_jishi	= abs(balance_log_money($moneywhere." AND `type_explain`= '计时赛'"));
@@ -111,6 +115,7 @@ switch ($todo) {
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `type`='充值'";
 			if (!empty($time_where)) {
 				$sql.=$time_where;
+				$moneywhere.=$time_where;
 			}
 			$sql.=" ORDER BY  `id` DESC ";
 			$result		= $db->query($sql);

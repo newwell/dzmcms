@@ -8,11 +8,7 @@
 <h2><?php echo $setting_sitename;?></h2>
 <?php echo $act['title'];?><br/>
 -----------------------------<br/>
-产生时间:<?php if (empty($balance_log_info['type'])){
-	echo gmdate('Y.n.j H:i:s',$balance_log_info['add_date']);
-}else {
-	echo date('Y.n.j H:i:s',$balance_log_info['add_date']);
-}?><br/>
+产生时间:<?php echo gmdate('Y.n.j H:i:s',$balance_log_info['add_date']);?><br/>
 打印时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br/>
 -----------------------------<br/>
 说明:<br>
