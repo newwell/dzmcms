@@ -46,7 +46,7 @@
 			<?php }?>
         </tr>
 		<?php if(is_array($goodslArr)) { foreach($goodslArr as $key => $value) { ?>
-        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
+        <tr bgcolor="#F1F3F5" onmouseover="tr_add_color($(this))"onmouseout="tr_del_color($(this))">
             <td class="list"><input type="checkbox" name="ids[]" value="<?php echo $value['id']?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>      
             <td class="list"><?php echo $value['name']?></td>
             <td class="list"><?php echo $value['suk']?></td>

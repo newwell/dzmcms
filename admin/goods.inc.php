@@ -5,6 +5,44 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/goods.f.php';
 switch ($todo) {
+	case 'saveupdate'://保存修改信息
+		$id	= intval( isset($_POST['id']) ? $_POST['id'] : 0 );
+		if (empty($id))e("未获取商品ID");
+		
+		$name	= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
+		$suk	= htmlspecialchars( isset($_POST['suk']) ? $_POST['suk'] : '' );
+		$unit	= htmlspecialchars( isset($_POST['unit']) ? $_POST['unit'] : '' );
+		$categories_id	= intval( isset($_POST['categories_id']) ? $_POST['categories_id'] : 0);
+		$jinjia	= htmlspecialchars( isset($_POST['jinjia']) ? $_POST['jinjia'] : '' );
+		$price	= intval( isset($_POST['price']) ? $_POST['price'] : 0 );
+		$jiangli_jifen	= intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : 0 );
+		$diyong_jifen	= intval( isset($_POST['diyong_jifen']) ? $_POST['diyong_jifen'] : 0 );
+		$inventory	= intval( isset($_POST['inventory']) ? $_POST['inventory'] : 0 );
+		$remark	= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '' );
+		
+		if (empty($name)){e('名称不能为空');};
+		if (empty($unit)){e('单位不能为空');};
+		if (empty($categories_id)){e('产品分类异常');};
+		if (empty($price)){e('零售价不能为空');};
+		if (empty($inventory)){e('库存不能为空');};
+		
+		$result = goods_update($id,array(
+			"name"=>$name,
+			"suk"=>$suk,
+			"unit"=>$unit,
+			"categories_id"=>$categories_id,
+			"jinjia"=>$jinjia,
+			"price"=>$price,
+			"jiangli_jifen"=>$jiangli_jifen,
+			"diyong_jifen"=>$diyong_jifen,
+			"inventory"=>$inventory,
+			"remark"=>$remark,
+		
+			"add_date"=>$localtime
+		));
+		s('修改成功','?action=goods_list&todo=list');
+		
+		break;
 	case 'js_good_info':
 		$ids = $_GET['ids'];
 		$ids = substr($ids,0,strlen($ids)- 1);
@@ -31,7 +69,15 @@ switch ($todo) {
 		exit();
 		break;
 	case 'update':
-		e('修改商品信息暂时未做!');
+		$id	= intval( isset($_GET['id']) ? $_GET['id'] : 0 );
+		if (empty($id))e("未获取商品ID");
+		//获取要修改的商品信息
+		$good_info = goods_get(array($id));
+		if (empty($good_info))e("无商品信息");
+		$good_info = $good_info[0];
+		//获取商品分类
+		$goodsClassInfoArr	= goods_class_list(0);
+		include template('goods_update');
 		break;
 	case 'saveadd'://保存商品信息
 		$name	= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
@@ -48,8 +94,8 @@ switch ($todo) {
 		if (empty($name)){e('名称不能为空');};
 		if (empty($unit)){e('单位不能为空');};
 		if (empty($categories_id)){e('产品分类异常');};
-		if (empty($price)){e('零售及不能为空');};
-		if (empty($inventory)){e('库存不能为空');};
+		if (empty($price)){e('零售价不能为空');};
+		if (empty($inventory)){e('库存不能为空');};			
 		
 		$result = goods_add(array(
 			"name"=>$name,

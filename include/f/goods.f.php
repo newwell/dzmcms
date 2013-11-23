@@ -186,3 +186,20 @@ function goods_get($idArr=array()) {
 	}
 	return $resultArr;
 }
+/**
+ * 修改指定ID的信息
+ * @param int		$id			ID
+ * @param array()	$infoArr	修改的条件   array('url'=>"http://www.dazan.cn")
+ */
+function goods_update($id,$infoArr) {
+	global $db,$tablepre;
+	if (empty($infoArr)) return false;
+	$sql = "UPDATE  `{$tablepre}goods` SET ";
+	foreach ($infoArr as $key => $value) {
+		$sql.= "`$key` =  '$value',";
+	}
+	//去掉最后一个多余的,
+	$sql = substr($sql,0,strlen($sql)- 1);
+	$sql.=" WHERE `id` =$id;";
+	return $db->query($sql);
+}

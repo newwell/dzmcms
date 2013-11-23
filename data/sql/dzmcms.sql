@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 11 月 21 日 17:47
+-- 生成日期: 2013 年 11 月 23 日 13:30
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -132,7 +132,7 @@ INSERT INTO `dzmc_goods` (`id`, `name`, `suk`, `unit`, `categories_id`, `jinjia`
 (2, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 0),
 (4, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 11111),
 (6, '红茶', 'hc', '杯', 9, '', '20', '0', '0', 99, '', 1384172704),
-(7, '法国干红', 'fhgh', '瓶', 11, '', '199', '0', '10', 999, '', 1384172772);
+(7, '法国干红213123', 'fhgh1', '瓶', 11, '11', '1911', '0', '10', 999, 'asd', 1385213172);
 
 -- --------------------------------------------------------
 
@@ -1583,7 +1583,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1385052523, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1385203518, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
