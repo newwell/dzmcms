@@ -19,7 +19,7 @@ require_once 'include/f/member.f.php';
 function balance_add($card,$value,$type='balance') {
 	global $db,$tablepre;
 	$sql = "UPDATE  `{$tablepre}member` SET  `$type` =  `$type`+$value WHERE  card =$card;";
-	$result	= $db->fetch_one_array($sql);
+	$result	= $db->query($sql);
 	return $result;
 }
 /**
@@ -30,7 +30,7 @@ function balance_add($card,$value,$type='balance') {
 function balance_reduce($card,$value,$type='balance') {
 	global $db,$tablepre;
 	$sql = "UPDATE  `{$tablepre}member` SET  `$type` =  `$type`-$value WHERE  card =$card;";
-	$result	= $db->fetch_one_array($sql);
+	$result	= $db->query($sql);
 	return $result;
 }
 /**

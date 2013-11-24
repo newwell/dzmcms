@@ -13,9 +13,9 @@
 	<tr>
 	    <td width="80px" align="right">支付方式:</td>
 	    <td><select name="method_payment">
-	    	<?php foreach (GetConfig("method_payment") as $key => $value) {?>
-	    		<option value="<?php echo $key;?>"><?php echo $value;?></option>
-	    	<?php }?>
+	    		<option value="积分">积分</option>
+	    		<option value="现金">现金</option>
+	    		<option value="刷卡">刷卡</option>
 	    	</select></td>
 	</tr>
 	<tr>

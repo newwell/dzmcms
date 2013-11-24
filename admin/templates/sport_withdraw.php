@@ -55,7 +55,7 @@ document.body.onload = function(){
 			<th>操作</th>		
         </tr>
         <?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
-        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
+        <tr bgcolor="#F1F3F5" onmouseover="tr_add_color($(this))"onmouseout="tr_del_color($(this))">
             <td class="list"><?php echo $value['member_info']['name'];?>/<?php echo $value['member_info']['nickname'];?></td>
             <td class="list"><?php echo $value['member_info']['cardid'];?></td>
             <td class="list"><?php echo $value['sport']['name'];?></td>  

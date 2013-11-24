@@ -55,7 +55,7 @@
             <td class="list"><?php echo $value['jiangli_jifen']?></td>
             <?php if ($_GET['do']!='buy_list'){?>
 			<td class="list">
-				<a href="?action=goods_list&todo=update&id=<?php echo $value['id']?>" title="修改"><img src="<?php echo $_TEMPLATESDIR?>/image/edit_g.gif" border="0" alt="修改"/></a>
+				<a href="?action=goods_add&todo=update&id=<?php echo $value['id']?>" title="修改"><img src="<?php echo $_TEMPLATESDIR?>/image/edit_g.gif" border="0" alt="修改"/></a>
 			</td>
 			<?php }?>
         </tr>

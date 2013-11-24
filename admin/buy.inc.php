@@ -25,16 +25,28 @@ switch ($todo) {
 			$goodArr[$ids[$key]] = $temp[0];
 			$goodArr[$ids[$key]]["shuliang"] = $value;
 		}
-		
+		$remark =$payment_amount=$diyong_jifen=$jiangli_jifen="";
 		foreach ($goodArr as $value) {
-			echo $value['shuliang'].$value['unit']."\t[".$value['name']."]\t使用".$value['shuliang']*$value['price']."积分,".$value['shuliang']*$value['diyong_jifen']."奖励积分<br/>";
+			$remark.= $value['shuliang'].$value['unit']."\t[".$value['name']."]\t使用".$value['shuliang']*$value['price']."积分,".$value['shuliang']*$value['diyong_jifen']."奖励积分<br/>";
+			$payment_amount = intval($payment_amount)+(intval($value['shuliang'])*intval($value['price']));
+			$diyong_jifen = intval($diyong_jifen)+(intval($value['shuliang'])*intval($value['diyong_jifen']));
+			$jiangli_jifen = intval($jiangli_jifen)+(intval($value['shuliang'])*intval($value['jiangli_jifen']));
 		}
-		//echo("<pre>");
-		
-		//print_r($goodArr);
+		$card = $member_info['card'];
+		$r = buy_add(array(
+			"card"=>$card,
+			"type"=>"商品",
+			"method_payment"=>$method_payment,
+			"payment_amount"=>$payment_amount,
+			"diyong_jifen"=>$diyong_jifen,
+			"jiangli_jifen"=>$jiangli_jifen,
+			"remark"=>$remark,
+			'add_date'=>$localtime
+		));
+		if (!$r)e("购买失败");
 		exit;
 		//include template('buy_print');
-	case 'docash':
+	case 'docash'://非商品购买
 		$card			= dzmc_revise_card(( isset($_POST['card']) ? $_POST['card'] : '' ));
 		$method_payment	= htmlspecialchars( isset($_POST['method_payment']) ? $_POST['method_payment'] : '' );
 		$payment_amount	= intval( isset($_POST['payment_amount']) ? $_POST['payment_amount'] : 0);
@@ -52,17 +64,24 @@ switch ($todo) {
 		if ($method_payment=="jifen"&&$member_info['balance']<$payment_amount){
 			e("积分不够,请时使用其他付款方式");
 		}
+		$card = $member_info['card'];
+		$r = buy_add(array(
+			"card"=>$card,
+			"type"=>"非商品",
+			"method_payment"=>$method_payment,
+			"payment_amount"=>$payment_amount,
+			"diyong_jifen"=>$diyong_jifen,
+			"jiangli_jifen"=>$jiangli_jifen,
+			"remark"=>$remark,
+			'add_date'=>$localtime
+		));
+		if (!$r)e("购买失败");
 		$money = intval("-".$payment_amount);
-		if (balance_reduce($card, $payment_amount)){
-			balance_log($card, "非商品交易,扣除$payment_amount积分",$localtime,$money);
-		}
-		//echo "";
-		$method_payment_v = GetConfig('method_payment');
-		//print_r($method_payment_v);
-		$method_payment_v = $method_payment_v[$method_payment];
-		$member_info = member_get(array($card),'card');
+		balance_reduce($card, $payment_amount);
+		$text =  "非商品交易,扣除".$payment_amount."积分";
+		balance_log($card,$text,$localtime,$money);
+
 		include template('buy_cash_print');
-		//s("交易完成","?action=buy_cash&todo=cash");
 		break;
 	case 'cash'://非商品购买
 		include template('buy_cash');
