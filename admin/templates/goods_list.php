@@ -23,7 +23,7 @@
          	按<select name="d_option">
          		<option value="name" <?php if(!empty($d_option)&&$d_option=='name'){echo 'selected';}?>>名称</option>
          		<option value="suk" <?php if(!empty($d_option)&&$d_option=='suk'){echo 'selected';}?>>简码</option>
-         	</select>搜索<input name="keywork" value="<?php if (!empty($keywork))echo $keywork;?>"/>
+         	</select>搜索<input name="keywork" value="<?php if (!empty($keywork))echo $keywork;?>" onkeydown="if(event.keyCode==13){searchsubmitform(this.form);}"/>
          	<input type="button" value="搜索" class="button_input" onclick="JavaScript:searchsubmitform(this.form);">
          	<script type="text/javascript">
          	function searchsubmitform(form) {

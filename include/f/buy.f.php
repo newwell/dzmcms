@@ -32,3 +32,15 @@ function buy_add($infoArr) {
 	$sql.=");";
 	return $db->query($sql);
 }
+/**
+ * 该条件下的参赛的总数
+ */
+function buy_order_total($where='') {
+	global $db,$tablepre;
+	$sql	= "SELECT COUNT(id) AS countnum FROM {$tablepre}order ";
+	if (!empty($where)) {
+		$sql .="WHERE ".$where;
+	}
+	$result	= $db->fetch_one_array($sql);
+	return $result['countnum'];
+}

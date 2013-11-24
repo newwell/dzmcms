@@ -8,6 +8,41 @@ require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 require_once 'include/f/goods.f.php';
 switch ($todo) {
+	case 'log'://销售记录
+		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : ''));
+		$infoList	= array();
+		if (!empty($card)){
+			$member_info = member_get(array($card),'card');
+			$card = isset($member_info['card'])?$member_info['card']:0;
+			$sql = "SELECT * FROM  `{$tablepre}entry` WHERE `card` =$card ORDER BY  `add_date` DESC ";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
+				$arr['member_info'] = member_get(array($arr['card']),"card");
+		        $infoList[]	= $arr;
+			}
+		}else {
+			$member_info = '';
+			$page   = intval( isset($_GET['page']) ? $_GET['page'] : 1 );
+			$perpage = intval( isset($_GET['perpage']) ? $_GET['perpage'] : 20 );
+			if($page > 0){
+				$startlimit = ($page - 1) * $perpage;
+			}else{
+				$startlimit = 0;
+			}
+			$page_array = array();
+			$total		= buy_order_total();
+			$page_control = multipage($total,$perpage,$page);
+			$sql = "SELECT * FROM  `{$tablepre}order` ORDER BY add_date DESC LIMIT $startlimit , $perpage";
+			$result		= $db->query($sql);
+			while($arr	= $db->fetch_array($result)){
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
+				$arr['member_info'] = member_get(array($arr['card']),"card");
+		        $infoList[]	= $arr;
+			}	
+		}
+		include template('buy_log');
+		break;
 	case 'buy'://执行购买
 		$card			= dzmc_revise_card( isset($_POST['card']) ? $_POST['card'] : '');
 		$shuliang		= isset($_POST['shuliang']) ? $_POST['shuliang'] : '';
@@ -43,9 +78,27 @@ switch ($todo) {
 			"remark"=>$remark,
 			'add_date'=>$localtime
 		));
+/*		echo $remark."<br/>";
+		echo $payment_amount."<br/>";
+		echo $diyong_jifen."<br/>";
+		echo $jiangli_jifen."<br/>";
+	
+		*/
 		if (!$r)e("购买失败");
-		exit;
-		//include template('buy_print');
+		$money = intval("-".$payment_amount)-$diyong_jifen+$jiangli_jifen;//计算收入
+		balance_reduce($card, $payment_amount);
+		$text =  "商品交易,扣除".$payment_amount."积分";
+		if (empty($diyong_jifen)){
+			balance_reduce($card, $diyong_jifen,"jiangli_jifen");
+			$text.=",扣除".$diyong_jifen."奖励积分";
+		}
+		if (empty($jiangli_jifen)){
+			balance_add($card, $jiangli_jifen,"jiangli_jifen");
+			$text.=",赠送".$jiangli_jifen."奖励积分";
+		}
+		balance_log($card,$text."<br/>备注:".$remark,$localtime,$money,"销售","商品");
+		include template('buy_print');
+		break;
 	case 'docash'://非商品购买
 		$card			= dzmc_revise_card(( isset($_POST['card']) ? $_POST['card'] : '' ));
 		$method_payment	= htmlspecialchars( isset($_POST['method_payment']) ? $_POST['method_payment'] : '' );
@@ -76,11 +129,18 @@ switch ($todo) {
 			'add_date'=>$localtime
 		));
 		if (!$r)e("购买失败");
-		$money = intval("-".$payment_amount);
+		$money = intval("-".$payment_amount)-$diyong_jifen+$jiangli_jifen;//计算收入
 		balance_reduce($card, $payment_amount);
 		$text =  "非商品交易,扣除".$payment_amount."积分";
-		balance_log($card,$text,$localtime,$money);
-
+		if (empty($diyong_jifen)){
+			balance_reduce($card, $diyong_jifen,"jiangli_jifen");
+			$text.=",扣除".$diyong_jifen."奖励积分";
+		}
+		if (empty($jiangli_jifen)){
+			balance_add($card, $jiangli_jifen,"jiangli_jifen");
+			$text.=",赠送".$jiangli_jifen."奖励积分";
+		}
+		balance_log($card,$text,$localtime,$money,"销售","非商品");
 		include template('buy_cash_print');
 		break;
 	case 'cash'://非商品购买

@@ -30,8 +30,10 @@
 	    </td>
 	</tr>
 	<tr>
-	    <td align="right">进价:</td>
-	    <td><input name="jinjia" value="<?php echo $good_info['jinjia'];?>"/></td>
+<!-- <td align="right">进价:</td>
+	    <td><input name="jinjia" value="<?php echo $good_info['jinjia'];?>"/></td>-->
+	    <td align="right">库存:</td>
+	    <td><input name="inventory" required="true" value="<?php echo $good_info['inventory'];?>"/>*不能为空</td>
 	    <td align="right">零售价:</td>
 	    <td><input name="price" required="true" value="<?php echo $good_info['price'];?>"/>*不能为空</td>
 	</tr>
@@ -42,8 +44,7 @@
 	    <td><input name="diyong_jifen" value="<?php echo $good_info['diyong_jifen'];?>"/></td>
 	</tr>
 	<tr>
-	    <td align="right">库存:</td>
-	    <td colspan="3"><input name="inventory" required="true" value="<?php echo $good_info['inventory'];?>"/>*不能为空</td>
+	    
 	</tr>
 	<tr >
 	    <td width="80px" align="right">备注:</td>

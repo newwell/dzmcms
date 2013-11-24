@@ -27,9 +27,11 @@
 	    	</select>
 	    </td>
 	</tr>
-	<tr>
+	<tr><!--
 	    <td align="right">进价:</td>
 	    <td><input name="jinjia"/></td>
+	    --><td align="right">库存:</td>
+	    <td ><input name="inventory" required="true"//>*不能为空</td>
 	    <td align="right">零售价:</td>
 	    <td><input name="price" required="true"/>*不能为空</td>
 	</tr>
@@ -38,10 +40,6 @@
 	    <td><input name="jiangli_jifen"/></td>
 	    <td align="right">可抵用奖励积分:</td>
 	    <td><input name="diyong_jifen"/></td>
-	</tr>
-	<tr>
-	    <td align="right">库存:</td>
-	    <td colspan="3"><input name="inventory" required="true"//>*不能为空</td>
 	</tr>
 	<tr >
 	    <td width="80px" align="right">备注:</td>

@@ -286,8 +286,7 @@ switch ($todo) {
 				$arr['sport'] = sport_get(array($arr['sport_id']),"id");
 				$arr['member_info'] = member_get(array($arr['card']),"card");
 		        $infoList[]	= $arr;
-			}
-			//$infoList	= entry_list($startlimit, $perpage);	
+			}	
 		}
 		include template('sport_withdraw');
 		break;
