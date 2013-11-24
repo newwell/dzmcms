@@ -14,7 +14,7 @@ switch ($todo) {
 		if (!empty($card)){
 			$member_info = member_get(array($card),'card');
 			$card = isset($member_info['card'])?$member_info['card']:0;
-			$sql = "SELECT * FROM  `{$tablepre}entry` WHERE `card` =$card ORDER BY  `add_date` DESC ";
+			$sql = "SELECT * FROM  `{$tablepre}order` WHERE `card` =$card ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
 				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);

@@ -6,7 +6,7 @@ document.body.onload = function(){
     document.getElementById("card").focus();
 };
 </script>
-<form action="?action=sport_withdraw&todo=withdraw" method="post" onsubmit="return CheckForm(this,true);">
+<form action="?action=buy_log&todo=log" method="post" onsubmit="return CheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
