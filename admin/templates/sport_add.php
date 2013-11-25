@@ -8,7 +8,7 @@
 	    <td align="right">赛事名称:</td>
 	    <td><input name="name" required="true"/>*不能为空</td>
 	    <td align="right">比赛开始时间:</td>
-	    <td><input name="start_time" autocomplete="off" class="Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+	    <td><input name="start_time" autocomplete="off" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
 	</tr>
 	<tr>
 	    <td align="right">类型:</td>
@@ -41,7 +41,7 @@
 		<td align="right">涨盲时间:</td>
 		<td><input name="zhangmang_time"/>分钟</td>
 	    <td align="right">截至买入时间:</td>
-	    <td><input name="stop_entry_time" autocomplete="off"  required="true" class="Wdate" onclick="WdatePicker({startDate:'%y-%M-01 00:00:00',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" />*不能为空</td>
+	    <td><input name="stop_entry_time" autocomplete="off"  required="true" class="Wdate" onclick="WdatePicker({startDate:'%y-%M-%d 23:59:59',dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})" />*不能为空</td>
 	</tr>
 	<tr>
 	    <td align="right">休息时间:</td>

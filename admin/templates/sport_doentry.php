@@ -40,7 +40,6 @@ document.body.onload = function(){
 <input type="hidden" value="<?php echo $card;?>" name="card">
 <input type="hidden" value="<?php echo $member_info['balance'];?>" name="balance" id="balance">
 <input type="hidden" value="<?php echo $member_info['jiangli_jifen'];?>" name="jiangli_jifen" id="jiangli_jifen">
-<input type="hidden" value="<?php echo $sportcharge;?>" name="sportcharge" id="sportcharge">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
 	    <td align="right">参赛名称:</td>
@@ -53,7 +52,10 @@ document.body.onload = function(){
 		    </select>
 	    </td>
 	</tr>
-
+	<tr>
+		<td align="right">PK赛买入金额:</td>
+		<td colspan="3"><input type="text" value="<?php echo $sportcharge;?>" name="sportcharge" id="sportcharge"></td>
+	</tr>
 	<tr>
 		<td colspan="4" align="center">	<input type="button" class="formsubmit" value="提交" onclick="check_jifen_submit(<?php echo $card;?>,<?php echo $id;?>,this.form);"></td>
 	</tr>

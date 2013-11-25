@@ -290,7 +290,7 @@ switch ($todo) {
 		}
 		include template('sport_withdraw');
 		break;
-	case 'save_entry':
+	case 'save_entry'://保存报名信息
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$sport_id   = isset($_REQUEST['sport_id']) ? $_REQUEST['sport_id'] : '';
 		$payment_type   = isset($_POST['payment_type']) ? $_POST['payment_type'] : '';
@@ -385,7 +385,7 @@ switch ($todo) {
 			s('失败','?action=sport_entry&todo=entry&do=entry');
 		}
 		break;
-	case 'doentry':
+	case 'doentry'://报名页面
 		$card		=dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$id   = isset($_GET['id']) ? $_GET['id'] : '';
 		if (!empty($card)){
@@ -519,7 +519,7 @@ switch ($todo) {
 		$deingcoholr_id	= intval( isset($_POST['deingcoholr_id']) ? $_POST['deingcoholr_id'] : 0 );
 		$remark	= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '' );
 		
-		if ($type=="time_trial"){
+		if ($type=="time_trial"){//计时赛必须填写服务费分钟
 			if (empty($service_charge_time))e('计时赛必须填写服务费扣费分钟');
 		};
 		if (empty($name))e("赛事名称不能为空!");
