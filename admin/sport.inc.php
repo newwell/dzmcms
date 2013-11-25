@@ -500,7 +500,7 @@ switch ($todo) {
 			s('删除成功','?action=sport_list&todo=list');
 		}
 		break;
-	case 'saveadd':
+	case 'saveadd'://保存添加赛事
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
 		$start_time	= htmlspecialchars( isset($_POST['start_time']) ? $_POST['start_time'] : 0 );
 		$type		= htmlspecialchars( isset($_POST['type']) ? $_POST['type'] : 0 );
@@ -509,7 +509,7 @@ switch ($todo) {
 		$service_charge	= intval( isset($_POST['service_charge']) ? $_POST['service_charge'] : 0 );
 		$people_number	= intval( isset($_POST['people_number']) ? $_POST['people_number'] : 0 );
 		$rebuy	= intval( isset($_POST['rebuy']) ? $_POST['rebuy'] : 0 );
-		$entry_number	= intval( isset($_POST['entry_number']) ? $_POST['entry_number'] : '' );
+		//$entry_number	= intval( isset($_POST['entry_number']) ? $_POST['entry_number'] : '' );
 		$zhangmang_time	= ( isset($_POST['zhangmang_time']) ? $_POST['zhangmang_time'] : '' );
 		$stop_entry_time= ( isset($_POST['stop_entry_time']) ? $_POST['stop_entry_time'] : 0 );
 		$rest_time	= intval( isset($_POST['rest_time']) ? $_POST['rest_time'] : 0 );
@@ -536,7 +536,7 @@ switch ($todo) {
 			'service_charge'=>$service_charge,
 			'people_number'=>$people_number,
 			'rebuy'=>$rebuy,
-			'entry_number'=>$entry_number,
+			/*'entry_number'=>$entry_number,  --去掉参赛次数--用新的 参赛人次逻辑代替 newwell 20131125*/
 			'zhangmang_time'=>$zhangmang_time,
 			'stop_entry_time'=>strtotime($stop_entry_time) + 8 * 3600,
 			'rest_time'=>$rest_time,

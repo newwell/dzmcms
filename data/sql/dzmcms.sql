@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 11 月 24 日 17:05
+-- 生成日期: 2013 年 11 月 25 日 12:44
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=62 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=63 ;
 
 --
 -- 转存表中的数据 `dzmc_balance_log`
@@ -80,7 +80,8 @@ INSERT INTO `dzmc_balance_log` (`id`, `card`, `type`, `money`, `type_explain`, `
 (58, '736940301', '销售', -1941, '商品', '商品交易,扣除1931积分,赠送0奖励积分<br>剩余积分:77774563742剩余奖励积分:999996669', 'admin', 1385307351),
 (59, '736940301', '销售', -1941, '商品', '商品交易,扣除1944积分<br/>备注:1个	[打火机]	使用1积分,0奖励积分<br/>12个	[打火机]	使用12积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/><br>剩余积分:77774561798剩余奖励积分:999996669', 'admin', 1385307464),
 (60, '736940301', '销售', -1, '非商品', '非商品交易,扣除1积分,扣除0奖励积分,赠送0奖励积分<br>剩余积分:77774561797剩余奖励积分:999996669', 'admin', 1385310802),
-(61, '736940301', '销售', 0, '商品', '商品交易,扣除1积分,扣除0奖励积分<br/>备注:1个	[打火机]	使用1积分,0奖励积分<br/><br>剩余积分:77774561796剩余奖励积分:999996669', 'admin', 1385310846);
+(61, '736940301', '销售', 0, '商品', '商品交易,扣除1积分,扣除0奖励积分<br/>备注:1个	[打火机]	使用1积分,0奖励积分<br/><br>剩余积分:77774561796剩余奖励积分:999996669', 'admin', 1385310846),
+(62, '', 'MSN', 11, '斯蒂芬', '11', '1', 1);
 
 -- --------------------------------------------------------
 
@@ -1515,7 +1516,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
   `add_date` int(15) DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=6 ;
 
 --
 -- 转存表中的数据 `dzmc_sport`
@@ -1524,7 +1525,8 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
 INSERT INTO `dzmc_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
 (1, '非计时赛 588', 'no_time_trial', 1379152016, 500, 88, 0, 10, 1, 0, 1379238422, 0, 0, '', 0, 0, '', 6899, '已结束', 5, 1379152036),
 (3, 'MTT 50积分赛', 'time_trial', 1381328223, 0, 50, 15, 10, 1, 0, 1381501025, 0, 0, '', 0, 0, '', 0, '竞赛中', 0, 1381328239),
-(4, '非计时赛 128', 'no_time_trial', 1383264000, 100, 28, 0, 10, 1, 0, 1383350400, 0, 0, '', 0, 0, '', 1000, '未开赛', 2, 1383518427);
+(4, '非计时赛 128', 'no_time_trial', 1383264000, 100, 28, 0, 10, 1, 0, 1383350400, 0, 0, '', 0, 0, '', 1000, '未开赛', 2, 1383518427),
+(5, 'PK赛 1223', 'pk_trial', 1383292800, 0, 0, 0, 10, 1, 0, 1383379200, 0, 0, '', 0, 0, '', 0, '未开赛', 0, 1385383368);
 
 -- --------------------------------------------------------
 
@@ -1642,7 +1644,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1385302192, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1385374037, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

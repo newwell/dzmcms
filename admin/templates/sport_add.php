@@ -13,29 +13,30 @@
 	<tr>
 	    <td align="right">类型:</td>
 	    <td><select name="type" onchange="show_sport_type(this.value);">
+	    		<option value="pk_trial">PK赛</option>
 	    		<option value="time_trial">计时赛</option>
 	    		<option value="no_time_trial" selected="selected">非计时赛</option>
 	    </select></td>
 	    <td align="right">积分消耗:</td>
-	    <td>
-	    	<input name="deduction" required="true"/>*不能为空
-	    </td>
+	    <td id="td_积分消耗"><input name="deduction"/>*不能为空</td>
+	    <td id="td_积分消耗报名时直接买入" style="display: none;">积分消耗报名时直接买入</td>
 	</tr>
 	<tr>
 	    <td align="right">服务费:</td>
-	    <td><span id="service_charge_time" style="display: none;">每<input name="service_charge_time" style="width: 35px;"/>分钟,</span>扣除<input name="service_charge" required="true"/>积分</td>
-	    <td align="right">人数上限:</td>
+	    <td id="td_服务费"><span id="service_charge_time" style="display: none;">每<input name="service_charge_time" style="width: 35px;"/>分钟,</span>扣除<input name="service_charge"/>积分</td>
+	    <td id="td_服务费为剩余奖池" style="display: none;">服务费为剩余奖池</td>
+	    <td align="right">可参赛人次:</td>
 	    <td><input name="people_number" required="true" value="10" />*不能为空</td>
 	</tr>
 	<tr>
 	    <td align="right">支持可以再次买入:</td>
-	    <td><select name="rebuy">
+	    <td colspan="3"><select name="rebuy">
 	    		<option value="1">是</option>
 	    		<option value="0">否</option>
 	    </select></td>
-	    <td align="right">参赛次数:</td>
+	    <!--<td align="right">参赛次数:</td>
 	    <td><input name="entry_number"/></td>
-	</tr>
+	--></tr>
 	<tr>
 		<td align="right">涨盲时间:</td>
 		<td><input name="zhangmang_time"/>分钟</td>
@@ -75,17 +76,29 @@
 </table>
 </form>
 <script type="text/javascript">
-<!--
 function show_sport_type(type) {
 	switch (type) {
+		case 'pk_trial':
+			$('#td_服务费').hide();
+			$('#td_服务费为剩余奖池').show();
+			$('#td_积分消耗').hide();
+			$('#td_积分消耗报名时直接买入').show();
+			break;
 		case 'time_trial':
+			$('#td_服务费为剩余奖池').hide();
+			$('#td_服务费').show();
+			$('#td_积分消耗报名时直接买入').hide();
+			$('#td_积分消耗').show();
 			$('#service_charge_time').show();
 		break;
 		case 'no_time_trial':
+			$('#td_服务费为剩余奖池').hide();
+			$('#td_服务费').show();
+			$('#td_积分消耗报名时直接买入').hide();
+			$('#td_积分消耗').show();
 			$('#service_charge_time').hide();
-			break;
+		break;
 	}
 }
-//-->
 </script>
 <?php include template('foot'); ?>
