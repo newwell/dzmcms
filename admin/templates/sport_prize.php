@@ -28,17 +28,19 @@
 		<?php } }?>
 		<tr bgcolor="#A6D0F6" align="center">
 			<td class="list"><input name="ranking" value="第 <?php if (isset($key)){echo $key+2;}else {echo 1;};?> 名"/></td>
-			<td class="list"><input name="card" value="" onblur="get_user_name();" id="card"/></td>
+			<td class="list"><input name="card" value="<?php echo $_GET['card'];?>" onblur="get_user_name();" onkeydown="if(event.keyCode==13){get_user_name();}"id="card"/></td>
 			<td class="list"><input name="name" id="name"/></td>
 			<td class="list"><input name="jiangli_jifen"/></td>
 			<td class="list"><input type="button" value="提交奖励"  class="formsubmit" onclick="javascript:this.form.submit();"/></td>
 		</tr>
 		<script type="text/javascript">
-function get_user_name() {
-	$.get("?action=member_find&todo=js_user_info&card="+$("#card").val(),function(data,status){
-		$("#name").val(data.name);
-	  }, "json");
-}</script>
+		function get_user_name() {
+			$.get("?action=member_find&todo=js_user_info&card="+$("#card").val(),function(data,status){
+				$("#name").val(data.name);
+			  }, "json");
+		}
+		get_user_name();
+		</script>
 		<tr bgcolor="#E4EDF9" align="center">
 			<td class="list" colspan="5" style="color: red;">奖池剩余:<?php echo $sport_info['jackpot']?></td>
 		</tr>

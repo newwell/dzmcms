@@ -29,6 +29,8 @@ switch ($todo) {
 		$sport_id	= intval( isset($_POST['sport_id']) ? $_POST['sport_id'] : '' );
 		$payment_type   = isset($_POST['payment_type']) ? $_POST['payment_type'] : '';
 		
+		$sportcharge	= intval( isset($_POST['sportcharge']) ? $_POST['sportcharge'] : '' );
+		
 		$tiaohui = "?action=sport_withdraw&todo=withdraw&card=$r_card";
 		if (empty($buy_card)){s('没有得到读卡',$tiaohui);}
 		if (empty($entry_id)){s('没有得到参赛编号',$tiaohui);}
@@ -44,8 +46,15 @@ switch ($todo) {
 		//计算赛事费用
 		if($sport_info['type']=='time_trial'){//计时赛
 			$serviceCharge = $sport_info['deduction'];
-		}else {//非计时赛
+		}elseif ($sport_info['type']=='no_time_trial') {//非计时赛
 			$serviceCharge = $sport_info['deduction']+$sport_info['service_charge'];
+		}elseif ($sport_info['type']=='pk_trial'){//PK赛
+			$serviceCharge = $sportcharge;
+			if (empty($serviceCharge)){
+				s('PK赛rebuy费用不能为空',$tiaohui);
+			}
+		}else {
+			s('无法获取赛事类型',$tiaohui);
 		}
 		
 		if((($member_info['balance'])+($member_info['jiangli_jifen']))<($serviceCharge)){
@@ -87,7 +96,12 @@ switch ($todo) {
 		if ($result) {
 			//$money = intval($value);
 			balance_log($card, $explain, $localtime,$money);
-			jackpot_add($sport_id,  $sport_info['deduction']);//增加奖池
+			//增加奖池
+			if ($sport_info['type']!='pk_trial') {//不是pk赛的话奖池增加数直接等于比赛的积分消耗
+				jackpot_add($sport_id,  $sport_info['deduction']);
+			}else {//PK赛买入的钱都直接进入奖池
+				jackpot_add($sport_id,$serviceCharge);
+			}
 			$buy_member_info = member_get(array($card),'card');
 			$r_member_info = member_get(array($r_card),'card');
 			include template('sport_rebuy_print');
@@ -212,7 +226,7 @@ switch ($todo) {
 		$entry_info		= entry_get(array($entry_id),'id');
 		$sport_info		= sport_get(array($sport_id),'id');
 		
-		if ($sport_info['type']=='time_trial'){
+		if ($sport_info['type']=='time_trial'){//计时赛
 			//计算服务费
 			$serviceCharge = $localtime - $entry_info['add_date'];
 			$serviceCharge = $serviceCharge/($sport_info['service_charge_time']*60);
@@ -220,37 +234,45 @@ switch ($todo) {
 		}else {
 			$serviceCharge = 0;
 		}
-		
-		//相应积分是否够扣除
-		if ($entry_info['payment_type']=='jiangli_jifen'){
-			if ($member_info['jiangli_jifen']<$serviceCharge){
-				s("需要[ $serviceCharge ]奖励积分,奖励积分不够,无法完成退赛",$tiaohui);
-				
+		//计时赛才进行积分计算 扣除根据时间计算的服务费
+		if ($sport_info['type']=='time_trial'){
+			//相应积分是否够扣除
+			if ($entry_info['payment_type']=='jiangli_jifen'){
+				if ($member_info['jiangli_jifen']<$serviceCharge){
+					s("需要[ $serviceCharge ]奖励积分,奖励积分不够,无法完成退赛",$tiaohui);
+					
+				}
+				balance_reduce($card, $serviceCharge,$entry_info['payment_type']);
+				$type="奖励积分";
+			}elseif ($entry_info['payment_type']=='balance') {
+				if ($member_info['balance']<$serviceCharge){
+					s("需要[ $serviceCharge ]积分,积分不够,无法完成退赛",$tiaohui);
+				}
+				balance_reduce($card, $serviceCharge,$entry_info['payment_type']);
+				$type="积分";
 			}
-			balance_reduce($card, $serviceCharge,$entry_info['payment_type']);
-			$type="奖励积分";
-		}elseif ($entry_info['payment_type']=='balance') {
-			if ($member_info['balance']<$serviceCharge){
-				s("需要[ $serviceCharge ]积分,积分不够,无法完成退赛",$tiaohui);
-			}
-			balance_reduce($card, $serviceCharge,$entry_info['payment_type']);
-			$type="积分";
 		}
 		$result = entry_update($entry_id, array(
 			"status"=>"已退赛",
 			"exit_time"=>$localtime
 		));
 		if ($result){
-			//s("退赛成功,扣除[ $serviceCharge ]$type",$tiaohui);
-			$money = intval("-".$serviceCharge);
-			balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money,"服务费","计时赛");
-			include template('sport_withdraw_print');
+			if ($sport_info['type']=='time_trial'){//计时赛
+				$money = intval("-".$serviceCharge);
+				balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money,"服务费","计时赛");
+				include template('sport_withdraw_print');
+			}elseif ($sport_info['type']=='no_time_trial'){//非计时赛
+				echo "把积分退回去,稍等一下做,可以先用积分变动!";
+			}elseif ($sport_info['type']=='pk_trial'){//PK赛
+				//直接去颁奖
+				echo '<script type="text/javascript">location.href="?action=sport_list&todo=prize&card='.$card.'&id='.$sport_id.'";</script>';
+			}
 		}else {
 			s("退赛失败",$tiaohui);
 		}
 		
 		break;
-	case 'withdraw':
+	case 'withdraw'://会员赛事记录页面
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : ''));
 		$infoList	= array();
 		if (!empty($card)){
@@ -294,6 +316,7 @@ switch ($todo) {
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$sport_id   = isset($_REQUEST['sport_id']) ? $_REQUEST['sport_id'] : '';
 		$payment_type   = isset($_POST['payment_type']) ? $_POST['payment_type'] : '';
+		$sportcharge   = isset($_POST['sportcharge']) ? $_POST['sportcharge'] : '';
 		
 		if (empty($card)||empty($sport_id))s('会员id未得到','?action=sport_entry&todo=entry&do=entry');
 		$member_info = member_get(array($card),'card');
@@ -307,8 +330,10 @@ switch ($todo) {
 		
 		if($sportinfo['type']=='time_trial'){//计时赛
 				$sportcharge = $sportinfo['deduction'];
-			}else {//非计时赛
+		}elseif ($sportinfo['type']=='no_time_trial') {//非计时赛
 				$sportcharge = $sportinfo['deduction']+$sportinfo['service_charge'];
+		}elseif ($sportinfo['type']=='pk_trial') {//PK赛
+			$sportcharge =intval($sportcharge);
 		}
 		if((($member_info['balance'])+($member_info['jiangli_jifen']))<($sportcharge)){
 			s('所有积分不够,无法完成报名','?action=sport_entry&todo=doentry&do=entry&card='.$card."&id=".$sport_id);
@@ -363,8 +388,7 @@ switch ($todo) {
 				$explain = "报名赛事[ ".$sportinfo['name']." ]:".$text_.",  ";
 			}
 		}
-			
-		
+		//记录到报名列表
 		$result = entry_add(array(
 			'card'=>$card,
 			'sport_id'=>$sport_id,
@@ -372,13 +396,18 @@ switch ($todo) {
 			'add_date'=>$localtime
 		));
 		if ($result) {
-			if ($sportinfo['type']!='time_trial') {
+			if ($sportinfo['type']=='no_time_trial') {
 				//非计时赛 记录服务费
 				balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛");
-			}else {
+				jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
+			}elseif ($sportinfo['type']=='time_trial'){
 				balance_log($card, $explain, $localtime,$money,"服务费","计时赛");
+				jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
+			}elseif ($sportinfo['type']=='pk_trial') {
+				balance_log($card, $explain, $localtime,$money,"","PK赛");
+				jackpot_add($sport_id,$sportcharge);//增加奖池
 			}
-			jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
+			
 			$member_info = member_get(array($card),'card');
 			include template('sport_save_entry_print');
 		}else {

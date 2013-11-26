@@ -52,7 +52,9 @@ document.body.onload = function(){
 		    </select>
 	    </td>
 	</tr>
-	<tr>
+	<tr <?php if ($sportinfo['type']!="pk_trial"){
+		echo 'style="display: none;"';
+	}?>>
 		<td align="right">PK赛买入金额:</td>
 		<td colspan="3"><input type="text" value="<?php echo $sportcharge;?>" name="sportcharge" id="sportcharge"></td>
 	</tr>

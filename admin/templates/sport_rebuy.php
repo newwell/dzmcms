@@ -41,7 +41,7 @@ document.body.onload = function(){
 	    <td align="right">参赛名称:</td>
 	    <td><?php echo $sport_info['name'];?></td>
 	    <td align="right">rebuy费用:</td>
-	    <td><input value="<?php echo $sportcharge;?>" disabled="disabled" name="sportcharge" id="sportcharge"></td>
+	    <td><input value="<?php if ($sportcharge==0){echo '';}else{echo $sportcharge;}?>" <?php if ($sport_info['type']!="pk_trial"){echo 'disabled="disabled"';}?> name="sportcharge" id="sportcharge"></td>
 	</tr>
 </table>
 <br>
