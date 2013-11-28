@@ -1,7 +1,6 @@
 <?php
 require_once('include/common.inc.php');
 require_once('include/lang/lang.php');
-
 session_start();
 
 //后台语言全局数组

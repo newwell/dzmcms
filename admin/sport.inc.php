@@ -1,4 +1,15 @@
 <?php
+/**
+ * ------------------------------------------------------------------
+ * 赛事逻辑处理块
+ * ------------------------------------------------------------------
+ * @author		newwell
+ * ------------------------------------------------------------------
+ * @copyright	武汉大赞网络科技
+ * ------------------------------------------------------------------
+ * @link		http://www.dazan.cn
+ * ------------------------------------------------------------------
+ */
 if(!defined('IN_SITE')) exit('Access Denied');
 CheckAccess();
 global $act,$todo,$tablepre,$db,$do;
@@ -8,6 +19,31 @@ require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 require_once 'include/f/staff.f.php';
 switch ($todo) {
+	case 'prize2service'://把剩余奖池放入服务费收益中
+		$sport_id	= intval( isset($_GET['sport_id']) ? $_GET['sport_id'] : '' );
+		if (empty($sport_id)) e("未获取到赛事编号");
+		$sport_info		= sport_get(array($sport_id),'id');
+		if ($sport_info['jackpot']<1) {
+			s("没有奖池可以转入服务费了",'?action=sport_list&todo=prize&id='.$sport_id);
+		}
+		switch ($sport_info['type']) {
+			case 'no_time_trial':
+				$explain = "非计时赛";
+			break;
+			case 'time_trial':
+				$explain = "计时赛";
+			break;
+			case 'pk_trial':
+				$explain = "PK赛";
+			break;
+		}
+		//剩余奖池扣完
+		jackpot_reduce($sport_id, $sport_info['jackpot']);
+		//记入服务费收益
+		$money = intval('-'.$sport_info['jackpot']);
+		balance_log("", "", $$localtime, $money,"服务费",$explain);
+		s("转入成功",'?action=sport_list&todo=prize&id='.$sport_id);
+	break;
 	case 'desktop':
 		$page   = intval( isset($_GET['page']) ? $_GET['page'] : 1 );
 		$perpage = intval( isset($_GET['perpage']) ? $_GET['perpage'] : 20 );
@@ -225,14 +261,24 @@ switch ($todo) {
 		$member_info	= member_get(array($card),'card');
 		$entry_info		= entry_get(array($entry_id),'id');
 		$sport_info		= sport_get(array($sport_id),'id');
-		
-		if ($sport_info['type']=='time_trial'){//计时赛
-			//计算服务费
-			$serviceCharge = $localtime - $entry_info['add_date'];
-			$serviceCharge = $serviceCharge/($sport_info['service_charge_time']*60);
-			$serviceCharge = ceil($serviceCharge)*$sport_info['service_charge'];
-		}else {
-			$serviceCharge = 0;
+				
+		switch ($sport_info['type']) {
+			case 'time_trial'://计时赛//计算记时服务费
+				$serviceCharge = $localtime - $entry_info['add_date'];
+				$serviceCharge = $serviceCharge/($sport_info['service_charge_time']*60);
+				$serviceCharge = ceil($serviceCharge)*$sport_info['service_charge'];
+			break;
+			case "no_time_trial"://非计时赛
+				//非计时赛的退赛是完全退回积分的.所以服务费为 积分消耗+服务费
+				$serviceCharge = $sport_info['deduction']+$sport_info['service_charge'];
+			break;
+			case "pk_trial"://PK赛
+				$serviceCharge = '';//PK赛退赛直接发奖,不用计算服务费
+			break;
+			
+			default:
+				s("找不到赛事类型",$tiaohui);
+			break;
 		}
 		//计时赛才进行积分计算 扣除根据时间计算的服务费
 		if ($sport_info['type']=='time_trial'){
@@ -252,7 +298,7 @@ switch ($todo) {
 				$type="积分";
 			}
 		}
-		$result = entry_update($entry_id, array(
+		 $result = entry_update($entry_id, array(
 			"status"=>"已退赛",
 			"exit_time"=>$localtime
 		));
@@ -262,7 +308,19 @@ switch ($todo) {
 				balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money,"服务费","计时赛");
 				include template('sport_withdraw_print');
 			}elseif ($sport_info['type']=='no_time_trial'){//非计时赛
-				echo "把积分退回去,稍等一下做,可以先用积分变动!";
+				//参赛次数大于1表示rebuy过了,rebuy就是已经上场了,上场过的用户是不允许退赛的!
+				if ($entry_info['number']>1) s("已经rebuy过了,无法完成退赛",$tiaohui);
+				//如果比赛颁奖过了,奖池不够了,是不能退回积分的
+				if ($sport_info['jackpot']<$sport_info['deduction']) s("奖池不够,无法完成退赛",$tiaohui);
+				//扣掉奖池里的积分
+				jackpot_reduce($sport_info['id'], $sport_info['deduction']);
+				
+				//把赛事退回的积分只能退回到奖励积分中
+				balance_add($card, $serviceCharge,"jiangli_jifen");
+				$money = intval("+".$sport_info['service_charge']);//赚到手的服务费给退回去了
+				balance_log($card, "退出赛事[".$sport_info['name']."]:退还".$serviceCharge."积分到奖励积分账户", $localtime,$money,"服务费","非计时赛");
+				include template('sport_withdraw_print');
+				//echo "把积分退回去,稍等一下做,可以先用积分变动!";
 			}elseif ($sport_info['type']=='pk_trial'){//PK赛
 				//直接去颁奖
 				echo '<script type="text/javascript">location.href="?action=sport_list&todo=prize&card='.$card.'&id='.$sport_id.'";</script>';

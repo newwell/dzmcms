@@ -13,8 +13,12 @@
 打印时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br/>
 -----------------------------<br/>
 参赛名称:<?php echo $sport_info['name'];?><br>
+<?php if ($sport_info['type']=='time_trial'){?>
 服务积分:<?php echo $serviceCharge;?><br>
 扣分方式:<?php if ($entry_info['payment_type']=='jiangli_jifen'){echo '奖励积分';}else{echo '积分';}?><br>
+<?php }elseif ($sport_info['type']=='no_time_trial'){?>
+退还<?php echo $serviceCharge;?>积分 至奖励积分账户<br/>
+<?php }?>
 -----------------------------<br/>
 会员名:<?php echo $member_info['name'];?><br/>
 会员昵称:<?php echo $member_info['nickname'];?><br/>

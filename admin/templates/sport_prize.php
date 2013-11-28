@@ -42,7 +42,10 @@
 		get_user_name();
 		</script>
 		<tr bgcolor="#E4EDF9" align="center">
-			<td class="list" colspan="5" style="color: red;">奖池剩余:<?php echo $sport_info['jackpot']?></td>
+			<td class="list" colspan="5">
+			奖池剩余:<SPAN style="color: red;"><?php echo $sport_info['jackpot']?></SPAN>
+			<INPUT value="剩余奖池转入服务费" onclick="if(confirm('确定将剩余奖池转入服务费收益?')){location.href='?action=sport_list&todo=prize2service&sport_id=<?php echo $sport_id;?>';}" class="formsubmit" type="button"/>
+		</td>
 		</tr>
     </table>
 </td>

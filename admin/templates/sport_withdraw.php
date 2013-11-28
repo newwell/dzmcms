@@ -69,7 +69,13 @@ document.body.onload = function(){
 			<td class="list">
 			<?php if ($value['status']=="已入赛"){?>
 				<a onclick="if(confirm('确定rebuy?')){location.href='?action=sport_withdraw&todo=rebuy&entry_id=<?php echo $value['id']?>&card=<?php echo $value['card'];?>&sport_id=<?php echo $value['sport']['id'];?>'}" href="JavaScript:;" title="rebuy">rebuy</a>
-				<a onclick="if(confirm('确定退赛?')){location.href='?action=sport_withdraw&todo=dowithdraw&entry_id=<?php echo $value['id']?>&card=<?php echo $value['card'];?>&sport_id=<?php echo $value['sport']['id'];?>'}" href="JavaScript:;" title="退赛">退赛</a>
+				<a onclick="if(confirm('<?php if ($value['sport']['type']=="time_trial") {
+					echo "确定现在退赛,停止服务费的计算!";
+				}elseif ($value['sport']['type']=="no_time_trial"){
+					echo "确定将积分退回?";
+				}elseif ($value['sport']['type']=="pk_trial"){
+					echo "确定退赛颁奖?";
+				}?>')){location.href='?action=sport_withdraw&todo=dowithdraw&entry_id=<?php echo $value['id']?>&card=<?php echo $value['card'];?>&sport_id=<?php echo $value['sport']['id'];?>'}" href="JavaScript:;" title="退赛">退赛</a>
 			<?php }else {?>
 			----
 			<?php }?>
