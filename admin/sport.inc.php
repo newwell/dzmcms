@@ -138,6 +138,10 @@ switch ($todo) {
 			}else {//PK赛买入的钱都直接进入奖池
 				jackpot_add($sport_id,$serviceCharge);
 			}
+			//成功rebuy 比赛人次减少一个
+			sport_update($sport_id, array(
+			"people_number"=>$sport_info['people_number']-1
+			));
 			$buy_member_info = member_get(array($card),'card');
 			$r_member_info = member_get(array($r_card),'card');
 			include template('sport_rebuy_print');
@@ -161,7 +165,8 @@ switch ($todo) {
 		$sport_info		= sport_get(array($sport_id),'id');
 		
 		$card = $member_info['card'];
-		
+		//比赛人次小于一就不能再次报名了.等于说没有名额了嘛
+		if ($sport_info['people_number']<1) s('参赛人次达到上限','?action=sport_withdraw&todo=withdraw');
 		//计算赛事费用
 		if($sport_info['type']=='time_trial'){//计时赛
 			$sportcharge = $sport_info['deduction'];
@@ -382,9 +387,10 @@ switch ($todo) {
 		$card = $member_info['card'];
 		
 		//计算当前正在比赛的人数
-		$shangxian = entry_total(" `sport_id`=".$sport_id." AND `status`='已入赛'");
-		//echo $sportinfo['people_number'];exit;
-		if (($shangxian+1)>$sportinfo['people_number'])s('参赛人数达到上限','?action=sport_entry&todo=entry&do=entry');
+		//$shangxian = entry_total(" `sport_id`=".$sport_id." AND `status`='已入赛'");
+		
+		
+		
 		
 		if($sportinfo['type']=='time_trial'){//计时赛
 				$sportcharge = $sportinfo['deduction'];
@@ -465,7 +471,10 @@ switch ($todo) {
 				balance_log($card, $explain, $localtime,$money,"","PK赛");
 				jackpot_add($sport_id,$sportcharge);//增加奖池
 			}
-			
+			//成功报名比赛人次减少一个
+			sport_update($sport_id, array(
+			"people_number"=>$sportinfo['people_number']-1
+			));
 			$member_info = member_get(array($card),'card');
 			include template('sport_save_entry_print');
 		}else {
@@ -493,8 +502,10 @@ switch ($todo) {
 			$sportinfo = '';
 			$sportcharge = 0;
 		}
-		
 		if ($sportinfo['status']=="已结束")e('比赛已结束,不能报名!');
+		//比赛人次小于一就不能再次报名了.等于说没有名额了嘛
+		if ($sportinfo['people_number']<1)s('参赛人次达到上限','?action=sport_entry&todo=entry&do=entry');
+		
 		//if ($localtime>$sportinfo['stop_entry_time'])e('超出报名时间,停止报名');
 		
 		/*$result = entry_add(array(

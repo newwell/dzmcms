@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 11 月 28 日 21:57
+-- 生成日期: 2013 年 11 月 29 日 18:03
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=85 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=88 ;
 
 --
 -- 转存表中的数据 `dzmc_balance_log`
@@ -102,7 +102,10 @@ INSERT INTO `dzmc_balance_log` (`id`, `card`, `type`, `money`, `type_explain`, `
 (80, '736955981', '服务费', 88, '非计时赛', '退出赛事[非计时赛 588]:退还588积分到奖励积分账户<br>剩余积分:1736956043剩余奖励积分:8880950', 'admin', 1385666780),
 (81, '736955981', '服务费', 88, '非计时赛', '退出赛事[非计时赛 588]:退还588积分到奖励积分账户<br>剩余积分:1736956043剩余奖励积分:8881538', 'admin', 1385666839),
 (82, '', '服务费', -300, '', 'PK赛<br>剩余积分:剩余奖励积分:', 'admin', 0),
-(83, '', '服务费', -1500, '', '非计时赛<br>剩余积分:剩余奖励积分:', 'admin', 0);
+(83, '', '服务费', -1500, '', '非计时赛<br>剩余积分:剩余奖励积分:', 'admin', 0),
+(85, '736940301', '', 0, 'PK赛', '报名赛事[ PK赛 1223 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774561668剩余奖励积分:999985313', 'admin', 1385747545),
+(86, '736955981', '', 0, 'PK赛', '报名赛事[ PK赛 1223 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:1736956043剩余奖励积分:8881538', 'admin', 1385747560),
+(87, '736940301', '', 0, 'PK赛', '报名赛事[ PK赛 1223 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774561668剩余奖励积分:999985313', 'admin', 1385747576);
 
 -- --------------------------------------------------------
 
@@ -121,7 +124,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_entry` (
   `exit_time` int(22) NOT NULL DEFAULT '0' COMMENT '退赛时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=37 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=40 ;
 
 --
 -- 转存表中的数据 `dzmc_entry`
@@ -162,7 +165,10 @@ INSERT INTO `dzmc_entry` (`id`, `card`, `sport_id`, `status`, `payment_type`, `n
 (33, '736940301', 4, '已入赛', 'jiangli_jifen', 1, 1385658798, 0),
 (34, '736940301', 4, '已入赛', 'jiangli_jifen', 1, 1385658884, 1385673764),
 (35, '736955981', 6, '已入赛', 'jiangli_jifen', 1, 1385661038, 0),
-(36, '736955981', 6, '已入赛', 'jiangli_jifen', 1, 1385661064, 1385666751);
+(36, '736955981', 6, '已入赛', 'jiangli_jifen', 1, 1385661064, 1385666751),
+(37, '736940301', 6, '已入赛', 'jiangli_jifen', 1, 1385747545, 0),
+(38, '736955981', 6, '已入赛', 'jiangli_jifen', 1, 1385747560, 0),
+(39, '736940301', 6, '已入赛', 'jiangli_jifen', 1, 1385747576, 0);
 
 -- --------------------------------------------------------
 
@@ -1559,7 +1565,7 @@ INSERT INTO `dzmc_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `serv
 (1, '非计时赛 588', 'no_time_trial', 1379152016, 500, 88, 0, 10, 1, 0, 1379238422, 0, 0, '', 0, 0, '', 0, '已结束', 5, 1379152036),
 (3, 'MTT 50积分赛', 'time_trial', 1381328223, 0, 50, 15, 10, 1, 0, 1381501025, 0, 0, '', 0, 0, '', 0, '已结束', 0, 1381328239),
 (4, '非计时赛 128', 'no_time_trial', 1383264000, 100, 28, 0, 10, 1, 0, 1383350400, 0, 0, '', 0, 0, '', 0, '未开赛', 2, 1383518427),
-(6, 'PK赛 1223', 'pk_trial', 1385426056, 0, 0, 0, 10, 1, 0, 1385452799, 0, 0, '', 0, 0, '', 0, '竞赛中', 0, 1385397265);
+(6, 'PK赛 1223', 'pk_trial', 1385426056, 0, 0, 0, 0, 1, 0, 1385452799, 0, 0, '', 0, 0, '', 0, '竞赛中', 0, 1385397265);
 
 -- --------------------------------------------------------
 
@@ -1677,7 +1683,7 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 --
 
 INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1385671652, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1385739485, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
