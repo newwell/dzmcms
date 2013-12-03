@@ -12,7 +12,7 @@
 	</tr>
 	<tr>
 	    <td align="right">类型:</td>
-	    <td><select name="type" onchange="show_sport_type(this.value);">
+	    <td><select name="type" id="type" onchange="show_sport_type(this.value);">
 	    		<option value="pk_trial">PK赛</option>
 	    		<option value="time_trial">计时赛</option>
 	    		<option value="no_time_trial" selected="selected">非计时赛</option>
@@ -100,5 +100,6 @@ function show_sport_type(type) {
 		break;
 	}
 }
+show_sport_type($('#type').val());
 </script>
 <?php include template('foot'); ?>

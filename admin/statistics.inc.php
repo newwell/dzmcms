@@ -14,7 +14,7 @@ require_once 'include/f/member.f.php';
 		$w = gmdate("w", strtotime($date));  //获取当前周的第几天 周日是 0 周一 到周六是 1 -6 
 		$d = $w ? $w - 1 : 6;  //如果是周日 -6天 
 		$kaishi = gmdate("Y-m-d 00:00:00", strtotime("$date -".$d." days")); //本周开始时间
-		$jieshu = gmdate("Y-m-d 23:59:59", strtotime("$kaishi +7 days"));  //本周结束时间	
+		$jieshu = gmdate("Y-m-d 23:59:59", strtotime("$kaishi +6 days"));  //本周结束时间	
 		$benzhou = "'".$kaishi."','".$jieshu."'";
 		//本月
 		$kaishi = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';

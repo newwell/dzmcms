@@ -13,6 +13,7 @@
 变动类型:<?php if ($change_type=="add"){echo '增加';}else {echo "减少";};?><br>
 变动对象:<?php if ($change_object=="balance"){echo '积分';}else {echo "奖励积分";};?><br>
 变动分值:<?php echo $change_value;?><br>
+备注:<?php echo $remark;?><br>
 -----------------------------<br/>
 会员名称:<?php echo $member_info['name'];?><br/>
 会员昵称:<?php echo $member_info['nickname'];?><br/>

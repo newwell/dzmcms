@@ -11,6 +11,7 @@
 打印时间:<?php echo gmdate('Y.n.j H:i:s',$localtime);?><br/>
 -----------------------------<br/>
 赠送分值:<?php echo $change_value;?><br>
+备注:<?php echo $remark;?><br>
 -----------------------------<br/>
 会员名称:<?php echo $member_info['name'];?><br/>
 会员昵称:<?php echo $member_info['nickname'];?><br/>

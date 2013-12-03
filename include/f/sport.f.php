@@ -137,7 +137,7 @@ function entry_add($infoArr) {
  */
 function entry_list($startlimit,$endlimit,$where='') {
 	global $db,$tablepre;
-	$sql = "SELECT * FROM  `{$tablepre}sport` ";
+	$sql = "SELECT * FROM  `{$tablepre}entry` ";
 	if (!empty($where)) {
 		$sql .="WHERE ".$where;
 	}

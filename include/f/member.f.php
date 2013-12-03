@@ -23,7 +23,7 @@ function member_list($startlimit,$endlimit,$where='',$order='add_date') {
 		$sql .="WHERE ".$where;
 	}
 	$sql .= "ORDER BY ".$order." DESC LIMIT $startlimit , $endlimit";
-	//exit($sql);
+	//echo($sql);
 	$result		= $db->query($sql);
 	$resultArr	= array();
 	while($arr	= $db->fetch_array($result)){

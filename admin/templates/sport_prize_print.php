@@ -15,7 +15,7 @@
 名次:<?php echo $ranking;?><br>
 奖励积分:<?php echo $jiangli_jifen;?><br>
 -----------------------------<br/>
-会员读卡:<?php echo $member_info['card'];?><br/>
+会员号:<?php echo $member_info['cardid'];?><br/>
 会员名:<?php echo $member_info['name'];?><br/>
 会员昵称:<?php echo $member_info['nickname'];?><br/>
 剩余积分:<?php echo $member_info['balance'];?><br/>
