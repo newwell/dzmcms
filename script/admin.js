@@ -702,3 +702,8 @@ function buy_sum() {
 	$("#jin_e").html(zoongjianglijifen+zongjifen);
 	
 }
+function showMainFrame(url) {
+	window.parent.frames["mainFrame"].location=url;
+	//document.frames("mainFrame").document.location=url;
+	
+}

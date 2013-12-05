@@ -133,11 +133,19 @@ switch ($todo) {
 			//$money = intval($value);
 			balance_log($card, $explain, $localtime,$money);
 			//增加奖池
-			if ($sport_info['type']!='pk_trial') {//不是pk赛的话奖池增加数直接等于比赛的积分消耗
-				jackpot_add($sport_id,  $sport_info['deduction']);
-			}else {//PK赛买入的钱都直接进入奖池
+			//++++++++++++++++++++++++++++++++
+			if ($sport_info['type']=='pk_trial') {
+				//PK赛买入的钱都直接进入奖池
 				jackpot_add($sport_id,$serviceCharge);
+				
+				//非计时赛 记录服务费
+				balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛");
+				//不是pk赛的话奖池增加数直接等于比赛的积分消耗
+				jackpot_add($sport_id,  $sport_info['deduction']);
+			}elseif ($sport_info['type']=='pk_trial') {
+				
 			}
+			//++++++++++++++++++++++++++++++++
 			//成功rebuy 比赛人次减少一个
 			sport_update($sport_id, array(
 			"people_number"=>$sport_info['people_number']-1
