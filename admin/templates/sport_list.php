@@ -44,7 +44,11 @@
             		foreach ($renshu123 as $temp_value) {
             			$renshu2[]=$temp_value['card'];
             		}
-            		echo count(array_unique($renshu2));
+            		if (!empty($renshu2)) {
+            			echo count(array_unique($renshu2));
+            		}else {
+            			echo "0";
+            		}
             ?></td>
             <td class="list"><?php if ($value['rebuy']){echo "是";}else {echo '否';}?></td>
             <td class="list"><?php echo $value['status']?></td>
@@ -72,7 +76,6 @@
    消耗积分:<?php echo $value['deduction'];?><br>
    服务费:<?php if ($value['type']=="time_trial"){echo "每".$value['service_charge_time']."分钟,".$value['service_charge']."积分";}else {echo $value['service_charge'].'积分';}?><br>
  类型:<?php if ($value['type']=="time_trial"){echo '计时赛';}elseif ($value['type']=="no_time_trial"){ echo "非计时赛";}elseif ($value['type']=="pk_trial"){echo "PK赛";};?><br>
- 人数上限:<?php echo $value['people_number'];?><br>
 是否可以再次买入:<?php if ($value['rebuy']){echo "是";}else {echo '否';}?><br>
 参赛次数:<?php echo $value['entry_number'];?><br>
 涨盲时间: <?php echo $value['zhangmang_time'];?> 分钟<br>

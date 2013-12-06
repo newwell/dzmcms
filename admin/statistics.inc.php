@@ -66,7 +66,6 @@ switch ($todo) {
 		}else {
 			$member_info = '';
 		}
-		//echo $sql;
 		//统计合计费用
 		$money_sun			= abs(balance_log_money($moneywhere));
 		$money_sun_jishi	= abs(balance_log_money($moneywhere." AND `type_explain`= '计时赛'"));

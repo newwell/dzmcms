@@ -41,7 +41,7 @@ switch ($todo) {
 		jackpot_reduce($sport_id, $sport_info['jackpot']);
 		//记入服务费收益
 		$money = intval('-'.$sport_info['jackpot']);
-		balance_log("", "", $$localtime, $money,"服务费",$explain);
+		balance_log("", "", $$localtime, $money,"服务费",$explain,$sport_id);
 		s("转入成功",'?action=sport_list&todo=prize&id='.$sport_id);
 	break;
 	case 'desktop':
@@ -132,17 +132,23 @@ switch ($todo) {
 		if ($result) {
 			//$money = intval($value);
 			balance_log($card, $explain, $localtime,$money);
-			//增加奖池
+			//增加奖池  和  记录服务费
 			//++++++++++++++++++++++++++++++++
 			if ($sport_info['type']=='pk_trial') {
 				//PK赛买入的钱都直接进入奖池
 				jackpot_add($sport_id,$serviceCharge);
+				//PK赛没有rebuy服务费 只记录积分流水
+				balance_log($card, $explain, $localtime,intval('-'.$sport_info['service_charge']));
 				
-				//非计时赛 记录服务费
-				balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛");
+			}elseif ($sport_info['type']=='time_trial') {//计时赛
 				//不是pk赛的话奖池增加数直接等于比赛的积分消耗
 				jackpot_add($sport_id,  $sport_info['deduction']);
-			}elseif ($sport_info['type']=='pk_trial') {
+				balance_log($card, $explain, $localtime,intval('-'.$sport_info['service_charge']));
+			}elseif ($sport_info['type']=='no_time_trial'){//非计时赛
+				//不是pk赛的话奖池增加数直接等于比赛的积分消耗
+				jackpot_add($sport_id,  $sport_info['deduction']);
+				balance_log($card, $explain, $localtime,intval('-'.$sport_info['service_charge']));
+				balance_log("", $explain, $localtime,intval('-'.$sport_info['service_charge']),"服务费","非计时赛",$sport_id);
 				
 			}
 			//++++++++++++++++++++++++++++++++
@@ -318,7 +324,7 @@ switch ($todo) {
 		if ($result){
 			if ($sport_info['type']=='time_trial'){//计时赛
 				$money = intval("-".$serviceCharge);
-				balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money,"服务费","计时赛");
+				balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money,"服务费","计时赛",$sport_id);
 				include template('sport_withdraw_print');
 			}elseif ($sport_info['type']=='no_time_trial'){//非计时赛
 				//参赛次数大于1表示rebuy过了,rebuy就是已经上场了,上场过的用户是不允许退赛的!
@@ -331,7 +337,7 @@ switch ($todo) {
 				//把赛事退回的积分只能退回到奖励积分中
 				balance_add($card, $serviceCharge,"jiangli_jifen");
 				$money = intval("+".$sport_info['service_charge']);//赚到手的服务费给退回去了
-				balance_log($card, "退出赛事[".$sport_info['name']."]:退还".$serviceCharge."积分到奖励积分账户", $localtime,$money,"服务费","非计时赛");
+				balance_log($card, "退出赛事[".$sport_info['name']."]:退还".$serviceCharge."积分到奖励积分账户", $localtime,$money,"服务费","非计时赛",$sport_id);
 				include template('sport_withdraw_print');
 				//echo "把积分退回去,稍等一下做,可以先用积分变动!";
 			}elseif ($sport_info['type']=='pk_trial'){//PK赛
@@ -470,10 +476,10 @@ switch ($todo) {
 		if ($result) {
 			if ($sportinfo['type']=='no_time_trial') {
 				//非计时赛 记录服务费
-				balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛");
+				balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛",$sport_id);
 				jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
 			}elseif ($sportinfo['type']=='time_trial'){
-				balance_log($card, $explain, $localtime,$money,"服务费","计时赛");
+				balance_log($card, $explain, $localtime,$money,"服务费","计时赛",$sport_id);
 				jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
 			}elseif ($sportinfo['type']=='pk_trial') {
 				balance_log($card, $explain, $localtime,$money,"","PK赛");
