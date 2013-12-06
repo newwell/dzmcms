@@ -45,10 +45,15 @@ switch ($todo) {
 		if (!empty($starttime)&&!empty($endtime)){
 			$time_where = " AND add_date>='".strtotime($starttime)."' AND add_date<='".strtotime($endtime)."'";
 		}
+		//获取赛事ID
+		$get_saishi_sql = "SELECT * FROM  `{$tablepre}sport` WHERE `id`>0 ";
+		if (!empty($time_where)){
+			$get_saishi_sql .= $time_where;
+		}
 		if ((!empty($card))||(!empty($time_where))){
-			$member_info = member_get(array($card),'card');
 			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `money`!=0 AND `type`='服务费'";
 			if (!empty($card)){
+				$member_info = member_get(array($card),'card');
 				$sql.=" AND `card` ='".$member_info['card']."'";
 				$moneywhere.=" AND `card` ='".$member_info['card']."'";
 			}
@@ -56,13 +61,22 @@ switch ($todo) {
 				$sql.=$time_where;
 				$moneywhere.=$time_where;
 			}
+			//得到时间范围内的赛事数据
+			$get_saishi_result		= $db->query($get_saishi_sql);
+			while($arr	= $db->fetch_array($get_saishi_result)){
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
+				$infoList[$arr['id']]['name']	= $arr['name'];
+				$infoList[$arr['id']]['type']	= $arr['type'];
+				$infoList[$arr['id']]['status']	= $arr['status'];
+			}
+			//echo "<pre>";print_r($get_saishi_arr);exit();
+			
 			$sql.=" ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				$arr['member_info'] = member_get(array($arr['card']),'card');
-				$infoList[]	= $arr;
+				$infoList[$arr['sport_id']]['serve_money'] = $infoList[$arr['sport_id']]['serve_money']+intval($arr['money']);
 			}
+			//echo "<pre>";print_r($infoList);//exit();
 		}else {
 			$member_info = '';
 		}
@@ -70,6 +84,9 @@ switch ($todo) {
 		$money_sun			= abs(balance_log_money($moneywhere));
 		$money_sun_jishi	= abs(balance_log_money($moneywhere." AND `type_explain`= '计时赛'"));
 		$money_sun_feijishi	= abs(balance_log_money($moneywhere." AND `type_explain`= '非计时赛'"));
+		
+		
+		
 		
 		//echo $money_sun;exit;
 		include template('statistics_serviceCharge_list');

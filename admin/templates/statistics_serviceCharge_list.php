@@ -23,10 +23,10 @@ function thisCheckForm() {
 <form action="?action=statistics_serviceCharge&todo=serviceCharge" method="post" onsubmit="return thisCheckForm(this,true);">
 <input type="hidden" value="<?php echo $formhash;?>" name="formhash">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
-	<tr>
+<!-- 	<tr>
 	    <td align="right">读卡:</td>
 	    <td><input name="card" id="card" type="text" style="border:#336699 1px solid;"/></td>
-	</tr>
+	</tr> -->
 		<tr>
 	    <td align="right">快捷选择:</td>
 	    <td>
@@ -84,28 +84,18 @@ function thisCheckForm() {
 			</td>
 		</tr>
         <tr>
-            <th>姓名/昵称</th>
-            <th>会员卡</th>
+            <th>赛事名称</th>
             <th>赛事类型</th>
-            <th>服务费</th>
-			<th >说明</th>
-			<th >操作员</th>
-			<th>产生日期</th>		
+            <th>状态</th>
+			<th>获得服务费</th>	
         </tr>
 		<?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
         <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>     
-            <td class="list"><?php echo $value['member_info']['name'];?>/<?php echo $value['member_info']['nickname'];?></td>
-            <td class="list"><?php echo $value['member_info']['cardid'];?></td>
-            <td class="list"><?php echo $value['type_explain']?></td>
-            <td class="list"><?php echo $value['money']?></td>
-            
-            <td class="list xiankuan" ><a href="JavaScript:;" onclick="JavaScript:hiBox('#showbox_<?php echo $value['id']?>', '详细说明',400,'','','.a_close');"><?php echo $value['explains']?><a/></td>
-            <td class="list"><?php echo $value['system_user']?></td>
-            <td class="list"><?php echo $value['add_date']?></td>
+            <td class="list"><?php echo $value['name'];?></td>
+            <td class="list"><?php if ($value['type']=="time_trial"){echo '计时赛';}elseif ($value['type']=="no_time_trial"){ echo "非计时赛";}elseif ($value['type']=="pk_trial"){echo "PK赛";};?></td>
+            <td class="list"><?php echo $value['status'];?></td>
+            <td class="list"><?php echo abs($value['serve_money']);?></td>
         </tr>
-        <div id="showbox_<?php echo $value['id']?>" style="display:none">
-		   <p><?php echo $value['explains']?></p>
-		</div>
 		<?php } }?>
 		<tr bgcolor="#A6D0F6" align="center">
 			<td colspan="7"><?php if (!empty($page_control)){echo $page_control;}?></td>
@@ -114,14 +104,4 @@ function thisCheckForm() {
 </td>
   </tr>
 </table>
-<script type="text/javascript">$("#searchResult").textSearch("扣除");</script>
-<script type="text/javascript">$("#searchResult").textSearch("减少");</script>
-<script type="text/javascript">$("#searchResult").textSearch("增加",options={divFlag: true,
-		divStr: " ",
-		markClass: "",
-		markColor: "#94AA3E",
-		nullReport: false,
-		callback: function(){
-			return false;	
-		}});</script>
 <?php include template('foot'); ?>
