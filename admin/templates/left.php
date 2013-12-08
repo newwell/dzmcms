@@ -10,7 +10,9 @@
 			<div class="wui_contentLeftItem">
 			<ul>
 			<?php foreach($cate['childs'] as $num => $child) {?>
-				<li class="wui_contentLeftItemList" onclick="showMainFrame('?action=<?php echo $child['action'];?>&todo=<?php echo $child['todo'];?>&do=<?php echo $child['do'];?>');"><a target=""  href="JavaScript:;"><?php echo $child['title'];?></a></li>
+				<li title="<?php echo $child['title'];?>" class="wui_contentLeftItemList" onclick="showMainFrame('?action=<?php echo $child['action'];?>&todo=<?php echo $child['todo'];?>&do=<?php echo $child['do'];?>');">
+					<a target=""  href="JavaScript:;"><?php echo $child['title'];?></a>
+				</li>
 			<?php }?>
 			</ul>
 		</div>

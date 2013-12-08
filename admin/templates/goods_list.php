@@ -38,6 +38,7 @@
             <th><input type="checkbox" name="chkall" onclick="checkall(this.form)" title="全选">全选</th>
             <th>名称</th>
 			<th>简码</th>
+			<th>库存</th>
 			<th>单位</th>
 			<th>售价(积分)</th>
 			<th>奖励积分</th>
@@ -50,6 +51,7 @@
             <td class="list"><input type="checkbox" name="ids[]" value="<?php echo $value['id']?>">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>      
             <td class="list"><?php echo $value['name']?></td>
             <td class="list"><?php echo $value['suk']?></td>
+            <td class="list"><?php echo $value['inventory']?></td>
             <td class="list"><?php echo $value['unit']?></td>
             <td class="list"><font color="red"><?php echo $value['price']?></font></td>
             <td class="list"><?php echo $value['jiangli_jifen']?></td>
@@ -61,7 +63,7 @@
         </tr>
 		<?php } }?>
 		<tr bgcolor="#A6D0F6" align="center">
-			<td colspan="7"><?php if (!empty($page_control)){echo $page_control;}?></td>
+			<td colspan="8"><?php if (!empty($page_control)){echo $page_control;}?></td>
 		</tr>
     </table>
 </td>

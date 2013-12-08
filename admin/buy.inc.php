@@ -1,4 +1,15 @@
 <?php
+/**
+ * ------------------------------------------------------------------
+ * 商品销售逻辑处理块
+ * ------------------------------------------------------------------
+ * @author		newwell
+ * ------------------------------------------------------------------
+ * @copyright	武汉大赞网络科技
+ * ------------------------------------------------------------------
+ * @link		http://www.dazan.cn
+ * ------------------------------------------------------------------
+ */
 if(!defined('IN_SITE')) exit('Access Denied');
 CheckAccess();
 global $act,$todo,$tablepre,$db;
@@ -60,6 +71,8 @@ switch ($todo) {
 			$goodArr[$ids[$key]] = $temp[0];
 			$goodArr[$ids[$key]]["shuliang"] = $value;
 		}
+		/* echo "<pre>";
+		print_r($goodArr); */
 		$remark =$payment_amount=$diyong_jifen=$jiangli_jifen="";
 		foreach ($goodArr as $value) {
 			$remark.= $value['shuliang'].$value['unit']."\t[".$value['name']."]\t使用".$value['shuliang']*$value['price']."积分,".$value['shuliang']*$value['diyong_jifen']."奖励积分<br/>";
@@ -78,13 +91,14 @@ switch ($todo) {
 			"remark"=>$remark,
 			'add_date'=>$localtime
 		));
-/*		echo $remark."<br/>";
-		echo $payment_amount."<br/>";
-		echo $diyong_jifen."<br/>";
-		echo $jiangli_jifen."<br/>";
-	
-		*/
 		if (!$r)e("购买失败");
+		/*--减少相应的库存*/
+		foreach ($goodArr as $value) {
+			goods_update($value['id'], array(
+			/*---库存减数量=现在的库存-*/
+				"inventory"=>$value['inventory']-$value['shuliang']
+			));
+		}
 		$money = intval("-".$payment_amount)-$diyong_jifen+$jiangli_jifen;//计算收入
 		balance_reduce($card, $payment_amount);
 		$text =  "商品交易,扣除".$payment_amount."积分";

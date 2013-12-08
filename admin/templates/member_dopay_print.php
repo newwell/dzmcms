@@ -12,6 +12,7 @@
 -----------------------------<br/>
 充值金额:<?php echo $dopay;?><br>
 对应充值积分:<?php echo $value;?><br>
+支付方式:<?php echo $method_payment;?><br/>
 -----------------------------<br/>
 会员名:<?php echo $member_info['name'];?><br/>
 会员昵称:<?php echo $member_info['nickname'];?><br/>

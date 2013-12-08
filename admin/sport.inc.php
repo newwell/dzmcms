@@ -473,27 +473,30 @@ switch ($todo) {
 			'payment_type'=>$payment_type,
 			'add_date'=>$localtime
 		));
-		if ($result) {
-			if ($sportinfo['type']=='no_time_trial') {
-				//非计时赛 记录服务费
-				balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛",$sport_id);
-				jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
-			}elseif ($sportinfo['type']=='time_trial'){
-				balance_log($card, $explain, $localtime,$money,"服务费","计时赛",$sport_id);
-				jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
-			}elseif ($sportinfo['type']=='pk_trial') {
-				balance_log($card, $explain, $localtime,$money,"","PK赛");
-				jackpot_add($sport_id,$sportcharge);//增加奖池
-			}
-			//成功报名比赛人次减少一个
-			sport_update($sport_id, array(
-			"people_number"=>$sportinfo['people_number']-1
-			));
-			$member_info = member_get(array($card),'card');
-			include template('sport_save_entry_print');
-		}else {
+		if (!$result) {
 			s('失败','?action=sport_entry&todo=entry&do=entry');
 		}
+		sport_update($sport_id, array(
+			"entry_number"=>$sportinfo['entry_number']+1
+		));
+		if ($sportinfo['type']=='no_time_trial') {
+			//非计时赛 记录服务费
+			balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛",$sport_id);
+			jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
+		}elseif ($sportinfo['type']=='time_trial'){
+			balance_log($card, $explain, $localtime,$money,"服务费","计时赛",$sport_id);
+			jackpot_add($sport_id,  $sportinfo['deduction']);//增加奖池
+		}elseif ($sportinfo['type']=='pk_trial') {
+			balance_log($card, $explain, $localtime,$money,"","PK赛");
+			jackpot_add($sport_id,$sportcharge);//增加奖池
+		}
+		//成功报名比赛人次减少一个
+		sport_update($sport_id, array(
+		"people_number"=>$sportinfo['people_number']-1
+		));
+		$member_info = member_get(array($card),'card');
+		include template('sport_save_entry_print');
+		
 		break;
 	case 'doentry'://报名页面
 		$card		=dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
@@ -621,7 +624,7 @@ switch ($todo) {
 		$service_charge	= intval( isset($_POST['service_charge']) ? $_POST['service_charge'] : 0 );
 		$people_number	= intval( isset($_POST['people_number']) ? $_POST['people_number'] : 0 );
 		$rebuy	= intval( isset($_POST['rebuy']) ? $_POST['rebuy'] : 0 );
-		//$entry_number	= intval( isset($_POST['entry_number']) ? $_POST['entry_number'] : '' );
+		//$entry_number	= intval( isset($_POST['entry_number']) ? $_POST['entry_number'] : '' );/*--去掉参赛次数--用新的 参赛人次逻辑代替 newwell 20131125*/
 		$zhangmang_time	= ( isset($_POST['zhangmang_time']) ? $_POST['zhangmang_time'] : '' );
 		$stop_entry_time= ( isset($_POST['stop_entry_time']) ? $_POST['stop_entry_time'] : 0 );
 		$rest_time	= intval( isset($_POST['rest_time']) ? $_POST['rest_time'] : 0 );
@@ -648,7 +651,7 @@ switch ($todo) {
 			'service_charge'=>$service_charge,
 			'people_number'=>$people_number,
 			'rebuy'=>$rebuy,
-			/*'entry_number'=>$entry_number,  --去掉参赛次数--用新的 参赛人次逻辑代替 newwell 20131125*/
+			'entry_number'=>0,  /*--当前报名的人次  newwell 20131208*/
 			'zhangmang_time'=>$zhangmang_time,
 			'stop_entry_time'=>strtotime($stop_entry_time) + 8 * 3600,
 			'rest_time'=>$rest_time,

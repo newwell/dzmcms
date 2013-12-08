@@ -677,7 +677,18 @@ function buy_cart_up_price(id) {
 	var old_diyong_jifen = parseInt($("#old_diyong_jifen_"+id).val());
 	//获取个数
 	var shuliang = parseInt($("#shuliang_"+id).val());
-	
+	//获取库存
+	var inventory = parseInt($("#inventory_"+id).text());
+	if (inventory<shuliang) {
+		alert("库存不够");
+		$("#shuliang_"+id).focus();
+		return false;
+	}
+	if (isNaN(shuliang)) {
+		alert("请输入数字");
+		$("#shuliang_"+id).focus();
+		return false;
+	}
 	$("#price_"+id).val(old_price*shuliang);
 	$("#diyong_jifen_"+id).val(old_diyong_jifen*shuliang);
 	buy_sum();

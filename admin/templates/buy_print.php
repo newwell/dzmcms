@@ -18,10 +18,11 @@
 抵用积分:<?php echo $diyong_jifen;?><br>
 奖励积分:<?php echo $jiangli_jifen;?><br>
 -----------------------------<br/>
-目前积分:<?php echo $member_info['balance'];?><br/>
-会员读卡:<?php echo $member_info['card'];?><br/>
+会员名称:<?php echo $member_info['name'];?><br/>
+会员昵称:<?php echo $member_info['nickname'];?><br/>
 会员卡号:<?php echo $member_info['cardid'];?><br/>
-
+剩余积分:<?php echo $member_info['balance'];?><br/>
+剩余奖励积分:<?php echo $member_info['jiangli_jifen'];?><br/>
 </div>
 
 <script type="text/javascript">

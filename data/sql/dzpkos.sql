@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 12 月 06 日 15:01
+-- 生成日期: 2013 年 12 月 09 日 01:05
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -17,16 +17,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8 */;
 
 --
--- 数据库: `dzmcms`
+-- 数据库: `dzpkos`
 --
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_balance_log`
+-- 表的结构 `dzpkos_balance_log`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
+CREATE TABLE IF NOT EXISTS `dzpkos_balance_log` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `card` varchar(25) NOT NULL COMMENT '读卡',
   `sport_id` bigint(255) DEFAULT NULL COMMENT '赛事编号',
@@ -38,25 +38,42 @@ CREATE TABLE IF NOT EXISTS `dzmc_balance_log` (
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=5 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=22 ;
 
 --
--- 转存表中的数据 `dzmc_balance_log`
+-- 转存表中的数据 `dzpkos_balance_log`
 --
 
-INSERT INTO `dzmc_balance_log` (`id`, `card`, `sport_id`, `type`, `money`, `type_explain`, `explains`, `system_user`, `add_date`) VALUES
+INSERT INTO `dzpkos_balance_log` (`id`, `card`, `sport_id`, `type`, `money`, `type_explain`, `explains`, `system_user`, `add_date`) VALUES
 (1, '736940301', 8, '服务费', -28, '非计时赛', '报名赛事[ SNG 128 ]:扣除参赛费,奖励积分:128分,  <br>剩余积分:77774557802剩余奖励积分:999973756', 'admin', 1386333735),
 (2, '736940301', 0, '', -128, '', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费,奖励积分:128分,  <br>剩余积分:77774557802剩余奖励积分:999973628', 'admin', 1386339150),
 (3, '736940301', 0, '', -28, '', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费,奖励积分:128分,  <br>剩余积分:77774557802剩余奖励积分:999973628', 'admin', 1386339150),
-(4, '', 8, '服务费', -28, '非计时赛', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费,奖励积分:128分,  <br>剩余积分:剩余奖励积分:', 'admin', 1386339150);
+(4, '', 8, '服务费', -28, '非计时赛', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费,奖励积分:128分,  <br>剩余积分:剩余奖励积分:', 'admin', 1386339150),
+(5, '736940301', 0, '充值', 2, '现金', '积分充值:增加积分 2分<br>剩余积分:77774557804剩余奖励积分:999973628', 'admin', 1386503943),
+(6, '736940301', 0, '', 0, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973628', 'admin', 1386504241),
+(7, '736940301', 0, '', 0, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973628', 'admin', 1386506130),
+(8, '736940301', 0, '', 0, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973628', 'admin', 1386506309),
+(9, '736940301', 0, '', 0, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973628', 'admin', 1386506335),
+(10, '736940301', 0, '', 0, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973628', 'admin', 1386506421),
+(11, '736940301', 0, '', 0, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973628', 'admin', 1386506439),
+(12, '736940301', 0, '', -1, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:1分,  <br>剩余积分:77774557804剩余奖励积分:999973627', 'admin', 1386506597),
+(13, '736940301', 10, '服务费', -500, '计时赛', '报名赛事[ MTT 30积分赛 ]:扣除参赛费,奖励积分:500分,  <br>剩余积分:77774557804剩余奖励积分:999973127', 'admin', 1386506662),
+(14, '736940301', 11, '服务费', 0, '计时赛', '报名赛事[ MTT 30积分赛 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973127', 'admin', 1386506876),
+(15, '736940301', 11, '服务费', 0, '计时赛', '报名赛事[ MTT 30积分赛 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973127', 'admin', 1386534489),
+(16, '736940301', 11, '服务费', 0, '计时赛', '报名赛事[ MTT 30积分赛 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973127', 'admin', 1386542984),
+(17, '736940301', 11, '服务费', 0, '计时赛', '报名赛事[ MTT 30积分赛 ]:扣除参赛费,奖励积分:0分,  <br>剩余积分:77774557804剩余奖励积分:999973127', 'admin', 1386543125),
+(18, '736940301', 0, '销售', -1941, '商品', '商品交易,扣除1955积分<br/>备注:2个	[打火机]	使用2积分,0奖励积分<br/>22个	[打火机]	使用22积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/><br>剩余积分:77774555849剩余奖励积分:999973127', 'admin', 1386544016),
+(19, '736940301', 0, '销售', -1941, '商品', '商品交易,扣除1955积分<br/>备注:2个	[打火机]	使用2积分,0奖励积分<br/>22个	[打火机]	使用22积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/><br>剩余积分:77774553894剩余奖励积分:999973127', 'admin', 1386544208),
+(20, '736940301', 0, '销售', -1941, '商品', '商品交易,扣除1955积分<br/>备注:2个	[打火机]	使用2积分,0奖励积分<br/>22个	[打火机]	使用22积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/><br>剩余积分:77774551939剩余奖励积分:999973127', 'admin', 1386544242),
+(21, '736940301', 0, '销售', -1941, '商品', '商品交易,扣除1955积分<br/>备注:2个	[打火机]	使用2积分,0奖励积分<br/>22个	[打火机]	使用22积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/><br>剩余积分:77774549984剩余奖励积分:999973127', 'admin', 1386544329);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_entry`
+-- 表的结构 `dzpkos_entry`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_entry` (
+CREATE TABLE IF NOT EXISTS `dzpkos_entry` (
   `id` int(15) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `card` varchar(25) NOT NULL COMMENT '读卡',
   `sport_id` int(22) NOT NULL COMMENT '赛事编号',
@@ -67,22 +84,38 @@ CREATE TABLE IF NOT EXISTS `dzmc_entry` (
   `exit_time` int(22) NOT NULL DEFAULT '0' COMMENT '退赛时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=2 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=18 ;
 
 --
--- 转存表中的数据 `dzmc_entry`
+-- 转存表中的数据 `dzpkos_entry`
 --
 
-INSERT INTO `dzmc_entry` (`id`, `card`, `sport_id`, `status`, `payment_type`, `number`, `add_date`, `exit_time`) VALUES
-(1, '736940301', 8, '已入赛', 'jiangli_jifen', 2, 1386333735, 0);
+INSERT INTO `dzpkos_entry` (`id`, `card`, `sport_id`, `status`, `payment_type`, `number`, `add_date`, `exit_time`) VALUES
+(1, '736940301', 8, '已入赛', 'jiangli_jifen', 2, 1386333735, 0),
+(2, '736940301', 9, '已入赛', 'jiangli_jifen', 1, 1386504241, 0),
+(3, '736940301', 9, '已入赛', 'jiangli_jifen', 1, 1386506130, 0),
+(4, '736940301', 9, '已入赛', 'jiangli_jifen', 1, 1386506309, 0),
+(5, '736940301', 9, '已入赛', 'jiangli_jifen', 1, 1386506335, 0),
+(6, '736940301', 9, '已入赛', 'jiangli_jifen', 1, 1386506421, 0),
+(7, '736940301', 9, '已入赛', 'jiangli_jifen', 1, 1386506439, 0),
+(8, '736940301', 9, '已入赛', 'jiangli_jifen', 1, 1386506597, 0),
+(9, '736940301', 10, '已入赛', 'jiangli_jifen', 1, 1386506662, 0),
+(10, '736940301', 11, '已入赛', 'jiangli_jifen', 1, 1386506876, 0),
+(11, '736940301', 11, '已入赛', 'jiangli_jifen', 1, 1386534489, 0),
+(12, '736940301', 11, '已入赛', 'jiangli_jifen', 1, 1386542984, 0),
+(13, '736940301', 11, '已入赛', 'jiangli_jifen', 1, 1386543033, 0),
+(14, '736940301', 11, '已入赛', 'jiangli_jifen', 1, 1386543095, 0),
+(15, '736940301', 11, '已入赛', 'jiangli_jifen', 1, 1386543112, 0),
+(16, '736940301', 11, '已入赛', 'jiangli_jifen', 1, 1386543115, 0),
+(17, '736940301', 11, '已入赛', 'jiangli_jifen', 1, 1386543125, 0);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_goods`
+-- 表的结构 `dzpkos_goods`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_goods` (
+CREATE TABLE IF NOT EXISTS `dzpkos_goods` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `name` varchar(255) NOT NULL COMMENT '商品名称',
   `suk` varchar(255) DEFAULT NULL COMMENT '简码',
@@ -100,22 +133,22 @@ CREATE TABLE IF NOT EXISTS `dzmc_goods` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=8 ;
 
 --
--- 转存表中的数据 `dzmc_goods`
+-- 转存表中的数据 `dzpkos_goods`
 --
 
-INSERT INTO `dzmc_goods` (`id`, `name`, `suk`, `unit`, `categories_id`, `jinjia`, `price`, `jiangli_jifen`, `diyong_jifen`, `inventory`, `remark`, `add_date`) VALUES
-(2, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 0),
-(4, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 999, '火机', 11111),
-(6, '红茶', 'hc', '杯', 9, '', '20', '0', '0', 99, 'qq', 1385242574),
-(7, '法国干红213123', 'fhgh1', '瓶', 11, '11', '1911', '0', '10', 999, 'asd', 1385213172);
+INSERT INTO `dzpkos_goods` (`id`, `name`, `suk`, `unit`, `categories_id`, `jinjia`, `price`, `jiangli_jifen`, `diyong_jifen`, `inventory`, `remark`, `add_date`) VALUES
+(2, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 993, '火机', 0),
+(4, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 933, '火机', 11111),
+(6, '红茶', 'hc', '杯', 9, '', '20', '0', '0', 96, 'qq', 1385242574),
+(7, '法国干红213123', 'fhgh1', '瓶', 11, '11', '1911', '0', '10', 996, 'asd', 1385213172);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_goods_class`
+-- 表的结构 `dzpkos_goods_class`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_goods_class` (
+CREATE TABLE IF NOT EXISTS `dzpkos_goods_class` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `fid` int(11) NOT NULL DEFAULT '0' COMMENT '父编号',
   `name` varchar(255) DEFAULT NULL COMMENT '名称',
@@ -124,10 +157,10 @@ CREATE TABLE IF NOT EXISTS `dzmc_goods_class` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品分类表' AUTO_INCREMENT=12 ;
 
 --
--- 转存表中的数据 `dzmc_goods_class`
+-- 转存表中的数据 `dzpkos_goods_class`
 --
 
-INSERT INTO `dzmc_goods_class` (`id`, `fid`, `name`, `remark`) VALUES
+INSERT INTO `dzpkos_goods_class` (`id`, `fid`, `name`, `remark`) VALUES
 (8, 0, '茶', ''),
 (5, 0, '酒', ''),
 (9, 8, '红茶', ''),
@@ -137,10 +170,10 @@ INSERT INTO `dzmc_goods_class` (`id`, `fid`, `name`, `remark`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_icon`
+-- 表的结构 `dzpkos_icon`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_icon` (
+CREATE TABLE IF NOT EXISTS `dzpkos_icon` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `iconid` int(11) DEFAULT '0' COMMENT '图标编号',
   `userid` int(11) NOT NULL COMMENT '用户ID',
@@ -151,10 +184,10 @@ CREATE TABLE IF NOT EXISTS `dzmc_icon` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=21 ;
 
 --
--- 转存表中的数据 `dzmc_icon`
+-- 转存表中的数据 `dzpkos_icon`
 --
 
-INSERT INTO `dzmc_icon` (`id`, `iconid`, `userid`, `link`, `action_id`, `listnum`) VALUES
+INSERT INTO `dzpkos_icon` (`id`, `iconid`, `userid`, `link`, `action_id`, `listnum`) VALUES
 (6, 6, 1, '', 43, 0),
 (13, 4, 251, '', 4, 0),
 (12, 6, 251, '', 43, 0),
@@ -176,10 +209,10 @@ INSERT INTO `dzmc_icon` (`id`, `iconid`, `userid`, `link`, `action_id`, `listnum
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_member`
+-- 表的结构 `dzpkos_member`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_member` (
+CREATE TABLE IF NOT EXISTS `dzpkos_member` (
   `card` varchar(11) NOT NULL COMMENT '读卡数字串',
   `cardid` int(11) NOT NULL COMMENT '会员卡上的编号',
   `card_type` int(11) NOT NULL COMMENT '卡的类型',
@@ -213,10 +246,10 @@ CREATE TABLE IF NOT EXISTS `dzmc_member` (
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COMMENT='会员表';
 
 --
--- 转存表中的数据 `dzmc_member`
+-- 转存表中的数据 `dzpkos_member`
 --
 
-INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
+INSERT INTO `dzpkos_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
 ('3674988221', 801287, 1, '100', '杨靖', '', '15872358286', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, 82, '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1377324741, 254, ''),
 ('1507527021', 801219, 1, '', '钟鼎文', '', '18616218833', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1377264077, 0, ''),
 ('3588622989', 801220, 1, '', '东哥', '', '13823157777', '', '', 1, 1, 0, '', 0, 52, '', '', '', '', '', 0, 0, '', '', 1377262207, 400, ''),
@@ -570,7 +603,7 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 ('736978253', 800750, 1, '', '桑磊', '', '13971611633', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1369036128, 22, ''),
 ('736671213', 800743, 1, '', '黄磊', '', '13871509678', '', '', 1, 1, 0, '', 0, 6, '', '', '', '', '', 0, 0, '', '', 1369036067, 12, ''),
 ('737361405', 800742, 1, '', '朵朵', '', '15848886300', '', '', 0, 1, 0, '', 0, 2, '', '', '', '', '', 0, 0, '', '', 1369035986, 0, '');
-INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
+INSERT INTO `dzpkos_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
 ('736761805', 800741, 1, '', '颜美眉', '', '13871387876', '', '', 0, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1369035855, 0, ''),
 ('737228637', 800757, 1, '', '朱昊', '', '13871020919', '', '', 1, 1, 0, '', 0, 146, '', '', '', '', '', 0, 0, '', '', 1368956533, 0, ''),
 ('736765293', 800735, 1, '', '决堤', '', '15387013110', '', '', 1, 1, 0, '', 0, 6, '', '', '', '', '', 0, 0, '', '', 1368946425, 476, ''),
@@ -927,7 +960,7 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 ('736664797', 800472, 1, '', '林刚', '', '18627883886', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363416178, 0, ''),
 ('736753229', 800486, 1, '', '祁锐', '', '13607186180', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363414436, 0, ''),
 ('737115357', 800467, 1, '', '李波', '', '18607141050', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363358504, 0, '');
-INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
+INSERT INTO `dzpkos_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
 ('737224077', 800441, 1, '', '唐勇', '', '15549966666', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363333915, 0, ''),
 ('736760717', 800440, 1, '', '侯文峰', '', '18671922727', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363333844, 0, ''),
 ('736840301', 800539, 1, '', '杨涛', '', '15972020202', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1363278878, 0, ''),
@@ -991,7 +1024,7 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 ('737053789', 800406, 1, '', '景桓', '', '13971049719', '', '', 1, 1, 0, '', 0, 100, '', '', '', '', '', 0, 0, '', '', 1362487537, 0, ''),
 ('736940797', 800372, 1, '', '王波', '', '13407183430', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362484226, 0, ''),
 ('736641501', 800381, 1, '', '崔晨伟', '', '18607139122', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362471830, 67, ''),
-('736940301', 800340, 1, '', '潘志增', '', '13797000089', '', '', 1, 1, 0, '', 0, 77774557802, '', '', '', '', '', 0, 0, '', '', 1362471733, 999973628, ''),
+('736940301', 800340, 1, '', '潘志增', '', '13797000089', '', '', 1, 1, 0, '', 0, 77774549984, '', '', '', '', '', 0, 0, '', '', 1362471733, 999973127, ''),
 ('736951805', 800380, 1, '', '王德勇', '', '13871237620', '', '', 1, 1, 0, '', 0, 32, '', '', '', '', '', 0, 0, '', '', 1362408429, 3239, ''),
 ('736762061', 800382, 1, '', '李广岐', '', '13971218881', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362406737, 0, ''),
 ('737890317', 800393, 1, '', '鹏鹏', '', '13995597744', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362403966, 0, ''),
@@ -1284,7 +1317,7 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 ('736831581', 800188, 1, '', '聂欣', '', '18607188848', '', '', 0, 1, 0, '', 0, 100, '', '', '', '', '', 0, 0, '', '', 1359457031, 0, ''),
 ('736918717', 800222, 1, '', '萧石', '', '13807181225', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1359456462, 2324, ''),
 ('736734557', 800166, 1, '', '周强', '', '18907151656', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1359453013, 0, '');
-INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
+INSERT INTO `dzpkos_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
 ('736764029', 800098, 1, '', '申毅文', '', '13072793766', '', '', 1, 1, 0, '', 0, 10, '', '', '', '', '', 0, 0, '', '', 1359452971, 500, ''),
 ('736641277', 800666, 1, '', '常笑', '', '13387577909', '', '', 1, 1, 0, '', 0, 1091, '', '', '', '', '', 0, 0, '', '', 1359450389, 900, ''),
 ('736699981', 800888, 1, '', '熊总', '', '13907129488', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1359448063, 580, ''),
@@ -1331,10 +1364,10 @@ INSERT INTO `dzmc_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`,
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_order`
+-- 表的结构 `dzpkos_order`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_order` (
+CREATE TABLE IF NOT EXISTS `dzpkos_order` (
   `id` int(22) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `card` int(25) NOT NULL COMMENT '读卡',
   `type` varchar(30) NOT NULL COMMENT '类型',
@@ -1345,15 +1378,25 @@ CREATE TABLE IF NOT EXISTS `dzmc_order` (
   `remark` text COMMENT '备注',
   `add_date` int(15) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='订单' AUTO_INCREMENT=41 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='订单' AUTO_INCREMENT=45 ;
+
+--
+-- 转存表中的数据 `dzpkos_order`
+--
+
+INSERT INTO `dzpkos_order` (`id`, `card`, `type`, `method_payment`, `payment_amount`, `diyong_jifen`, `jiangli_jifen`, `remark`, `add_date`) VALUES
+(41, 736940301, '商品', '积分', '1955', '10', '24', '2个	[打火机]	使用2积分,0奖励积分<br/>22个	[打火机]	使用22积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/>', 1386544016),
+(42, 736940301, '商品', '积分', '1955', '10', '24', '2个	[打火机]	使用2积分,0奖励积分<br/>22个	[打火机]	使用22积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/>', 1386544208),
+(43, 736940301, '商品', '积分', '1955', '10', '24', '2个	[打火机]	使用2积分,0奖励积分<br/>22个	[打火机]	使用22积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/>', 1386544242),
+(44, 736940301, '商品', '积分', '1955', '10', '24', '2个	[打火机]	使用2积分,0奖励积分<br/>22个	[打火机]	使用22积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>1瓶	[法国干红213123]	使用1911积分,10奖励积分<br/>', 1386544329);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_prize`
+-- 表的结构 `dzpkos_prize`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_prize` (
+CREATE TABLE IF NOT EXISTS `dzpkos_prize` (
   `id` int(22) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `card` varchar(11) NOT NULL COMMENT '读卡',
   `name` varchar(200) NOT NULL COMMENT '会员名称',
@@ -1368,20 +1411,20 @@ CREATE TABLE IF NOT EXISTS `dzmc_prize` (
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_settings`
+-- 表的结构 `dzpkos_settings`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_settings` (
+CREATE TABLE IF NOT EXISTS `dzpkos_settings` (
   `variable` varchar(32) NOT NULL DEFAULT '',
   `value` text,
   UNIQUE KEY `variable` (`variable`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 --
--- 转存表中的数据 `dzmc_settings`
+-- 转存表中的数据 `dzpkos_settings`
 --
 
-INSERT INTO `dzmc_settings` (`variable`, `value`) VALUES
+INSERT INTO `dzpkos_settings` (`variable`, `value`) VALUES
 ('sitename', 'PK365俱乐部'),
 ('sitephone', '13026105388'),
 ('siteaddress', '湖北省武汉市'),
@@ -1398,10 +1441,10 @@ INSERT INTO `dzmc_settings` (`variable`, `value`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_sport`
+-- 表的结构 `dzpkos_sport`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_sport` (
+CREATE TABLE IF NOT EXISTS `dzpkos_sport` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `name` text NOT NULL COMMENT '赛事名称',
   `type` varchar(255) NOT NULL COMMENT '赛事类型',
@@ -1409,9 +1452,9 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
   `deduction` int(20) NOT NULL COMMENT '消耗积分',
   `service_charge` int(255) NOT NULL COMMENT '服务费',
   `service_charge_time` int(11) DEFAULT NULL COMMENT '每次服务费时间(分钟)',
-  `people_number` int(11) DEFAULT NULL COMMENT '人数',
+  `people_number` int(11) DEFAULT NULL COMMENT '可参赛人次',
   `rebuy` int(1) NOT NULL COMMENT '是否可以再次买入',
-  `entry_number` int(11) NOT NULL COMMENT '参赛次数',
+  `entry_number` int(11) NOT NULL COMMENT '当前报名人次',
   `stop_entry_time` int(15) NOT NULL COMMENT '买入截至时间',
   `zhangmang_time` int(15) DEFAULT NULL COMMENT '涨盲时间',
   `rest_time` int(11) DEFAULT NULL COMMENT '休息时间',
@@ -1425,22 +1468,25 @@ CREATE TABLE IF NOT EXISTS `dzmc_sport` (
   `add_date` int(15) DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=9 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=12 ;
 
 --
--- 转存表中的数据 `dzmc_sport`
+-- 转存表中的数据 `dzpkos_sport`
 --
 
-INSERT INTO `dzmc_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
-(8, 'SNG 128', 'no_time_trial', 1386361445, 100, 28, 0, 8, 1, 0, 1386403199, 0, 0, '', 0, 0, '', 200, '未开赛', 0, 1386332651);
+INSERT INTO `dzpkos_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
+(8, 'SNG 128', 'no_time_trial', 1386361445, 100, 28, 0, 8, 1, 0, 1386403199, 0, 0, '', 0, 0, '', 200, '未开赛', 0, 1386332651),
+(9, 'PK 1208', 'pk_trial', 1386533003, 0, 0, 0, 3, 1, 0, 1386575999, 0, 0, '', 0, 0, '', 1, '未开赛', 0, 1386504216),
+(10, 'MTT 30积分赛', 'time_trial', 1386535429, 500, 100, 15, 9, 1, 0, 1386575999, 0, 0, '', 0, 0, '', 500, '未开赛', 0, 1386506649),
+(11, 'MTT 30积分赛', 'time_trial', 1386535498, 0, 100, 15, 6, 1, 2, 1386575999, 0, 0, '', 0, 0, '', 0, '未开赛', 0, 1386506703);
 
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_staff`
+-- 表的结构 `dzpkos_staff`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_staff` (
+CREATE TABLE IF NOT EXISTS `dzpkos_staff` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '编号',
   `name` varchar(255) NOT NULL COMMENT '名字',
   `type` varchar(255) NOT NULL COMMENT '类型',
@@ -1450,10 +1496,10 @@ CREATE TABLE IF NOT EXISTS `dzmc_staff` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='员工表' AUTO_INCREMENT=7 ;
 
 --
--- 转存表中的数据 `dzmc_staff`
+-- 转存表中的数据 `dzpkos_staff`
 --
 
-INSERT INTO `dzmc_staff` (`id`, `name`, `type`, `activate`) VALUES
+INSERT INTO `dzpkos_staff` (`id`, `name`, `type`, `activate`) VALUES
 (6, '张曼玉', '发牌员', 1),
 (2, '刘德华', '发牌员', 1),
 (4, '张学友', '发牌员', 1),
@@ -1462,10 +1508,10 @@ INSERT INTO `dzmc_staff` (`id`, `name`, `type`, `activate`) VALUES
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_systemaction`
+-- 表的结构 `dzpkos_systemaction`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_systemaction` (
+CREATE TABLE IF NOT EXISTS `dzpkos_systemaction` (
   `id` tinyint(3) NOT NULL AUTO_INCREMENT,
   `fid` int(11) NOT NULL DEFAULT '0',
   `title` varchar(50) NOT NULL DEFAULT '',
@@ -1478,10 +1524,10 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemaction` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=83 ;
 
 --
--- 转存表中的数据 `dzmc_systemaction`
+-- 转存表中的数据 `dzpkos_systemaction`
 --
 
-INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `page`, `listnum`) VALUES
+INSERT INTO `dzpkos_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `page`, `listnum`) VALUES
 (1, 0, '系统设置', '0', '0', '0', '0', 1),
 (2, 1, '系统参数设置', 'system_set', 'show', '', 'system_set.inc.php', 1),
 (4, 1, '管理员管理', 'system_user', 'list', '1', 'system_user.inc.php', 0),
@@ -1528,10 +1574,10 @@ INSERT INTO `dzmc_systemaction` (`id`, `fid`, `title`, `action`, `todo`, `do`, `
 -- --------------------------------------------------------
 
 --
--- 表的结构 `dzmc_systemuser`
+-- 表的结构 `dzpkos_systemuser`
 --
 
-CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
+CREATE TABLE IF NOT EXISTS `dzpkos_systemuser` (
   `id` mediumint(9) NOT NULL AUTO_INCREMENT,
   `username` varchar(50) NOT NULL DEFAULT '',
   `zname` varchar(50) NOT NULL COMMENT '真实姓名',
@@ -1546,11 +1592,11 @@ CREATE TABLE IF NOT EXISTS `dzmc_systemuser` (
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=252 ;
 
 --
--- 转存表中的数据 `dzmc_systemuser`
+-- 转存表中的数据 `dzpkos_systemuser`
 --
 
-INSERT INTO `dzmc_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1386328898, '127.0.0.1', 'all', 1, '', ''),
+INSERT INTO `dzpkos_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1386530400, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

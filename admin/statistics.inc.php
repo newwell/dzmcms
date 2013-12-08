@@ -242,7 +242,7 @@ switch ($todo) {
 		}
 		if ((!empty($card))||(!empty($time_where))){
 			$member_info = member_get(array($card),'card');
-			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `money`!=0 ";
+			$sql = "SELECT * FROM  `{$tablepre}balance_log` WHERE `money`!=0 AND `card`>0";
 			if (!empty($card)){
 				$sql.=" AND `card` ='".$member_info['card']."'";
 			}
@@ -252,17 +252,10 @@ switch ($todo) {
 			$sql.=" ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-// 				if (empty($arr['type'])){
-// 					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-// 				}else{
-					$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				//}
+				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				$arr['member_info'] = member_get(array($arr['card']),'card');
 		        $infoList[]	= $arr;
 			}
-			//$infoList = entry_list(0, 100," `card` = $card AND status = '已入赛' ");
-			/*echo '<<pre>';
-			print_r($infoList);exit();*/
 		}else {
 			$member_info = '';
 			/*$page   = intval( isset($_GET['page']) ? $_GET['page'] : 1 );

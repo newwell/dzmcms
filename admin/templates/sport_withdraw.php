@@ -60,7 +60,7 @@ document.body.onload = function(){
             <td class="list"><?php echo $value['member_info']['cardid'];?></td>
             <td class="list"><?php echo $value['sport']['name'];?></td>  
             <td class="list"><?php echo $value['status'];?></td>
-            <td class="list"><?php if ($value['sport']['type']=="time_trial"){echo '计时赛';}else echo "非计时赛";?></td>
+            <td class="list"><?php if ($value['sport']['type']=="time_trial"){echo '计时赛';}elseif ($value['sport']['type']=="no_time_trial"){ echo "非计时赛";}elseif ($value['sport']['type']=="pk_trial"){echo "PK赛";};?></td>
             <td class="list"><?php echo $value['number'];?></td>
             <td class="list"><?php echo gmdate("Y-n-j H:i:s",$value['sport']['add_date']) ?></td>
             <td class="list"><?php echo $value['add_date'];?></td>

@@ -40,6 +40,7 @@ document.body.onload = function(){
 <input type="hidden" value="<?php echo $card;?>" name="card">
 <input type="hidden" value="<?php echo $member_info['balance'];?>" name="balance" id="balance">
 <input type="hidden" value="<?php echo $member_info['jiangli_jifen'];?>" name="jiangli_jifen" id="jiangli_jifen">
+<input type="hidden" value="<?php echo $sportinfo['type']?>" name="sporttype" id="sporttype">
 <table align="center" class="formtable" cellpadding="0" cellspacing="1" width="97%">
 	<tr>
 	    <td align="right">参赛名称:</td>
@@ -69,7 +70,12 @@ function check_jifen_submit(card,sid,form) {
 	jiangli_jifen = parseInt($("#jiangli_jifen").val());
 	sportcharge = parseInt($("#sportcharge").val());
 	payment_type = $("#payment_type").val();
-
+	sporttype= $("#sporttype").val();
+	if(sporttype=="pk_trial"){//PK赛的时候买入金额不能为0
+		if (sportcharge=="0"||isNaN(sportcharge)) {
+			alert('PK赛买入金额不能为零');return false;
+		}
+	}
 	if(((balance)+(jiangli_jifen))<(sportcharge)){
 		alert('积分不够,无法完成报名!');
 		return false;

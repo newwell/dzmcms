@@ -39,8 +39,8 @@
             <td class="list"><?php if ($value['type']=="time_trial"){echo "每".$value['service_charge_time']."分钟,".$value['service_charge']."积分";}elseif ($value['type']=="no_time_trial") {echo $value['service_charge'].'积分';}elseif ($value['type']=="pk_trial"){echo "----";}?></td>
             <td class="list"><?php echo entry_total(" `sport_id`=".$value['id']." AND `status`='已入赛'");?>/<?php echo $value['people_number'];?></td>
             
-            <td class="list"><?php //计算当前参赛的人数
-            		$renshu123 = entry_list(0,200," `sport_id`=".$value['id']." AND `status`='已入赛' ");
+            <td class="list"><?php echo $value['entry_number']; //计算当前参赛的人数
+            		/* $renshu123 = entry_list(0,200," `sport_id`=".$value['id']." AND `status`='已入赛' ");
             		foreach ($renshu123 as $temp_value) {
             			$renshu2[]=$temp_value['card'];
             		}
@@ -48,7 +48,7 @@
             			echo count(array_unique($renshu2));
             		}else {
             			echo "0";
-            		}
+            		} */
             ?></td>
             <td class="list"><?php if ($value['rebuy']){echo "是";}else {echo '否';}?></td>
             <td class="list"><?php echo $value['status']?></td>

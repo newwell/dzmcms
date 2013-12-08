@@ -96,4 +96,8 @@ function importclass()
 	loadscriptfile('script/class.js','js');
 }
 
-
+console.log("DZPKOS %c德州扑克运营系统","color:red");
+console.log("开发商:%c 武汉大赞科技有限公司","color:red");
+console.log("网址：http://www.dazan.cn");
+console.log("培训方:%c 武汉PK365德州扑克俱乐部","color:red");
+console.log("网址：http://www.pk365club.com\n");

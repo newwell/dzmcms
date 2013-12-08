@@ -53,6 +53,7 @@ switch ($todo) {
 			$html.="<tr bgcolor='#F1F3F5'>";
 			$html.='<td class="list">'.$value['name'].'</td>';
 			$html.='<td class="list">'.$value['suk'].'</td>';
+			$html.='<td class="list" id="inventory_'.$value['id'].'">'.$value['inventory'].'</td>';
 			$html.='<td class="list"><input name="shuliang[]" id="shuliang_'.$value['id'].'" value="1" onblur="buy_cart_up_price('.$value['id'].');"/><input type="hidden" name="ids[]" value="'.$value['id'].'"/>'.$value['unit'].'</td>';
 			$html.='<td class="list">';
 			$html.='<input disabled name="price[]" id="price_'.$value['id'].'" value="'.$value['price'].'"/>';

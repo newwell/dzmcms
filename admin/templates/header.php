@@ -16,7 +16,7 @@
 <script type="text/javascript" src="script/Date_Time/WdatePicker.js" ></script>
 <script type="text/javascript" src="script/class.js"></script>
 <script type="text/javascript" src="script/common.js"></script>
-<script type="text/javascript" src="script/admin.js?v20131112.js"></script>
+<script type="text/javascript" src="script/admin.js?v20131209.js"></script>
 <script type="text/javascript" src="script/check.js"></script>
 <script type="text/javascript" src="script/jquery-1.8.0.min.js"></script>
 
