@@ -44,3 +44,15 @@ function buy_order_total($where='') {
 	$result	= $db->fetch_one_array($sql);
 	return $result['countnum'];
 }
+/**
+ * 计算该条件下的支付的金额合计
+ */
+function buy_order_money($where='') {
+	global $db,$tablepre;
+	$sql	= "SELECT SUM(payment_amount) AS moneysum FROM {$tablepre}order ";
+	if (!empty($where)) {
+		$sql .="WHERE ".$where;
+	}
+	$result	= $db->fetch_one_array($sql);
+	return $result['moneysum'];
+}

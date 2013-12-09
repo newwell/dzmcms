@@ -6,9 +6,9 @@
 <script src="script/hiAlert/jquery.alert.js" type="text/javascript"></script>
 <script src="script/textSearch.jquery.js" type="text/javascript"></script>
 <script type="text/javascript"> 
-document.body.onload = function(){
-    document.getElementById("card").focus();
-};
+// document.body.onload = function(){
+//     document.getElementById("card").focus();
+// };
 function thisCheckForm() {
 	if($("#starttime").val()!=''&&$("#endtime").val()!=''){
 		return true;
@@ -81,6 +81,7 @@ function thisCheckForm() {
 				该条件下的服务费合计:<font color="red"><?php echo $money_sun;?></font>积分=<font color="red"><?php echo $money_sun/$setting_rate;?></font>人民币
 				&nbsp;&nbsp;其中&nbsp;[计时赛:<font color="red"><?php echo $money_sun_jishi;?></font>积分=<font color="red"><?php echo $money_sun_jishi/$setting_rate;?></font>人民币
 				&nbsp;&nbsp;非计时赛:<font color="red"><?php echo $money_sun_feijishi;?></font>积分=<font color="red"><?php echo $money_sun_feijishi/$setting_rate;?></font>人民币]
+				&nbsp;&nbsp;PK赛:<font color="red"><?php echo $money_sun_pk;?></font>积分=<font color="red"><?php echo $money_sun_pk/$setting_rate;?></font>人民币]
 			</td>
 		</tr>
         <tr>
@@ -90,7 +91,7 @@ function thisCheckForm() {
 			<th>获得服务费</th>	
         </tr>
 		<?php if(is_array($infoList)) { foreach($infoList as $key => $value) { ?>
-        <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>     
+        <tr bgcolor="#F1F3F5" onmouseover="tr_add_color($(this))"onmouseout="tr_del_color($(this))">    
             <td class="list"><?php echo $value['name'];?></td>
             <td class="list"><?php if ($value['type']=="time_trial"){echo '计时赛';}elseif ($value['type']=="no_time_trial"){ echo "非计时赛";}elseif ($value['type']=="pk_trial"){echo "PK赛";};?></td>
             <td class="list"><?php echo $value['status'];?></td>

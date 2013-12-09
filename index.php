@@ -28,49 +28,6 @@ switch($action) {
 	case '':
 		include template('login');
 	break;
-	case 'savereg':		
-		$username	= $_POST['username'];
-		$password	= $_POST['password'];
-		$password2	= $_POST['password2'];
-		$zname		= $_POST['zname'];//真姓名
-		$yuanxi		= $_POST['province'];//院系
-		$bumen		= $_POST['city'];//部门
-		$tel		= $_POST['tel'];
-		$zhiwei		= $_POST['zhiwei'];
-		$phone		= $_POST['phone'];//手机
-		$userlevel  = $_POST['userlevel'];
-		//数据合法性验证
-		$hascheck = checkuser($username,$password);
-		if($hascheck){
-			e($hascheck);
-		}
-		/*if ($password!=$password2) {
-			e('两次输入的密码不一致！');
-		}*/
-		$password = md5($password);
-		//检查用户名是否被使用了
-		$sql = "select id from {$tablepre}systemuser where username = '$username'";
-		$userarr = $db->fetch_one_array($sql);
-		if($userarr) {
-			e("user_username_alreadyexist");
-		}
-		switch ($userlevel) {
-			case '1':
-				$actions = "all";
-			break;
-			case '2':
-			case '3':
-				$actions = "system_user,zhouzhi,announcement";
-			break;
-		}
-		
-		$sql = "INSERT INTO {$tablepre}systemuser (`actions`,`username`, `zname`, `password`, `userlevel`, `yuanxi`, `bumen`, `zhiwei`, `tel`, `phone`) 
-		VALUES ('$actions','$username', '$zname', '$password', '$userlevel', '$yuanxi', '$bumen', '$zhiwei', '$tel', '$phone')";
-		$db->query($sql);		
-		s('用户添加成功','?action=system_user&todo=list');
-		
-		
-	break;
 	case 'checklogin' :
 
 		//调用验证码类

@@ -18,40 +18,67 @@ require_once 'include/f/buy.f.php';
 require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 require_once 'include/f/goods.f.php';
+
+//今天
+$kaishi = gmdate("Y-n-j 00:00:00",$localtime);
+$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
+$jintian = "'".$kaishi."','".$jieshu."'";
+//本周
+$date = gmdate("Y-m-d",$localtime);
+$w = gmdate("w", strtotime($date));  //获取当前周的第几天 周日是 0 周一 到周六是 1 -6
+$d = $w ? $w - 1 : 6;  //如果是周日 -6天
+$kaishi = gmdate("Y-m-d 00:00:00", strtotime("$date -".$d." days")); //本周开始时间
+$jieshu = gmdate("Y-m-d 23:59:59", strtotime("$kaishi +6 days"));  //本周结束时间
+$benzhou = "'".$kaishi."','".$jieshu."'";
+//本月
+$kaishi = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';
+$jieshu = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-'.gmdate("t",$localtime).'  23:59:59';
+$benyue = "'".$kaishi."','".$jieshu."'";
+//近30天
+$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
+$kaishi = gmdate("Y-m-d 00:00:00", strtotime("$jieshu -30 days"));
+$jin30tian =  "'".$kaishi."','".$jieshu."'";
+//近3月
+$jieshu = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';
+$kaishi = gmdate("Y-m-1 00:00:00", strtotime("$benyu1hao -2 month"));
+$jin3yue =  "'".$kaishi."','".$jieshu."'";
+
 switch ($todo) {
 	case 'log'://销售记录
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : ''));
+		$starttime	= isset($_REQUEST['starttime']) ? $_REQUEST['starttime'] : '';
+		$endtime	= isset($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
+		
+		$time_where = "";
+		$moneywhere=" `card` >0 ";
+		if (!empty($starttime)&&!empty($endtime)){
+			$time_where = " AND add_date>='".strtotime($starttime)."' AND add_date<='".strtotime($endtime)."'";
+		}
 		$infoList	= array();
-		if (!empty($card)){
+		if ((!empty($card))||(!empty($time_where))){
 			$member_info = member_get(array($card),'card');
 			$card = isset($member_info['card'])?$member_info['card']:0;
-			$sql = "SELECT * FROM  `{$tablepre}order` WHERE `card` =$card ORDER BY  `add_date` DESC ";
-			$result		= $db->query($sql);
+			$sql = "SELECT * FROM  `{$tablepre}order` WHERE `card` >0";
+			if (!empty($card)){
+				$member_info = member_get(array($card),'card');
+				$sql.=" AND `card` ='".$member_info['card']."'";
+				$moneywhere.=" AND `card` ='".$member_info['card']."'";
+			}
+			if (!empty($time_where)) {
+				$sql.=$time_where;
+				$moneywhere.=$time_where;
+			}
+			$result		= $db->query($sql." ORDER BY  `add_date` DESC ");
 			while($arr	= $db->fetch_array($result)){
 				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
 				$arr['member_info'] = member_get(array($arr['card']),"card");
 		        $infoList[]	= $arr;
 			}
 		}else {
-			$member_info = '';
-			$page   = intval( isset($_GET['page']) ? $_GET['page'] : 1 );
-			$perpage = intval( isset($_GET['perpage']) ? $_GET['perpage'] : 20 );
-			if($page > 0){
-				$startlimit = ($page - 1) * $perpage;
-			}else{
-				$startlimit = 0;
-			}
-			$page_array = array();
-			$total		= buy_order_total();
-			$page_control = multipage($total,$perpage,$page);
-			$sql = "SELECT * FROM  `{$tablepre}order` ORDER BY add_date DESC LIMIT $startlimit , $perpage";
-			$result		= $db->query($sql);
-			while($arr	= $db->fetch_array($result)){
-				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
-				$arr['member_info'] = member_get(array($arr['card']),"card");
-		        $infoList[]	= $arr;
-			}	
+			$member_info="";
 		}
+		//统计合计费用
+		$money_sun			= abs(buy_order_money($moneywhere));
 		include template('buy_log');
 		break;
 	case 'buy'://执行购买

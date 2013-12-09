@@ -41,7 +41,7 @@ switch ($todo) {
 		jackpot_reduce($sport_id, $sport_info['jackpot']);
 		//记入服务费收益
 		$money = intval('-'.$sport_info['jackpot']);
-		balance_log("", "", $$localtime, $money,"服务费",$explain,$sport_id);
+		balance_log("", "", $localtime, $money,"服务费",$explain,$sport_id);
 		s("转入成功",'?action=sport_list&todo=prize&id='.$sport_id);
 	break;
 	case 'desktop':
@@ -328,7 +328,9 @@ switch ($todo) {
 				include template('sport_withdraw_print');
 			}elseif ($sport_info['type']=='no_time_trial'){//非计时赛
 				//参赛次数大于1表示rebuy过了,rebuy就是已经上场了,上场过的用户是不允许退赛的!
-				if ($entry_info['number']>1) s("已经rebuy过了,无法完成退赛",$tiaohui);
+				
+				/*--当前注释的原因是让[非计时赛rebuy后也能退最后一次的积分]
+				if ($entry_info['number']>1) s("已经rebuy过了,无法完成退赛",$tiaohui);--*/
 				//如果比赛颁奖过了,奖池不够了,是不能退回积分的
 				if ($sport_info['jackpot']<$sport_info['deduction']) s("奖池不够,无法完成退赛",$tiaohui);
 				//扣掉奖池里的积分

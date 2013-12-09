@@ -5,6 +5,7 @@ global $act,$todo,$tablepre,$db;
 admin_priv($act['action']);
 require_once 'include/f/balance.f.php';
 require_once 'include/f/member.f.php';
+require_once 'include/f/sport.f.php';
 //今天
 		$kaishi = gmdate("Y-n-j 00:00:00",$localtime);
 		$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
@@ -58,7 +59,7 @@ switch ($todo) {
 				$moneywhere.=$time_where;
 			}
 			//得到时间范围内的赛事数据
-			echo $get_saishi_sql;
+			//echo $get_saishi_sql;
 			$get_saishi_result		= $db->query($get_saishi_sql);
 			while($arr	= $db->fetch_array($get_saishi_result)){
 				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
@@ -71,9 +72,12 @@ switch ($todo) {
 			$sql.=" ORDER BY  `add_date` DESC ";
 			$result		= $db->query($sql);
 			while($arr	= $db->fetch_array($result)){
-				$infoList[$arr['sport_id']]['serve_money'] = $infoList[$arr['sport_id']]['serve_money']+intval($arr['money']);
+				$infoList[$arr['sport_id']]=sport_get(array($arr['sport_id']),"id");
+//				$infoList[$arr['sport_id']]['serve_money'] = $infoList[$arr['sport_id']]['serve_money']+intval($arr['money']);
+				$infoList[$arr['sport_id']]['serve_money'] = balance_log_money($moneywhere."AND `sport_id`= ".$arr['sport_id']);
+				
 			}
-			echo "<pre>";print_r($infoList);//exit();
+			//echo "<pre>";print_r($infoList);//exit();
 		}else {
 			$member_info = '';
 		}
@@ -81,6 +85,7 @@ switch ($todo) {
 		$money_sun			= abs(balance_log_money($moneywhere));
 		$money_sun_jishi	= abs(balance_log_money($moneywhere." AND `type_explain`= '计时赛'"));
 		$money_sun_feijishi	= abs(balance_log_money($moneywhere." AND `type_explain`= '非计时赛'"));
+		$money_sun_pk	= abs(balance_log_money($moneywhere." AND `type_explain`= 'PK赛'"));
 		
 		
 		
