@@ -25,11 +25,9 @@ require_once 'include/f/member.f.php';
 		$kaishi = gmdate("Y-m-d 00:00:00", strtotime("$jieshu -30 days"));
 		$jin30tian =  "'".$kaishi."','".$jieshu."'";
 		//近3月
-		//$jieshu = gmdate("Y-n-j 23:59:59",$localtime);
 		$jieshu = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';
 		$kaishi = gmdate("Y-m-1 00:00:00", strtotime("$benyu1hao -2 month"));
 		$jin3yue =  "'".$kaishi."','".$jieshu."'";
-		
 		
 switch ($todo) {
 	case 'serviceCharge'://服务费统计
@@ -37,8 +35,6 @@ switch ($todo) {
 		$starttime	= isset($_REQUEST['starttime']) ? $_REQUEST['starttime'] : '';
 		$endtime	= isset($_REQUEST['endtime']) ? $_REQUEST['endtime'] : '';
 		
-		/*echo strtotime($starttime)."<br/>";
-		echo $endtime."<br/>";*/
 		
 		$time_where = "";
 		$moneywhere=" `money`!=0 AND `type`='服务费'";
@@ -62,6 +58,7 @@ switch ($todo) {
 				$moneywhere.=$time_where;
 			}
 			//得到时间范围内的赛事数据
+			echo $get_saishi_sql;
 			$get_saishi_result		= $db->query($get_saishi_sql);
 			while($arr	= $db->fetch_array($get_saishi_result)){
 				$arr['add_date']= gmdate('Y-n-j H:i:s',$arr['add_date']);
@@ -76,7 +73,7 @@ switch ($todo) {
 			while($arr	= $db->fetch_array($result)){
 				$infoList[$arr['sport_id']]['serve_money'] = $infoList[$arr['sport_id']]['serve_money']+intval($arr['money']);
 			}
-			//echo "<pre>";print_r($infoList);//exit();
+			echo "<pre>";print_r($infoList);//exit();
 		}else {
 			$member_info = '';
 		}
