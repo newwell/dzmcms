@@ -76,12 +76,12 @@ function check_jifen_submit(card,sid,form) {
 			alert('PK赛买入金额不能为零');return false;
 		}
 	}
-	if(((balance)+(jiangli_jifen))<(sportcharge)){
+	if((sportcharge)>((balance)+(jiangli_jifen))){
 		alert('积分不够,无法完成报名!');
 		return false;
 	}
 	if(payment_type=='jiangli_jifen'){
-		if(jiangli_jifen>sportcharge){
+		if(jiangli_jifen>=sportcharge){
 			form.submit();
 			return true;
 		}else{
@@ -91,7 +91,7 @@ function check_jifen_submit(card,sid,form) {
 			}return false;
 		}
 	}else{
-		if(balance>sportcharge){
+		if(balance>=sportcharge){
 			form.submit();
 			return true;
 		}else{
