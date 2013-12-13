@@ -8,7 +8,7 @@
 	    <td align="right">赛事名称:</td>
 	    <td><input name="name" required="true"/>*不能为空</td>
 	    <td align="right">比赛开始时间:</td>
-	    <td><input name="start_time" autocomplete="off" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/></td>
+	    <td><input name="start_time" autocomplete="off" class="Wdate" onclick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss',alwaysUseStartDate:true})"/>*不能为空</td>
 	</tr>
 	<tr>
 	    <td align="right">类型:</td>

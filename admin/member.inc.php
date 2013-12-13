@@ -22,8 +22,8 @@ switch ($todo) {
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '空' );
 		
-		if (empty($change_value))s("赠送积分值不能为0",'member_PresentExp&todo=PresentExp&card='.$card);
-		if (empty($card))e('无法获取读卡');
+		if (empty($change_value))s("赠送积分值不能为0",'?action=member_PresentExp&todo=PresentExp&card='.$card);
+		if (empty($card))s("无法获取读卡",'?action=member_PresentExp&todo=PresentExp&card='.$card);
 		
 		$member_info = member_get(array($card),'card');
 		$card = $member_info['card'];
@@ -345,8 +345,8 @@ switch ($todo) {
 		//$system_user_id = intval( isset($_GET['system_user_id']) ? $_GET['system_user_id'] : "" );
 		//print_r($method_payment);exit();
 		//$xianzaishijian = time();
-		if (empty($dopay))e("充值金额为0");
-		if (empty($card))e('无法获取读卡');
+		if (empty($dopay))s("充值金额不能为0","?action=member_pay&todo=pay&card=".$card);
+		if (empty($card))s('无法获取读卡',"?action=member_pay&todo=pay&card=".$card);
 		$member_info = member_get(array($card),'card');
 		$card = $member_info['card'];
 		$value = $dopay*$setting_rate;

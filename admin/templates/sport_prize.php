@@ -11,7 +11,7 @@
     <table width="100%" cellpadding="1" cellspacing="1" align="center" class="listtable">
         <tr>
             <th>奖项</th>
-			<th>会员读卡</th>
+			<th>会员号</th>
 			<th >会员名称</th>
 			<th >奖励积分</th>
 			<th>奖励时间</th>		
@@ -20,7 +20,7 @@
         <tr <?php if (($key%2) == 0){echo 'bgcolor="#E4EDF9"';}else {echo 'bgcolor="#F1F3F5"';}?>>
                   
             <td class="list"><?php echo $value['ranking']?></td>  
-            <td class="list"><?php echo $value['card']?></td>
+            <td class="list"><?php $user_info = member_get(array($value['card']),"card"); echo $user_info['cardid']?></td>
             <td class="list"><?php echo $value['name']?></td>
             <td class="list"><?php echo $value['jiangli_jifen']?></td>
             <td class="list xiankuan"><?php echo $value['add_date'];?></td>

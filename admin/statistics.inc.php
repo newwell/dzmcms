@@ -27,7 +27,7 @@ require_once 'include/f/sport.f.php';
 		$jin30tian =  "'".$kaishi."','".$jieshu."'";
 		//近3月
 		$jieshu = gmdate("Y",$localtime).'-'.gmdate("m",$localtime).'-1  00:00:00';
-		$kaishi = gmdate("Y-m-1 00:00:00", strtotime("$benyu1hao -2 month"));
+		$kaishi = gmdate("Y-m-1 00:00:00", strtotime("$benyu1hao -3 month"));
 		$jin3yue =  "'".$kaishi."','".$jieshu."'";
 		
 switch ($todo) {

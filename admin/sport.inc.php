@@ -325,6 +325,7 @@ switch ($todo) {
 			if ($sport_info['type']=='time_trial'){//计时赛
 				$money = intval("-".$serviceCharge);
 				balance_log($card, "退出赛事[".$sport_info['name']."]:扣除服务费:$type,".$serviceCharge."分", $localtime,$money,"服务费","计时赛",$sport_id);
+				$member_info	= member_get(array($card),'card');
 				include template('sport_withdraw_print');
 			}elseif ($sport_info['type']=='no_time_trial'){//非计时赛
 				//参赛次数大于1表示rebuy过了,rebuy就是已经上场了,上场过的用户是不允许退赛的!
