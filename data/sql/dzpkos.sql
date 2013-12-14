@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 12 月 13 日 13:08
+-- 生成日期: 2013 年 12 月 14 日 13:19
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -1420,6 +1420,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_sport` (
   `service_charge` int(255) NOT NULL COMMENT '服务费',
   `service_charge_time` int(11) DEFAULT NULL COMMENT '每次服务费时间(分钟)',
   `people_number` int(11) DEFAULT NULL COMMENT '可参赛人次',
+  `cansai_renci` int(11) NOT NULL DEFAULT '0' COMMENT '参赛人次',
   `rebuy` int(1) NOT NULL COMMENT '是否可以再次买入',
   `entry_number` int(11) NOT NULL COMMENT '当前报名人次',
   `stop_entry_time` int(15) NOT NULL COMMENT '买入截至时间',
@@ -1441,8 +1442,8 @@ CREATE TABLE IF NOT EXISTS `dzpkos_sport` (
 -- 转存表中的数据 `dzpkos_sport`
 --
 
-INSERT INTO `dzpkos_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
-(13, 'SNG 128', 'no_time_trial', 1386961923, 100, 28, 0, 8, 1, 1, 1387007999, 0, 0, '', 0, 0, '', 99, '未开赛', 0, 1386933137);
+INSERT INTO `dzpkos_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `cansai_renci`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
+(13, 'SNG 128', 'no_time_trial', 1386961923, 100, 28, 0, 8, 0, 1, 1, 1387007999, 0, 0, '', 0, 0, '', 99, '未开赛', 0, 1386933137);
 
 -- --------------------------------------------------------
 
@@ -1560,7 +1561,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_systemuser` (
 --
 
 INSERT INTO `dzpkos_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1386938295, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1387025663, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

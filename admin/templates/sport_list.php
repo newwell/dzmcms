@@ -37,12 +37,7 @@
             <td class="list"><?php echo $value['name'];?></td>      
             <td class="list"><?php echo $value['deduction'];?></td>  
             <td class="list"><?php if ($value['type']=="time_trial"){echo "每".$value['service_charge_time']."分钟,".$value['service_charge']."积分";}elseif ($value['type']=="no_time_trial") {echo $value['service_charge'].'积分';}elseif ($value['type']=="pk_trial"){echo "----";}?></td>
-            <td class="list"><?php $renshu123 = entry_list(0,200," `sport_id`=".$value['id']." AND `status`='已入赛' ");
-            foreach ($renshu123 as $temp_value) {
-            	$cishu = $cishu+intval($temp_value['number']);
-            }echo $cishu;
-            ?>/<?php echo $value['people_number'];?></td>
-            
+            <td class="list"><?php echo $value['cansai_renci'];?>/<?php echo $value['people_number'];?></td>
             <td class="list"><?php echo $value['entry_number']; //计算当前参赛的人数
             		/* $renshu123 = entry_list(0,200," `sport_id`=".$value['id']." AND `status`='已入赛' ");
             		foreach ($renshu123 as $temp_value) {

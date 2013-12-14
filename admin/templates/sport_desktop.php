@@ -47,7 +47,7 @@ background-color: #FFBD00;
 			<li><a href="JavaScript:;" onclick="if(confirm('删除不可恢复,同时删除该赛事下的参赛,颁奖记录,确认删除?')){location.href='?action=sport_list&todo=del&id=<?php echo $value['id']?>'}" title="删除">删除</a></li>
 		</ul>
   		<div class="desktop_name"><?php echo $value['name'];?></div>
-  		<div class="desktop_num">人数/上限:<?php echo entry_total(" `sport_id`=".$value['id']." AND `status`='已入赛'");?>/<?php echo $value['people_number'];?></div>
+  		<div class="desktop_num">比赛人次/剩余人次<br/><?php echo $value['cansai_renci'];?>/<?php echo $value['people_number'];?></div>
   		<div class="desktop_time">开赛时间:<?php echo gmdate("Y-n-j H:i:s",$value['add_date']) ?></div>
   	</div>
   	<script type="text/javascript">

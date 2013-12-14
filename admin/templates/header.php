@@ -10,7 +10,7 @@
 
 <title>德州扑克运营管理系统</title>
 <link type="text/css" rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css.min.css?v131028.css"/>
-<link type="text/css" rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css/wui.min.css?v131108.css" />
+<link type="text/css" rel="stylesheet" href="<?php echo $_TEMPLATESDIR;?>css/wui.min.css?v131214.css" />
 <link type="text/css" rel="stylesheet" href="script/Date_Time/skin/WdatePicker.css">
 
 <script type="text/javascript" src="script/Date_Time/WdatePicker.js" ></script>

@@ -118,13 +118,13 @@ background-repeat: no-repeat;
 	color: #fff;
 }
 .desktop_time{
-	margin-top: 14px;
 	font-size: 12px;
 	color: #fff;
+	margin-top: 10px;
 }
 .desktop_num{
 	margin-left: 118px;
-	margin-top: 22px;
+	margin-top: 8px;
 	font-size: 12px;
 	color: #fff;
 }
