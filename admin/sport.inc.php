@@ -125,9 +125,14 @@ switch ($todo) {
 				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}
 		}
-			
+		
+		/*--rebuy增加参赛人数--*/
+		sport_update($sport_id, array(
+		"cansai_renci"=>$sport_info['cansai_renci']+1
+		));
+		
 		$result = entry_update($entry_id, array(
-				"number"=>$entry_info['number']+1
+			"number"=>$entry_info['number']+1
 		));
 		if ($result) {
 			//$money = intval($value);
@@ -317,6 +322,12 @@ switch ($todo) {
 				$type="积分";
 			}
 		}
+		/*--退出比赛 报名人次减一人  参赛人次减一人  剩余人次加一 --*/
+		sport_update($sport_id, array(
+			"entry_number"=>$sport_info['entry_number']-1,
+			"cansai_renci"=>$sport_info['cansai_renci']-1,
+			"people_number"=>$sport_info['people_number']+1
+		));
 		 $result = entry_update($entry_id, array(
 			"status"=>"已退赛",
 			"exit_time"=>$localtime
@@ -479,8 +490,10 @@ switch ($todo) {
 		if (!$result) {
 			s('失败','?action=sport_entry&todo=entry&do=entry');
 		}
+		/*--报名增加报名人数很参赛人数--*/
 		sport_update($sport_id, array(
-			"entry_number"=>$sportinfo['entry_number']+1
+			"entry_number"=>$sportinfo['entry_number']+1,
+			"cansai_renci"=>$sportinfo['cansai_renci']+1
 		));
 		if ($sportinfo['type']=='no_time_trial') {
 			//非计时赛 记录服务费

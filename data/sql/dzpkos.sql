@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 12 月 14 日 13:19
+-- 生成日期: 2013 年 12 月 15 日 12:02
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_balance_log` (
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=52 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=61 ;
 
 --
 -- 转存表中的数据 `dzpkos_balance_log`
@@ -51,7 +51,16 @@ INSERT INTO `dzpkos_balance_log` (`id`, `card`, `sport_id`, `type`, `money`, `ty
 (48, '736940301', 0, '', -128, '', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费:,积分:128分,  <br>剩余积分:78511505692剩余奖励积分:1', 'admin', 1386934840),
 (49, '736940301', 0, '', -28, '', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费:,积分:128分,  <br>剩余积分:78511505692剩余奖励积分:1', 'admin', 1386934840),
 (50, '', 13, '服务费', -28, '非计时赛', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费:,积分:128分,  <br>剩余积分:剩余奖励积分:', 'admin', 1386934840),
-(51, '736940301', 13, '服务费', 28, '非计时赛', '退出赛事[SNG 128]:退还128积分到奖励积分账户<br>剩余积分:78511505565剩余奖励积分:128', 'admin', 1386939226);
+(51, '736940301', 13, '服务费', 28, '非计时赛', '退出赛事[SNG 128]:退还128积分到奖励积分账户<br>剩余积分:78511505565剩余奖励积分:128', 'admin', 1386939226),
+(52, '3674988221', 13, '服务费', -28, '非计时赛', '报名赛事[ SNG 128 ]:扣除参赛费,奖励积分:128分,  <br>剩余积分:82剩余奖励积分:126', 'admin', 1387106882),
+(53, '3674988221', 13, '服务费', 28, '非计时赛', '退出赛事[SNG 128]:退还128积分到奖励积分账户<br>剩余积分:82剩余奖励积分:254', 'admin', 1387107735),
+(54, '', 13, '服务费', -99, '非计时赛', '<br>剩余积分:剩余奖励积分:', 'admin', 1387107839),
+(55, '3674988221', 14, '服务费', -28, '非计时赛', '报名赛事[ SNG 128 ]:扣除参赛费,奖励积分:128分,  <br>剩余积分:82剩余奖励积分:126', 'admin', 1387108868),
+(56, '736940301', 14, '服务费', -28, '非计时赛', '报名赛事[ SNG 128 ]:扣除参赛费:,积分:128分,  <br>剩余积分:78511505437剩余奖励积分:128', 'admin', 1387108885),
+(57, '736940301', 0, '', -128, '', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费:,积分:128分,  <br>剩余积分:78511505309剩余奖励积分:128', 'admin', 1387108905),
+(58, '736940301', 0, '', -28, '', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费:,积分:128分,  <br>剩余积分:78511505309剩余奖励积分:128', 'admin', 1387108905),
+(59, '', 14, '服务费', -28, '非计时赛', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费:,积分:128分,  <br>剩余积分:剩余奖励积分:', 'admin', 1387108905),
+(60, '736940301', 14, '服务费', 28, '非计时赛', '退出赛事[SNG 128]:退还128积分到奖励积分账户<br>剩余积分:78511505309剩余奖励积分:256', 'admin', 1387108925);
 
 -- --------------------------------------------------------
 
@@ -70,14 +79,15 @@ CREATE TABLE IF NOT EXISTS `dzpkos_entry` (
   `exit_time` int(22) NOT NULL DEFAULT '0' COMMENT '退赛时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=22 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=25 ;
 
 --
 -- 转存表中的数据 `dzpkos_entry`
 --
 
 INSERT INTO `dzpkos_entry` (`id`, `card`, `sport_id`, `status`, `payment_type`, `number`, `add_date`, `exit_time`) VALUES
-(21, '736940301', 13, '已退赛', 'jiangli_jifen', 2, 1386933159, 1386939936);
+(24, '736940301', 14, '已退赛', 'balance', 2, 1387108885, 1387108925),
+(23, '3674988221', 14, '已入赛', 'jiangli_jifen', 1, 1387108868, 0);
 
 -- --------------------------------------------------------
 
@@ -220,7 +230,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_member` (
 --
 
 INSERT INTO `dzpkos_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
-('3674988221', 801287, 1, '100', '杨靖', '', '15872358286', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, 82, '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1377324741, 254, ''),
+('3674988221', 801287, 1, '100', '杨靖', '', '15872358286', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, 82, '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1377324741, 126, ''),
 ('1507527021', 801219, 1, '', '钟鼎文', '', '18616218833', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1377264077, 0, ''),
 ('3588622989', 801220, 1, '', '东哥', '', '13823157777', '', '', 1, 1, 0, '', 0, 52, '', '', '', '', '', 0, 0, '', '', 1377262207, 400, ''),
 ('3590250605', 801213, 1, '', '曾一晋', '', '18327441555', '', '', 1, 1, 0, '', 0, 14, '', '', '', '', '', 0, 0, '', '', 1377253681, 0, ''),
@@ -994,7 +1004,7 @@ INSERT INTO `dzpkos_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name
 ('737053789', 800406, 1, '', '景桓', '', '13971049719', '', '', 1, 1, 0, '', 0, 100, '', '', '', '', '', 0, 0, '', '', 1362487537, 0, ''),
 ('736940797', 800372, 1, '', '王波', '', '13407183430', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362484226, 0, ''),
 ('736641501', 800381, 1, '', '崔晨伟', '', '18607139122', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362471830, 67, ''),
-('736940301', 800340, 1, '', '潘志增', '', '13797000089', '', '', 1, 1, 0, '', 0, 78511505565, '', '', '', '', '', 0, 0, '', '', 1362471733, 128, ''),
+('736940301', 800340, 1, '', '潘志增', '', '13797000089', '', '', 1, 1, 0, '', 0, 78511505309, '', '', '', '', '', 0, 0, '', '', 1362471733, 256, ''),
 ('736951805', 800380, 1, '', '王德勇', '', '13871237620', '', '', 1, 1, 0, '', 0, 32, '', '', '', '', '', 0, 0, '', '', 1362408429, 3239, ''),
 ('736762061', 800382, 1, '', '李广岐', '', '13971218881', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362406737, 0, ''),
 ('737890317', 800393, 1, '', '鹏鹏', '', '13995597744', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362403966, 0, ''),
@@ -1368,13 +1378,6 @@ CREATE TABLE IF NOT EXISTS `dzpkos_prize` (
   UNIQUE KEY `id` (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='颁奖表' AUTO_INCREMENT=7 ;
 
---
--- 转存表中的数据 `dzpkos_prize`
---
-
-INSERT INTO `dzpkos_prize` (`id`, `card`, `name`, `sport_id`, `ranking`, `jiangli_jifen`, `add_date`) VALUES
-(6, '736940301', '潘志增', 13, '第 1 名', 1, 1386933173);
-
 -- --------------------------------------------------------
 
 --
@@ -1436,14 +1439,14 @@ CREATE TABLE IF NOT EXISTS `dzpkos_sport` (
   `add_date` int(15) DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=14 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='赛事表' AUTO_INCREMENT=15 ;
 
 --
 -- 转存表中的数据 `dzpkos_sport`
 --
 
 INSERT INTO `dzpkos_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `cansai_renci`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `deingcoholr_id`, `add_date`) VALUES
-(13, 'SNG 128', 'no_time_trial', 1386961923, 100, 28, 0, 8, 0, 1, 1, 1387007999, 0, 0, '', 0, 0, '', 99, '未开赛', 0, 1386933137);
+(14, 'SNG 128', 'no_time_trial', 1387137319, 100, 28, 0, 8, 2, 1, 1, 1387180799, 0, 0, '', 0, 0, '', 200, '未开赛', 5, 1387108530);
 
 -- --------------------------------------------------------
 
@@ -1561,7 +1564,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_systemuser` (
 --
 
 INSERT INTO `dzpkos_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1387025663, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1387106474, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
