@@ -72,7 +72,7 @@ function thisCheckForm() {
 <table width="97%" cellpadding="1" cellspacing="1" align="center" class="listtable">
 	<tr bgcolor="#fff" align="left">
 			<td colspan="7" align="left">
-				该条件下的服务费合计:<font color="red"><?php echo $money_sun;?></font>积分=<font color="red"><?php echo $money_sun/$setting_rate;?></font>人民币
+				该条件下的销售额合计:<font color="red"><?php echo $money_sun;?></font>积分=<font color="red"><?php echo $money_sun/$setting_rate;?></font>人民币
 				&nbsp;&nbsp;
 			</td>
 		</tr>

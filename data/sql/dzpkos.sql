@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 12 月 15 日 12:02
+-- 生成日期: 2013 年 12 月 20 日 16:57
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -110,17 +110,16 @@ CREATE TABLE IF NOT EXISTS `dzpkos_goods` (
   `add_date` int(22) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=8 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=10 ;
 
 --
 -- 转存表中的数据 `dzpkos_goods`
 --
 
 INSERT INTO `dzpkos_goods` (`id`, `name`, `suk`, `unit`, `categories_id`, `jinjia`, `price`, `jiangli_jifen`, `diyong_jifen`, `inventory`, `remark`, `add_date`) VALUES
-(2, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 992, '火机', 0),
+(9, '打火机3', 'dhj3', '杯', 9, '', '20', '0', '0', 95, '', 1387557027),
 (4, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 932, '火机', 11111),
-(6, '红茶', 'hc', '杯', 9, '', '20', '0', '0', 95, 'qq', 1385242574),
-(7, '法国干红213123', 'fhgh1', '瓶', 11, '11', '1911', '0', '10', 995, 'asd', 1385213172);
+(6, '红茶', 'hc', '杯', 9, '', '20', '0', '0', 95, 'qq', 1387551469);
 
 -- --------------------------------------------------------
 
@@ -1564,7 +1563,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_systemuser` (
 --
 
 INSERT INTO `dzpkos_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1387106474, '127.0.0.1', 'all', 1, '', ''),
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1387548819, '127.0.0.1', 'all', 1, '', ''),
 (8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

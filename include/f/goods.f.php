@@ -203,3 +203,18 @@ function goods_update($id,$infoArr) {
 	$sql.=" WHERE `id` =$id;";
 	return $db->query($sql);
 }
+/**
+ * 检查指定字段的值是够存在
+ * @param int		$field			字段
+ * @param string	$value			值
+ * @return Boole	true or false   返回几条
+ */
+function goods_check_field($field,$value,$where) {
+	global $db,$tablepre;
+	$sql = "SELECT COUNT(id) AS countnum FROM {$tablepre}goods WHERE `$field` = '$value' $where";
+	$result	= $db->fetch_one_array($sql);
+	if (intval($result['countnum'])>0) {
+		return true;
+	}
+	return false;
+}

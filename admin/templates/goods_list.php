@@ -11,12 +11,12 @@
 		<tr >
          <td colspan="1" >
          <?php if ($_GET['do']!='buy_list'){?>
-         	<input type="button" value="删除" class="button_input" onclick="JavaScript:if(confirm('删除操作不可恢复,确认吗?')){commendsubmitform('?action=goods_list&todo=del',this.form,'');}">
+         	<input type="button" value="删除" class="button_input" onclick="JavaScript:if(confirm('删除操作不可恢复,确认吗?')){commendsubmitform('?action=goods_add&todo=del',this.form,'');}">
          <?php }else{?>
          <input type="button" value="添加到购物车" class="button_input" onclick="huoqu();">
          <?php }?>
          </td>
-         <td colspan="6" align="right">
+         <td colspan="7" align="right">
          <input type="hidden" name="action" value="goods_list"/>
          <input type="hidden" name="todo" value="search"/>
          <input type="hidden" name="do" value="<?php if ($_GET['do']=='buy_list')echo 'buy_list';?>"/>

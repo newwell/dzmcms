@@ -26,6 +26,14 @@ switch ($todo) {
 		if (empty($price)){e('零售价不能为空');};
 		if (empty($inventory)){e('库存不能为空');};
 		
+		
+		if (goods_check_field("name", $name,"AND `id`!= ".$id))e("商品名称已经被占用!");
+		if (!empty($suk)) {
+			if (goods_check_field("suk", $suk,"AND `id`!= ".$id)){
+				e("商品简码已经被占用!");
+			};
+		}
+		
 		$result = goods_update($id,array(
 			"name"=>$name,
 			"suk"=>$suk,
@@ -96,8 +104,12 @@ switch ($todo) {
 		if (empty($unit)){e('单位不能为空');};
 		if (empty($categories_id)){e('产品分类异常');};
 		if (empty($price)){e('零售价不能为空');};
-		if (empty($inventory)){e('库存不能为空');};			
+		if (empty($inventory)){e('库存不能为空');};
 		
+		if (goods_check_field("name", $name))e("商品名称已经被占用!");
+		if (!empty($suk)) {
+			if (goods_check_field("suk", $suk))e("商品简码已经被占用!");
+		}
 		$result = goods_add(array(
 			"name"=>$name,
 			"suk"=>$suk,

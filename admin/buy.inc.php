@@ -138,6 +138,7 @@ switch ($todo) {
 			$text.=",赠送".$jiangli_jifen."奖励积分";
 		}
 		balance_log($card,$text."<br/>备注:".$remark,$localtime,$money,"销售","商品");
+		$member_info = member_get(array($card),'card');
 		include template('buy_print');
 		break;
 	case 'docash'://非商品购买

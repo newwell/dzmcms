@@ -352,6 +352,7 @@ switch ($todo) {
 				balance_add($card, $serviceCharge,"jiangli_jifen");
 				$money = intval("+".$sport_info['service_charge']);//赚到手的服务费给退回去了
 				balance_log($card, "退出赛事[".$sport_info['name']."]:退还".$serviceCharge."积分到奖励积分账户", $localtime,$money,"服务费","非计时赛",$sport_id);
+				$member_info	= member_get(array($card),'card');
 				include template('sport_withdraw_print');
 				//echo "把积分退回去,稍等一下做,可以先用积分变动!";
 			}elseif ($sport_info['type']=='pk_trial'){//PK赛

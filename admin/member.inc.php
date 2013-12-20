@@ -97,7 +97,7 @@ switch ($todo) {
 		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '空' );
 		
 		if (empty($card))e('无法获取读卡');
-		if (empty($change_value))s("变动积分值0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
+		if (empty($change_value))s("变动积分值不能为0",'?action=member_jifenlog&todo=jifenlog&card='.$card);
 		
 		
 		$member_info = member_get(array($card),'card');
@@ -315,7 +315,7 @@ switch ($todo) {
 	case 'docredits':
 		$docredits= isset($_POST['docredits']) ? $_POST['docredits'] : "" ;
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '') );
-		if (empty($docredits))e("提现金额为0");
+		if (empty($docredits))e("提现金额不能为0");
 		if (empty($card))e('无法获取读卡');
 		$member_info = member_get(array($card),'card');
 		$value = $docredits*$setting_rate;
