@@ -52,10 +52,11 @@ switch ($todo) {
 		}else{
 			$startlimit = 0;
 		}
+		$where = " sport_del=0";
 		$page_array = array();
-		$total		= sport_total();
+		$total		= sport_total($where);
 		$page_control = multipage($total,$perpage,$page);
-		$listArr	= sport_list($startlimit, $perpage);
+		$listArr	= sport_list($startlimit, $perpage,$where);
 		include template('sport_desktop');
 		break;
 	case 'dorebuy':
@@ -322,12 +323,20 @@ switch ($todo) {
 				$type="积分";
 			}
 		}
-		/*--退出比赛 报名人次减一人  参赛人次减一人  剩余人次加一 --*/
-		sport_update($sport_id, array(
+		//--pk赛 退赛只减少人数
+		if ($sport_info['type']=='pk_trial'){
+			sport_update($sport_id, array(
+			"entry_number"=>$sport_info['entry_number']-1
+			));
+		}else {
+			/*--退出比赛 报名人次减一人  参赛人次减一人  剩余人次加一 --*/
+			sport_update($sport_id, array(
 			"entry_number"=>$sport_info['entry_number']-1,
 			"cansai_renci"=>$sport_info['cansai_renci']-1,
-			"people_number"=>$sport_info['people_number']+1
-		));
+			"people_number"=>$sport_info['entry_number']+1
+			));
+		}
+		
 		 $result = entry_update($entry_id, array(
 			"status"=>"已退赛",
 			"exit_time"=>$localtime
@@ -574,9 +583,10 @@ switch ($todo) {
 			$startlimit = 0;
 		}
 		$page_array = array();
-		$total		= sport_total();
+		$where = " sport_del=0";
+		$total		= sport_total($where);
 		$page_control = multipage($total,$perpage,$page);
-		$listArr	= sport_list($startlimit, $perpage);	
+		$listArr	= sport_list($startlimit, $perpage,$where);	
 		include template('sport_list');
 		break;
 	case 'jiesai':
@@ -612,7 +622,7 @@ switch ($todo) {
 		}else{
 			$startlimit = 0;
 		}
-		$where = "name LIKE '%$keywork%' ";
+		$where = "name LIKE '%$keywork%' AND  sport_del=0";
 		$total		= sport_total($where);
 		$listArr =sport_list($startlimit, $perpage,$where);
 		$page_control = multipage($total,$perpage,$page);
@@ -623,14 +633,19 @@ switch ($todo) {
 		if (empty($id)) {
 			e('ID不存在!');
 		}
-		//删除赛事信息
+		sport_update($id, array(
+			"sport_del"=>1
+		));
+		s('删除成功','?action=sport_list&todo=list');
+		/*--项目需要,赛事不再删除  值做标记删除  newwell 20131224*/
+		/* //删除赛事信息
 		if (sport_del(array($id))) {
 			//删除参赛退赛记录
 			entry_del(array($id),'sport_id');
 			//删除颁奖记录
 			prize_del(array($id),'sport_id');
 			s('删除成功','?action=sport_list&todo=list');
-		}
+		} */
 		break;
 	case 'saveadd'://保存添加赛事
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
@@ -700,9 +715,10 @@ switch ($todo) {
 			$startlimit = 0;
 		}
 		$page_array = array();
-		$total		= sport_total();
+		$where = " sport_del=0";
+		$total		= sport_total($where);
 		$page_control = multipage($total,$perpage,$page);
-		$listArr	= sport_list($startlimit, $perpage);	
+		$listArr	= sport_list($startlimit, $perpage,$where);	
 		include template('sport_list');
 	break;
 	

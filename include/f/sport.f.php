@@ -32,7 +32,7 @@ function sport_list($startlimit,$endlimit,$where='') {
 	global $db,$tablepre;
 	$sql = "SELECT * FROM  `{$tablepre}sport` ";
 	if (!empty($where)) {
-		$sql .="WHERE ".$where;
+		$sql .="WHERE ".$where." ";
 	}
 	$sql .= "ORDER BY add_date DESC LIMIT $startlimit , $endlimit";
 	$result		= $db->query($sql);
