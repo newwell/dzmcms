@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- 主机: localhost
--- 生成日期: 2013 年 12 月 24 日 13:45
+-- 生成日期: 2014 年 01 月 02 日 01:33
 -- 服务器版本: 5.1.71-community
 -- PHP 版本: 5.2.17
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_balance_log` (
   `add_date` int(15) NOT NULL COMMENT '产生时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=62 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='余额变动记录' AUTO_INCREMENT=75 ;
 
 --
 -- 转存表中的数据 `dzpkos_balance_log`
@@ -61,7 +61,20 @@ INSERT INTO `dzpkos_balance_log` (`id`, `card`, `sport_id`, `type`, `money`, `ty
 (58, '736940301', 0, '', -28, '', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费:,积分:128分,  <br>剩余积分:78511505309剩余奖励积分:128', 'admin', 1387108905),
 (59, '', 14, '服务费', -28, '非计时赛', '为[潘志增]rebuy赛事[ SNG 128 ]:扣除rebuy费:,积分:128分,  <br>剩余积分:剩余奖励积分:', 'admin', 1387108905),
 (60, '736940301', 14, '服务费', 28, '非计时赛', '退出赛事[SNG 128]:退还128积分到奖励积分账户<br>剩余积分:78511505309剩余奖励积分:256', 'admin', 1387108925),
-(61, '736940301', 0, '', -500, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费:,积分:500分,  <br>剩余积分:78511504809剩余奖励积分:256', 'admin', 1387888884);
+(61, '736940301', 0, '', -500, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费:,积分:500分,  <br>剩余积分:78511504809剩余奖励积分:256', 'admin', 1387888884),
+(62, '736940301', 0, '销售', 40, '商品', '商品交易,扣除41积分,扣除0奖励积分<br/>备注:1杯	[打火机3]	使用20积分,0奖励积分<br/>1个	[打火机]	使用1积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/><br>剩余积分:78511504768剩余奖励积分:256', 'newwell', 1388624368),
+(63, '736940301', 0, '销售', 40, '商品', '商品交易,扣除41积分,扣除0奖励积分<br/>备注:1杯	[打火机3]	使用20积分<br/>1个	[打火机]	使用1积分<br/>1杯	[红茶]	使用20积分<br/><br>剩余积分:78511504727剩余奖励积分:256', 'newwell', 1388624724),
+(64, '736940301', 0, '销售', 30, '商品', '商品交易,扣除41积分<br/>备注:1杯	[打火机3]	使用20积分<br/>1个	[打火机]	使用1积分10奖励积分<br/>1杯	[红茶]	使用20积分<br/><br>剩余积分:78511504686剩余奖励积分:256', 'newwell', 1388624782),
+(65, '736940301', 0, '', 0, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:-5454分,  <br>剩余积分:78511504686剩余奖励积分:5710', 'newwell', 1388624835),
+(66, '736940301', 0, '', 0, '', '为[潘志增]rebuy赛事[ PK 1208 ]:扣除rebuy费,奖励积分:-800分,  <br>剩余积分:78511504686剩余奖励积分:6510', 'newwell', 1388624859),
+(67, '736940301', 0, '', 0, '', '为[潘志增]rebuy赛事[ PK 1208 ]:扣除rebuy费,奖励积分:-800分,  <br>剩余积分:78511504686剩余奖励积分:6510', 'newwell', 1388624859),
+(68, '736940301', 0, '', -5454, '', '为[潘志增]rebuy赛事[ PK 1208 ]:扣除rebuy费,奖励积分:5454分,  <br>剩余积分:78511504686剩余奖励积分:1056', 'newwell', 1388625471),
+(69, '736940301', 0, '', 0, '', '为[潘志增]rebuy赛事[ PK 1208 ]:扣除rebuy费,奖励积分:5454分,  <br>剩余积分:78511504686剩余奖励积分:1056', 'newwell', 1388625471),
+(70, '736940301', 0, '', -128, '', '为[潘志增]rebuy赛事[ PK 1208 ]:扣除rebuy费,奖励积分:128分,  <br>剩余积分:78511504686剩余奖励积分:928', 'newwell', 1388625497),
+(71, '736940301', 0, '', 0, '', '为[潘志增]rebuy赛事[ PK 1208 ]:扣除rebuy费,奖励积分:128分,  <br>剩余积分:78511504686剩余奖励积分:928', 'newwell', 1388625497),
+(72, '736940301', 0, '', -3333, '', '为[潘志增]rebuy赛事[ PK 1208 ]:扣除rebuy费:,积分:3333分,  <br>剩余积分:78511501353剩余奖励积分:928', 'newwell', 1388625566),
+(73, '736940301', 0, '', 0, '', '为[潘志增]rebuy赛事[ PK 1208 ]:扣除rebuy费:,积分:3333分,  <br>剩余积分:78511501353剩余奖励积分:928', 'newwell', 1388625566),
+(74, '3674988221', 0, '', -2, 'PK赛', '报名赛事[ PK 1208 ]:扣除参赛费,奖励积分:2分,  <br>剩余积分:82剩余奖励积分:124', 'newwell', 1388625666);
 
 -- --------------------------------------------------------
 
@@ -80,7 +93,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_entry` (
   `exit_time` int(22) NOT NULL DEFAULT '0' COMMENT '退赛时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=26 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='参赛表' AUTO_INCREMENT=28 ;
 
 --
 -- 转存表中的数据 `dzpkos_entry`
@@ -89,7 +102,9 @@ CREATE TABLE IF NOT EXISTS `dzpkos_entry` (
 INSERT INTO `dzpkos_entry` (`id`, `card`, `sport_id`, `status`, `payment_type`, `number`, `add_date`, `exit_time`) VALUES
 (24, '736940301', 14, '已退赛', 'balance', 2, 1387108885, 1387108925),
 (23, '3674988221', 14, '已入赛', 'jiangli_jifen', 1, 1387108868, 0),
-(25, '736940301', 15, '已入赛', 'balance', 1, 1387888884, 0);
+(25, '736940301', 15, '已入赛', 'balance', 1, 1387888884, 0),
+(26, '736940301', 15, '已入赛', 'jiangli_jifen', 5, 1388624835, 0),
+(27, '3674988221', 15, '已入赛', 'jiangli_jifen', 1, 1388625666, 0);
 
 -- --------------------------------------------------------
 
@@ -112,16 +127,16 @@ CREATE TABLE IF NOT EXISTS `dzpkos_goods` (
   `add_date` int(22) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `id` (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=10 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='商品' AUTO_INCREMENT=11 ;
 
 --
 -- 转存表中的数据 `dzpkos_goods`
 --
 
 INSERT INTO `dzpkos_goods` (`id`, `name`, `suk`, `unit`, `categories_id`, `jinjia`, `price`, `jiangli_jifen`, `diyong_jifen`, `inventory`, `remark`, `add_date`) VALUES
-(9, '打火机3', 'dhj3', '杯', 9, '', '20', '0', '0', 95, '', 1387557027),
-(4, '打火机', 'dhj', '个', 2, '0.5', '1', '1', '0', 932, '火机', 11111),
-(6, '红茶', 'hc', '杯', 9, '', '20', '0', '0', 95, 'qq', 1387551469);
+(9, '打火机3', 'dhj3', '杯', 9, '', '20', '80', '0', 92, '', 1388624328),
+(4, '打火机', 'dhj', '个', 9, '', '1', '1', '10', 929, '火机', 1388624770),
+(6, '红茶', 'hc', '杯', 9, '', '20', '0', '0', 92, 'qq', 1387551469);
 
 -- --------------------------------------------------------
 
@@ -231,7 +246,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_member` (
 --
 
 INSERT INTO `dzpkos_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name`, `nickname`, `phone`, `email`, `identity_card`, `sex`, `grade`, `birthday`, `annual_fee`, `annual_fee_end_time`, `balance`, `customer_manager`, `address`, `qq`, `work_unit`, `occupation`, `eligibility`, `match_number`, `representative_club`, `representative_city`, `add_date`, `jiangli_jifen`, `pwd`) VALUES
-('3674988221', 801287, 1, '100', '杨靖', '', '15872358286', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, 82, '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1377324741, 126, ''),
+('3674988221', 801287, 1, '100', '杨靖', '', '15872358286', 'v@dazan.cn', '429888888888888000', 1, 1, 592934400, '100', 1441728000, 82, '华子', '湖北省武汉市司门口', '1040811569', '滚石演艺公司', '演员', 1, 2, 'PK365', '武汉', 1377324741, 124, ''),
 ('1507527021', 801219, 1, '', '钟鼎文', '', '18616218833', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1377264077, 0, ''),
 ('3588622989', 801220, 1, '', '东哥', '', '13823157777', '', '', 1, 1, 0, '', 0, 52, '', '', '', '', '', 0, 0, '', '', 1377262207, 400, ''),
 ('3590250605', 801213, 1, '', '曾一晋', '', '18327441555', '', '', 1, 1, 0, '', 0, 14, '', '', '', '', '', 0, 0, '', '', 1377253681, 0, ''),
@@ -1005,7 +1020,7 @@ INSERT INTO `dzpkos_member` (`card`, `cardid`, `card_type`, `cash_pledge`, `name
 ('737053789', 800406, 1, '', '景桓', '', '13971049719', '', '', 1, 1, 0, '', 0, 100, '', '', '', '', '', 0, 0, '', '', 1362487537, 0, ''),
 ('736940797', 800372, 1, '', '王波', '', '13407183430', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362484226, 0, ''),
 ('736641501', 800381, 1, '', '崔晨伟', '', '18607139122', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362471830, 67, ''),
-('736940301', 800340, 1, '', '潘志增', '', '13797000089', '', '', 1, 1, 0, '', 0, 78511504809, '', '', '', '', '', 0, 0, '', '', 1362471733, 256, ''),
+('736940301', 800340, 1, '', '潘志增', '', '13797000089', '', '', 1, 1, 0, '', 0, 78511501353, '', '', '', '', '', 0, 0, '', '', 1362471733, 928, ''),
 ('736951805', 800380, 1, '', '王德勇', '', '13871237620', '', '', 1, 1, 0, '', 0, 32, '', '', '', '', '', 0, 0, '', '', 1362408429, 3239, ''),
 ('736762061', 800382, 1, '', '李广岐', '', '13971218881', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362406737, 0, ''),
 ('737890317', 800393, 1, '', '鹏鹏', '', '13995597744', '', '', 1, 1, 0, '', 0, 0, '', '', '', '', '', 0, 0, '', '', 1362403966, 0, ''),
@@ -1359,7 +1374,16 @@ CREATE TABLE IF NOT EXISTS `dzpkos_order` (
   `remark` text COMMENT '备注',
   `add_date` int(15) NOT NULL COMMENT '添加时间',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='订单' AUTO_INCREMENT=46 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COMMENT='订单' AUTO_INCREMENT=49 ;
+
+--
+-- 转存表中的数据 `dzpkos_order`
+--
+
+INSERT INTO `dzpkos_order` (`id`, `card`, `type`, `method_payment`, `payment_amount`, `diyong_jifen`, `jiangli_jifen`, `remark`, `add_date`) VALUES
+(46, 736940301, '商品', '积分', '41', '0', '81', '1杯	[打火机3]	使用20积分,0奖励积分<br/>1个	[打火机]	使用1积分,0奖励积分<br/>1杯	[红茶]	使用20积分,0奖励积分<br/>', 1388624368),
+(47, 736940301, '商品', '积分', '41', '0', '81', '1杯	[打火机3]	使用20积分<br/>1个	[打火机]	使用1积分<br/>1杯	[红茶]	使用20积分<br/>', 1388624724),
+(48, 736940301, '商品', '积分', '41', '10', '81', '1杯	[打火机3]	使用20积分<br/>1个	[打火机]	使用1积分10奖励积分<br/>1杯	[红茶]	使用20积分<br/>', 1388624782);
 
 -- --------------------------------------------------------
 
@@ -1449,7 +1473,7 @@ CREATE TABLE IF NOT EXISTS `dzpkos_sport` (
 
 INSERT INTO `dzpkos_sport` (`id`, `name`, `type`, `start_time`, `deduction`, `service_charge`, `service_charge_time`, `people_number`, `cansai_renci`, `rebuy`, `entry_number`, `stop_entry_time`, `zhangmang_time`, `rest_time`, `scoreboard`, `MaxBLNum`, `seating`, `remark`, `jackpot`, `status`, `sport_del`, `deingcoholr_id`, `add_date`) VALUES
 (14, 'SNG 128', 'no_time_trial', 1387137319, 100, 28, 0, 8, 2, 1, 1, 1387180799, 0, 0, '', 0, 0, '', 200, '未开赛', 1, 5, 1387108530),
-(15, 'PK 1208', 'pk_trial', 1387917652, 0, 0, 0, 9, 1, 1, 1, 1387958399, 0, 0, '', 0, 0, '', 500, '未开赛', 0, 0, 1387888857);
+(15, 'PK 1208', 'pk_trial', 1387917652, 0, 0, 0, 3, 7, 1, 3, 1387958399, 0, 0, '', 0, 0, '', 3163, '未开赛', 0, 0, 1387888857);
 
 -- --------------------------------------------------------
 
@@ -1560,15 +1584,15 @@ CREATE TABLE IF NOT EXISTS `dzpkos_systemuser` (
   `QQ` varchar(15) NOT NULL COMMENT 'QQ',
   `email` varchar(255) NOT NULL COMMENT '手机',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=252 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=253 ;
 
 --
 -- 转存表中的数据 `dzpkos_systemuser`
 --
 
 INSERT INTO `dzpkos_systemuser` (`id`, `username`, `zname`, `password`, `lastlogintime`, `lastloginip`, `actions`, `userlevel`, `QQ`, `email`) VALUES
-(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1387887533, '127.0.0.1', 'all', 1, '', ''),
-(8, 'liuwei', '', 'e10adc3949ba59abbe56e057f20f883e', 1383226342, '127.0.0.1', 'system_set,icon_list,goods_class,member_find,member_export,member_PresentExp,sport_list,sport_desktop,statistics_balance_change,statistics_PresentExp', 2, '', '');
+(1, 'admin', '', 'e10adc3949ba59abbe56e057f20f883e', 1388626134, '127.0.0.1', 'all', 1, '', ''),
+(252, 'newwell', '', 'eed50d3cecd0c41b29fff87df49f5ace', 1388618739, '127.0.0.1', 'system_set,system_user,database_backup,staff_deingcoholr_list,icon_list,goods_class,goods_add,goods_list,buy_cash,buy_list,buy_log,member_find,member_add,member_pay,member_jifenlog,member_export,member_import,member_changePassword,member_PresentExp,sport_list,sport_add,sport_entry,sport_withdraw,sport_desktop,statistics_balance_change,statistics_jifenlog,statistics_PresentExp,statistics_paylog,statistics_leaderboard,statistics_serviceCharge', 2, '', '');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

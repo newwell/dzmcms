@@ -102,7 +102,14 @@ switch ($todo) {
 		print_r($goodArr); */
 		$remark =$payment_amount=$diyong_jifen=$jiangli_jifen="";
 		foreach ($goodArr as $value) {
-			$remark.= $value['shuliang'].$value['unit']."\t[".$value['name']."]\t使用".$value['shuliang']*$value['price']."积分,".$value['shuliang']*$value['diyong_jifen']."奖励积分<br/>";
+			$remark.= $value['shuliang'].$value['unit']."\t[".$value['name']."]\t";
+			if (!empty($value['price'])) {
+				$remark.="使用".$value['shuliang']*$value['price']."积分";
+			}
+			if (!empty($value['diyong_jifen'])) {
+				$remark.=",".$value['shuliang']*$value['diyong_jifen']."奖励积分";
+			}	
+			$remark.="<br/>";
 			$payment_amount = intval($payment_amount)+(intval($value['shuliang'])*intval($value['price']));
 			$diyong_jifen = intval($diyong_jifen)+(intval($value['shuliang'])*intval($value['diyong_jifen']));
 			$jiangli_jifen = intval($jiangli_jifen)+(intval($value['shuliang'])*intval($value['jiangli_jifen']));

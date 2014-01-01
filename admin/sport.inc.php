@@ -66,7 +66,7 @@ switch ($todo) {
 		$sport_id	= intval( isset($_POST['sport_id']) ? $_POST['sport_id'] : '' );
 		$payment_type   = isset($_POST['payment_type']) ? $_POST['payment_type'] : '';
 		
-		$sportcharge	= intval( isset($_POST['sportcharge']) ? $_POST['sportcharge'] : '' );
+		$sportcharge	= abs(intval( isset($_POST['sportcharge']) ? $_POST['sportcharge'] : '' ));
 		
 		$tiaohui = "?action=sport_withdraw&todo=withdraw&card=$r_card";
 		if (empty($buy_card)){s('没有得到读卡',$tiaohui);}
@@ -231,7 +231,7 @@ switch ($todo) {
 		$card		= dzmc_revise_card(( isset($_POST['card']) ? $_POST['card'] : '' ));
 		$sport_id		= intval( isset($_POST['sport_id']) ? $_POST['sport_id'] : '' );
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
-		$jiangli_jifen	= intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : '' );
+		$jiangli_jifen	= abs(intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : '' ));
 		
 		$sportinfo		= sport_get(array($sport_id),'id');
 		if ($jiangli_jifen>$sportinfo['jackpot'])e('奖池不够颁奖');
@@ -435,7 +435,7 @@ switch ($todo) {
 		}elseif ($sportinfo['type']=='no_time_trial') {//非计时赛
 				$sportcharge = $sportinfo['deduction']+$sportinfo['service_charge'];
 		}elseif ($sportinfo['type']=='pk_trial') {//PK赛
-			$sportcharge =intval($sportcharge);
+			$sportcharge =abs(intval($sportcharge));
 		}
 		if((($member_info['balance'])+($member_info['jiangli_jifen']))<($sportcharge)){
 			s('所有积分不够,无法完成报名','?action=sport_entry&todo=doentry&do=entry&card='.$card."&id=".$sport_id);
@@ -651,18 +651,18 @@ switch ($todo) {
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
 		$start_time	= htmlspecialchars( isset($_POST['start_time']) ? $_POST['start_time'] : 0 );
 		$type		= htmlspecialchars( isset($_POST['type']) ? $_POST['type'] : 0 );
-		$deduction	= intval( isset($_POST['deduction']) ? $_POST['deduction'] : 0 );
-		$service_charge_time	= intval( isset($_POST['service_charge_time']) ? $_POST['service_charge_time'] : 0 );
-		$service_charge	= intval( isset($_POST['service_charge']) ? $_POST['service_charge'] : 0 );
-		$people_number	= intval( isset($_POST['people_number']) ? $_POST['people_number'] : 0 );
+		$deduction	= abs(intval( isset($_POST['deduction']) ? $_POST['deduction'] : 0 ));
+		$service_charge_time	= abs(intval( isset($_POST['service_charge_time']) ? $_POST['service_charge_time'] : 0 ));
+		$service_charge	= abs(intval( isset($_POST['service_charge']) ? $_POST['service_charge'] : 0 ));
+		$people_number	= abs(intval( isset($_POST['people_number']) ? $_POST['people_number'] : 0 ));
 		$rebuy	= intval( isset($_POST['rebuy']) ? $_POST['rebuy'] : 0 );
 		//$entry_number	= intval( isset($_POST['entry_number']) ? $_POST['entry_number'] : '' );/*--去掉参赛次数--用新的 参赛人次逻辑代替 newwell 20131125*/
 		$zhangmang_time	= ( isset($_POST['zhangmang_time']) ? $_POST['zhangmang_time'] : '' );
 		$stop_entry_time= ( isset($_POST['stop_entry_time']) ? $_POST['stop_entry_time'] : 0 );
-		$rest_time	= intval( isset($_POST['rest_time']) ? $_POST['rest_time'] : 0 );
+		$rest_time	= abs(intval( isset($_POST['rest_time']) ? $_POST['rest_time'] : 0 ));
 		$scoreboard	= htmlspecialchars( isset($_POST['scoreboard']) ? $_POST['scoreboard'] : 0 );
-		$MaxBLNum	= intval( isset($_POST['MaxBLNum']) ? $_POST['MaxBLNum'] : 0 );
-		$seating	= intval( isset($_POST['seating']) ? $_POST['seating'] : 0 );
+		$MaxBLNum	= abs(intval( isset($_POST['MaxBLNum']) ? $_POST['MaxBLNum'] : 0 ));
+		$seating	= abs(intval( isset($_POST['seating']) ? $_POST['seating'] : 0 ));
 		$deingcoholr_id	= intval( isset($_POST['deingcoholr_id']) ? $_POST['deingcoholr_id'] : 0 );
 		$remark	= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '' );
 		

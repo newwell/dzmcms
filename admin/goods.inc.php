@@ -14,10 +14,10 @@ switch ($todo) {
 		$unit	= htmlspecialchars( isset($_POST['unit']) ? $_POST['unit'] : '' );
 		$categories_id	= intval( isset($_POST['categories_id']) ? $_POST['categories_id'] : 0);
 		$jinjia	= htmlspecialchars( isset($_POST['jinjia']) ? $_POST['jinjia'] : '' );
-		$price	= intval( isset($_POST['price']) ? $_POST['price'] : 0 );
-		$jiangli_jifen	= intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : 0 );
-		$diyong_jifen	= intval( isset($_POST['diyong_jifen']) ? $_POST['diyong_jifen'] : 0 );
-		$inventory	= intval( isset($_POST['inventory']) ? $_POST['inventory'] : 0 );
+		$price	= abs(intval( isset($_POST['price']) ? $_POST['price'] : 0 ));
+		$jiangli_jifen	= abs(intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : 0 ));
+		$diyong_jifen	= abs(intval( isset($_POST['diyong_jifen']) ? $_POST['diyong_jifen'] : 0 ));
+		$inventory	= abs(intval( isset($_POST['inventory']) ? $_POST['inventory'] : 0 ));
 		$remark	= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '' );
 		
 		if (empty($name)){e('名称不能为空');};
@@ -94,10 +94,10 @@ switch ($todo) {
 		$unit	= htmlspecialchars( isset($_POST['unit']) ? $_POST['unit'] : '' );
 		$categories_id	= intval( isset($_POST['categories_id']) ? $_POST['categories_id'] : 0);
 		$jinjia	= htmlspecialchars( isset($_POST['jinjia']) ? $_POST['jinjia'] : '' );
-		$price	= intval( isset($_POST['price']) ? $_POST['price'] : 0 );
-		$jiangli_jifen	= intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : 0 );
-		$diyong_jifen	= intval( isset($_POST['diyong_jifen']) ? $_POST['diyong_jifen'] : 0 );
-		$inventory	= intval( isset($_POST['inventory']) ? $_POST['inventory'] : 0 );
+		$price	= abs(intval( isset($_POST['price']) ? $_POST['price'] : 0 ));
+		$jiangli_jifen	= abs(intval( isset($_POST['jiangli_jifen']) ? $_POST['jiangli_jifen'] : 0 ));
+		$diyong_jifen	= abs(intval( isset($_POST['diyong_jifen']) ? $_POST['diyong_jifen'] : 0 ));
+		$inventory	= abs(intval( isset($_POST['inventory']) ? $_POST['inventory'] : 0 ));
 		$remark	= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '' );
 		
 		if (empty($name)){e('名称不能为空');};

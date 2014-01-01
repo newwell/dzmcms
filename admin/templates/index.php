@@ -1,7 +1,7 @@
 <?php if(!defined('IN_SITE')) exit('Access Denied'); ?>
 <?php include template('header'); ?>
 <div class="formnav">管理平台首页</div>
-<?php if (is_array($iconArr)){?>
+<?php if (!empty($iconArr)&&is_array($iconArr)){?>
 <table align="center" class="formtable" cellpadding="3" cellspacing="1" width="97%" style="line-height:18px;">
 	<tr>
 		<th scope="row" colspan="2" >快捷图标</th>
@@ -18,9 +18,8 @@
 		<?php }?>
 		</td>
 	</tr>
-</table>
+</table><br/>
 <?php }?>
-<br/>
 <table align="center" class="formtable" cellpadding="3" cellspacing="1" width="97%" style="line-height:18px;">
 	<tr>
 		<th scope="row" colspan="2" >系统版权信息</th>
@@ -35,6 +34,8 @@
 		<td  align="left" valign="middle"><a href="http://www.pk365club.com/" target="_blank">PK365俱乐部</a></td>
 	</tr><!--
 	<tr>
+	<td  align="right" valign="middle">公司网站：</td>
+		<td  align="left" valign="middle"><a href="http://www.dazan.cn/" target="_blank">大赞科技</a></td>
 		<td  align="right" valign="top">联系方式：</td>
 		<td  align="left" valign="middle">
 		电话:027-86926978<br>
