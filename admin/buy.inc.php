@@ -136,11 +136,11 @@ switch ($todo) {
 		$money = intval("-".$payment_amount)-$diyong_jifen+$jiangli_jifen;//计算收入
 		balance_reduce($card, $payment_amount);
 		$text =  "商品交易,扣除".$payment_amount."积分";
-		if (empty($diyong_jifen)){
+		if (!empty($diyong_jifen)){
 			balance_reduce($card, $diyong_jifen,"jiangli_jifen");
 			$text.=",扣除".$diyong_jifen."奖励积分";
 		}
-		if (empty($jiangli_jifen)){
+		if (!empty($jiangli_jifen)){
 			balance_add($card, $jiangli_jifen,"jiangli_jifen");
 			$text.=",赠送".$jiangli_jifen."奖励积分";
 		}

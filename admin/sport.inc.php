@@ -108,7 +108,13 @@ switch ($todo) {
 				balance_reduce($card, $member_info['jiangli_jifen'],'jiangli_jifen');
 				balance_reduce($card, $cha,'balance');
 				$money = intval("-".($member_info['jiangli_jifen']+$cha));
-				$text_ = "扣除rebuy费,奖励积分:".$member_info['jiangli_jifen']."分,积分:".$cha."分";
+				$text_ = "扣除rebuy费";
+				if (!empty($member_info['jiangli_jifen'])) {
+					$text_ .= ",奖励积分:".$member_info['jiangli_jifen']."分";
+				}
+				if (!empty($cha)) {
+					$text_ .=",积分:".$cha."分";
+				}
 				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}
 		}elseif ($payment_type=="balance") {
@@ -122,7 +128,13 @@ switch ($todo) {
 				balance_reduce($card, $member_info['balance'],'balance');
 				balance_reduce($card, $cha,'jiangli_jifen');
 				$money = intval("-".($member_info['balance']+$cha));
-				$text_ = "扣除rebuy费,积分:".$member_info['balance']."分,奖励积分:".$cha."分";
+				$text_ = "扣除rebuy费";
+				if (!empty($member_info['balance'])) {
+					$text_ .=",积分:".$member_info['balance']."分";
+				}
+				if (!empty($cha)) {
+					$text_ .=",奖励积分:".$cha."分";
+				}
 				$explain = "为[".$r_member_info['name']."]rebuy赛事[ ".$sport_info['name']." ]:".$text_.",  ";
 			}
 		}
@@ -323,6 +335,7 @@ switch ($todo) {
 				$type="积分";
 			}
 		}
+		
 		//--pk赛 退赛只减少人数
 		if ($sport_info['type']=='pk_trial'){
 			sport_update($sport_id, array(
@@ -330,10 +343,12 @@ switch ($todo) {
 			));
 		}else {
 			/*--退出比赛 报名人次减一人  参赛人次减一人  剩余人次加一 --*/
+			///echo $sport_info['people_number'];echo "<br/>";echo "<br/>";echo "<br/>";echo "<br/>";echo "<br/>";echo "<br/>";
+			//exit("少时诵诗书");
 			sport_update($sport_id, array(
-			"entry_number"=>$sport_info['entry_number']-1,
-			"cansai_renci"=>$sport_info['cansai_renci']-1,
-			"people_number"=>$sport_info['entry_number']+1
+			"entry_number"=>intval($sport_info['entry_number'])-1,
+			"cansai_renci"=>intval($sport_info['cansai_renci'])-1,
+			"people_number"=>intval($sport_info['people_number'])+1
 			));
 		}
 		
@@ -500,11 +515,7 @@ switch ($todo) {
 		if (!$result) {
 			s('失败','?action=sport_entry&todo=entry&do=entry');
 		}
-		/*--报名增加报名人数很参赛人数--*/
-		sport_update($sport_id, array(
-			"entry_number"=>$sportinfo['entry_number']+1,
-			"cansai_renci"=>$sportinfo['cansai_renci']+1
-		));
+		
 		if ($sportinfo['type']=='no_time_trial') {
 			//非计时赛 记录服务费
 			balance_log($card, $explain, $localtime,intval('-'.$sportinfo['service_charge']),"服务费","非计时赛",$sport_id);
@@ -516,10 +527,12 @@ switch ($todo) {
 			balance_log($card, $explain, $localtime,$money,"","PK赛");
 			jackpot_add($sport_id,$sportcharge);//增加奖池
 		}
-		//成功报名比赛人次减少一个
+		/*--报名增加报名人数很参赛人数--*/
 		sport_update($sport_id, array(
-		"people_number"=>$sportinfo['people_number']-1
-		));
+			"entry_number"=>$sportinfo['entry_number']+1,
+			"cansai_renci"=>$sportinfo['cansai_renci']+1,
+			"people_number"=>$sportinfo['people_number']-1
+		));;
 		$member_info = member_get(array($card),'card');
 		include template('sport_save_entry_print');
 		

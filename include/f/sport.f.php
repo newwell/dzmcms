@@ -92,6 +92,7 @@ function sport_update($id,$infoArr) {
 	//去掉最后一个多余的,
 	$sql = substr($sql,0,strlen($sql)- 1);
 	$sql.=" WHERE `id` =$id;";
+	//exit($sql);
 	return $db->query($sql);
 }
 /**

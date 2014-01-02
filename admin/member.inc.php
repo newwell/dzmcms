@@ -18,7 +18,7 @@ require_once 'include/f/member.f.php';
 require_once 'include/f/balance.f.php';
 switch ($todo) {
 	case 'doPresentExp':
-		$change_value	= isset($_POST['change_value']) ? $_POST['change_value'] : "" ;
+		$change_value	= abs(intval(isset($_POST['change_value']) ? $_POST['change_value'] : "" ));
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '空' );
 		
@@ -92,7 +92,7 @@ switch ($todo) {
 	case 'dojifenlog'://执行积分变动
 		$change_type	= isset($_POST['change_type']) ? $_POST['change_type'] : "" ;
 		$change_object	= isset($_POST['change_object']) ? $_POST['change_object'] : "" ;
-		$change_value	= isset($_POST['change_value']) ? $_POST['change_value'] : "" ;
+		$change_value	= abs(intval(isset($_POST['change_value']) ? $_POST['change_value'] : "")) ;
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		$remark		= htmlspecialchars( isset($_POST['remark']) ? $_POST['remark'] : '空' );
 		
@@ -313,7 +313,7 @@ switch ($todo) {
 		include template('member_changePassword');
 		break;
 	case 'docredits':
-		$docredits= isset($_POST['docredits']) ? $_POST['docredits'] : "" ;
+		$docredits= abs(intval(isset($_POST['docredits']) ? $_POST['docredits'] : "")) ;
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '') );
 		if (empty($docredits))e("提现金额不能为0");
 		if (empty($card))e('无法获取读卡');
@@ -337,7 +337,7 @@ switch ($todo) {
 		include template('member_credits');
 		break;
 	case 'dopay':
-		$dopay	= isset($_POST['dopay']) ? $_POST['dopay'] : "" ;
+		$dopay	= abs(intval(isset($_POST['dopay']) ? $_POST['dopay'] : ""));
 		$card		= dzmc_revise_card(( isset($_REQUEST['card']) ? $_REQUEST['card'] : '' ));
 		
 		//支付方式  现金 or 刷卡
@@ -398,7 +398,7 @@ switch ($todo) {
 		break;
 	case 'saveadd':
 		$card		= dzmc_revise_card(( isset($_POST['card']) ? $_POST['card'] : 0 ));
-		$cardid		= ( isset($_POST['cardid']) ? $_POST['cardid'] : 0 );
+		$cardid		= abs( isset($_POST['cardid']) ? $_POST['cardid'] : 0 );
 		$card_type	= (int)( isset($_POST['card_type']) ? $_POST['card_type'] : 0 );		
 		$cash_pledge= htmlspecialchars( isset($_POST['cash_pledge']) ? $_POST['cash_pledge'] : '' );
 		$name		= htmlspecialchars( isset($_POST['name']) ? $_POST['name'] : '' );
